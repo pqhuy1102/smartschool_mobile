@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: Routes.splash,
+      initialRoute: Routes.dashboard,
       getPages: AppPages.routes,
       title: 'Smart School App',
     );
