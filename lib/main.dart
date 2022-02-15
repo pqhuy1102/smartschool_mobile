@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'routes/routes.dart';
 
@@ -13,10 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialRoute: Routes.splash,
-      getPages: AppPages.routes,
-      title: 'Smart School App',
-    );
+    return Sizer(builder: (context, orientation, deviceType) {
+      return GetMaterialApp(
+        initialRoute: Routes.splash,
+        getPages: AppPages.routes,
+        title: 'Smart School App',
+      );
+    });
   }
 }

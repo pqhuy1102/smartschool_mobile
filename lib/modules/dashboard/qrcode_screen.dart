@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:sizer/sizer.dart';
 
 class QRCodeScreen extends StatelessWidget {
   const QRCodeScreen({Key? key}) : super(key: key);
@@ -34,9 +35,9 @@ class QRCodeScreen extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 30),
                   child: ElevatedButton(
-                    child: const Text(
+                    child: Text(
                       "Làm mới",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 16.sp),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue.shade900,

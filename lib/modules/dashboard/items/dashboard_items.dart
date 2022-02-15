@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class DashBoardItem extends StatelessWidget {
   const DashBoardItem(
@@ -35,12 +36,12 @@ class DashBoardItem extends StatelessWidget {
               child: Icon(
                 icon,
                 color: color,
-                size: 40,
+                size: 30.sp,
               ),
             ),
             Text(
               title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
             )
           ],
         ));
