@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class BottomNavTab extends StatelessWidget {
   const BottomNavTab(
@@ -26,7 +27,7 @@ class BottomNavTab extends StatelessWidget {
                   color: isSelected
                       ? Colors.indigo.shade800
                       : Colors.grey.shade400,
-                  size: isSelected ? 28 : 25,
+                  size: isSelected ? 20.sp : 18.sp,
                 ),
               ),
               Text(
@@ -35,7 +36,7 @@ class BottomNavTab extends StatelessWidget {
                     color: isSelected
                         ? Colors.indigo.shade800
                         : Colors.grey.shade800,
-                    fontSize: isSelected ? 20 : 18,
+                    fontSize: isSelected ? 16.sp : 14.sp,
                     fontWeight: isSelected ? FontWeight.w500 : FontWeight.w300,
                     letterSpacing: 1),
               ),

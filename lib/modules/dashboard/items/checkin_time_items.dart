@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class CheckinTimeItem extends StatelessWidget {
   const CheckinTimeItem(
@@ -10,21 +11,27 @@ class CheckinTimeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.only(top: 16),
       child: Row(
         children: [
           Container(
-            margin: const EdgeInsets.only(right: 2),
+            margin: const EdgeInsets.symmetric(horizontal: 1),
             child: Icon(
               icon,
-              size: status == 'in' ? 40 : 30,
-              color: status == 'in' ? Colors.green : Colors.red,
+              size: status == 'in' ? 30.sp : 20.sp,
+              color: status == 'in'
+                  ? Colors.green
+                  : status == 'room'
+                      ? Colors.red
+                      : Colors.yellow,
             ),
           ),
           Text(
             title,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600),
           )
         ],
       ),

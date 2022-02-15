@@ -6,6 +6,7 @@ import 'package:smartschool_mobile/modules/dashboard/items/dashboard_items.dart'
 import 'package:smartschool_mobile/modules/dashboard/tabs/bottom_nav_tab.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
+import 'package:sizer/sizer.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -21,8 +22,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return SafeArea(
         child: Scaffold(
             floatingActionButton: SizedBox(
-              width: 60.0,
-              height: 60.0,
+              width: 18.0.w,
+              height: 18.0.h,
               child: FittedBox(
                 child: FloatingActionButton(
                   onPressed: () =>
@@ -45,7 +46,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   Stack(
                     children: [
                       Container(
-                        height: 120,
+                        height: 18.h,
                         width: double.infinity,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 12),
@@ -55,28 +56,37 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Điểm danh mới nhất:',
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 24,
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Row(
                                   children: [
                                     Container(
                                       margin: const EdgeInsets.fromLTRB(
-                                          0, 0, 30, 0),
+                                          0, 0, 18, 0),
                                       child: const CheckinTimeItem(
                                         title: '7:30',
                                         icon: Icons.arrow_drop_up,
                                         status: 'in',
                                       ),
                                     ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0, 0, 18, 0),
+                                      child: const CheckinTimeItem(
+                                        title: 'I.44',
+                                        icon: Icons.room,
+                                        status: 'room',
+                                      ),
+                                    ),
                                     const CheckinTimeItem(
-                                      title: 'I.44',
-                                      icon: Icons.room,
-                                      status: 'room',
+                                      title: '15/02/2022',
+                                      icon: Icons.date_range,
+                                      status: 'date',
                                     ),
                                   ],
                                 )
@@ -87,14 +97,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           color: Colors.blue.shade900,
                         ),
                       ),
-                      const Positioned(
-                        child: Image(
-                            image: AssetImage('assets/images/calendar.png')),
-                        width: 100,
-                        height: 100,
-                        top: -8,
-                        right: 10,
-                      )
                     ],
                   ),
                   Expanded(
