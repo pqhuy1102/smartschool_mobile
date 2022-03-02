@@ -37,7 +37,7 @@ class BottomNavTab extends StatelessWidget {
                         ? Colors.indigo.shade800
                         : Colors.grey.shade800,
                     fontSize: isSelected ? 16.sp : 14.sp,
-                    fontWeight: isSelected ? FontWeight.w500 : FontWeight.w300,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w300,
                     letterSpacing: 1),
               ),
             ],
