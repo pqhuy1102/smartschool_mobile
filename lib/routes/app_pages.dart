@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:smartschool_mobile/modules/dashboard/dashboard_screen.dart';
-import 'package:smartschool_mobile/modules/dashboard/qrcode_screen.dart';
-import 'package:smartschool_mobile/modules/dashboard/report_screen.dart';
-import 'package:smartschool_mobile/modules/splash/splash_screen.dart';
+import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
+import 'package:smartschool_mobile/modules/qrcode/views/qrcode_screen.dart';
+import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
+import 'package:smartschool_mobile/modules/splash/views/splash_screen.dart';
 part 'app_routes.dart';
 
 class AppPages {
