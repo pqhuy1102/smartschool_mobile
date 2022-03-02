@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
         initialRoute: Routes.splash,
         getPages: AppPages.routes,
         title: 'Smart School App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'OpenSans'),
       );
     });
   }

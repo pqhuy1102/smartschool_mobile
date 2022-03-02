@@ -36,15 +36,57 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ),
               ),
             ),
+            extendBodyBehindAppBar: true,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: _buildBottomTab(),
+            appBar: AppBar(
+              title: Text(
+                'Điểm danh',
+                style: TextStyle(
+                    fontSize: 32,
+                    color: Colors.blue.shade900,
+                    fontWeight: FontWeight.w600),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () => null,
+                  icon: const Icon(Icons.notifications),
+                  color: Colors.blue.shade900,
+                  iconSize: 30.sp,
+                )
+              ],
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
             body: Container(
-              decoration: BoxDecoration(color: Colors.indigo.shade50),
-              child: Column(
-                children: [
-                  Stack(
+                decoration: BoxDecoration(color: Colors.indigo.shade50),
+                child: SafeArea(
+                  child: Column(
                     children: [
+                      Container(
+                        margin:
+                            const EdgeInsets.only(top: 10, left: 10, right: 10),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: RichText(
+                              text: TextSpan(
+                                  text: 'Xin chào, ',
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    color: Colors.black,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                        text: 'admin',
+                                        style: TextStyle(
+                                            fontSize: 18.5.sp,
+                                            fontWeight: FontWeight.bold))
+                                  ]),
+                            )),
+                      ),
+
                       Container(
                         height: 18.h,
                         width: double.infinity,
@@ -70,7 +112,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                           0, 0, 18, 0),
                                       child: const CheckinTimeItem(
                                         title: '7:30',
-                                        icon: Icons.arrow_drop_up,
+                                        icon: Icons.arrow_drop_down,
                                         status: 'in',
                                       ),
                                     ),
@@ -97,48 +139,42 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           color: Colors.blue.shade900,
                         ),
                       ),
+
+                      //Dashboard element
+                      Expanded(
+                        child: GridView.count(
+                          primary: false,
+                          padding: const EdgeInsets.all(10),
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                          crossAxisCount: 2,
+                          children: const [
+                            DashBoardItem(
+                              title: 'Nghỉ phép',
+                              icon: Icons.person_off,
+                              color: Colors.red,
+                            ),
+                            DashBoardItem(
+                              title: 'Đi trễ/về sớm',
+                              icon: Icons.schedule,
+                              color: Colors.orange,
+                            ),
+                            DashBoardItem(
+                              title: 'Cá nhân',
+                              icon: Icons.person,
+                              color: Colors.green,
+                            ),
+                            DashBoardItem(
+                              title: 'Phản ánh',
+                              icon: Icons.report,
+                              color: Colors.red,
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                  Expanded(
-                      child: SizedBox(
-                    child: GridView.count(
-                      primary: false,
-                      padding: const EdgeInsets.all(10),
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      crossAxisCount: 2,
-                      children: const [
-                        DashBoardItem(
-                          title: 'Báo đi trễ',
-                          icon: Icons.schedule,
-                          color: Colors.red,
-                        ),
-                        DashBoardItem(
-                          title: 'Báo nghỉ học',
-                          icon: Icons.person_remove_alt_1_rounded,
-                          color: Colors.orange,
-                        ),
-                        DashBoardItem(
-                          title: 'Báo đi trễ',
-                          icon: Icons.schedule,
-                          color: Colors.red,
-                        ),
-                        DashBoardItem(
-                          title: 'Báo đi trễ',
-                          icon: Icons.schedule,
-                          color: Colors.red,
-                        ),
-                        DashBoardItem(
-                          title: 'Báo đi trễ',
-                          icon: Icons.schedule,
-                          color: Colors.red,
-                        ),
-                      ],
-                    ),
-                  ))
-                ],
-              ),
-            )));
+                ))));
   }
 
   _buildBottomTab() {
@@ -154,7 +190,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           children: [
             BottomNavTab(
               title: 'Điểm danh',
-              icon: Icons.calendar_today,
+              icon: Icons.perm_contact_calendar_outlined,
               isSelected: selectedPosition == 0,
               onTap: () {
                 setState(() {
