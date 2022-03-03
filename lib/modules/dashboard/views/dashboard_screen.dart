@@ -44,14 +44,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               title: Text(
                 'Điểm danh',
                 style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 26.sp,
                     color: Colors.blue.shade900,
                     fontWeight: FontWeight.w600),
               ),
               actions: [
                 IconButton(
+                  // ignore: avoid_returning_null_for_void
                   onPressed: () => null,
-                  icon: const Icon(Icons.notifications),
+                  icon: const Icon(Icons.notifications_none),
                   color: Colors.blue.shade900,
                   iconSize: 30.sp,
                 )
@@ -88,7 +89,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
 
                       Container(
-                        height: 18.h,
+                        height: 20.h,
                         width: double.infinity,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 12),

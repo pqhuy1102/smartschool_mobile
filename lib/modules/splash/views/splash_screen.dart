@@ -41,12 +41,12 @@ class _SplashScreenState extends State<SplashScreen> {
           children: <Widget>[
             Container(
                 margin: const EdgeInsets.only(top: 150, bottom: 30),
-                height: h * 0.16,
+                height: h * 0.18,
                 width: w,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                   image: NetworkImage(
-                      'https://phenikaamaas.com/wp-content/themes/phenikaa-theme-dev/images/logo-black.png'),
+                      'https://haitrieu.com/wp-content/uploads/2021/12/logo-hcmus-new.png'),
                 ))),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 0),
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: TextStyle(
                     color: Colors.red[300],
                     fontSize: 30,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w700),
               ),
             ),
             Container(
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: TextStyle(
                     color: Colors.blue[900],
                     fontSize: 30,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w700),
               ),
             ),
             Container(
