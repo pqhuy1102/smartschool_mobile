@@ -27,7 +27,7 @@ class BottomNavTab extends StatelessWidget {
                   color: isSelected
                       ? Colors.indigo.shade800
                       : Colors.grey.shade400,
-                  size: isSelected ? 20.sp : 18.sp,
+                  size: isSelected ? 20.0.sp : 18.0.sp,
                 ),
               ),
               Text(
@@ -36,7 +36,7 @@ class BottomNavTab extends StatelessWidget {
                     color: isSelected
                         ? Colors.indigo.shade800
                         : Colors.grey.shade800,
-                    fontSize: isSelected ? 16.sp : 14.sp,
+                    fontSize: isSelected ? 16.0.sp : 14.0.sp,
                     fontWeight: isSelected ? FontWeight.w600 : FontWeight.w300,
                     letterSpacing: 1),
               ),
