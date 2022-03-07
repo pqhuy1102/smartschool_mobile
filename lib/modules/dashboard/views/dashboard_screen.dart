@@ -89,7 +89,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
 
                       Container(
-                        height: 20.h,
+                        height: 14.0.h,
                         width: double.infinity,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 12),

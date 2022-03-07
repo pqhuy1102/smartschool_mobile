@@ -11,7 +11,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.splash,
-      page: () => const SplashScreen(),
+      page: () => SplashScreen(),
     ),
     GetPage(
         name: Routes.dashboard,

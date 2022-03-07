@@ -1,29 +1,43 @@
+// ignore_for_file: prefer_equal_for_default_values
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
+import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
+import 'package:smartschool_mobile/modules/authentication/widgets/onboard.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatelessWidget {
+  SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
+  final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 2),
-        () => Get.off(() => const DashBoardScreen()));
+  Future<void> initializeSettings() async {
+    _authmanager.checkLoginStatus();
+
+    //Simulate other services for 3 seconds
+    await Future.delayed(const Duration(seconds: 3));
   }
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    return FutureBuilder(
+      future: initializeSettings(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return waitingView();
+        } else {
+          if (snapshot.hasError) {
+            return errorView(snapshot);
+          } else {
+            return const OnBoard();
+          }
+        }
+      },
+    );
+  }
+
+  Scaffold waitingView() {
     return Scaffold(
         body: Container(
       width: double.infinity,
@@ -41,13 +55,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: <Widget>[
             Container(
                 margin: const EdgeInsets.only(top: 150, bottom: 30),
-                height: h * 0.18,
-                width: w,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                  image: NetworkImage(
-                      'https://haitrieu.com/wp-content/uploads/2021/12/logo-hcmus-new.png'),
-                ))),
+                height: 120,
+                child: Image.asset('assets/images/logo-hcmus-new.png')),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 0),
               child: Text(
@@ -79,5 +88,9 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     ));
+  }
+
+  Scaffold errorView(AsyncSnapshot<Object?> snapshot) {
+    return Scaffold(body: Center(child: Text('Error: ${snapshot.error}')));
   }
 }

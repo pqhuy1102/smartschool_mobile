@@ -18,7 +18,7 @@ class CheckinTimeItem extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 1),
             child: Icon(
               icon,
-              size: status == 'in' ? 30.sp : 20.sp,
+              size: status == 'in' ? 26.0.sp : 18.0.sp,
               color: status == 'in'
                   ? Colors.green
                   : status == 'room'
@@ -30,7 +30,7 @@ class CheckinTimeItem extends StatelessWidget {
             title,
             style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.sp,
+                fontSize: 14.0.sp,
                 fontWeight: FontWeight.w600),
           )
         ],
