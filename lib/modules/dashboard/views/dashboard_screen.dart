@@ -89,7 +89,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
 
                       Container(
-                        height: 14.0.h,
+                        height: 16.0.h,
                         width: double.infinity,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 12),
@@ -149,23 +149,28 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           crossAxisSpacing: 20,
                           mainAxisSpacing: 20,
                           crossAxisCount: 2,
-                          children: const [
-                            DashBoardItem(
+                          children: [
+                            const DashBoardItem(
                               title: 'Nghỉ phép',
                               icon: Icons.person_off,
                               color: Colors.red,
                             ),
-                            DashBoardItem(
+                            const DashBoardItem(
                               title: 'Đi trễ/về sớm',
                               icon: Icons.schedule,
                               color: Colors.orange,
                             ),
-                            DashBoardItem(
-                              title: 'Cá nhân',
-                              icon: Icons.person,
-                              color: Colors.green,
+                            GestureDetector(
+                              onTap: (() {
+                                Get.toNamed(Routes.dashboard + Routes.profile);
+                              }),
+                              child: const DashBoardItem(
+                                title: 'Cá nhân',
+                                icon: Icons.person,
+                                color: Colors.green,
+                              ),
                             ),
-                            DashBoardItem(
+                            const DashBoardItem(
                               title: 'Phản ánh',
                               icon: Icons.report,
                               color: Colors.red,

@@ -11,12 +11,11 @@ void main() async {
   await GetStorage.init();
 
   //wrap app with device preview
-  runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => const MyApp(),
-    ),
-  );
+  // runApp(DevicePreview(
+  //   enabled: true,
+  //   builder: (context) => const MyApp(),
+  // ));
+  const MyApp();
 }
 
 class MyApp extends StatelessWidget {

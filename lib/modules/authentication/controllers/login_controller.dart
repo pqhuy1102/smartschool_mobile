@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/authentication/model/login_request_model.dart';
 import 'package:smartschool_mobile/modules/authentication/providers/login_provider.dart';
+import 'package:smartschool_mobile/modules/authentication/widgets/onboard.dart';
 
 class LoginController extends GetxController {
   late final LoginProvider _loginProvider;
@@ -28,7 +29,7 @@ class LoginController extends GetxController {
         .login(LoginRequestModel(email: email, password: password));
     if (res != null) {
       _authenticationManager.login(res.token);
-      Get.snackbar('Success', 'Login successfully!',
+      Get.snackbar('Success', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green,
           colorText: Colors.white);
@@ -40,5 +41,15 @@ class LoginController extends GetxController {
           colorText: Colors.white);
       isLoading(false);
     }
+  }
+
+  void logout() {
+    _authenticationManager.logOut();
+    Get.offAll(const OnBoard());
+
+    Get.snackbar('Success', 'Đăng xuất thành công!',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white);
   }
 }
