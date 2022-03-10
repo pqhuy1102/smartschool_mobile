@@ -5,4 +5,5 @@ abstract class Routes {
   static const dashboard = '/dashboard';
   static const qrcode = '/qrcode';
   static const report = '/report';
+  static const profile = '/profile';
 }
