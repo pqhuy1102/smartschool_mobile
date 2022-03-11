@@ -4,7 +4,6 @@ import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'routes/routes.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:device_preview/device_preview.dart';
 
 void main() async {
   //initialize for data persistency
