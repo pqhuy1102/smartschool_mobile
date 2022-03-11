@@ -34,16 +34,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         middleTextStyle: TextStyle(fontSize: 14.0.sp),
                         backgroundColor: Colors.white,
                         radius: 10.0,
-                        textCancel: 'Hủy bỏ',
-                        cancelTextColor: Colors.blue.shade900,
-                        textConfirm: 'Đăng xuất',
-                        confirmTextColor: Colors.white,
-                        onCancel: () {},
-                        onConfirm: () {
-                          _loginController.logout();
-                        },
-                        buttonColor: Colors.blue.shade900,
-                        contentPadding: const EdgeInsets.all(14));
+                        confirm: ElevatedButton(
+                            onPressed: (() {
+                              _loginController.logout();
+                            }),
+                            child: Text(
+                              'Đăng xuất',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp, color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.blue.shade900,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0.sp),
+                              ),
+                            )),
+                        cancel: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0.sp),
+                                  side:
+                                      BorderSide(color: Colors.blue.shade900)),
+                            ),
+                            onPressed: (() {
+                              Get.back();
+                            }),
+                            child: Text(
+                              'Hủy bỏ',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  color: Colors.blue.shade900),
+                            )),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 18));
                   },
                   icon: const Icon(Icons.logout),
                   color: Colors.blue.shade900,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
+
 import 'package:smartschool_mobile/modules/report/widgets/detail_subject.dart';
 
 class ReportScreen extends StatefulWidget {
@@ -17,29 +16,9 @@ class _ReportScreenState extends State<ReportScreen> {
         child: Scaffold(
             extendBodyBehindAppBar: true,
             resizeToAvoidBottomInset: true,
-            appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.blue.shade900,
-                  size: 24.sp,
-                ),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
-              title: Text(
-                'Báo cáo',
-                style: TextStyle(
-                    fontSize: 26.sp,
-                    color: Colors.blue.shade900,
-                    fontWeight: FontWeight.w600),
-              ),
-              centerTitle: true,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
+            //
             body: Container(
+              decoration: BoxDecoration(color: Colors.indigo.shade50),
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SafeArea(
                 child: Column(

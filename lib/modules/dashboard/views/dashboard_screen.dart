@@ -1,9 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/dashboard/items/checkin_time_items.dart';
 import 'package:smartschool_mobile/modules/dashboard/items/dashboard_items.dart';
 import 'package:smartschool_mobile/modules/dashboard/tabs/bottom_nav_tab.dart';
+import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
 import 'package:sizer/sizer.dart';
@@ -17,6 +17,7 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int selectedPosition = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,150 +41,166 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: _buildBottomTab(),
-            appBar: AppBar(
-              title: Text(
-                'Điểm danh',
-                style: TextStyle(
-                    fontSize: 26.sp,
-                    color: Colors.blue.shade900,
-                    fontWeight: FontWeight.w600),
-              ),
-              actions: [
-                IconButton(
-                  // ignore: avoid_returning_null_for_void
-                  onPressed: () => null,
-                  icon: const Icon(Icons.notifications_none),
-                  color: Colors.blue.shade900,
-                  iconSize: 30.sp,
-                )
-              ],
-              centerTitle: true,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
+            appBar: (selectedPosition == 0)
+                ? (AppBar(
+                    title: Text(
+                      'Điểm danh',
+                      style: TextStyle(
+                          fontSize: 26.sp,
+                          color: Colors.blue.shade900,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    actions: [
+                      IconButton(
+                        // ignore: avoid_returning_null_for_void
+                        onPressed: () => null,
+                        icon: const Icon(Icons.notifications_none),
+                        color: Colors.blue.shade900,
+                        iconSize: 30.sp,
+                      )
+                    ],
+                    centerTitle: true,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ))
+                : (AppBar(
+                    title: Text(
+                      'Báo cáo',
+                      style: TextStyle(
+                          fontSize: 26.sp,
+                          color: Colors.blue.shade900,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    centerTitle: true,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  )),
             body: Container(
                 decoration: BoxDecoration(color: Colors.indigo.shade50),
                 child: SafeArea(
-                  child: Column(
-                    children: [
-                      Container(
-                        margin:
-                            const EdgeInsets.only(top: 10, left: 10, right: 10),
-                        child: Align(
-                            alignment: Alignment.topLeft,
-                            child: RichText(
-                              text: TextSpan(
-                                  text: 'Xin chào, ',
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    color: Colors.black,
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                        text: 'admin',
-                                        style: TextStyle(
-                                            fontSize: 18.5.sp,
-                                            fontWeight: FontWeight.bold))
-                                  ]),
-                            )),
-                      ),
-
-                      Container(
-                        height: 16.0.h,
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 12),
-                        child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 14),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Điểm danh mới nhất:',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.fromLTRB(
-                                          0, 0, 18, 0),
-                                      child: const CheckinTimeItem(
-                                        title: '7:30',
-                                        icon: Icons.arrow_drop_down,
-                                        status: 'in',
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.fromLTRB(
-                                          0, 0, 18, 0),
-                                      child: const CheckinTimeItem(
-                                        title: 'I.44',
-                                        icon: Icons.room,
-                                        status: 'room',
-                                      ),
-                                    ),
-                                    const CheckinTimeItem(
-                                      title: '15/02/2022',
-                                      icon: Icons.date_range,
-                                      status: 'date',
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue.shade900,
-                        ),
-                      ),
-
-                      //Dashboard element
-                      Expanded(
-                        child: GridView.count(
-                          primary: false,
-                          padding: const EdgeInsets.all(10),
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                          crossAxisCount: 2,
-                          children: [
-                            const DashBoardItem(
-                              title: 'Nghỉ phép',
-                              icon: Icons.person_off,
-                              color: Colors.red,
-                            ),
-                            const DashBoardItem(
-                              title: 'Đi trễ/về sớm',
-                              icon: Icons.schedule,
-                              color: Colors.orange,
-                            ),
-                            GestureDetector(
-                              onTap: (() {
-                                Get.toNamed(Routes.dashboard + Routes.profile);
-                              }),
-                              child: const DashBoardItem(
-                                title: 'Cá nhân',
-                                icon: Icons.person,
-                                color: Colors.green,
-                              ),
-                            ),
-                            const DashBoardItem(
-                              title: 'Phản ánh',
-                              icon: Icons.report,
-                              color: Colors.red,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ))));
+                    child: IndexedStack(
+                  index: selectedPosition,
+                  children: [
+                    _dashboardScreen(),
+                    const ReportScreen(),
+                  ],
+                )))));
   }
 
-  _buildBottomTab() {
+  Widget _dashboardScreen() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+          child: Align(
+              alignment: Alignment.topLeft,
+              child: RichText(
+                text: TextSpan(
+                    text: 'Xin chào, ',
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      color: Colors.black,
+                    ),
+                    children: [
+                      TextSpan(
+                          text: 'admin',
+                          style: TextStyle(
+                              fontSize: 18.5.sp, fontWeight: FontWeight.bold))
+                    ]),
+              )),
+        ),
+
+        Container(
+          height: 16.0.h,
+          width: double.infinity,
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+          child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Điểm danh mới nhất:',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
+                        child: const CheckinTimeItem(
+                          title: '7:30',
+                          icon: Icons.arrow_drop_down,
+                          status: 'in',
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
+                        child: const CheckinTimeItem(
+                          title: 'I.44',
+                          icon: Icons.room,
+                          status: 'room',
+                        ),
+                      ),
+                      const CheckinTimeItem(
+                        title: '15/02/2022',
+                        icon: Icons.date_range,
+                        status: 'date',
+                      ),
+                    ],
+                  )
+                ],
+              )),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.blue.shade900,
+          ),
+        ),
+
+        //Dashboard element
+        Expanded(
+          child: GridView.count(
+            primary: false,
+            padding: const EdgeInsets.all(10),
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
+            crossAxisCount: 2,
+            children: [
+              const DashBoardItem(
+                title: 'Nghỉ phép',
+                icon: Icons.person_off,
+                color: Colors.red,
+              ),
+              const DashBoardItem(
+                title: 'Đi trễ/về sớm',
+                icon: Icons.schedule,
+                color: Colors.orange,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Get.toNamed(Routes.dashboard + Routes.profile);
+                }),
+                child: const DashBoardItem(
+                  title: 'Cá nhân',
+                  icon: Icons.person,
+                  color: Colors.green,
+                ),
+              ),
+              const DashBoardItem(
+                title: 'Phản ánh',
+                icon: Icons.report,
+                color: Colors.red,
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildBottomTab() {
     return Container(
       decoration: const BoxDecoration(),
       child: BottomAppBar(
@@ -212,12 +229,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 setState(() {
                   selectedPosition = 1;
                 });
-                Get.toNamed(Routes.dashboard + Routes.report);
-                Timer(const Duration(seconds: 1), () {
-                  setState(() {
-                    selectedPosition = 0;
-                  });
-                });
+                // Get.toNamed(Routes.dashboard + Routes.report);
+                // Timer(const Duration(seconds: 1), () {
+                //   setState(() {
+                //     selectedPosition = 0;
+                //   });
+                // });
               },
             ),
           ],
