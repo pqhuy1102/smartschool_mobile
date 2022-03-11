@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_new, unnecessary_const
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
@@ -53,85 +52,82 @@ class _LoginScreenState extends State<LoginScreen> {
                     )),
                 Container(
                     margin: const EdgeInsets.all(20),
-                    child: Obx((() {
-                      if (_loginController.isLoading.value) {
-                        return Center(
-                          child: SpinKitFadingFour(
-                            color: Colors.blue.shade900,
-                            size: 50.0,
-                          ),
-                        );
-                      } else {
-                        return Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextFormField(
-                                  controller:
-                                      _loginController.emailEditingController,
-                                  validator: (value) => validateEmail(value),
-                                  style: TextStyle(fontSize: 14.0.sp),
-                                  decoration: inputDecoration(
-                                      'Email của bạn', Icons.email),
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                TextFormField(
-                                  obscureText: true,
-                                  controller: _loginController
-                                      .passwordEditingController,
-                                  validator: (value) => validatePassword(value),
-                                  style: TextStyle(fontSize: 14.0.sp),
-                                  decoration: inputDecoration(
-                                      'Mật khẩu của bạn', Icons.lock),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Align(
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Quên mật khẩu?',
-                                          style: TextStyle(
-                                              fontSize: 12.0.sp,
-                                              color: Colors.black),
-                                        ))),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                ElevatedButton(
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        await _loginController.login(
-                                            _loginController
-                                                .emailEditingController!.text,
-                                            _loginController
-                                                .passwordEditingController!
-                                                .text);
-                                      }
-                                    },
+                    child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextFormField(
+                              controller:
+                                  _loginController.emailEditingController,
+                              validator: (value) => validateEmail(value),
+                              style: TextStyle(fontSize: 14.0.sp),
+                              decoration: inputDecoration(
+                                  'Email của bạn', Icons.email),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              obscureText: true,
+                              controller:
+                                  _loginController.passwordEditingController,
+                              validator: (value) => validatePassword(value),
+                              style: TextStyle(fontSize: 14.0.sp),
+                              decoration: inputDecoration(
+                                  'Mật khẩu của bạn', Icons.lock),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                    onPressed: () {},
                                     child: Text(
+                                      'Quên mật khẩu?',
+                                      style: TextStyle(
+                                          fontSize: 14.0.sp,
+                                          color: Colors.black),
+                                    ))),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    await _loginController.login(
+                                        _loginController
+                                            .emailEditingController!.text,
+                                        _loginController
+                                            .passwordEditingController!.text);
+                                  }
+                                },
+                                child: Obx((() {
+                                  if (_loginController.isLoading.value) {
+                                    return const CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Colors.white));
+                                  } else {
+                                    return Text(
                                       'đăng nhập'.toUpperCase(),
                                       style: TextStyle(
                                           fontSize: 14.0.sp,
                                           fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: const Size.fromHeight(50),
-                                      primary: Colors.blue.shade900,
-                                      shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(10.0.sp),
-                                      ),
-                                    ))
-                              ],
-                            ));
-                      }
-                    })))
+                                    );
+                                  }
+                                })),
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size.fromHeight(60),
+                                  primary: Colors.blue.shade900,
+                                  shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0.sp),
+                                  ),
+                                ))
+                          ],
+                        )))
               ],
             ),
           ),
@@ -145,10 +141,12 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
     labelText: labelText,
+    labelStyle: TextStyle(color: Colors.blue.shade900),
     prefixText: prefix,
     prefixIcon: Icon(
       iconData,
       size: 20.0.sp,
+      color: Colors.blue.shade900,
     ),
     prefixIconConstraints: const BoxConstraints(minWidth: 60),
     enabledBorder: OutlineInputBorder(
@@ -156,7 +154,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
         borderSide: const BorderSide(color: Colors.black)),
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.blue.shade500)),
+        borderSide: BorderSide(color: Colors.blue.shade900)),
     errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: Colors.red)),
