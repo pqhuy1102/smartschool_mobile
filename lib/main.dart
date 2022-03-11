@@ -15,7 +15,7 @@ void main() async {
   //   enabled: true,
   //   builder: (context) => const MyApp(),
   // ));
-  const MyApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return GetMaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+        // useInheritedMediaQuery: true,
+        // locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
         initialRoute: Routes.splash,
         getPages: AppPages.routes,
         title: 'Smart School App',
