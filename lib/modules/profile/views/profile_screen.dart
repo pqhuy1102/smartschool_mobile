@@ -27,7 +27,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               actions: [
                 IconButton(
                   onPressed: () {
-                    _loginController.logout();
+                    Get.defaultDialog(
+                        title: 'Đăng xuất',
+                        titleStyle: TextStyle(fontSize: 18.0.sp),
+                        middleText: 'Bạn có muốn đăng xuất không?',
+                        middleTextStyle: TextStyle(fontSize: 14.0.sp),
+                        backgroundColor: Colors.white,
+                        radius: 10.0,
+                        textCancel: 'Hủy bỏ',
+                        cancelTextColor: Colors.blue.shade900,
+                        textConfirm: 'Đăng xuất',
+                        confirmTextColor: Colors.white,
+                        onCancel: () {},
+                        onConfirm: () {
+                          _loginController.logout();
+                        },
+                        buttonColor: Colors.blue.shade900,
+                        contentPadding: const EdgeInsets.all(14));
                   },
                   icon: const Icon(Icons.logout),
                   color: Colors.blue.shade900,
@@ -120,8 +136,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         as ImageProvider,
               ))),
           Positioned(
-            bottom: 0,
-            right: 25.0,
+            bottom: 15.0,
+            right: 26.0,
             child: InkWell(
               onTap: () {
                 showModalBottomSheet(
@@ -129,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Icon(
                 Icons.camera_alt,
-                size: 30.0.sp,
+                size: 26.0.sp,
                 color: Colors.blue.shade900,
               ),
             ),
