@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
@@ -95,53 +96,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            body: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: SafeArea(
-                  child: Form(
-                      child: ListView(
-                children: [
-                  imageProfile(),
-                  const SizedBox(
-                    height: 25,
+            body: Obx(() {
+              if (_profileController.isLoading.value) {
+                return Center(
+                  child: SpinKitFadingFour(
+                    color: Colors.blue.shade900,
+                    size: 50.0,
                   ),
-                  nameTextField(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  studentIdTextField(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  genderTextField(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  emailTextField(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  phoneNumberTextField(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'cập nhật thông tin'.toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.bold),
+                );
+              } else {
+                return Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: SafeArea(
+                      child: Form(
+                          child: ListView(
+                    children: [
+                      imageProfile(),
+                      const SizedBox(
+                        height: 25,
                       ),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                        primary: Colors.blue.shade900,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0.sp),
-                        ),
-                      ))
-                ],
-              ))),
-            )));
+                      nameTextField(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      studentIdTextField(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      genderTextField(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      emailTextField(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      phoneNumberTextField(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'cập nhật thông tin'.toUpperCase(),
+                            style: TextStyle(
+                                fontSize: 14.0.sp, fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size.fromHeight(50),
+                            primary: Colors.blue.shade900,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0.sp),
+                            ),
+                          ))
+                    ],
+                  ))),
+                );
+              }
+            })));
   }
 
   Widget imageProfile() {
@@ -161,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ))),
           Positioned(
             bottom: 15.0,
-            right: 26.0,
+            right: 16.0,
             child: InkWell(
               onTap: () {
                 showModalBottomSheet(
@@ -169,8 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: Icon(
                 Icons.camera_alt,
-                size: 26.0.sp,
-                color: Colors.blue.shade900,
+                size: 24.0.sp,
               ),
             ),
           )
@@ -239,7 +251,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget nameTextField() {
     return TextFormField(
-      initialValue: 'Nguyen Van A',
+      initialValue: _profileController.userData.data != null
+          ? _profileController.userData.data!.firstName
+          : '',
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderSide: BorderSide(
@@ -261,7 +275,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget studentIdTextField() {
     return TextFormField(
-      initialValue: '18125000',
+      initialValue: _profileController.userData.data!.id.toString(),
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -307,7 +321,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget emailTextField() {
     return TextFormField(
-      initialValue: 'nva18@apcs.fitus.edu.vn',
+      initialValue: _profileController.userData.data!.email,
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(

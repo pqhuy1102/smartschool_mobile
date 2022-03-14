@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
+import 'package:smartschool_mobile/modules/profile/bindings/profile_bindings.dart';
 import 'package:smartschool_mobile/modules/profile/views/profile_screen.dart';
 import 'package:smartschool_mobile/modules/qrcode/views/qrcode_screen.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
@@ -20,7 +21,10 @@ class AppPages {
         children: [
           GetPage(name: Routes.qrcode, page: () => const QRCodeScreen()),
           GetPage(name: Routes.report, page: () => const ReportScreen()),
-          GetPage(name: Routes.profile, page: () => const ProfileScreen()),
+          GetPage(
+              name: Routes.profile,
+              page: () => const ProfileScreen(),
+              binding: ProfileBinding()),
         ]),
   ];
 }
