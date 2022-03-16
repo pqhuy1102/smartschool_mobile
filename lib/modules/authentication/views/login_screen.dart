@@ -50,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                           color: Colors.blue.shade900),
                     )),
+                //Login form
                 Container(
                     margin: const EdgeInsets.all(20),
                     child: Form(
@@ -68,14 +69,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(
                               height: 15,
                             ),
-                            TextFormField(
-                              obscureText: true,
-                              controller:
-                                  _loginController.passwordEditingController,
-                              validator: (value) => validatePassword(value),
-                              style: TextStyle(fontSize: 14.0.sp),
-                              decoration: inputDecoration(
-                                  'Mật khẩu của bạn', Icons.lock),
+                            Obx(
+                              () => TextFormField(
+                                obscureText:
+                                    _loginController.isPasswordHidden.value,
+                                controller:
+                                    _loginController.passwordEditingController,
+                                validator: (value) => validatePassword(value),
+                                style: TextStyle(fontSize: 14.0.sp),
+                                decoration: inputDecoration(
+                                    'Mật khẩu của bạn', Icons.lock,
+                                    surfixIconData:
+                                        _loginController.isPasswordHidden.value
+                                            ? Icons.visibility_off
+                                            : Icons.visibility),
+                              ),
                             ),
                             const SizedBox(
                               height: 5,
@@ -136,7 +144,9 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 InputDecoration inputDecoration(String labelText, IconData iconData,
-    {String? prefix, String? helperText}) {
+    {String? prefix, String? helperText, IconData? surfixIconData}) {
+  final LoginController _loginController = Get.put(LoginController());
+
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
@@ -147,6 +157,16 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
       iconData,
       size: 20.0.sp,
       color: Colors.blue.shade900,
+    ),
+    suffix: InkWell(
+      child: Icon(
+        surfixIconData,
+        color: Colors.grey,
+        size: 20.0.sp,
+      ),
+      onTap: () {
+        _loginController.togglePasswordVisibility();
+      },
     ),
     prefixIconConstraints: const BoxConstraints(minWidth: 60),
     enabledBorder: OutlineInputBorder(
@@ -164,22 +184,26 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
   );
 }
 
+//validate email function
 String? validateEmail(String? value) {
-  String pattern =
+  String emailPattern =
       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
       r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
       r"{0,253}[a-zA-Z0-9])?)*$";
-  RegExp regex = RegExp(pattern);
-  if (value == null || value.isEmpty || !regex.hasMatch(value)) {
-    return 'Email không hợp lệ!';
+  RegExp emailRegex = RegExp(emailPattern);
+  if (value == null || value.isEmpty || !emailRegex.hasMatch(value)) {
+    return 'Email không hợp lệ, vui lòng nhập lại!';
   } else {
     return null;
   }
 }
 
+//validate password function
 String? validatePassword(String? value) {
-  if (value == null || value.isEmpty || value.length < 6) {
-    return 'Mật khẩu không hợp lệ!';
+  String spacePattern = r'\s';
+  RegExp spaceRegex = RegExp(spacePattern);
+  if (value == null || value.isEmpty || spaceRegex.hasMatch(value)) {
+    return 'Mật khẩu cần đủ 8 kí tự, không chứa khoảng trắng, vui lòng nhập lại!';
   } else {
     return null;
   }

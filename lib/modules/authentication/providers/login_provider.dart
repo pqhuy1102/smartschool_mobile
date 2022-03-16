@@ -4,7 +4,7 @@ import 'package:smartschool_mobile/modules/authentication/model/login_request_mo
 import 'package:smartschool_mobile/modules/authentication/model/login_respone_model.dart';
 
 class LoginProvider extends GetConnect {
-  final String loginUrl = 'https://reqres.in/api/login';
+  final String loginUrl = 'http://13.228.244.196:6002/login';
 
   //login
   Future<LoginResponseModel?> login(LoginRequestModel model) async {
