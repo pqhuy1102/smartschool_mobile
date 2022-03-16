@@ -13,6 +13,9 @@ class LoginController extends GetxController {
   TextEditingController? emailEditingController;
   TextEditingController? passwordEditingController;
 
+  //visibility password
+  var isPasswordHidden = true.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -35,7 +38,7 @@ class LoginController extends GetxController {
           colorText: Colors.white);
       isLoading(false);
     } else {
-      Get.snackbar('Error ', 'Không tìm thấy tài khoản!',
+      Get.snackbar('Error ', 'Đăng nhập thất bại!',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
@@ -51,5 +54,9 @@ class LoginController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
         colorText: Colors.white);
+  }
+
+  void togglePasswordVisibility() {
+    isPasswordHidden(!isPasswordHidden.value);
   }
 }
