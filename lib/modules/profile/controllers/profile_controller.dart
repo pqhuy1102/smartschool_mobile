@@ -42,20 +42,17 @@ class ProfileController extends GetxController {
 
   ProfileResponseModel get userData => _userData;
 
-  void getProfileUser() async {
-    try {
-      isLoading(true);
-      var res = await ProfileProvider().getProfileUser();
-      if (res != null) {
-        _userData = res;
-      }
-    } catch (e) {
+  Future<void> getProfileUser() async {
+    isLoading(true);
+    var res = await ProfileProvider().getProfileUser();
+    if (res != null) {
+      _userData = res;
+      isLoading(false);
+    } else {
       Get.snackbar('Error ', 'Không tìm thấy dữ liệu!',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
-      isLoading(false);
-    } finally {
       isLoading(false);
     }
   }
