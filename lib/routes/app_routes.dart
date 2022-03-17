@@ -6,4 +6,5 @@ abstract class Routes {
   static const qrcode = '/qrcode';
   static const report = '/report';
   static const profile = '/profile';
+  static const settings = '/settings';
 }

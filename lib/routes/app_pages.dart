@@ -4,6 +4,7 @@ import 'package:smartschool_mobile/modules/profile/bindings/profile_bindings.dar
 import 'package:smartschool_mobile/modules/profile/views/profile_screen.dart';
 import 'package:smartschool_mobile/modules/qrcode/views/qrcode_screen.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
+import 'package:smartschool_mobile/modules/setttings/views/setttings_screen.dart';
 import 'package:smartschool_mobile/modules/splash/views/splash_screen.dart';
 part 'app_routes.dart';
 
@@ -25,6 +26,7 @@ class AppPages {
               name: Routes.profile,
               page: () => const ProfileScreen(),
               binding: ProfileBinding()),
+          GetPage(name: Routes.settings, page: () => const SettingsScreen()),
         ]),
   ];
 }

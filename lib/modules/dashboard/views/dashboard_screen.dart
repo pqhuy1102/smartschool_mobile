@@ -59,6 +59,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         iconSize: 30.sp,
                       )
                     ],
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.settings_outlined,
+                        color: Colors.blue.shade900,
+                        size: 26.0.sp,
+                      ),
+                      onPressed: () {
+                        Get.toNamed(Routes.dashboard + Routes.settings);
+                      },
+                    ),
                     centerTitle: true,
                     backgroundColor: Colors.transparent,
                     elevation: 0,
@@ -111,13 +121,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
 
         Container(
-          height: 16.0.h,
+          height: 18.0.h,
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
           child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Điểm danh mới nhất:',
