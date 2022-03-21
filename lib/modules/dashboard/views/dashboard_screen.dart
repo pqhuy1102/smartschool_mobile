@@ -179,30 +179,34 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             mainAxisSpacing: 20,
             crossAxisCount: 2,
             children: [
-              const DashBoardItem(
+              DashBoardItem(
                 title: 'Nghỉ phép',
                 icon: Icons.person_off,
-                color: Colors.red,
+                color: Colors.blue,
+                iconBackground: Colors.blue.shade100,
               ),
-              const DashBoardItem(
+              DashBoardItem(
                 title: 'Đi trễ/về sớm',
                 icon: Icons.schedule,
                 color: Colors.orange,
+                iconBackground: Colors.amber.shade100,
               ),
               GestureDetector(
                 onTap: (() {
                   Get.toNamed(Routes.dashboard + Routes.profile);
                 }),
-                child: const DashBoardItem(
+                child: DashBoardItem(
                   title: 'Cá nhân',
                   icon: Icons.person,
                   color: Colors.green,
+                  iconBackground: Colors.green.shade100,
                 ),
               ),
-              const DashBoardItem(
+              DashBoardItem(
                 title: 'Phản ánh',
                 icon: Icons.report,
                 color: Colors.red,
+                iconBackground: Colors.red.shade100,
               ),
             ],
           ),

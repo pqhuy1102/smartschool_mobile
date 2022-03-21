@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final LoginController _loginController = Get.put(LoginController());
   final _formKey = GlobalKey<FormState>();
+  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     margin: const EdgeInsets.all(20),
                     child: Form(
                         key: _formKey,
+                        autovalidateMode: _autovalidateMode,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -64,10 +66,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               validator: (value) => validateEmail(value),
                               style: TextStyle(fontSize: 14.0.sp),
                               decoration: inputDecoration(
-                                  'Email của bạn', Icons.email),
+                                'Email của bạn',
+                                Icons.email,
+                              ),
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 25,
                             ),
                             Obx(
                               () => TextFormField(
@@ -78,11 +82,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 validator: (value) => validatePassword(value),
                                 style: TextStyle(fontSize: 14.0.sp),
                                 decoration: inputDecoration(
-                                    'Mật khẩu của bạn', Icons.lock,
-                                    surfixIconData:
-                                        _loginController.isPasswordHidden.value
-                                            ? Icons.visibility_off
-                                            : Icons.visibility),
+                                  'Mật khẩu của bạn',
+                                  Icons.lock,
+                                  surfixIconData:
+                                      _loginController.isPasswordHidden.value
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -95,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'Quên mật khẩu?',
                                       style: TextStyle(
-                                          fontSize: 14.0.sp,
+                                          fontSize: 12.0.sp,
                                           color: Colors.black),
                                     ))),
                             const SizedBox(
@@ -109,6 +115,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                             .emailEditingController!.text,
                                         _loginController
                                             .passwordEditingController!.text);
+                                  } else {
+                                    setState(() {
+                                      _autovalidateMode =
+                                          AutovalidateMode.onUserInteraction;
+                                    });
                                   }
                                 },
                                 child: Obx((() {
@@ -151,7 +162,6 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
     labelText: labelText,
-    labelStyle: TextStyle(color: Colors.blue.shade900),
     prefixText: prefix,
     prefixIcon: Icon(
       iconData,
@@ -168,6 +178,8 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
         _loginController.togglePasswordVisibility();
       },
     ),
+    errorStyle: TextStyle(
+        color: Colors.red, fontWeight: FontWeight.w500, fontSize: 12.0.sp),
     prefixIconConstraints: const BoxConstraints(minWidth: 60),
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
@@ -203,7 +215,7 @@ String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
   if (value == null || value.isEmpty || spaceRegex.hasMatch(value)) {
-    return 'Mật khẩu cần đủ 8 kí tự, không chứa khoảng trắng, vui lòng nhập lại!';
+    return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
   } else {
     return null;
   }

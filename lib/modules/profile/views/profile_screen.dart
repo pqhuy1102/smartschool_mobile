@@ -46,6 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.blue.shade900,
+                              padding: const EdgeInsets.all(10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4.0.sp),
                               ),
@@ -53,6 +54,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         cancel: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4.0.sp),
                                   side:
