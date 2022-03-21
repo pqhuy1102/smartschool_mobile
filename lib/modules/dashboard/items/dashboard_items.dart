@@ -3,11 +3,16 @@ import 'package:sizer/sizer.dart';
 
 class DashBoardItem extends StatelessWidget {
   const DashBoardItem(
-      {Key? key, required this.title, required this.icon, required this.color})
+      {Key? key,
+      required this.title,
+      required this.icon,
+      required this.color,
+      required this.iconBackground})
       : super(key: key);
   final String title;
   final IconData icon;
   final Color color;
+  final Color iconBackground;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +37,12 @@ class DashBoardItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+              height: 65,
+              width: 65,
               margin: const EdgeInsets.only(bottom: 14),
+              decoration: BoxDecoration(
+                  color: iconBackground,
+                  borderRadius: BorderRadius.circular(65)),
               child: Icon(
                 icon,
                 color: color,
