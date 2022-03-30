@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import 'package:smartschool_mobile/modules/report/widgets/detail_subject.dart';
+import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({Key? key}) : super(key: key);
@@ -18,8 +21,8 @@ class _ReportScreenState extends State<ReportScreen> {
             resizeToAvoidBottomInset: true,
             //
             body: Container(
-              decoration: BoxDecoration(color: Colors.indigo.shade50),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: const BoxDecoration(color: Colors.white70),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               child: SafeArea(
                 child: Column(
                   children: [
@@ -29,16 +32,16 @@ class _ReportScreenState extends State<ReportScreen> {
                         Text(
                           'Học kỳ',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 14.0.sp,
                               color: Colors.grey.shade600,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w600),
                         ),
-                        DropdownButton(items: const [
+                        DropdownButton(items: [
                           DropdownMenuItem(
                             child: Text(
                               'HK1 2021-2022',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 14.0.sp,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400),
                             ),
@@ -48,7 +51,7 @@ class _ReportScreenState extends State<ReportScreen> {
                             child: Text(
                               'HK2 2021-2022',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 14.0.sp,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400),
                             ),
@@ -58,7 +61,7 @@ class _ReportScreenState extends State<ReportScreen> {
                             child: Text(
                               'HK3 2021-2022',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 14.0.sp,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400),
                             ),
@@ -68,38 +71,51 @@ class _ReportScreenState extends State<ReportScreen> {
                       ],
                     ),
                     const SizedBox(
-                      height: 14,
+                      height: 20,
                     ),
                     Expanded(
                         child: ListView(
-                      children: const [
-                        DetailSubject(
-                          subjectName: 'CM101 - Communication',
-                          validSession: 1,
-                          absenceSession: 2,
-                          lateSession: 1,
-                          totalSession: 20,
+                      children: [
+                        InkWell(
+                          child: const DetailSubject(
+                            subjectName: 'Communication',
+                            validSession: 1,
+                            absenceSession: 2,
+                            lateSession: 1,
+                            totalSession: 20,
+                            className: "18CTT1",
+                            subjectId: "CM101",
+                          ),
+                          onTap: () {
+                            Get.toNamed(Routes.subjectDetailReport);
+                          },
                         ),
-                        DetailSubject(
-                          subjectName: 'CM163 - Computer Hardware',
+                        const DetailSubject(
+                          subjectName: 'Computer Hardware',
                           validSession: 1,
                           absenceSession: 2,
                           lateSession: 1,
                           totalSession: 20,
+                          className: "18CTT1",
+                          subjectId: "CM101",
                         ),
-                        DetailSubject(
-                          subjectName: 'CM163 - Computer Hardware',
+                        const DetailSubject(
+                          subjectName: 'Computer Hardware',
                           validSession: 1,
                           absenceSession: 2,
                           lateSession: 1,
                           totalSession: 20,
+                          className: "18CTT1",
+                          subjectId: "CM63",
                         ),
-                        DetailSubject(
-                          subjectName: 'CM163 - Computer Hardware',
+                        const DetailSubject(
+                          subjectName: 'Introduction to Computer Hardware',
                           validSession: 1,
                           absenceSession: 2,
                           lateSession: 1,
                           totalSession: 20,
+                          className: "18CTT1",
+                          subjectId: "CM163",
                         ),
                       ],
                     ))

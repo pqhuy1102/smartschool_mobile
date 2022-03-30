@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
+import 'package:smartschool_mobile/modules/setttings/widgets/setting_item.dart';
+import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -26,30 +28,44 @@ class SettingsScreen extends StatelessWidget {
         title: Text(
           'Cài đặt',
           style: TextStyle(
-              fontSize: 26.sp,
+              fontSize: 26.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
-        backgroundColor: Colors.indigo.shade50,
+        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Container(
-          decoration: BoxDecoration(color: Colors.indigo.shade50),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: const BoxDecoration(color: Colors.white70),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: SafeArea(
             child: ListView(
               padding: const EdgeInsets.all(8),
               children: [
-                _settingitem("Đổi mật khẩu", Icons.lock_outline),
-                _settingitem(
-                  "Về chúng tôi",
-                  Icons.people_alt,
+                InkWell(
+                  child: const SettingItem(
+                      title: "Thông tin cá nhân", icon: Icons.person),
+                  onTap: () {
+                    Get.toNamed(Routes.dashboard + Routes.profile);
+                  },
+                ),
+                const SettingItem(
+                  title: "Về chúng tôi",
+                  icon: Icons.people_alt,
+                ),
+                const SettingItem(
+                  title: "Ngôn ngữ",
+                  icon: Icons.translate,
+                ),
+                const SettingItem(
+                  title: "Đổi mật khẩu",
+                  icon: Icons.lock,
                 ),
                 InkWell(
-                  child: _settingitem(
-                    "Đăng xuất",
-                    Icons.logout,
+                  child: const SettingItem(
+                    title: "Đăng xuất",
+                    icon: Icons.logout,
                   ),
                   onTap: () {
                     Get.defaultDialog(
@@ -102,24 +118,5 @@ class SettingsScreen extends StatelessWidget {
             ),
           )),
     ));
-  }
-
-  Widget _settingitem(String title, IconData icon) {
-    return Container(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.grey.shade400)),
-          color: Colors.indigo.shade50,
-        ),
-        child: ListTile(
-          leading: Icon(
-            icon,
-            size: 20.0.sp,
-          ),
-          title: Text(
-            title,
-            style: TextStyle(fontSize: 16.0.sp),
-          ),
-        ));
   }
 }

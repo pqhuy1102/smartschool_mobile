@@ -20,10 +20,10 @@ class DashBoardItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)),
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.25),
@@ -34,12 +34,12 @@ class DashBoardItem extends StatelessWidget {
           ],
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 65,
               width: 65,
-              margin: const EdgeInsets.only(bottom: 14),
+              margin: const EdgeInsets.only(bottom: 14, top: 35),
               decoration: BoxDecoration(
                   color: iconBackground,
                   borderRadius: BorderRadius.circular(65)),
@@ -49,9 +49,18 @@ class DashBoardItem extends StatelessWidget {
                 size: 30.sp,
               ),
             ),
-            Text(
-              title,
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             )
           ],
         ));

@@ -24,9 +24,8 @@ class BottomNavTab extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 4),
                 child: Icon(
                   icon,
-                  color: isSelected
-                      ? Colors.indigo.shade800
-                      : Colors.grey.shade400,
+                  color:
+                      isSelected ? Colors.blue.shade900 : Colors.grey.shade400,
                   size: isSelected ? 20.0.sp : 18.0.sp,
                 ),
               ),
@@ -34,7 +33,7 @@ class BottomNavTab extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: isSelected
-                        ? Colors.indigo.shade800
+                        ? Colors.blue.shade900
                         : Colors.grey.shade800,
                     fontSize: isSelected ? 16.0.sp : 14.0.sp,
                     fontWeight: isSelected ? FontWeight.w600 : FontWeight.w300,

@@ -10,6 +10,7 @@ class LoginController extends GetxController {
   late final AuthenticationManager _authenticationManager;
 
   var isLoading = false.obs;
+
   TextEditingController? emailEditingController;
   TextEditingController? passwordEditingController;
 
@@ -26,36 +27,39 @@ class LoginController extends GetxController {
     passwordEditingController = TextEditingController();
   }
 
+  //login
   Future<void> login(String email, String password) async {
     isLoading(true);
     final res = await _loginProvider
         .login(LoginRequestModel(email: email, password: password));
     if (res != null) {
       _authenticationManager.login(res.token);
-      Get.snackbar('Success', 'Đăng nhập thành công!',
-          snackPosition: SnackPosition.BOTTOM,
+      Get.snackbar('Thành công', 'Đăng nhập thành công!',
+          snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,
           colorText: Colors.white);
       isLoading(false);
     } else {
-      Get.snackbar('Error ', 'Đăng nhập thất bại!',
-          snackPosition: SnackPosition.BOTTOM,
+      Get.snackbar('Lỗi ', 'Đăng nhập thất bại!',
+          snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);
       isLoading(false);
     }
   }
 
+  //logout
   void logout() {
     _authenticationManager.logOut();
     Get.offAll(const OnBoard());
 
-    Get.snackbar('Success', 'Đăng xuất thành công!',
-        snackPosition: SnackPosition.BOTTOM,
+    Get.snackbar('Thành công', 'Đăng xuất thành công!',
+        snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.green,
         colorText: Colors.white);
   }
 
+  //toggle password
   void togglePasswordVisibility() {
     isPasswordHidden(!isPasswordHidden.value);
   }
