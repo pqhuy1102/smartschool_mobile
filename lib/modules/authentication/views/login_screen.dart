@@ -29,8 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: double.infinity,
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image:
-                      AssetImage('assets/images/background_image_official.jpg'),
+                  image: AssetImage('assets/images/background_login.jpg'),
                   fit: BoxFit.fill)),
           child: Center(
             child: Column(

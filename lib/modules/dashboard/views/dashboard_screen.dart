@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartschool_mobile/modules/dashboard/items/checkin_time_items.dart';
-import 'package:smartschool_mobile/modules/dashboard/items/dashboard_items.dart';
-import 'package:smartschool_mobile/modules/dashboard/tabs/bottom_nav_tab.dart';
+import 'package:smartschool_mobile/modules/dashboard/widgets/checkin_time_items.dart';
+import 'package:smartschool_mobile/modules/dashboard/widgets/dashboard_items.dart';
+import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
@@ -44,7 +44,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             appBar: (selectedPosition == 0)
                 ? (AppBar(
                     title: Text(
-                      'Điểm danh',
+                      'SmartSchool',
                       style: TextStyle(
                           fontSize: 26.sp,
                           color: Colors.blue.shade900,
@@ -54,14 +54,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       IconButton(
                         // ignore: avoid_returning_null_for_void
                         onPressed: () => null,
-                        icon: const Icon(Icons.notifications_none),
+                        icon: const Icon(Icons.notifications),
                         color: Colors.blue.shade900,
                         iconSize: 30.sp,
                       )
                     ],
                     leading: IconButton(
                       icon: Icon(
-                        Icons.settings_outlined,
+                        Icons.settings,
                         color: Colors.blue.shade900,
                         size: 26.0.sp,
                       ),
@@ -86,7 +86,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     elevation: 0,
                   )),
             body: Container(
-                decoration: BoxDecoration(color: Colors.indigo.shade50),
+                decoration: const BoxDecoration(color: Colors.white70),
                 child: SafeArea(
                     child: IndexedStack(
                   index: selectedPosition,
@@ -113,7 +113,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     ),
                     children: [
                       TextSpan(
-                          text: 'admin',
+                          text: 'Nguyễn Văn A',
                           style: TextStyle(
                               fontSize: 18.5.sp, fontWeight: FontWeight.bold))
                     ]),
@@ -125,7 +125,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
           child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +135,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.sp,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w600),
                   ),
                   Row(
                     children: [
@@ -179,34 +179,36 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             mainAxisSpacing: 20,
             crossAxisCount: 2,
             children: [
+              InkWell(
+                child: DashBoardItem(
+                  title: 'Điểm danh hôm nay',
+                  icon: Icons.date_range_sharp,
+                  color: const Color.fromARGB(255, 4, 170, 9),
+                  iconBackground: Colors.green.shade100,
+                ),
+                onTap: () {
+                  Get.toNamed(Routes.dashboard + Routes.checkinToday);
+                },
+              ),
               DashBoardItem(
                 title: 'Nghỉ phép',
                 icon: Icons.person_off,
-                color: Colors.blue,
-                iconBackground: Colors.blue.shade100,
+                color: const Color.fromARGB(255, 255, 17, 0),
+                iconBackground: Colors.red.shade100,
               ),
-              DashBoardItem(
-                title: 'Đi trễ/về sớm',
-                icon: Icons.schedule,
-                color: Colors.orange,
-                iconBackground: Colors.amber.shade100,
-              ),
-              GestureDetector(
-                onTap: (() {
-                  Get.toNamed(Routes.dashboard + Routes.profile);
-                }),
+              InkWell(
                 child: DashBoardItem(
-                  title: 'Cá nhân',
-                  icon: Icons.person,
-                  color: Colors.green,
-                  iconBackground: Colors.green.shade100,
+                  title: 'Đi trễ/ về sớm',
+                  icon: Icons.timer_outlined,
+                  color: const Color.fromARGB(255, 0, 140, 255),
+                  iconBackground: Colors.blue.shade100,
                 ),
               ),
               DashBoardItem(
                 title: 'Phản ánh',
                 icon: Icons.report,
-                color: Colors.red,
-                iconBackground: Colors.red.shade100,
+                color: const Color.fromARGB(255, 241, 157, 60),
+                iconBackground: Colors.amber.shade100,
               ),
             ],
           ),
@@ -219,7 +221,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return Container(
       decoration: const BoxDecoration(),
       child: BottomAppBar(
-        color: Colors.grey.shade200,
+        color: Colors.grey.shade100,
         // shape: const CircularNotchedRectangle(),
         notchMargin: 5,
 
@@ -227,8 +229,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BottomNavTab(
-              title: 'Điểm danh',
-              icon: Icons.perm_contact_calendar_outlined,
+              title: 'Trang chủ',
+              icon: Icons.home,
               isSelected: selectedPosition == 0,
               onTap: () {
                 setState(() {
@@ -244,12 +246,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 setState(() {
                   selectedPosition = 1;
                 });
-                // Get.toNamed(Routes.dashboard + Routes.report);
-                // Timer(const Duration(seconds: 1), () {
-                //   setState(() {
-                //     selectedPosition = 0;
-                //   });
-                // });
               },
             ),
           ],

@@ -255,7 +255,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget nameTextField() {
     return TextFormField(
       initialValue: _profileController.userData.data != null
-          ? _profileController.userData.data!.firstName
+          ? _profileController.userData.data?.firstName
           : '',
       decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -278,7 +278,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget studentIdTextField() {
     return TextFormField(
-      initialValue: _profileController.userData.data!.id.toString(),
+      initialValue: _profileController.userData.data?.id.toString(),
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -324,7 +324,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget emailTextField() {
     return TextFormField(
-      initialValue: _profileController.userData.data!.email,
+      initialValue: _profileController.userData.data?.email,
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(

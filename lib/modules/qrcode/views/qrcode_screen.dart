@@ -47,11 +47,28 @@ class QRCodeScreen extends StatelessWidget {
                     version: 3,
                     gapless: false,
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.replay_outlined,
+                        size: 20.0.sp,
+                      ),
+                      Text(
+                        "Tự động cập nhật sau 30 giây",
+                        style: TextStyle(
+                            fontSize: 14.0.sp, fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 30),
                     child: ElevatedButton(
                       child: Text(
-                        "Làm mới",
+                        "Làm mới".toUpperCase(),
                         style: TextStyle(fontSize: 16.sp),
                       ),
                       style: ElevatedButton.styleFrom(
@@ -59,7 +76,7 @@ class QRCodeScreen extends StatelessWidget {
                         // onSurface: Colors.transparent,
                         // shadowColor: Colors.transparent,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 110, vertical: 16),
+                            horizontal: 150, vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0.sp),
                         ),
