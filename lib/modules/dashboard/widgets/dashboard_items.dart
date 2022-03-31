@@ -37,9 +37,8 @@ class DashBoardItem extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 65,
-              width: 65,
-              margin: const EdgeInsets.only(bottom: 14, top: 35),
+              margin: const EdgeInsets.only(bottom: 6, top: 30),
+              padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                   color: iconBackground,
                   borderRadius: BorderRadius.circular(65)),
@@ -51,7 +50,7 @@ class DashBoardItem extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.symmetric(
-                horizontal: 20,
+                horizontal: 15,
               ),
               child: Text(
                 title,

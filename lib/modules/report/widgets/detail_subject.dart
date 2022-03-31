@@ -69,7 +69,7 @@ class DetailSubject extends StatelessWidget {
                     children: [
                       // ignore: unnecessary_string_interpolations
                       Text(
-                        '• Số buổi đi học hợp lệ',
+                        '• Số buổi hợp lệ',
                         style: TextStyle(
                             fontSize: 14.0.sp, fontWeight: FontWeight.w400),
                       ),

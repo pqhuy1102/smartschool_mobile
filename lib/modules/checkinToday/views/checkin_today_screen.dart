@@ -35,7 +35,7 @@ class CheckinTodayScreen extends StatelessWidget {
         body: SafeArea(
             child: Container(
                 decoration: const BoxDecoration(color: Colors.white70),
-                margin: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+                margin: const EdgeInsets.fromLTRB(10, 18, 10, 0),
                 child: Column(
                   children: [
                     Expanded(

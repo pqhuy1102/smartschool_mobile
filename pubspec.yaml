@@ -41,6 +41,7 @@ dependencies:
   get_storage: ^2.0.3
   device_preview: ^1.0.0
   image_picker: ^0.8.4+10
+  flutter_slidable: ^1.2.0
 
 dev_dependencies:
   flutter_test:
