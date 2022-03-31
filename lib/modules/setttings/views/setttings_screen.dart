@@ -6,7 +6,59 @@ import 'package:smartschool_mobile/modules/setttings/widgets/setting_item.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  SettingsScreen({Key? key}) : super(key: key);
+
+  final List locale = [
+    {'name': 'English(US)', 'locale': const Locale('en', 'US')},
+    {'name': 'Tiếng Việt', 'locale': const Locale('vi', 'VN')},
+  ];
+
+  updateLanguage(Locale locale) {
+    Get.back();
+    Get.updateLocale(locale);
+  }
+
+  handleChangeLanguage(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (builder) {
+          return AlertDialog(
+            title: Text(
+              'choose your language'.tr,
+              style: TextStyle(fontSize: 16.0.sp),
+            ),
+            content: Container(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              width: double.maxFinite,
+              child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        child: Text(
+                          locale[index]['name'],
+                          style: TextStyle(fontSize: 14.0.sp),
+                        ),
+                        onTap: () {
+                          updateLanguage(locale[index]['locale']);
+                        },
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Divider(
+                      color: Colors.grey,
+                    );
+                  },
+                  itemCount: locale.length),
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +78,7 @@ class SettingsScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Cài đặt',
+          'settings'.tr,
           style: TextStyle(
               fontSize: 26.0.sp,
               color: Colors.blue.shade900,
@@ -44,27 +96,32 @@ class SettingsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               children: [
                 InkWell(
-                  child: const SettingItem(
-                      title: "Thông tin cá nhân", icon: Icons.person),
+                  child: SettingItem(
+                      title: "personal information".tr, icon: Icons.person),
                   onTap: () {
                     Get.toNamed(Routes.dashboard + Routes.profile);
                   },
                 ),
-                const SettingItem(
-                  title: "Về chúng tôi",
+                SettingItem(
+                  title: "about us".tr,
                   icon: Icons.people_alt,
                 ),
-                const SettingItem(
-                  title: "Ngôn ngữ",
-                  icon: Icons.translate,
+                InkWell(
+                  child: SettingItem(
+                    title: "language".tr,
+                    icon: Icons.translate,
+                  ),
+                  onTap: () {
+                    handleChangeLanguage(context);
+                  },
                 ),
-                const SettingItem(
-                  title: "Đổi mật khẩu",
+                SettingItem(
+                  title: "change password".tr,
                   icon: Icons.lock,
                 ),
                 InkWell(
-                  child: const SettingItem(
-                    title: "Đăng xuất",
+                  child: SettingItem(
+                    title: "logout".tr,
                     icon: Icons.logout,
                   ),
                   onTap: () {

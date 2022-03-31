@@ -32,7 +32,7 @@ class AppPages {
               binding: ProfileBinding()),
           GetPage(
               name: Routes.settings,
-              page: () => const SettingsScreen(),
+              page: () => SettingsScreen(),
               binding: SettingsBinding()),
           GetPage(
             name: Routes.notification,
