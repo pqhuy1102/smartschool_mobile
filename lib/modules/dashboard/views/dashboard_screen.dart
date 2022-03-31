@@ -53,11 +53,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     actions: [
                       IconButton(
                         // ignore: avoid_returning_null_for_void
-                        onPressed: () => null,
+                        onPressed: () {
+                          Get.toNamed(Routes.dashboard + Routes.notification);
+                        },
                         icon: const Icon(Icons.notifications),
                         color: Colors.blue.shade900,
-                        iconSize: 30.sp,
-                      )
+                        iconSize: 30.0.sp,
+                      ),
                     ],
                     leading: IconButton(
                       icon: Icon(
@@ -198,7 +200,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               ),
               InkWell(
                 child: DashBoardItem(
-                  title: 'Đi trễ/ về sớm',
+                  title: 'Đi trễ/về sớm',
                   icon: Icons.timer_outlined,
                   color: const Color.fromARGB(255, 0, 140, 255),
                   iconBackground: Colors.blue.shade100,

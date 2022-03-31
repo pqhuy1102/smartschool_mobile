@@ -75,8 +75,8 @@ class QRCodeScreen extends StatelessWidget {
                         primary: Colors.blue.shade900,
                         // onSurface: Colors.transparent,
                         // shadowColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 150, vertical: 16),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        minimumSize: const Size.fromHeight(40),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0.sp),
                         ),

@@ -47,7 +47,7 @@ class ParticularSubjectReport extends StatelessWidget {
               ],
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
