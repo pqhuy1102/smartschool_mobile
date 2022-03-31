@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smartschool_mobile/LocaleString.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'routes/routes.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         // useInheritedMediaQuery: true,
         // locale: DevicePreview.locale(context),
         // builder: DevicePreview.appBuilder,
+        translations: LocaleString(),
+        locale: const Locale("vi", "VN"),
+        fallbackLocale: const Locale("vi", "VN"),
         initialRoute: Routes.splash,
         getPages: AppPages.routes,
         title: 'Smart School App',

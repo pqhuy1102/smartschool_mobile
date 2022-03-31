@@ -108,14 +108,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               alignment: Alignment.topLeft,
               child: RichText(
                 text: TextSpan(
-                    text: 'Xin chào, ',
+                    text: 'hello'.tr,
                     style: TextStyle(
                       fontSize: 18.sp,
                       color: Colors.black,
                     ),
                     children: [
                       TextSpan(
-                          text: 'Nguyễn Văn A',
+                          text: ', Nguyễn Văn A',
                           style: TextStyle(
                               fontSize: 18.5.sp, fontWeight: FontWeight.bold))
                     ]),
@@ -133,7 +133,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Điểm danh mới nhất:',
+                    'latest checkin'.tr,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.sp,
@@ -183,7 +183,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             children: [
               InkWell(
                 child: DashBoardItem(
-                  title: 'Điểm danh hôm nay',
+                  title: 'checkin today'.tr,
                   icon: Icons.date_range_sharp,
                   color: const Color.fromARGB(255, 4, 170, 9),
                   iconBackground: Colors.green.shade100,
@@ -193,21 +193,21 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 },
               ),
               DashBoardItem(
-                title: 'Nghỉ phép',
+                title: 'absence'.tr,
                 icon: Icons.person_off,
                 color: const Color.fromARGB(255, 255, 17, 0),
                 iconBackground: Colors.red.shade100,
               ),
               InkWell(
                 child: DashBoardItem(
-                  title: 'Đi trễ/về sớm',
+                  title: 'late/earlier'.tr,
                   icon: Icons.timer_outlined,
                   color: const Color.fromARGB(255, 0, 140, 255),
                   iconBackground: Colors.blue.shade100,
                 ),
               ),
               DashBoardItem(
-                title: 'Phản ánh',
+                title: 'complain'.tr,
                 icon: Icons.report,
                 color: const Color.fromARGB(255, 241, 157, 60),
                 iconBackground: Colors.amber.shade100,
@@ -231,7 +231,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BottomNavTab(
-              title: 'Trang chủ',
+              title: 'home'.tr,
               icon: Icons.home,
               isSelected: selectedPosition == 0,
               onTap: () {
@@ -241,7 +241,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               },
             ),
             BottomNavTab(
-              title: 'Báo cáo',
+              title: 'report'.tr,
               icon: Icons.bar_chart,
               isSelected: selectedPosition == 1,
               onTap: () {
