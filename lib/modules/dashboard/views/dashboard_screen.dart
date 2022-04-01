@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/checkin_time_items.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/dashboard_items.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
+import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
@@ -17,6 +18,7 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int selectedPosition = 0;
+  final ProfileController _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       children: [
         Container(
           margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-          child: Align(
+          child: Obx(() => Align(
               alignment: Alignment.topLeft,
               child: RichText(
                 text: TextSpan(
@@ -115,11 +117,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     ),
                     children: [
                       TextSpan(
-                          text: ', Nguyễn Văn A',
+                          text: '${_profileController.userName}',
                           style: TextStyle(
                               fontSize: 18.5.sp, fontWeight: FontWeight.bold))
                     ]),
-              )),
+              ))),
         ),
 
         Container(

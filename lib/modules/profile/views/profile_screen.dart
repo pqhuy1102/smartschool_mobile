@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               elevation: 0,
             ),
             body: Obx(() {
-              if (_profileController.isLoading.value) {
+              if (_profileController.isLoading.value == true) {
                 return Center(
                   child: SpinKitFadingFour(
                     color: Colors.blue.shade900,
@@ -108,54 +108,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 );
               } else {
-                return Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: SafeArea(
-                      child: Form(
-                          child: ListView(
-                    children: [
-                      imageProfile(),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      nameTextField(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      studentIdTextField(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      genderTextField(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      emailTextField(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      phoneNumberTextField(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            'cập nhật thông tin'.toUpperCase(),
-                            style: TextStyle(
-                                fontSize: 14.0.sp, fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size.fromHeight(50),
-                            primary: Colors.blue.shade900,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0.sp),
+                if (_profileController.userData != null) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: SafeArea(
+                        child: Form(
+                            child: ListView(
+                      children: [
+                        imageProfile(),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        nameTextField(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        studentIdTextField(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        studentClassTextField(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        genderTextField(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        emailTextField(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        phoneNumberTextField(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {},
+                            child: Text(
+                              'cập nhật thông tin'.toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ))
-                    ],
-                  ))),
-                );
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size.fromHeight(60),
+                              primary: Colors.blue.shade900,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0.sp),
+                              ),
+                            ))
+                      ],
+                    ))),
+                  );
+                } else {
+                  return const Center(
+                    child: Text('Data not found!'),
+                  );
+                }
               }
             })));
   }
@@ -176,16 +187,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         as ImageProvider,
               ))),
           Positioned(
-            bottom: 15.0,
-            right: 16.0,
+            bottom: 10.0,
+            right: 12.0,
             child: InkWell(
               onTap: () {
                 showModalBottomSheet(
                     context: context, builder: (builder) => bottomSheet());
               },
-              child: Icon(
-                Icons.camera_alt,
-                size: 24.0.sp,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 6, top: 30),
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey.shade400),
+                    borderRadius: BorderRadius.circular(50)),
+                child: Icon(
+                  Icons.camera_alt,
+                  color: Colors.black,
+                  size: 24.0.sp,
+                ),
               ),
             ),
           )
@@ -254,10 +274,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget nameTextField() {
     return TextFormField(
-      initialValue: _profileController.userData.data != null
-          ? _profileController.userData.data?.firstName
-          : '',
-      decoration: InputDecoration(
+        initialValue: _profileController.userData?.studentName,
+        style: TextStyle(
+          fontSize: 14.0.sp,
+          fontWeight: FontWeight.w500,
+        ),
+        decoration: InputDecoration(
           border: OutlineInputBorder(
               borderSide: BorderSide(
             color: Colors.blue.shade900,
@@ -270,15 +292,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           prefixIcon: Icon(
             Icons.person,
             color: Colors.blue.shade900,
+            size: 20.0.sp,
           ),
           labelText: "Họ tên",
-          labelStyle: TextStyle(color: Colors.blue.shade900)),
-    );
+          labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
+        ));
   }
 
-  Widget studentIdTextField() {
+  Widget studentClassTextField() {
     return TextFormField(
-      initialValue: _profileController.userData.data?.id.toString(),
+      initialValue: _profileController.userData?.studentClass,
+      style: TextStyle(
+        fontSize: 14.0.sp,
+        fontWeight: FontWeight.w500,
+      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -292,16 +319,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
         prefixIcon: Icon(
           Icons.person_search_outlined,
           color: Colors.blue.shade900,
+          size: 20.0.sp,
+        ),
+        labelText: "Lớp học",
+        labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
+      ),
+    );
+  }
+
+  Widget studentIdTextField() {
+    return TextFormField(
+      initialValue: _profileController.userData?.studentId,
+      style: TextStyle(
+        fontSize: 14.0.sp,
+        fontWeight: FontWeight.w500,
+      ),
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.blue.shade900,
+        )),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.blue.shade900,
+          width: 2,
+        )),
+        prefixIcon: Icon(
+          Icons.person_search_outlined,
+          color: Colors.blue.shade900,
+          size: 20.0.sp,
         ),
         labelText: "Mã sinh viên",
-        labelStyle: TextStyle(color: Colors.blue.shade900),
+        labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
       ),
     );
   }
 
   Widget genderTextField() {
     return TextFormField(
-      initialValue: 'Nam',
+      initialValue: _profileController.userData?.gender,
+      style: TextStyle(
+        fontSize: 14.0.sp,
+        fontWeight: FontWeight.w500,
+      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -315,16 +375,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         prefixIcon: Icon(
           Icons.person_pin,
           color: Colors.blue.shade900,
+          size: 20.0.sp,
         ),
         labelText: "Giới tính",
-        labelStyle: TextStyle(color: Colors.blue.shade900),
+        labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
       ),
     );
   }
 
   Widget emailTextField() {
     return TextFormField(
-      initialValue: _profileController.userData.data?.email,
+      initialValue: _profileController.userData?.email,
+      style: TextStyle(
+        fontSize: 14.0.sp,
+        fontWeight: FontWeight.w500,
+      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -338,16 +403,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         prefixIcon: Icon(
           Icons.email,
           color: Colors.blue.shade900,
+          size: 20.0.sp,
         ),
         labelText: "Email",
-        labelStyle: TextStyle(color: Colors.blue.shade900),
+        labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
       ),
     );
   }
 
   Widget phoneNumberTextField() {
     return TextFormField(
-      initialValue: '0123456789',
+      initialValue: _profileController.userData?.phoneNumber,
+      style: TextStyle(
+        fontSize: 14.0.sp,
+        fontWeight: FontWeight.w500,
+      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -361,9 +431,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         prefixIcon: Icon(
           Icons.phone_iphone,
           color: Colors.blue.shade900,
+          size: 20.0.sp,
         ),
         labelText: "Số điện thoại",
-        labelStyle: TextStyle(color: Colors.blue.shade900),
+        labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
       ),
     );
   }
