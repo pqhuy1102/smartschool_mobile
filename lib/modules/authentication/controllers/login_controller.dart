@@ -51,7 +51,7 @@ class LoginController extends GetxController {
   //logout
   void logout() {
     _authenticationManager.logOut();
-    Get.offAll(const OnBoard());
+    Get.offAll(() => const OnBoard());
 
     Get.snackbar('Thành công', 'Đăng xuất thành công!',
         snackPosition: SnackPosition.TOP,

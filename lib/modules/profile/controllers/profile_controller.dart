@@ -10,18 +10,17 @@ class ProfileController extends GetxController {
   var selectedImagePath = ''.obs;
   final ImagePicker _picker = ImagePicker();
 
-  //get profile
-  late final AuthenticationManager _authenticationManager;
-  Map<String, String> headers = {};
   var isLoading = false.obs;
   // ignore: prefer_typing_uninitialized_variables
   var _userData;
+  var userName = RxString('');
+
+  late final AuthenticationManager _authenticationManager;
 
   @override
   void onInit() {
     super.onInit();
     _authenticationManager = Get.find();
-    headers['Authorization'] = 'Bearer ${_authenticationManager.getToken()}';
     getProfileUser();
   }
 
@@ -40,17 +39,23 @@ class ProfileController extends GetxController {
     }
   }
 
-  ProfileResponseModel get userData => _userData;
+  ProfileResponseModel? get userData => _userData;
 
   Future<void> getProfileUser() async {
     isLoading(true);
-    var res = await ProfileProvider().getProfileUser();
+    String? token = _authenticationManager.getToken();
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    var res = await ProfileProvider().getProfileUser(headers);
     if (res != null) {
       _userData = res;
+      userName.value = res.studentName;
       isLoading(false);
     } else {
       Get.snackbar('Error ', 'Không tìm thấy dữ liệu!',
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);
       isLoading(false);

@@ -12,73 +12,37 @@ String profileResponseModelToJson(ProfileResponseModel data) =>
 
 class ProfileResponseModel {
   ProfileResponseModel({
-    this.data,
-    this.support,
+    required this.studentName,
+    required this.studentClass,
+    required this.email,
+    required this.phoneNumber,
+    required this.gender,
+    required this.studentId,
   });
 
-  Data? data;
-  Support? support;
+  String studentName;
+  String studentClass;
+  String email;
+  String phoneNumber;
+  String gender;
+  String studentId;
 
   factory ProfileResponseModel.fromJson(Map<String, dynamic> json) =>
       ProfileResponseModel(
-        data: Data.fromJson(json["data"]),
-        support: Support.fromJson(json["support"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "data": data?.toJson(),
-        "support": support?.toJson(),
-      };
-}
-
-class Data {
-  Data({
-    this.id,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.avatar,
-  });
-
-  int? id;
-  String? email;
-  String? firstName;
-  String? lastName;
-  String? avatar;
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
+        studentName: json["student_name"],
+        studentClass: json["student_class"],
         email: json["email"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
-        avatar: json["avatar"],
+        phoneNumber: json["phone_number"],
+        gender: json["gender"],
+        studentId: json["student_id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "student_name": studentName,
+        "student_class": studentClass,
         "email": email,
-        "first_name": firstName,
-        "last_name": lastName,
-        "avatar": avatar,
-      };
-}
-
-class Support {
-  Support({
-    this.url,
-    this.text,
-  });
-
-  String? url;
-  String? text;
-
-  factory Support.fromJson(Map<String, dynamic> json) => Support(
-        url: json["url"],
-        text: json["text"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "url": url,
-        "text": text,
+        "phone_number": phoneNumber,
+        "gender": gender,
+        "student_id": studentId,
       };
 }

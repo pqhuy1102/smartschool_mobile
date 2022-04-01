@@ -4,11 +4,10 @@ import 'package:smartschool_mobile/modules/profile/models/profile_response_model
 //import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
 
 class ProfileProvider extends GetConnect {
-  final String getProfileUrl = 'https://reqres.in/api/users/2';
-  //final ProfileController _profileController = Get.put(ProfileController());
+  final String getProfileUrl = 'http://13.228.244.196:6002/user/me';
 
-  Future<ProfileResponseModel?> getProfileUser() async {
-    final response = await get(getProfileUrl);
+  Future<ProfileResponseModel?> getProfileUser(headers) async {
+    final response = await get(getProfileUrl, headers: headers);
     if (response.statusCode == HttpStatus.ok) {
       return profileResponseModelFromJson(response.bodyString!);
     } else {
