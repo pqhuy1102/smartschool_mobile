@@ -12,9 +12,13 @@ class OnBoard extends StatelessWidget {
     AuthenticationManager _authManager = Get.put(AuthenticationManager());
 
     return Obx(() {
-      return _authManager.isLogged.value
+      return (_authManager.isLogged.value &&
+              _authManager.isChangedPassword.value)
           ? const DashBoardScreen()
-          : const LoginScreen();
+          : (_authManager.isLogged.value &&
+                  !_authManager.isChangedPassword.value)
+              ? const DashBoardScreen()
+              : const LoginScreen();
     });
   }
 }

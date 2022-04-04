@@ -16,6 +16,8 @@ mixin CacheManager {
     final box = GetStorage();
     await box.remove(CacheManagerKey.TOKEN.toString());
   }
+
+  //1234578ab
 }
 
 // ignore: constant_identifier_names

@@ -10,4 +10,5 @@ abstract class Routes {
   static const checkinToday = '/checkinToday';
   static const subjectDetailReport = '/subjectDetailReport';
   static const notification = '/notification';
+  static const changePassword = '/changePassword';
 }
