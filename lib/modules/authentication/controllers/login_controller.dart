@@ -30,8 +30,8 @@ class LoginController extends GetxController {
   //login
   Future<void> login(String email, String password) async {
     isLoading(true);
-    final res = await _loginProvider
-        .login(LoginRequestModel(email: email, password: password));
+    final res = await _loginProvider.login(
+        LoginRequestModel(email: email.trim(), password: password.trim()));
     if (res != null) {
       _authenticationManager.login(res.token);
       Get.snackbar('Thành công', 'Đăng nhập thành công!',

@@ -115,9 +115,16 @@ class SettingsScreen extends StatelessWidget {
                     handleChangeLanguage(context);
                   },
                 ),
-                SettingItem(
-                  title: "change password".tr,
-                  icon: Icons.lock,
+                InkWell(
+                  child: SettingItem(
+                    title: "change password".tr,
+                    icon: Icons.lock,
+                  ),
+                  onTap: () {
+                    Get.toNamed(Routes.dashboard +
+                        Routes.settings +
+                        Routes.changePassword);
+                  },
                 ),
                 InkWell(
                   child: SettingItem(

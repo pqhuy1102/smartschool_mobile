@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:smartschool_mobile/modules/changePassword/views/change_password_screen.dart';
 import 'package:smartschool_mobile/modules/checkinToday/views/checkin_today_screen.dart';
 import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
 import 'package:smartschool_mobile/modules/notification/views/notification_screen.dart';
@@ -33,7 +34,12 @@ class AppPages {
           GetPage(
               name: Routes.settings,
               page: () => SettingsScreen(),
-              binding: SettingsBinding()),
+              binding: SettingsBinding(),
+              children: [
+                GetPage(
+                    name: Routes.changePassword,
+                    page: () => const ChangePasswordScreen()),
+              ]),
           GetPage(
             name: Routes.notification,
             page: () => const NotificationScreen(),
