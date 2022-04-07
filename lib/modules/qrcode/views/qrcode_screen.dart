@@ -1,14 +1,22 @@
+import 'dart:core';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smartschool_mobile/modules/qrcode/controllers/get_qrcode_controller.dart';
 
 class QRCodeScreen extends StatelessWidget {
-  const QRCodeScreen({Key? key}) : super(key: key);
+  QRCodeScreen({Key? key}) : super(key: key);
+
+  GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () => showInstruction(context));
+
     return SafeArea(
         child: Scaffold(
       extendBodyBehindAppBar: true,
@@ -42,11 +50,21 @@ class QRCodeScreen extends StatelessWidget {
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  QrImage(
-                    data: Random().nextInt(1900).toString(),
-                    version: 3,
-                    gapless: false,
-                  ),
+                  Obx(() {
+                    if (_qrCodeController.isLoading.value) {
+                      return Center(
+                        child: SpinKitFadingFour(
+                          color: Colors.blue.shade900,
+                          size: 50.0,
+                        ),
+                      );
+                    } else {
+                      return QrImage(
+                        data: _qrCodeController.qrCodeString.value,
+                        gapless: false,
+                      );
+                    }
+                  }),
                   const SizedBox(
                     height: 20,
                   ),
@@ -81,7 +99,9 @@ class QRCodeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0.sp),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _qrCodeController.getQrCode();
+                      },
                     ),
                   ),
                 ],
@@ -89,5 +109,51 @@ class QRCodeScreen extends StatelessWidget {
             ),
           )),
     ));
+  }
+
+  void showInstruction(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Center(
+                child: Text(
+                  "Hướng dẫn sử dụng",
+                  style:
+                      TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+                ),
+              ),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              content: Container(
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Center(
+                      child: Text(
+                        "Đưa mã QR của bạn lại gần thiết bị bCheckin với khoảng cách tối ưu từ 15 đến 20cm. ",
+                        style: TextStyle(
+                            fontSize: 12.0.sp, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Image.asset(
+                      'assets/images/qr-code-instruction.gif',
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      'Đóng',
+                      style: TextStyle(
+                          fontSize: 12.0.sp, fontWeight: FontWeight.w500),
+                    ))
+              ],
+            ));
   }
 }

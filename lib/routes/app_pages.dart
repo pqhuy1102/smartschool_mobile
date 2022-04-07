@@ -25,7 +25,7 @@ class AppPages {
         name: Routes.dashboard,
         page: () => const DashBoardScreen(),
         children: [
-          GetPage(name: Routes.qrcode, page: () => const QRCodeScreen()),
+          GetPage(name: Routes.qrcode, page: () => QRCodeScreen()),
           GetPage(name: Routes.report, page: () => const ReportScreen()),
           GetPage(
               name: Routes.profile,
