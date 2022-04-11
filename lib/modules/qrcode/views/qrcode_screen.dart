@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -8,10 +7,11 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/qrcode/controllers/get_qrcode_controller.dart';
 
+// ignore: must_be_immutable
 class QRCodeScreen extends StatelessWidget {
   QRCodeScreen({Key? key}) : super(key: key);
 
-  GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
+  final GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
 
   @override
   Widget build(BuildContext context) {

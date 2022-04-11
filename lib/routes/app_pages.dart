@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/changePassword/views/change_password_screen.dart';
-import 'package:smartschool_mobile/modules/checkinToday/views/checkin_today_screen.dart';
+import 'package:smartschool_mobile/modules/checkinToday/bindings/get_inday_attendance_bindings.dart';
+import 'package:smartschool_mobile/modules/checkinToday/views/get_inday_attendance_screen.dart';
 import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
 import 'package:smartschool_mobile/modules/notification/views/notification_screen.dart';
 import 'package:smartschool_mobile/modules/profile/bindings/profile_bindings.dart';
@@ -45,7 +46,9 @@ class AppPages {
             page: () => const NotificationScreen(),
           ),
           GetPage(
-              name: Routes.checkinToday, page: () => const CheckinTodayScreen())
+              name: Routes.checkinToday,
+              page: () => const CheckinTodayScreen(),
+              binding: GetIndayAttendanceBinding()),
         ]),
     GetPage(
         name: Routes.subjectDetailReport,
