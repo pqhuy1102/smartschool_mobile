@@ -76,7 +76,7 @@ class QRCodeScreen extends StatelessWidget {
                         size: 20.0.sp,
                       ),
                       Text(
-                        "Tự động cập nhật sau 30 giây",
+                        "Tự động cập nhật sau ${_qrCodeController.countDown.value} giây",
                         style: TextStyle(
                             fontSize: 14.0.sp, fontWeight: FontWeight.w500),
                       )

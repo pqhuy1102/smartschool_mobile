@@ -3,6 +3,7 @@ import 'package:smartschool_mobile/modules/changePassword/views/change_password_
 import 'package:smartschool_mobile/modules/checkinToday/bindings/get_inday_attendance_bindings.dart';
 import 'package:smartschool_mobile/modules/checkinToday/views/get_inday_attendance_screen.dart';
 import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
+import 'package:smartschool_mobile/modules/notification/bindings/notifications_binding.dart';
 import 'package:smartschool_mobile/modules/notification/views/notification_screen.dart';
 import 'package:smartschool_mobile/modules/profile/bindings/profile_bindings.dart';
 import 'package:smartschool_mobile/modules/profile/views/profile_screen.dart';
@@ -43,7 +44,8 @@ class AppPages {
               ]),
           GetPage(
             name: Routes.notification,
-            page: () => const NotificationScreen(),
+            page: () => NotificationScreen(),
+            binding: NotificationsBinding(),
           ),
           GetPage(
               name: Routes.checkinToday,

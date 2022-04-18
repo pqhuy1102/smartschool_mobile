@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
@@ -10,10 +12,15 @@ class GetQrCodeController extends GetxController {
 
   late final AuthenticationManager _authenticationManager;
 
+  final countDown = 30.obs;
+
+  Timer? timer;
+
   @override
   void onInit() {
     super.onInit();
     _authenticationManager = Get.find();
+
     getQrCode();
   }
 
@@ -27,6 +34,7 @@ class GetQrCodeController extends GetxController {
     var res = await GetQrCodeProvider().getQrCode(headers);
     if (res != null) {
       qrCodeString.value = res.qrString;
+
       isLoading(false);
     } else {
       Get.snackbar('Error ', 'Không tìm thấy dữ liệu!',

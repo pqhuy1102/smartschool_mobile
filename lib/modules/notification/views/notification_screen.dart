@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smartschool_mobile/modules/notification/controllers/notifications_controller.dart';
 import 'package:smartschool_mobile/modules/notification/widgets/notification_item.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({Key? key}) : super(key: key);
+  NotificationScreen({Key? key}) : super(key: key);
+  final NotificationsController _notificationsController =
+      Get.put(NotificationsController());
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +100,9 @@ class NotificationScreen extends StatelessWidget {
                           "Đơn xin nghỉ phép môn CS469 ngày 22/02/2022 của bạn đã được chấp nhận",
                       date: "22/02/2022",
                     ),
+                    Center(
+                      child: Text(_notificationsController.token.value),
+                    )
                   ],
                 ))
               ],

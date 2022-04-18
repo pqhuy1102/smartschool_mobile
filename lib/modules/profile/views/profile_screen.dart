@@ -120,45 +120,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(
                           height: 25,
                         ),
-                        nameTextField(),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: nameTextField(),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        studentIdTextField(),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: studentIdTextField(),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        studentClassTextField(),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: studentClassTextField(),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        genderTextField(),
+                        Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: genderTextField()),
                         const SizedBox(
                           height: 20,
                         ),
-                        emailTextField(),
+                        Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: emailTextField()),
                         const SizedBox(
                           height: 20,
                         ),
-                        phoneNumberTextField(),
+                        Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: phoneNumberTextField()),
                         const SizedBox(
                           height: 20,
                         ),
-                        ElevatedButton(
-                            onPressed: () {},
-                            child: Text(
-                              'cập nhật thông tin'.toUpperCase(),
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: const Size.fromHeight(60),
-                              primary: Colors.blue.shade900,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0.sp),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text(
+                                'cập nhật thông tin'.toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ))
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(50),
+                                primary: Colors.blue.shade900,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0.sp),
+                                ),
+                              )),
+                        )
                       ],
                     ))),
                   );
@@ -175,102 +193,74 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Center(
       child: Stack(
         children: [
-          Obx(() => SizedBox(
-              height: 24.0.h,
-              child: CircleAvatar(
-                radius: 100,
-                backgroundImage: (_profileController.selectedImagePath.value ==
-                        '')
-                    ? const AssetImage('assets/images/default-avatar.png')
-                    : FileImage(
-                            File(_profileController.selectedImagePath.value))
-                        as ImageProvider,
-              ))),
-          Positioned(
-            bottom: 10.0,
-            right: 12.0,
-            child: InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                    context: context, builder: (builder) => bottomSheet());
-              },
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 6, top: 30),
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey.shade400),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Colors.black,
-                  size: 24.0.sp,
-                ),
-              ),
-            ),
-          )
+          SizedBox(
+              height: 22.0.h,
+              child: const CircleAvatar(
+                  radius: 100,
+                  backgroundImage:
+                      AssetImage('assets/images/default-avatar.png'))),
         ],
       ),
     );
   }
 
-  Widget bottomSheet() {
-    return Container(
-      height: 16.0.h,
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            "Chọn ảnh đại diện",
-            style: TextStyle(
-              fontSize: 14.0.sp,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton.icon(
-                  icon: const Icon(
-                    Icons.camera,
-                  ),
-                  onPressed: () {
-                    _profileController.getImage(ImageSource.camera);
-                  },
-                  label: Text(
-                    "Chụp ảnh",
-                    style: TextStyle(color: Colors.white, fontSize: 14.0.sp),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blue.shade900,
-                      side: BorderSide.none,
-                      padding: const EdgeInsets.all(10)),
-                ),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.image),
-                  onPressed: () {
-                    _profileController.getImage(ImageSource.gallery);
-                  },
-                  label: Text(
-                    "Thư viện",
-                    style: TextStyle(color: Colors.white, fontSize: 14.0.sp),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blue.shade900,
-                      side: BorderSide.none,
-                      padding: const EdgeInsets.all(10)),
-                ),
-              ])
-        ],
-      ),
-    );
-  }
+  // Widget bottomSheet() {
+  //   return Container(
+  //     height: 16.0.h,
+  //     width: MediaQuery.of(context).size.width,
+  //     margin: const EdgeInsets.symmetric(
+  //       horizontal: 20,
+  //       vertical: 20,
+  //     ),
+  //     child: Column(
+  //       children: <Widget>[
+  //         Text(
+  //           "Chọn ảnh đại diện",
+  //           style: TextStyle(
+  //             fontSize: 14.0.sp,
+  //           ),
+  //         ),
+  //         const SizedBox(
+  //           height: 20,
+  //         ),
+  //         Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             children: <Widget>[
+  //               ElevatedButton.icon(
+  //                 icon: const Icon(
+  //                   Icons.camera,
+  //                 ),
+  //                 onPressed: () {
+  //                   _profileController.getImage(ImageSource.camera);
+  //                 },
+  //                 label: Text(
+  //                   "Chụp ảnh",
+  //                   style: TextStyle(color: Colors.white, fontSize: 14.0.sp),
+  //                 ),
+  //                 style: ElevatedButton.styleFrom(
+  //                     primary: Colors.blue.shade900,
+  //                     side: BorderSide.none,
+  //                     padding: const EdgeInsets.all(10)),
+  //               ),
+  //               ElevatedButton.icon(
+  //                 icon: const Icon(Icons.image),
+  //                 onPressed: () {
+  //                   _profileController.getImage(ImageSource.gallery);
+  //                 },
+  //                 label: Text(
+  //                   "Thư viện",
+  //                   style: TextStyle(color: Colors.white, fontSize: 14.0.sp),
+  //                 ),
+  //                 style: ElevatedButton.styleFrom(
+  //                     primary: Colors.blue.shade900,
+  //                     side: BorderSide.none,
+  //                     padding: const EdgeInsets.all(10)),
+  //               ),
+  //             ])
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget nameTextField() {
     return TextFormField(

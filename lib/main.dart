@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -10,7 +11,9 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   //initialize for data persistency
   await GetStorage.init();
-
+  //initialize for firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 
   // runApp(
