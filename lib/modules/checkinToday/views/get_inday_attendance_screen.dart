@@ -25,7 +25,7 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
               title: Text(
                 'Điểm danh hôm nay',
                 style: TextStyle(
-                    fontSize: 22.0.sp,
+                    fontSize: 19.0.sp,
                     color: Colors.blue.shade900,
                     fontWeight: FontWeight.w600),
               ),
@@ -37,13 +37,16 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
                 child: controller.obx((data) => ListView.builder(
                     itemCount: data!.length,
                     itemBuilder: ((context, index) {
-                      return CheckinTodayItem(
-                          date: data[index]['check_in_time'],
-                          time: "9:35",
-                          subjectId: "CS101",
-                          className: "18CTT1",
-                          room: data[index]['room'],
-                          status: "Thành công");
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: CheckinTodayItem(
+                            date: data[index]['check_in_time'],
+                            time: "9:35",
+                            subjectId: "CS101",
+                            className: "18CTT1",
+                            room: data[index]['room'],
+                            status: "Thành công"),
+                      );
                     }))))));
   }
 }

@@ -10,7 +10,7 @@ class SettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey.shade400)),
           color: Colors.white,
@@ -18,11 +18,11 @@ class SettingItem extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             icon,
-            size: 20.0.sp,
+            size: 18.0.sp,
           ),
           title: Text(
             title,
-            style: TextStyle(fontSize: 16.0.sp),
+            style: TextStyle(fontSize: 14.0.sp),
           ),
         ));
   }
