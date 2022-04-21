@@ -20,8 +20,9 @@ class GetQrCodeController extends GetxController {
   void onInit() {
     super.onInit();
     _authenticationManager = Get.find();
-
     getQrCode();
+
+    Timer.periodic(const Duration(seconds: 30), (Timer t) => getQrCode());
   }
 
   Future<void> getQrCode() async {
@@ -34,7 +35,6 @@ class GetQrCodeController extends GetxController {
     var res = await GetQrCodeProvider().getQrCode(headers);
     if (res != null) {
       qrCodeString.value = res.qrString;
-
       isLoading(false);
     } else {
       Get.snackbar('Error ', 'Không tìm thấy dữ liệu!',

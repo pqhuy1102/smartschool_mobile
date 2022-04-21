@@ -20,6 +20,7 @@ class GetIndayAttendanceController extends GetxController
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
     };
+
     GetIndayAttendanceProvider().getIndayAttendance(headers).then((res) {
       change(res, status: RxStatus.success());
     }, onError: (err) {

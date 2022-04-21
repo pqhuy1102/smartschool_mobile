@@ -54,10 +54,6 @@ class ProfileController extends GetxController {
       userName.value = res.studentName;
       isLoading(false);
     } else {
-      Get.snackbar('Error ', 'Không tìm thấy dữ liệu!',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
       isLoading(false);
     }
   }

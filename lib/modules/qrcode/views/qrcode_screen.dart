@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:core';
 
 import 'package:flutter/material.dart';
@@ -13,10 +14,14 @@ class QRCodeScreen extends StatelessWidget {
 
   final GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
 
+  var counter = 30;
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () => showInstruction(context));
-
+    Timer.periodic(const Duration(seconds: 1), (Timer t) {
+      counter--;
+    });
     return SafeArea(
         child: Scaffold(
       extendBodyBehindAppBar: true,
