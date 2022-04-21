@@ -38,7 +38,7 @@ class CheckinTodayItem extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 14.0.sp, color: Colors.grey.shade600),
                 ),
-                Text("$time AM",
+                Text("$time",
                     style: TextStyle(
                         fontSize: 14.0.sp, color: Colors.grey.shade600))
               ],
@@ -78,8 +78,8 @@ class CheckinTodayItem extends StatelessWidget {
               child: Text("• $status",
                   style: TextStyle(
                       fontSize: 14.0.sp,
-                      color: status == "Thành công"
-                          ? Colors.green.shade600
+                      color: status == "Attend"
+                          ? Colors.green.shade700
                           : Colors.red.shade600,
                       fontWeight: FontWeight.w600)),
             )

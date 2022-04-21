@@ -49,7 +49,7 @@ class AppPages {
           ),
           GetPage(
               name: Routes.checkinToday,
-              page: () => const CheckinTodayScreen(),
+              page: () => CheckinTodayScreen(),
               binding: GetIndayAttendanceBinding()),
         ]),
     GetPage(
