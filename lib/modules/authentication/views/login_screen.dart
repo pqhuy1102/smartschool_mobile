@@ -20,8 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    // double w = MediaQuery.of(context).size.width;
+    // double h = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -32,18 +32,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   image: AssetImage('assets/images/background_login.jpg'),
                   fit: BoxFit.fill)),
           child: Center(
+              child: SingleChildScrollView(
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               // ignore: prefer_const_literals_to_create_immutables
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 100, 0, 20),
-                  height: h * 0.16,
-                  width: w,
-                  child: Image.asset('assets/images/logo-hcmus-new.png'),
+                  margin: const EdgeInsets.fromLTRB(0, 60, 0, 8),
+                  child: Image.asset(
+                    'assets/images/logo-hcmus-new.png',
+                    fit: BoxFit.contain,
+                    height: 180.0,
+                    width: 180.0,
+                  ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(bottom: 10, top: 20),
+                    margin: const EdgeInsets.only(bottom: 10, top: 10),
                     child: Text(
                       'đăng nhập'.toUpperCase(),
                       style: TextStyle(
@@ -138,18 +142,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }
                                 })),
                                 style: ElevatedButton.styleFrom(
-                                  minimumSize: const Size.fromHeight(60),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
+                                  minimumSize: const Size.fromHeight(40),
                                   primary: Colors.blue.shade900,
                                   shape: new RoundedRectangleBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(10.0.sp),
+                                        new BorderRadius.circular(8.0.sp),
                                   ),
                                 ))
                           ],
                         )))
               ],
             ),
-          ),
+          )),
         ));
   }
 }
@@ -162,6 +168,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
     labelText: labelText,
+    labelStyle: TextStyle(color: Colors.blue.shade900),
     prefixText: prefix,
     prefixIcon: Icon(
       iconData,

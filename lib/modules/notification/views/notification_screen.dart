@@ -74,13 +74,6 @@ class NotificationScreen extends StatelessWidget {
                             icon: Icons.delete,
                             label: "Xóa",
                           ),
-                          SlidableAction(
-                            onPressed: doNothing,
-                            foregroundColor: Colors.white,
-                            backgroundColor: Colors.blue.shade900,
-                            icon: Icons.cancel,
-                            label: "Đóng",
-                          ),
                         ],
                       ),
                     ),

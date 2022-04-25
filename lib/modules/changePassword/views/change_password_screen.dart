@@ -163,11 +163,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     }
                                   })),
                                   style: ElevatedButton.styleFrom(
-                                    minimumSize: const Size.fromHeight(50),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    minimumSize: const Size.fromHeight(40),
                                     primary: Colors.blue.shade900,
                                     shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(10.0.sp),
+                                          BorderRadius.circular(8.0.sp),
                                     ),
                                   ))
                             ],

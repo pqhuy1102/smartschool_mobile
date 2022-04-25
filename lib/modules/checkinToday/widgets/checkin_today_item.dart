@@ -38,6 +38,7 @@ class CheckinTodayItem extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 14.0.sp, color: Colors.grey.shade600),
                 ),
+                // ignore: unnecessary_string_interpolations
                 Text("$time",
                     style: TextStyle(
                         fontSize: 14.0.sp, color: Colors.grey.shade600))
