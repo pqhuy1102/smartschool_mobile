@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:core';
 
 import 'package:flutter/material.dart';
@@ -9,9 +8,14 @@ import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/qrcode/controllers/get_qrcode_controller.dart';
 
 // ignore: must_be_immutable
-class QRCodeScreen extends StatelessWidget {
-  QRCodeScreen({Key? key}) : super(key: key);
+class QRCodeScreen extends StatefulWidget {
+  const QRCodeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<QRCodeScreen> createState() => _QRCodeScreenState();
+}
+
+class _QRCodeScreenState extends State<QRCodeScreen> {
   final GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
 
   var counter = 30;
@@ -19,9 +23,7 @@ class QRCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () => showInstruction(context));
-    Timer.periodic(const Duration(seconds: 1), (Timer t) {
-      counter--;
-    });
+
     return SafeArea(
         child: Scaffold(
       extendBodyBehindAppBar: true,
@@ -52,6 +54,7 @@ class QRCodeScreen extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: SafeArea(
             child: Center(
+                child: SingleChildScrollView(
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -73,22 +76,25 @@ class QRCodeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.replay_outlined,
-                        size: 20.0.sp,
-                      ),
-                      Text(
-                        "Tự động cập nhật sau ${_qrCodeController.countDown.value} giây",
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  ),
+                  Obx(() {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.replay_outlined,
+                          size: 20.0.sp,
+                        ),
+                        Text(
+                          "Tự động cập nhật sau ${_qrCodeController.countDown.value} giây",
+                          style: TextStyle(
+                              fontSize: 14.0.sp, fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    );
+                  }),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 30),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 30, horizontal: 10),
                     child: ElevatedButton(
                       child: Text(
                         "Làm mới".toUpperCase(),
@@ -98,7 +104,8 @@ class QRCodeScreen extends StatelessWidget {
                         primary: Colors.blue.shade900,
                         // onSurface: Colors.transparent,
                         // shadowColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+
                         minimumSize: const Size.fromHeight(40),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0.sp),
@@ -111,7 +118,7 @@ class QRCodeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            )),
           )),
     ));
   }
@@ -130,26 +137,28 @@ class QRCodeScreen extends StatelessWidget {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               content: Container(
-                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Center(
-                      child: Text(
-                        "Đưa mã QR của bạn lại gần thiết bị bCheckin với khoảng cách tối ưu từ 15 đến 20cm. ",
-                        style: TextStyle(
-                            fontSize: 12.0.sp, fontWeight: FontWeight.w500),
-                      ),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Center(
+                          child: Text(
+                            "Đưa mã QR của bạn lại gần thiết bị bCheckin với khoảng cách tối ưu từ 15 đến 20cm. ",
+                            style: TextStyle(
+                                fontSize: 12.0.sp, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset(
+                          'assets/images/qr-code-instruction.gif',
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Image.asset(
-                      'assets/images/qr-code-instruction.gif',
-                    ),
-                  ],
-                ),
-              ),
+                  )),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.pop(context),

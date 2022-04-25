@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
@@ -170,7 +167,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     fontWeight: FontWeight.bold),
                               ),
                               style: ElevatedButton.styleFrom(
-                                minimumSize: const Size.fromHeight(50),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                minimumSize: const Size.fromHeight(40),
                                 primary: Colors.blue.shade900,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0.sp),
@@ -197,8 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 22.0.h,
               child: const CircleAvatar(
                   radius: 100,
-                  backgroundImage:
-                      AssetImage('assets/images/default-avatar.png'))),
+                  backgroundImage: AssetImage('assets/images/avatar.png'))),
         ],
       ),
     );

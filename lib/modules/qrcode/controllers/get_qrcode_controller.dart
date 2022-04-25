@@ -22,10 +22,21 @@ class GetQrCodeController extends GetxController {
     _authenticationManager = Get.find();
     getQrCode();
 
-    Timer.periodic(const Duration(seconds: 30), (Timer t) => getQrCode());
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      decreaseCounter();
+      if (countDown.value == 0) {
+        countDown.value = 30;
+        getQrCode();
+      }
+    });
+  }
+
+  decreaseCounter() {
+    countDown.value -= 1;
   }
 
   Future<void> getQrCode() async {
+    countDown.value = 30;
     isLoading(true);
     String? token = _authenticationManager.getToken();
     Map<String, String> headers = {
@@ -43,5 +54,17 @@ class GetQrCodeController extends GetxController {
           colorText: Colors.white);
       isLoading(false);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer!.cancel();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    timer!.cancel();
   }
 }
