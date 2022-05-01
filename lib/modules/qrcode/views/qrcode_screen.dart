@@ -69,7 +69,6 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                     } else {
                       return QrImage(
                         data: _qrCodeController.qrCodeString.value,
-                        gapless: false,
                       );
                     }
                   }),

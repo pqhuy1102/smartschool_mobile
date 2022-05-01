@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
-import 'package:smartschool_mobile/modules/report/widgets/detail_subject.dart';
+import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
+import 'package:smartschool_mobile/modules/report/widgets/overview_subject_report_item.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class ReportScreen extends StatefulWidget {
@@ -13,6 +13,8 @@ class ReportScreen extends StatefulWidget {
 }
 
 class _ReportScreenState extends State<ReportScreen> {
+  final ReportController _reportController = Get.put(ReportController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,99 +28,83 @@ class _ReportScreenState extends State<ReportScreen> {
               child: SafeArea(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Học kỳ',
-                          style: TextStyle(
-                              fontSize: 14.0.sp,
-                              color: Colors.grey.shade600,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        DropdownButton(items: [
-                          DropdownMenuItem(
-                            child: Text(
-                              'HK1 2021-2022',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            value: "1",
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Học kỳ',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.grey.shade600,
+                                fontWeight: FontWeight.w600),
                           ),
-                          DropdownMenuItem(
-                            child: Text(
-                              'HK2 2021-2022',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            value: "2",
-                          ),
-                          DropdownMenuItem(
-                            child: Text(
-                              'HK3 2021-2022',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            value: "3",
-                          ),
-                        ], value: "1", onChanged: (selectedValue) {}),
-                      ],
+                          Obx(() {
+                            return SizedBox(
+                              width: 50.0.w,
+                              child: DropdownButton(
+                                isExpanded: true,
+                                value: _reportController
+                                    .currentSemesterValue.value,
+                                items: _reportController.userSemestersList
+                                    .map((sem) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                      "${sem['title']} ${sem['year']}",
+                                      style: TextStyle(
+                                          fontSize: 14.0.sp,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    value: sem['id'].toString(),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  _reportController.currentSemesterValue.value =
+                                      value.toString();
+
+                                  _reportController.getCoursesInSemester();
+                                },
+                              ),
+                            );
+                          })
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Expanded(
-                        child: ListView(
-                      children: [
-                        InkWell(
-                          child: const DetailSubject(
-                            subjectName: 'Communication',
-                            validSession: 1,
-                            absenceSession: 2,
-                            lateSession: 1,
-                            totalSession: 20,
-                            className: "18CTT1",
-                            subjectId: "CM101",
-                          ),
-                          onTap: () {
-                            Get.toNamed(Routes.subjectDetailReport);
-                          },
-                        ),
-                        const DetailSubject(
-                          subjectName: 'Computer Hardware',
-                          validSession: 1,
-                          absenceSession: 2,
-                          lateSession: 1,
-                          totalSession: 20,
-                          className: "18CTT1",
-                          subjectId: "CM101",
-                        ),
-                        const DetailSubject(
-                          subjectName: 'Computer Hardware',
-                          validSession: 1,
-                          absenceSession: 2,
-                          lateSession: 1,
-                          totalSession: 20,
-                          className: "18CTT1",
-                          subjectId: "CM63",
-                        ),
-                        const DetailSubject(
-                          subjectName: 'Introduction to Computer Hardware',
-                          validSession: 1,
-                          absenceSession: 2,
-                          lateSession: 1,
-                          totalSession: 20,
-                          className: "18CTT1",
-                          subjectId: "CM163",
-                        ),
-                      ],
-                    ))
+                    Obx(() {
+                      return Expanded(
+                          child: ListView.builder(
+                              itemCount:
+                                  _reportController.userCoursesList.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  child: OverviewSubjectItem(
+                                    subjectName:
+                                        "${_reportController.userCoursesList[index]['name']}",
+                                    validSession: _reportController
+                                        .userCoursesList[index]['attendance'],
+                                    absenceSession: _reportController
+                                        .userCoursesList[index]['absence'],
+                                    lateSession: 0,
+                                    totalSession: _reportController
+                                        .userCoursesList[index]['total'],
+                                    className: "18CTT",
+                                    subjectId:
+                                        "${_reportController.userCoursesList[index]['course_id']}",
+                                  ),
+                                  onTap: () {
+                                    _reportController.getCourseAttendance(
+                                        _reportController.userCoursesList[index]
+                                                ['id']
+                                            .toString());
+                                    Get.toNamed(Routes.subjectDetailReport);
+                                  },
+                                );
+                              }));
+                    })
                   ],
                 ),
               ),

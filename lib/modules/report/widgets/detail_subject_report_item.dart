@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class ParticularSubjectReport extends StatelessWidget {
-  const ParticularSubjectReport(
+class DetailSubjectItem extends StatelessWidget {
+  const DetailSubjectItem(
       {Key? key,
       required this.date,
       required this.subjectId,
@@ -19,7 +19,7 @@ class ParticularSubjectReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(0, 0, 0, 22),
+        margin: const EdgeInsets.fromLTRB(8, 0, 8, 24),
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -51,13 +51,16 @@ class ParticularSubjectReport extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    // ignore: unnecessary_string_interpolations
-                    "$subjectId - $className",
-                    style: TextStyle(
-                        fontSize: 18.0.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600),
+                  Expanded(
+                    child: Text(
+                      // ignore: unnecessary_string_interpolations
+                      "$subjectId",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 18.0.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                   Row(
                     children: [
@@ -83,7 +86,9 @@ class ParticularSubjectReport extends StatelessWidget {
                       fontSize: 14.0.sp,
                       color: status == "Hợp lệ"
                           ? Colors.green.shade600
-                          : Colors.red.shade600,
+                          : status == "Đi trễ"
+                              ? Colors.orange.shade600
+                              : Colors.red.shade600,
                       fontWeight: FontWeight.w600)),
             )
           ],
