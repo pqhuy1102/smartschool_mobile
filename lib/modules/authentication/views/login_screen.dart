@@ -38,11 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
               // ignore: prefer_const_literals_to_create_immutables
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 60, 0, 8),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 2),
                   child: Image.asset(
                     'assets/images/logo-hcmus-new.png',
                     fit: BoxFit.contain,
-                    height: 180.0,
+                    height: 200.0,
                     width: 180.0,
                   ),
                 ),
@@ -128,10 +128,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child: Obx((() {
                                   if (_loginController.isLoading.value) {
-                                    return const CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Colors.white));
+                                    return const SizedBox(
+                                      height: 30.0,
+                                      child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white)),
+                                    );
                                   } else {
                                     return Text(
                                       'đăng nhập'.toUpperCase(),
@@ -143,12 +146,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 })),
                                 style: ElevatedButton.styleFrom(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 14),
+                                      const EdgeInsets.symmetric(vertical: 16),
                                   minimumSize: const Size.fromHeight(40),
                                   primary: Colors.blue.shade900,
                                   shape: new RoundedRectangleBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(8.0.sp),
+                                        new BorderRadius.circular(6.0.sp),
                                   ),
                                 ))
                           ],

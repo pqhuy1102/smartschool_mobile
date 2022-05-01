@@ -53,7 +53,8 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
                             subjectId: data[index]['course'],
                             className: "18CTT1",
                             room: data[index]['room'],
-                            status: data[index]['check_in_status']),
+                            status: data[index]['check_in_status'] ??
+                                "Chưa điểm danh"),
                       );
                     }))))));
   }

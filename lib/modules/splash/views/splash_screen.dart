@@ -58,11 +58,11 @@ class SplashScreen extends StatelessWidget {
           // ignore: prefer_const_literals_to_create_immutables
           children: <Widget>[
             Container(
-                margin: const EdgeInsets.only(top: 80, bottom: 10),
+                margin: const EdgeInsets.only(top: 100, bottom: 20),
                 child: Image.asset(
                   'assets/images/logo-hcmus-new.png',
                   fit: BoxFit.contain,
-                  height: 180.0,
+                  height: 200.0,
                   width: 180.0,
                 )),
             Text(

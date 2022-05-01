@@ -168,11 +168,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
+                                    const EdgeInsets.symmetric(vertical: 16),
                                 minimumSize: const Size.fromHeight(40),
                                 primary: Colors.blue.shade900,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0.sp),
+                                  borderRadius: BorderRadius.circular(6.0.sp),
                                 ),
                               )),
                         )

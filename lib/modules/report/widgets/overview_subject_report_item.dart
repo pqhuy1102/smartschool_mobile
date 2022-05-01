@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class DetailSubject extends StatelessWidget {
-  const DetailSubject(
+class OverviewSubjectItem extends StatelessWidget {
+  const OverviewSubjectItem(
       {Key? key,
       required this.subjectName,
       required this.subjectId,
@@ -23,7 +23,7 @@ class DetailSubject extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(0, 0, 0, 22),
+        margin: const EdgeInsets.fromLTRB(8, 0, 8, 24),
         padding: const EdgeInsets.fromLTRB(0, 20, 8, 20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

@@ -149,10 +149,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   child: Obx((() {
                                     if (_changePasswordController
                                         .isLoading.value) {
-                                      return const CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.white));
+                                      return const SizedBox(
+                                        height: 30.0,
+                                        child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.white)),
+                                      );
                                     } else {
                                       return Text(
                                         'cập nhật'.toUpperCase(),
@@ -164,12 +167,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   })),
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
+                                        vertical: 16),
                                     minimumSize: const Size.fromHeight(40),
                                     primary: Colors.blue.shade900,
                                     shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(8.0.sp),
+                                          BorderRadius.circular(6.0.sp),
                                     ),
                                   ))
                             ],
