@@ -32,15 +32,15 @@ class LoginController extends GetxController {
     isLoading(true);
     final res = await _loginProvider.login(
         LoginRequestModel(email: email.trim(), password: password.trim()));
-    if (res != null) {
-      _authenticationManager.login(res.token);
+    if (!res.hasError) {
+      _authenticationManager.login(res.body['token']);
       Get.snackbar('Thành công', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,
           colorText: Colors.white);
       isLoading(false);
     } else {
-      Get.snackbar('Lỗi ', 'Đăng nhập thất bại!',
+      Get.snackbar('Lỗi ', res.body['message'],
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);
