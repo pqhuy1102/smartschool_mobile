@@ -224,7 +224,10 @@ String? validateEmail(String? value) {
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null || value.isEmpty || spaceRegex.hasMatch(value)) {
+  if (value == null ||
+      value.isEmpty ||
+      spaceRegex.hasMatch(value) ||
+      value.length <= 6) {
     return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
   } else {
     return null;
