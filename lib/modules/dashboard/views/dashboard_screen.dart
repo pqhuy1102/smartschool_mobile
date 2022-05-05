@@ -49,9 +49,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         title: Text(
                           'SmartSchool',
                           style: TextStyle(
-                              fontSize: 26.sp,
+                              fontSize: 25.sp,
                               color: Colors.blue.shade900,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.2),
                         ),
                         actions: [
                           IconButton(
@@ -231,12 +232,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   color: const Color.fromARGB(255, 0, 140, 255),
                   iconBackground: Colors.blue.shade100,
                 ),
-              ),
-              DashBoardItem(
-                title: 'complain'.tr,
-                icon: Icons.report,
-                color: const Color.fromARGB(255, 241, 157, 60),
-                iconBackground: Colors.amber.shade100,
               ),
             ],
           ),

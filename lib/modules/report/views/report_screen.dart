@@ -50,11 +50,13 @@ class _ReportScreenState extends State<ReportScreen> {
                                 items: _reportController.userSemestersList
                                     .map((sem) {
                                   return DropdownMenuItem(
-                                    child: Text(
-                                      "${sem['title']} ${sem['year']}",
-                                      style: TextStyle(
-                                          fontSize: 14.0.sp,
-                                          fontWeight: FontWeight.w500),
+                                    child: Center(
+                                      child: Text(
+                                        "${sem['title']} ${sem['year']}",
+                                        style: TextStyle(
+                                            fontSize: 14.0.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
                                     value: sem['id'].toString(),
                                   );

@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Obx((() {
                                   if (_loginController.isLoading.value) {
                                     return const SizedBox(
-                                      height: 30.0,
+                                      height: 24.0,
                                       child: CircularProgressIndicator(
                                           valueColor:
                                               AlwaysStoppedAnimation<Color>(
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 })),
                                 style: ElevatedButton.styleFrom(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 16),
+                                      const EdgeInsets.symmetric(vertical: 14),
                                   minimumSize: const Size.fromHeight(40),
                                   primary: Colors.blue.shade900,
                                   shape: new RoundedRectangleBorder(

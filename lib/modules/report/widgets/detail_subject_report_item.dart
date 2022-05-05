@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class DetailSubjectItem extends StatelessWidget {
   const DetailSubjectItem(
@@ -36,14 +38,23 @@ class DetailSubjectItem extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 14.0.sp, color: Colors.grey.shade600),
                 ),
-                InkWell(
-                  child: Text("Phản ánh",
-                      style: TextStyle(
-                          fontSize: 16.0.sp,
-                          color: Colors.red,
-                          fontWeight: FontWeight.w600)),
-                  onTap: () {},
-                )
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 6),
+                      primary: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0.sp),
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.toNamed(Routes.addComplain);
+                    },
+                    child: Text("Phản ánh",
+                        style: TextStyle(
+                            fontSize: 16.0.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600)))
               ],
             ),
             Container(
