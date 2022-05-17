@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
+
 import 'package:smartschool_mobile/modules/qrcode/providers/get_qrcode_provider.dart';
 
 class GetQrCodeController extends GetxController {
@@ -20,8 +21,11 @@ class GetQrCodeController extends GetxController {
   void onInit() {
     super.onInit();
     _authenticationManager = Get.find();
+
+    //get qr code first time
     getQrCode();
 
+    //renew get qrcode after 30s
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       decreaseCounter();
       if (countDown.value == 0) {

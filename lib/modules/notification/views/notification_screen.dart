@@ -93,9 +93,6 @@ class NotificationScreen extends StatelessWidget {
                           "Đơn xin nghỉ phép môn CS469 ngày 22/02/2022 của bạn đã được chấp nhận",
                       date: "22/02/2022",
                     ),
-                    Center(
-                      child: Text(_notificationsController.token.value),
-                    )
                   ],
                 ))
               ],

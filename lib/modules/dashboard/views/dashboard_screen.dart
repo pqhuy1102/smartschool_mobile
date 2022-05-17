@@ -1,9 +1,11 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
+import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/checkin_time_items.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/dashboard_items.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
-import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
@@ -18,7 +20,61 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int selectedPosition = 0;
-  final ProfileController _profileController = Get.put(ProfileController());
+  final LoginController _loginController = Get.put(LoginController());
+  final DashBoardController _dashBoardController =
+      Get.put(DashBoardController());
+  late FirebaseMessaging messaging;
+
+  @override
+  void initState() {
+    super.initState();
+
+    messaging = FirebaseMessaging.instance;
+
+    //get register firebase token
+    messaging.getToken().then((value) {
+      _dashBoardController.fcmToken.value = value!;
+      print(_dashBoardController.fcmToken.value);
+      _dashBoardController
+          .updateNotificationToken(_dashBoardController.fcmToken.value);
+      _dashBoardController.testNotification();
+    });
+
+    messaging.getInitialMessage();
+
+    //foreground state
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        print(message.notification!.title);
+        print(message.notification!.body);
+
+        //display notification dialog
+        Get.dialog(
+          AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            title: Text(
+              '${message.notification?.title}',
+              style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
+            ),
+            content: Text('${message.notification?.body}',
+                style: TextStyle(
+                  fontSize: 14.0.sp,
+                )),
+            actions: [
+              TextButton(
+                child: Text("Close",
+                    style: TextStyle(
+                      fontSize: 14.0.sp,
+                    )),
+                onPressed: () => Get.back(),
+              ),
+            ],
+          ),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +198,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     ),
                     children: [
                       TextSpan(
-                          text: '${_profileController.userName}',
+                          text: '${_loginController.username}',
                           style: TextStyle(
                               fontSize: 18.5.sp, fontWeight: FontWeight.bold))
                     ]),

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "88490814434",
-    "project_id": "smartschool-mobile-a0fd3",
-    "storage_bucket": "smartschool-mobile-a0fd3.appspot.com"
+    "project_number": "555616356133",
+    "project_id": "smartschool-dev-aeed1",
+    "storage_bucket": "smartschool-dev-aeed1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:88490814434:android:652b3042d5f3f24d7fe7bb",
+        "mobilesdk_app_id": "1:555616356133:android:7a934a83e581e0fe5d7ccc",
         "android_client_info": {
           "package_name": "com.example.smartschool_mobile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "88490814434-56f46qlfn12aa749mrj7n3m04gt0q5bo.apps.googleusercontent.com",
+          "client_id": "555616356133-ae9jiglf5lb5b9vcko58bg3odrji20dg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC_kjx6gMpJvLlj_x57bHkyEfn-vU1kmPE"
+          "current_key": "AIzaSyB61KrkOgIsJJ6ADgvjm591CBfaRwbi7-o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "88490814434-56f46qlfn12aa749mrj7n3m04gt0q5bo.apps.googleusercontent.com",
+              "client_id": "555616356133-ae9jiglf5lb5b9vcko58bg3odrji20dg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

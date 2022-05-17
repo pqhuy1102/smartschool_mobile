@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -8,20 +9,20 @@ import 'routes/routes.dart';
 import 'package:get_storage/get_storage.dart';
 // import 'package:device_preview/device_preview.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+}
+
 void main() async {
   //initialize for data persistency
   await GetStorage.init();
   //initialize for firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
-
-  // runApp(
-  //   DevicePreview(
-  //     enabled: true,
-  //     builder: (context) => const MyApp(),
-  //   ),
-  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,9 +33,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return GetMaterialApp(
-        // useInheritedMediaQuery: true,
-        // locale: DevicePreview.locale(context),
-        // builder: DevicePreview.appBuilder,
         translations: LocaleString(),
         locale: const Locale("vi", "VN"),
         fallbackLocale: const Locale("vi", "VN"),

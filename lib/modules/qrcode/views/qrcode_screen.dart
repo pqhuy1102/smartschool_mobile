@@ -18,8 +18,6 @@ class QRCodeScreen extends StatefulWidget {
 class _QRCodeScreenState extends State<QRCodeScreen> {
   final GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
 
-  var counter = 30;
-
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () => showInstruction(context));
