@@ -208,12 +208,13 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
 
 //validate email function
 String? validateEmail(String? value) {
-  String emailPattern =
-      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-      r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-      r"{0,253}[a-zA-Z0-9])?)*$";
-  RegExp emailRegex = RegExp(emailPattern);
-  if (value == null || value.isEmpty || !emailRegex.hasMatch(value)) {
+  // String emailPattern =
+  //     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+  //     r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+  //     r"{0,253}[a-zA-Z0-9])?)*$";
+  // RegExp emailRegex = RegExp(emailPattern);
+  //  !emailRegex.hasMatch(value)
+  if (value == null || value.isEmpty) {
     return 'Email không hợp lệ, vui lòng nhập lại!';
   } else {
     return null;
@@ -227,7 +228,7 @@ String? validatePassword(String? value) {
   if (value == null ||
       value.isEmpty ||
       spaceRegex.hasMatch(value) ||
-      value.length <= 6) {
+      value.length < 6) {
     return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
   } else {
     return null;

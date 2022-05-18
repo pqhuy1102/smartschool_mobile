@@ -14,6 +14,8 @@ class LoginController extends GetxController {
   TextEditingController? emailEditingController;
   TextEditingController? passwordEditingController;
 
+  var username = "".obs;
+
   //visibility password
   var isPasswordHidden = true.obs;
 
@@ -34,6 +36,7 @@ class LoginController extends GetxController {
         LoginRequestModel(email: email.trim(), password: password.trim()));
     if (!res.hasError) {
       _authenticationManager.login(res.body['token']);
+      username.value = res.body['username'];
       Get.snackbar('Thành công', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,

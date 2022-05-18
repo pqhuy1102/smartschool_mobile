@@ -5,6 +5,8 @@ import 'package:smartschool_mobile/modules/notification/models/update_notificati
 class NotificationProvider extends GetConnect {
   final String updateNotificationTokenUrl =
       "http://13.228.244.196:6002/user/update-notification-token";
+  final String testNotificationUrl =
+      "http://13.228.244.196:6002/user/test-notification";
 
   //update notification token
   Future<String?> updateNotificationToken(
@@ -13,8 +15,23 @@ class NotificationProvider extends GetConnect {
         headers: headers);
 
     if (response.statusCode == HttpStatus.ok) {
+      print('OK');
       return response.bodyString;
     } else {
+      print(response.bodyString);
+
+      return null;
+    }
+  }
+
+  //test notification
+  Future<String?> testNotification(headers) async {
+    final response = await get(testNotificationUrl, headers: headers);
+    if (response.statusCode == HttpStatus.ok) {
+      print("Ok");
+      return response.bodyString;
+    } else {
+      print(response.bodyString);
       return null;
     }
   }
