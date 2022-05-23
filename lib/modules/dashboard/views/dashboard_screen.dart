@@ -31,6 +31,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
     messaging = FirebaseMessaging.instance;
 
+    /*
     //get register firebase token
     messaging.getToken().then((value) {
       _dashBoardController.fcmToken.value = value!;
@@ -39,14 +40,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           .updateNotificationToken(_dashBoardController.fcmToken.value);
       _dashBoardController.testNotification();
     });
+    */
 
     messaging.getInitialMessage();
 
     //foreground state
     FirebaseMessaging.onMessage.listen((message) {
-      if (message.notification != null) {
-        print(message.notification!.title);
-        print(message.notification!.body);
+      if (message.data != null) {
+        print(message.data['message']);
+        //print(message.notification!.body);
 
         //display notification dialog
         Get.dialog(
@@ -54,10 +56,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             title: Text(
-              '${message.notification?.title}',
+              '${message.data['message']}',
               style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
             ),
-            content: Text('${message.notification?.body}',
+            content: Text('${message.data['message']}',
                 style: TextStyle(
                   fontSize: 14.0.sp,
                 )),
@@ -76,6 +78,20 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     });
   }
 
+  void updateNotiToken() {
+    messaging.getToken().then((value) {
+      _dashBoardController.fcmToken.value = value!;
+      print(_dashBoardController.fcmToken.value);
+      _dashBoardController
+          .updateNotificationToken(_dashBoardController.fcmToken.value);
+      //_dashBoardController.testNotification();
+    });
+  }
+
+  void testNoti() {
+    _dashBoardController.testNotification();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -87,7 +103,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   child: FittedBox(
                     child: FloatingActionButton(
                       onPressed: () =>
-                          Get.toNamed(Routes.dashboard + Routes.qrcode),
+                          updateNotiToken(),
                       backgroundColor: Colors.blue.shade900,
                       child: const Icon(
                         Icons.qr_code_2,
@@ -114,8 +130,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           IconButton(
                             // ignore: avoid_returning_null_for_void
                             onPressed: () {
-                              Get.toNamed(
-                                  Routes.dashboard + Routes.notification);
+                              testNoti();
                             },
                             icon: const Icon(Icons.notifications),
                             color: Colors.blue.shade900,
