@@ -1,7 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/notification/models/update_notification_token_request_model.dart';
 import 'package:smartschool_mobile/modules/notification/providers/notification_provider.dart';

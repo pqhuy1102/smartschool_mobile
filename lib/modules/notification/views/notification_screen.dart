@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smartschool_mobile/modules/notification/controllers/notifications_controller.dart';
 import 'package:smartschool_mobile/modules/notification/widgets/notification_item.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NotificationScreen extends StatelessWidget {
-  NotificationScreen({Key? key}) : super(key: key);
-  final NotificationsController _notificationsController =
-      Get.put(NotificationsController());
+  const NotificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

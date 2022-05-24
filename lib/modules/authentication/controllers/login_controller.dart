@@ -16,6 +16,8 @@ class LoginController extends GetxController {
 
   var username = "".obs;
 
+  var isActivate = false.obs;
+
   //visibility password
   var isPasswordHidden = true.obs;
 
@@ -37,6 +39,7 @@ class LoginController extends GetxController {
     if (!res.hasError) {
       _authenticationManager.login(res.body['token']);
       username.value = res.body['username'];
+      isActivate.value = res.body['is_activate'];
       Get.snackbar('Thành công', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,

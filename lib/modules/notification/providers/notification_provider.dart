@@ -15,11 +15,8 @@ class NotificationProvider extends GetConnect {
         headers: headers);
 
     if (response.statusCode == HttpStatus.ok) {
-      print('OK');
       return response.bodyString;
     } else {
-      print(response.bodyString);
-
       return null;
     }
   }
@@ -28,10 +25,8 @@ class NotificationProvider extends GetConnect {
   Future<String?> testNotification(headers) async {
     final response = await get(testNotificationUrl, headers: headers);
     if (response.statusCode == HttpStatus.ok) {
-      print("Ok");
       return response.bodyString;
     } else {
-      print(response.bodyString);
       return null;
     }
   }
