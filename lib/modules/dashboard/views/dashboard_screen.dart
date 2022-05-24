@@ -46,35 +46,32 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
     //foreground state
     FirebaseMessaging.onMessage.listen((message) {
-      if (message.data != null) {
-        print(message.data['message']);
-        //print(message.notification!.body);
+      //print(message.notification!.body);
 
-        //display notification dialog
-        Get.dialog(
-          AlertDialog(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: Text(
-              '${message.data['message']}',
-              style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
-            ),
-            content: Text('${message.data['message']}',
-                style: TextStyle(
-                  fontSize: 14.0.sp,
-                )),
-            actions: [
-              TextButton(
-                child: Text("Close",
-                    style: TextStyle(
-                      fontSize: 14.0.sp,
-                    )),
-                onPressed: () => Get.back(),
-              ),
-            ],
+      //display notification dialog
+      Get.dialog(
+        AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          title: Text(
+            '${message.data['message']}',
+            style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
           ),
-        );
-      }
+          content: Text('${message.data['message']}',
+              style: TextStyle(
+                fontSize: 14.0.sp,
+              )),
+          actions: [
+            TextButton(
+              child: Text("Close",
+                  style: TextStyle(
+                    fontSize: 14.0.sp,
+                  )),
+              onPressed: () => Get.back(),
+            ),
+          ],
+        ),
+      );
     });
   }
 
@@ -102,8 +99,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   height: 18.0.h,
                   child: FittedBox(
                     child: FloatingActionButton(
-                      onPressed: () =>
-                          updateNotiToken(),
+                      onPressed: () => updateNotiToken(),
                       backgroundColor: Colors.blue.shade900,
                       child: const Icon(
                         Icons.qr_code_2,

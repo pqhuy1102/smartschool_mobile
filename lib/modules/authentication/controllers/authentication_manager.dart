@@ -3,7 +3,6 @@ import 'package:smartschool_mobile/modules/authentication/controllers/cache_mana
 
 class AuthenticationManager extends GetxController with CacheManager {
   final isLogged = false.obs;
-  final isChangedPassword = false.obs;
 
   void logOut() {
     isLogged.value = false;
@@ -12,6 +11,7 @@ class AuthenticationManager extends GetxController with CacheManager {
 
   void login(String? token) async {
     isLogged.value = true;
+
     //Token is cached
     await saveToken(token);
   }

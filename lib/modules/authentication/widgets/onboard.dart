@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
+import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/authentication/views/login_screen.dart';
+import 'package:smartschool_mobile/modules/changePassword/views/change_password_first_time_screen.dart';
 import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
 
 class OnBoard extends StatelessWidget {
@@ -10,14 +12,13 @@ class OnBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthenticationManager _authManager = Get.put(AuthenticationManager());
+    LoginController _loginController = Get.put(LoginController());
 
     return Obx(() {
-      return (_authManager.isLogged.value &&
-              _authManager.isChangedPassword.value)
+      return (_authManager.isLogged.value && _loginController.isActivate.value)
           ? const DashBoardScreen()
-          : (_authManager.isLogged.value &&
-                  !_authManager.isChangedPassword.value)
-              ? const DashBoardScreen()
+          : (_authManager.isLogged.value && !_loginController.isActivate.value)
+              ? const ChangePasswordFirstTimeScreen()
               : const LoginScreen();
     });
   }

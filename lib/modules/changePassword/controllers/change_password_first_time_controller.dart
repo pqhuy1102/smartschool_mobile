@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
-import 'package:smartschool_mobile/modules/changePassword/models/change_password_request_model.dart';
+import 'package:smartschool_mobile/modules/changePassword/models/change_password_first_time_request_model.dart';
 import 'package:smartschool_mobile/modules/changePassword/providers/change_password_provider.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 
-class ChangePasswordController extends GetxController {
-  final isOldPasswordHidden = true.obs;
+class ChangePasswordFirstTimeController extends GetxController {
   final isNewPasswordHidden = true.obs;
   final isReNewPasswordHidden = true.obs;
   final isLoading = false.obs;
@@ -14,7 +13,6 @@ class ChangePasswordController extends GetxController {
   late final ChangePasswordProvider _changePasswordProvider;
   late final AuthenticationManager _authenticationManager;
 
-  TextEditingController? oldPasswordEditingController;
   TextEditingController? newPasswordEditingController;
   TextEditingController? reNewPasswordEditingController;
 
@@ -24,13 +22,12 @@ class ChangePasswordController extends GetxController {
     _changePasswordProvider = Get.put(ChangePasswordProvider());
     _authenticationManager = Get.find();
 
-    oldPasswordEditingController = TextEditingController();
     newPasswordEditingController = TextEditingController();
     reNewPasswordEditingController = TextEditingController();
   }
 
-  Future<void> changePassword(
-      String oldPassword, String newPassword, String confirmPassword) async {
+  Future<void> changePasswordFirstTime(
+      String newPassword, String reNewPassword) async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
 
@@ -38,11 +35,11 @@ class ChangePasswordController extends GetxController {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
     };
-    final res = await _changePasswordProvider.changePassword(
-        ChangePasswordRequestModel(
-            oldPassword: oldPassword.trim(),
+
+    final res = await _changePasswordProvider.changePasswordFirstTime(
+        ChangePasswordFirstTimeRequestModel(
             newPassword: newPassword.trim(),
-            reNewPassword: confirmPassword.trim()),
+            reNewPassword: reNewPassword.trim()),
         headers);
     if (res != null) {
       Get.snackbar('Thành công', 'Đổi mật khẩu thành công!',
@@ -62,11 +59,7 @@ class ChangePasswordController extends GetxController {
     }
   }
 
-  //toggle password
-  void toggleOldPasswordVisibility() {
-    isOldPasswordHidden(!isOldPasswordHidden.value);
-  }
-
+  //toggle password visibility
   void toggleNewPasswordVisibility() {
     isNewPasswordHidden(!isNewPasswordHidden.value);
   }
@@ -77,7 +70,6 @@ class ChangePasswordController extends GetxController {
 
   //clear textfield
   void clearTextField() {
-    oldPasswordEditingController!.clear();
     newPasswordEditingController!.clear();
     reNewPasswordEditingController!.clear();
   }

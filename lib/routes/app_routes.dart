@@ -11,5 +11,6 @@ abstract class Routes {
   static const subjectDetailReport = '/subjectDetailReport';
   static const notification = '/notification';
   static const changePassword = '/changePassword';
+  static const changePasswordFirstTime = '/changePasswordFirstTime';
   static const addComplain = '/addComplain';
 }

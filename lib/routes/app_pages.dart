@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:smartschool_mobile/modules/changePassword/views/change_password_first_time_screen.dart';
 import 'package:smartschool_mobile/modules/changePassword/views/change_password_screen.dart';
 import 'package:smartschool_mobile/modules/checkinToday/bindings/get_inday_attendance_bindings.dart';
 import 'package:smartschool_mobile/modules/checkinToday/views/get_inday_attendance_screen.dart';
@@ -45,7 +46,7 @@ class AppPages {
               ]),
           GetPage(
             name: Routes.notification,
-            page: () => NotificationScreen(),
+            page: () => const NotificationScreen(),
             binding: NotificationsBinding(),
           ),
           GetPage(
@@ -57,5 +58,8 @@ class AppPages {
         name: Routes.subjectDetailReport,
         page: () => SubjectDetailReportScreen()),
     GetPage(name: Routes.addComplain, page: () => const AddComplainScreen()),
+    GetPage(
+        name: Routes.changePasswordFirstTime,
+        page: () => const ChangePasswordFirstTimeScreen()),
   ];
 }
