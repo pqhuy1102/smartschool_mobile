@@ -16,6 +16,8 @@ class SplashScreen extends StatelessWidget {
   //initialize settings
   Future<void> initializeSettings() async {
     _authmanager.checkLoginStatus();
+    _authmanager.changePassStatus();
+    _authmanager.changeUsername();
     //Simulate other services for 3 seconds
     await Future.delayed(const Duration(seconds: 2));
   }

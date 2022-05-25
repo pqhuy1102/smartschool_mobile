@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/checkin_time_items.dart';
@@ -20,9 +21,11 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int selectedPosition = 0;
-  final LoginController _loginController = Get.put(LoginController());
+  final AuthenticationManager _authenticationManager =
+      Get.put(AuthenticationManager());
   final DashBoardController _dashBoardController =
       Get.put(DashBoardController());
+  final LoginController _loginController = Get.put(LoginController());
   late FirebaseMessaging messaging;
 
   @override
@@ -73,11 +76,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
       );
     });
+    updateNotiToken();
   }
 
   void updateNotiToken() {
     messaging.getToken().then((value) {
       _dashBoardController.fcmToken.value = value!;
+
       print(_dashBoardController.fcmToken.value);
       _dashBoardController
           .updateNotificationToken(_dashBoardController.fcmToken.value);
@@ -99,7 +104,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   height: 18.0.h,
                   child: FittedBox(
                     child: FloatingActionButton(
-                      onPressed: () => updateNotiToken(),
+                      onPressed: () =>
+                          Get.toNamed(Routes.dashboard + Routes.qrcode),
                       backgroundColor: Colors.blue.shade900,
                       child: const Icon(
                         Icons.qr_code_2,
@@ -126,7 +132,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           IconButton(
                             // ignore: avoid_returning_null_for_void
                             onPressed: () {
-                              testNoti();
+                              Get.toNamed(
+                                  Routes.dashboard + Routes.notification);
                             },
                             icon: const Icon(Icons.notifications),
                             color: Colors.blue.shade900,
@@ -209,7 +216,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     ),
                     children: [
                       TextSpan(
-                          text: '${_loginController.username}',
+                          text: _authenticationManager.username.value == ""
+                              ? '${_loginController.username}'
+                              : '${_authenticationManager.username}',
                           style: TextStyle(
                               fontSize: 18.5.sp, fontWeight: FontWeight.bold))
                     ]),

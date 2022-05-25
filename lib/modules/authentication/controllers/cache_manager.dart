@@ -17,8 +17,38 @@ mixin CacheManager {
     await box.remove(CacheManagerKey.TOKEN.toString());
   }
 
-  //1234578ab
+  Future<bool> saveChangePassStatus(bool isActivate) async {
+    final box = GetStorage();
+    await box.write(CacheManagerKey.ISACTIVATE.toString(), isActivate);
+    return true;
+  }
+
+  bool? getChangePassStatus() {
+    final box = GetStorage();
+    return box.read(CacheManagerKey.ISACTIVATE.toString());
+  }
+
+  Future<void> removeChangePassStatus() async {
+    final box = GetStorage();
+    await box.remove(CacheManagerKey.ISACTIVATE.toString());
+  }
+
+  Future<bool> saveUsername(String name) async {
+    final box = GetStorage();
+    await box.write(CacheManagerKey.USERNAME.toString(), name);
+    return true;
+  }
+
+  String? getUsername() {
+    final box = GetStorage();
+    return box.read(CacheManagerKey.USERNAME.toString());
+  }
+
+  Future<void> removeUsername() async {
+    final box = GetStorage();
+    await box.remove(CacheManagerKey.USERNAME.toString());
+  }
 }
 
 // ignore: constant_identifier_names
-enum CacheManagerKey { TOKEN }
+enum CacheManagerKey { TOKEN, ISACTIVATE, USERNAME }

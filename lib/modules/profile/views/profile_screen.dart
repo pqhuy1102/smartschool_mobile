@@ -168,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 14),
+                                    const EdgeInsets.symmetric(vertical: 16),
                                 minimumSize: const Size.fromHeight(40),
                                 primary: Colors.blue.shade900,
                                 shape: RoundedRectangleBorder(

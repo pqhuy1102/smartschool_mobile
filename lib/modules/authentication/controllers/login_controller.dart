@@ -11,12 +11,12 @@ class LoginController extends GetxController {
 
   var isLoading = false.obs;
 
-  TextEditingController? emailEditingController;
-  TextEditingController? passwordEditingController;
-
   var username = "".obs;
 
   var isActivate = false.obs;
+
+  TextEditingController? emailEditingController;
+  TextEditingController? passwordEditingController;
 
   //visibility password
   var isPasswordHidden = true.obs;
@@ -38,7 +38,10 @@ class LoginController extends GetxController {
         LoginRequestModel(email: email.trim(), password: password.trim()));
     if (!res.hasError) {
       _authenticationManager.login(res.body['token']);
+      _authenticationManager
+          .changePasswordFirstTimeStatus(res.body['is_activate']);
       username.value = res.body['username'];
+      _authenticationManager.saveUsernameToStorage(res.body['username']);
       isActivate.value = res.body['is_activate'];
       Get.snackbar('Thành công', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.TOP,
