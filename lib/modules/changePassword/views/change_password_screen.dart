@@ -150,7 +150,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     if (_changePasswordController
                                         .isLoading.value) {
                                       return const SizedBox(
-                                        height: 24.0,
                                         child: CircularProgressIndicator(
                                             valueColor:
                                                 AlwaysStoppedAnimation<Color>(
@@ -167,7 +166,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   })),
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 14),
+                                        vertical: 16),
                                     minimumSize: const Size.fromHeight(40),
                                     primary: Colors.blue.shade900,
                                     shape: RoundedRectangleBorder(
