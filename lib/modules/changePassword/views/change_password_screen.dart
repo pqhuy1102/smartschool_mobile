@@ -25,7 +25,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     double h = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: SizedBox(
               width: double.infinity,
               height: double.infinity,
@@ -195,6 +195,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
     helperText: helperText,
     labelText: labelText,
     prefixText: prefix,
+    labelStyle: TextStyle(color: Colors.blue.shade900),
     prefixIcon: Icon(
       iconData,
       size: 20.0.sp,

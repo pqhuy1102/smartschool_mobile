@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 
 import 'package:smartschool_mobile/modules/qrcode/providers/get_qrcode_provider.dart';
@@ -16,6 +17,10 @@ class GetQrCodeController extends GetxController {
   final countDown = 30.obs;
 
   Timer? timer;
+
+  final isNeverDisplayAgain = false.obs;
+
+  final box = GetStorage();
 
   @override
   void onInit() {
@@ -33,6 +38,8 @@ class GetQrCodeController extends GetxController {
         getQrCode();
       }
     });
+
+    readIsNeverAskAgain();
   }
 
   decreaseCounter() {
@@ -57,6 +64,12 @@ class GetQrCodeController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white);
       isLoading(false);
+    }
+  }
+
+  void readIsNeverAskAgain() {
+    if (box.read('isNeverDisplayAgain') != null) {
+      isNeverDisplayAgain.value = box.read('isNeverDisplayAgain');
     }
   }
 

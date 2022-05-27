@@ -55,7 +55,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                         "${sem['title']} ${sem['year']}",
                                         style: TextStyle(
                                             fontSize: 14.0.sp,
-                                            fontWeight: FontWeight.w500),
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                     value: sem['id'].toString(),

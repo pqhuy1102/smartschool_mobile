@@ -40,21 +40,27 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
                     itemCount: data!.length,
                     itemBuilder: ((context, index) {
                       return Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
                         child: CheckinTodayItem(
+                            startTime: formatDate(data[index]['start_time'])
+                                .substring(10),
+                            endTime: formatDate(data[index]['end_time'])
+                                .substring(10),
                             date: data[index]['check_in_time'] == null
                                 ? ""
                                 : formatDate(data[index]['check_in_time'])
                                     .substring(0, 10),
                             time: data[index]['check_in_time'] == null
                                 ? ""
-                                : formatDate(data[index]['check_in_time'])
-                                    .substring(10),
+                                : "Điểm danh lúc: " +
+                                    formatDate(data[index]['check_in_time'])
+                                        .substring(10),
                             subjectId: data[index]['course'],
                             className: "18CTT1",
                             room: data[index]['room'],
-                            status: data[index]['check_in_status'] ??
-                                "Chưa điểm danh"),
+                            status: data[index]['check_in_status'] == ""
+                                ? "Chưa điểm danh"
+                                : data[index]['check_in_status']),
                       );
                     }))))));
   }

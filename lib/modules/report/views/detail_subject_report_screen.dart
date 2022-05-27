@@ -72,7 +72,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 14.0.sp,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                             value: "1",
                           ),
@@ -82,7 +82,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 14.0.sp,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                             value: "2",
                           ),
@@ -92,7 +92,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 14.0.sp,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                             value: "3",
                           ),
@@ -102,7 +102,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 14.0.sp,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                             value: "4",
                           ),

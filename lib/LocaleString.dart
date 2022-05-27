@@ -20,7 +20,7 @@ class LocaleString extends Translations {
           "complain": "Complain",
           "home": "Home page",
           "report": "Report",
-          "late/earlier": "Late/Earlier"
+          "late/earlier": "Late/Early"
         },
         'vi_VN': {
           "settings": "Cài đặt",
