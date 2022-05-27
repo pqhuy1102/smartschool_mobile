@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/qrcode/controllers/get_qrcode_controller.dart';
@@ -17,10 +20,11 @@ class QRCodeScreen extends StatefulWidget {
 
 class _QRCodeScreenState extends State<QRCodeScreen> {
   final GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
-
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () => showInstruction(context));
+    if (_qrCodeController.isNeverDisplayAgain.isFalse) {
+      Future.delayed(Duration.zero, () => showInstruction(context));
+    }
 
     return SafeArea(
         child: Scaffold(
@@ -132,29 +136,49 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                 ),
               ),
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(18.0))),
               content: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
                   child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Center(
-                          child: Text(
-                            "Đưa mã QR của bạn lại gần thiết bị bCheckin với khoảng cách tối ưu từ 15 đến 20cm. ",
-                            style: TextStyle(
-                                fontSize: 12.0.sp, fontWeight: FontWeight.w500),
-                          ),
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Center(
+                        child: Text(
+                          "Đưa mã QR của bạn lại gần thiết bị bCheckin với khoảng cách tối ưu từ 15 đến 20cm. ",
+                          style: TextStyle(
+                              fontSize: 12.0.sp, fontWeight: FontWeight.w500),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Image.asset(
-                          'assets/images/qr-code-instruction.gif',
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Image.asset(
+                        'assets/images/qr-code-instruction.gif',
+                      ),
+                      Obx((() {
+                        return Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                  height: 20.0,
+                                  width: 20.0,
+                                  child: Checkbox(
+                                      value: _qrCodeController
+                                          .isNeverDisplayAgain.value,
+                                      onChanged: (value) {
+                                        _qrCodeController
+                                            .isNeverDisplayAgain.value = value!;
+                                        _qrCodeController.box.write(
+                                            'isNeverDisplayAgain', value);
+                                      })),
+                              const SizedBox(width: 4.0),
+                              Text(
+                                "Không hiển thị lại!",
+                                style: TextStyle(fontSize: 12.0.sp),
+                              )
+                            ]);
+                      }))
+                    ]),
                   )),
               actions: [
                 TextButton(
@@ -162,7 +186,9 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                     child: Text(
                       'Đóng',
                       style: TextStyle(
-                          fontSize: 12.0.sp, fontWeight: FontWeight.w500),
+                          fontSize: 12.0.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.blue.shade900),
                     ))
               ],
             ));

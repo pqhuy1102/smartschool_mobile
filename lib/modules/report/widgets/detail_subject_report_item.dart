@@ -94,7 +94,7 @@ class DetailSubjectItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               child: Text("• $status",
                   style: TextStyle(
-                      fontSize: 14.0.sp,
+                      fontSize: 15.0.sp,
                       color: status == "Hợp lệ"
                           ? Colors.green.shade600
                           : status == "Đi trễ"

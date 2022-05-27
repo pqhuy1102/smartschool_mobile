@@ -34,17 +34,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
     messaging = FirebaseMessaging.instance;
 
-    /*
-    //get register firebase token
-    messaging.getToken().then((value) {
-      _dashBoardController.fcmToken.value = value!;
-      print(_dashBoardController.fcmToken.value);
-      _dashBoardController
-          .updateNotificationToken(_dashBoardController.fcmToken.value);
-      _dashBoardController.testNotification();
-    });
-    */
-
     messaging.getInitialMessage();
 
     //foreground state
@@ -55,38 +44,135 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       Get.dialog(
         AlertDialog(
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          title: Text(
-            '${message.data['message']}',
-            style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
+              borderRadius: BorderRadius.all(Radius.circular(14.0))),
+          title: Center(
+            child: Text(
+              '${message.data['message']}',
+              style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
+            ),
           ),
-          content: Text('${message.data['message']}',
-              style: TextStyle(
-                fontSize: 14.0.sp,
+          content: Container(
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Môn học: ',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  fontWeight: FontWeight.bold)),
+                          TextSpan(
+                            text: message.data['course'] == null
+                                ? ""
+                                : '${message.data['course']}',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.green,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Phòng học: ',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  fontWeight: FontWeight.bold)),
+                          TextSpan(
+                            text: message.data['room'] == null
+                                ? ""
+                                : '${message.data['room']}',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.green,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Ca học: ',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  fontWeight: FontWeight.bold)),
+                          TextSpan(
+                            text: message.data['shift'] == null
+                                ? "2022-05-01 15:30:02 - 2022-05-01 15:30:02 "
+                                : '${message.data['shift']}',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.green,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Điểm danh lúc: ',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  fontWeight: FontWeight.bold)),
+                          TextSpan(
+                            text: message.data['checkintime'] == null
+                                ? ""
+                                : '${message.data['checkintime']}',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.green,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                  ],
+                ),
               )),
           actions: [
             TextButton(
-              child: Text("Close",
+              child: Text("Đóng",
                   style: TextStyle(
-                    fontSize: 14.0.sp,
-                  )),
+                      fontSize: 12.0.sp, color: Colors.blue.shade900)),
               onPressed: () => Get.back(),
             ),
           ],
         ),
       );
     });
+
     updateNotiToken();
   }
 
   void updateNotiToken() {
     messaging.getToken().then((value) {
       _dashBoardController.fcmToken.value = value!;
-
-      print(_dashBoardController.fcmToken.value);
       _dashBoardController
           .updateNotificationToken(_dashBoardController.fcmToken.value);
-      //_dashBoardController.testNotification();
     });
   }
 
@@ -132,8 +218,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           IconButton(
                             // ignore: avoid_returning_null_for_void
                             onPressed: () {
-                              Get.toNamed(
-                                  Routes.dashboard + Routes.notification);
+                              testNoti();
+                              // Get.toNamed(
+                              //     Routes.dashboard + Routes.notification);
                             },
                             icon: const Icon(Icons.notifications),
                             color: Colors.blue.shade900,

@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // double w = MediaQuery.of(context).size.width;
     // double h = MediaQuery.of(context).size.height;
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         body: Container(
           width: double.infinity,
           height: double.infinity,
