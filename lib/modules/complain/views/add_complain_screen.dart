@@ -222,7 +222,7 @@ class AddComplainScreen extends StatelessWidget {
                           DropdownMenuItem(
                             child: Center(
                               child: Text(
-                                'Đinh Bá Tiến',
+                                'Đinh Bá Tiếnn',
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 14.0.sp,

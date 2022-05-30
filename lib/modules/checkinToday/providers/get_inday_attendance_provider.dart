@@ -9,6 +9,9 @@ class GetIndayAttendanceProvider extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText.toString());
     } else {
+      if (response.body['checkin_list'] == null) {
+        return [];
+      }
       return response.body['checkin_list'];
     }
   }

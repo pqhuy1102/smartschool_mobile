@@ -40,7 +40,6 @@ dependencies:
   sizer: ^2.0.15
   get_storage: ^2.0.3
   device_preview: ^1.0.0
-  flutter_slidable: ^1.2.0
   firebase_messaging: ^11.2.12
   flutter_local_notifications: ^9.4.0
   firebase_core: ^1.14.0

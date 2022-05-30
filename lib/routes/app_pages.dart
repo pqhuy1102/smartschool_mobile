@@ -46,7 +46,7 @@ class AppPages {
               ]),
           GetPage(
             name: Routes.notification,
-            page: () => const NotificationScreen(),
+            page: () => NotificationScreen(),
             binding: NotificationsBinding(),
           ),
           GetPage(

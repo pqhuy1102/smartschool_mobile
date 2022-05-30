@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               validator: (value) => validateEmail(value),
                               style: TextStyle(fontSize: 14.0.sp),
                               decoration: inputDecoration(
-                                'Email của bạn',
+                                'Mã số sinh viên',
                                 Icons.email,
                               ),
                             ),
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 validator: (value) => validatePassword(value),
                                 style: TextStyle(fontSize: 14.0.sp),
                                 decoration: inputDecoration(
-                                  'Mật khẩu của bạn',
+                                  'Mật khẩu',
                                   Icons.lock,
                                   surfixIconData:
                                       _loginController.isPasswordHidden.value

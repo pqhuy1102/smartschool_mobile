@@ -42,33 +42,42 @@ class _ReportScreenState extends State<ReportScreen> {
                           ),
                           Obx(() {
                             return SizedBox(
-                              width: 50.0.w,
-                              child: DropdownButton(
-                                isExpanded: true,
-                                value: _reportController
-                                    .currentSemesterValue.value,
-                                items: _reportController.userSemestersList
-                                    .map((sem) {
-                                  return DropdownMenuItem(
-                                    child: Center(
-                                      child: Text(
-                                        "${sem['title']} ${sem['year']}",
-                                        style: TextStyle(
-                                            fontSize: 14.0.sp,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    value: sem['id'].toString(),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  _reportController.currentSemesterValue.value =
-                                      value.toString();
+                                width: 50.0.w,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.blueGrey,
+                                          width: 1,
+                                          style: BorderStyle.solid),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    underline: DropdownButtonHideUnderline(
+                                        child: Container()),
+                                    value: _reportController
+                                        .currentSemesterValue.value,
+                                    items: _reportController.userSemestersList
+                                        .map((sem) {
+                                      return DropdownMenuItem(
+                                        child: Center(
+                                          child: Text(
+                                            "${sem['title']} ${sem['year']}",
+                                            style: TextStyle(
+                                                fontSize: 14.0.sp,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                        value: sem['id'].toString(),
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      _reportController.currentSemesterValue
+                                          .value = value.toString();
 
-                                  _reportController.getCoursesInSemester();
-                                },
-                              ),
-                            );
+                                      _reportController.getCoursesInSemester();
+                                    },
+                                  ),
+                                ));
                           })
                         ],
                       ),

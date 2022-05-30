@@ -65,55 +65,56 @@ class SubjectDetailReportScreen extends StatelessWidget {
                   ),
                   Obx(() {
                     return DropdownButton(
-                        items: [
-                          DropdownMenuItem(
-                            child: Text(
-                              'Tất cả',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            value: "1",
+                      items: [
+                        DropdownMenuItem(
+                          child: Text(
+                            'Tất cả',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                           ),
-                          DropdownMenuItem(
-                            child: Text(
-                              'Hợp lệ',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            value: "2",
+                          value: "1",
+                        ),
+                        DropdownMenuItem(
+                          child: Text(
+                            'Hợp lệ',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                           ),
-                          DropdownMenuItem(
-                            child: Text(
-                              'Đi trễ',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            value: "3",
+                          value: "2",
+                        ),
+                        DropdownMenuItem(
+                          child: Text(
+                            'Đi trễ',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                           ),
-                          DropdownMenuItem(
-                            child: Text(
-                              'Vắng',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            value: "4",
+                          value: "3",
+                        ),
+                        DropdownMenuItem(
+                          child: Text(
+                            'Vắng',
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                           ),
-                        ],
-                        value: _reportController.filterValue.value,
-                        onChanged: (selectedValue) {
-                          _reportController.filterValue.value =
-                              selectedValue.toString();
-                          _reportController.filterCourseAttendanceFun(
-                              selectedValue.toString());
-                        });
+                          value: "4",
+                        ),
+                      ],
+                      value: _reportController.filterValue.value,
+                      onChanged: (selectedValue) {
+                        _reportController.filterValue.value =
+                            selectedValue.toString();
+                        _reportController.filterCourseAttendanceFun(
+                            selectedValue.toString());
+                      },
+                    );
                   })
                 ],
               ),
@@ -123,8 +124,6 @@ class SubjectDetailReportScreen extends StatelessWidget {
             ),
             Expanded(
                 child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Obx(() {
                   if (_reportController.isLoading.value) {
@@ -135,11 +134,18 @@ class SubjectDetailReportScreen extends StatelessWidget {
                       ),
                     );
                   } else if (_reportController.filterCourseAttendance.isEmpty) {
-                    return Center(
-                      child: Text(
-                        "Không có dữ liệu!",
-                        style: TextStyle(fontSize: 14.0.sp),
-                      ),
+                    return Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/no_data.gif',
+                        ),
+                        Center(
+                            child: Text(
+                          'Danh sách trống! ',
+                          style: TextStyle(
+                              fontSize: 16.0.sp, fontWeight: FontWeight.w600),
+                        ))
+                      ],
                     );
                   } else {
                     return Expanded(
