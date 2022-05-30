@@ -114,7 +114,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
                             text: message.data['shift'] == null
-                                ? "2022-05-01 15:30:02 - 2022-05-01 15:30:02 "
+                                ? ""
                                 : '${message.data['shift']}',
                             style: TextStyle(
                                 fontSize: 14.0.sp,
@@ -218,9 +218,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           IconButton(
                             // ignore: avoid_returning_null_for_void
                             onPressed: () {
-                              testNoti();
-                              // Get.toNamed(
-                              //     Routes.dashboard + Routes.notification);
+                              Get.toNamed(
+                                  Routes.dashboard + Routes.notification);
                             },
                             icon: const Icon(Icons.notifications),
                             color: Colors.blue.shade900,

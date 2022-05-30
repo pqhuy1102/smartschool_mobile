@@ -35,9 +35,24 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            body: SafeArea(
-                child: controller.obx((data) => ListView.builder(
-                    itemCount: data!.length,
+            body: SafeArea(child: controller.obx((data) {
+              if (data!.isEmpty) {
+                return Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/no_data.gif',
+                    ),
+                    Center(
+                        child: Text(
+                      'Danh sách trống! ',
+                      style: TextStyle(
+                          fontSize: 16.0.sp, fontWeight: FontWeight.w600),
+                    ))
+                  ],
+                );
+              } else {
+                return ListView.builder(
+                    itemCount: data.length,
                     itemBuilder: ((context, index) {
                       return Container(
                         margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
@@ -62,7 +77,9 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
                                 ? "Chưa điểm danh"
                                 : data[index]['check_in_status']),
                       );
-                    }))))));
+                    }));
+              }
+            }))));
   }
 
   String formatDate(String date) {

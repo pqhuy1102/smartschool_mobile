@@ -19,10 +19,11 @@ class SettingItem extends StatelessWidget {
           leading: Icon(
             icon,
             size: 18.0.sp,
+            color: Colors.black,
           ),
           title: Text(
             title,
-            style: TextStyle(fontSize: 14.0.sp),
+            style: TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w600),
           ),
         ));
   }

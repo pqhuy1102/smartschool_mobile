@@ -22,7 +22,7 @@ class DetailSubjectItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-        padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
+        padding: const EdgeInsets.fromLTRB(16, 10, 16, 20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.blue.shade900, width: 2)),

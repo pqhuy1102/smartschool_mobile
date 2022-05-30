@@ -136,7 +136,8 @@ class SettingsScreen extends StatelessWidget {
                         title: 'Đăng xuất',
                         titleStyle: TextStyle(fontSize: 18.0.sp),
                         middleText: 'Bạn có muốn đăng xuất không?',
-                        middleTextStyle: TextStyle(fontSize: 14.0.sp),
+                        middleTextStyle: TextStyle(
+                            fontSize: 14.0.sp, fontWeight: FontWeight.w500),
                         backgroundColor: Colors.white,
                         radius: 10.0,
                         confirm: ElevatedButton(
@@ -146,10 +147,12 @@ class SettingsScreen extends StatelessWidget {
                             child: Text(
                               'Đăng xuất',
                               style: TextStyle(
-                                  fontSize: 14.0.sp, color: Colors.white),
+                                  fontSize: 14.0.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.blue.shade900,
+                              primary: Colors.red.shade600,
                               padding: const EdgeInsets.all(10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4.0.sp),
@@ -162,8 +165,8 @@ class SettingsScreen extends StatelessWidget {
                                   horizontal: 20, vertical: 10),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4.0.sp),
-                                  side:
-                                      BorderSide(color: Colors.blue.shade900)),
+                                  side: BorderSide(
+                                      color: Colors.blue.shade900, width: 1.5)),
                             ),
                             onPressed: (() {
                               Get.back();
@@ -172,6 +175,7 @@ class SettingsScreen extends StatelessWidget {
                               'Hủy bỏ',
                               style: TextStyle(
                                   fontSize: 14.0.sp,
+                                  fontWeight: FontWeight.w600,
                                   color: Colors.blue.shade900),
                             )),
                         contentPadding: const EdgeInsets.symmetric(

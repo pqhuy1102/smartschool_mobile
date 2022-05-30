@@ -22,8 +22,6 @@ class GetIndayAttendanceController extends GetxController
 
     GetIndayAttendanceProvider().getIndayAttendance(headers).then((res) {
       change(res, status: RxStatus.success());
-    }, onError: (err) {
-      change(null, status: RxStatus.error("Không có dữ liệu!"));
-    });
+    }, onError: (err) {});
   }
 }
