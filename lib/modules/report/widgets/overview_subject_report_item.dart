@@ -107,7 +107,7 @@ class OverviewSubjectItem extends StatelessWidget {
                     children: [
                       // ignore: unnecessary_string_interpolations
                       Text(
-                        '• Số buổi đi học trễ',
+                        '• Số buổi trễ',
                         style: TextStyle(
                             fontSize: 14.0.sp, fontWeight: FontWeight.w400),
                       ),

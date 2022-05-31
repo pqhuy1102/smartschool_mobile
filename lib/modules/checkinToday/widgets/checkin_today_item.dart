@@ -37,7 +37,7 @@ class CheckinTodayItem extends StatelessWidget {
           children: [
             Text(
               // ignore: unnecessary_string_interpolations
-              "$time, $date",
+              "$time $date",
               style: TextStyle(
                   fontSize: 14.0.sp,
                   color: Colors.grey.shade600,
@@ -58,23 +58,23 @@ class CheckinTodayItem extends StatelessWidget {
                         color: Colors.black,
                         fontWeight: FontWeight.w600),
                   ),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4, horizontal: 6),
-                        primary: Colors.red,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0.sp),
-                        ),
-                      ),
-                      onPressed: () {
-                        Get.toNamed(Routes.addComplain);
-                      },
-                      child: Text("Phản ánh",
-                          style: TextStyle(
-                              fontSize: 16.0.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600)))
+                  // ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //       padding: const EdgeInsets.symmetric(
+                  //           vertical: 4, horizontal: 6),
+                  //       primary: Colors.red,
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(4.0.sp),
+                  //       ),
+                  //     ),
+                  //     onPressed: () {
+                  //       Get.toNamed(Routes.addComplain);
+                  //     },
+                  //     child: Text("Phản ánh",
+                  //         style: TextStyle(
+                  //             fontSize: 16.0.sp,
+                  //             color: Colors.white,
+                  //             fontWeight: FontWeight.w600)))
                 ],
               ),
             ),
