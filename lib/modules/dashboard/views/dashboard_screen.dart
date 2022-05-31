@@ -48,7 +48,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           title: Center(
             child: Text(
               '${message.data['message']}',
-              style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 15.0.sp, fontWeight: FontWeight.bold),
             ),
           ),
           content: Container(
@@ -68,7 +68,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
                             text: message.data['course'] == null
-                                ? ""
+                                ? "Không có dữ liệu"
                                 : '${message.data['course']}',
                             style: TextStyle(
                                 fontSize: 14.0.sp,
@@ -91,7 +91,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
                             text: message.data['room'] == null
-                                ? ""
+                                ? "Không có dữ liệu"
                                 : '${message.data['room']}',
                             style: TextStyle(
                                 fontSize: 14.0.sp,
@@ -114,7 +114,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
                             text: message.data['shift'] == null
-                                ? ""
+                                ? "Không có dữ liệu"
                                 : '${message.data['shift']}',
                             style: TextStyle(
                                 fontSize: 14.0.sp,
@@ -137,7 +137,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
                             text: message.data['checkintime'] == null
-                                ? ""
+                                ? "Không có dữ liệu"
                                 : '${message.data['checkintime']}',
                             style: TextStyle(
                                 fontSize: 14.0.sp,
@@ -171,6 +171,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   void updateNotiToken() {
     messaging.getToken().then((value) {
       _dashBoardController.fcmToken.value = value!;
+      print(_dashBoardController.fcmToken.value);
       _dashBoardController
           .updateNotificationToken(_dashBoardController.fcmToken.value);
     });
