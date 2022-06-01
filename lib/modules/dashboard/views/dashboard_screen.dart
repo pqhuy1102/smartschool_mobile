@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
@@ -28,6 +29,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   final LoginController _loginController = Get.put(LoginController());
   late FirebaseMessaging messaging;
 
+  final shift = "2022-06-01 09:55:22-2022-06-01 11:55:22";
+
   @override
   void initState() {
     super.initState();
@@ -38,8 +41,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
     //foreground state
     FirebaseMessaging.onMessage.listen((message) {
-      //print(message.notification!.body);
-
       //display notification dialog
       Get.dialog(
         AlertDialog(
@@ -114,8 +115,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
                             text: message.data['shift'] == null
-                                ? "Không có dữ liệu"
-                                : '${message.data['shift']}',
+                                ? 'Không có dữ liệu'
+                                : formatUtcToLocalTime(message.data['shift']
+                                        .toString()
+                                        .substring(0, 18)) +
+                                    '-' +
+                                    formatUtcToLocalTime(message.data['shift']
+                                        .toString()
+                                        .substring(20)),
                             style: TextStyle(
                                 fontSize: 14.0.sp,
                                 color: Colors.green,
@@ -138,7 +145,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           TextSpan(
                             text: message.data['checkintime'] == null
                                 ? "Không có dữ liệu"
-                                : '${message.data['checkintime']}',
+                                : formatUtcToLocalTime(
+                                    message.data['checkintime']),
                             style: TextStyle(
                                 fontSize: 14.0.sp,
                                 color: Colors.green,
@@ -438,5 +446,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
       ),
     );
+  }
+
+  String formatUtcToLocalTime(String? dateUtc) {
+    if (dateUtc != null) {
+      DateTime date =
+          DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateUtc, true).toLocal();
+      var inputDate = DateTime.parse(date.toString());
+      var outputFormat = DateFormat('dd/MM/yyyy hh:mm a');
+      var outputDate = outputFormat.format(inputDate);
+      return outputDate;
+    }
+    return "";
   }
 }

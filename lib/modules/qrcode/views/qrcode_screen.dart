@@ -159,8 +159,8 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  height: 20.0,
-                                  width: 20.0,
+                                  height: 24.0,
+                                  width: 24.0,
                                   child: Checkbox(
                                       value: _qrCodeController
                                           .isNeverDisplayAgain.value,
