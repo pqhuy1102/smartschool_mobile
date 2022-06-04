@@ -179,7 +179,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   void updateNotiToken() {
     messaging.getToken().then((value) {
       _dashBoardController.fcmToken.value = value!;
-      print(_dashBoardController.fcmToken.value);
       _dashBoardController
           .updateNotificationToken(_dashBoardController.fcmToken.value);
     });

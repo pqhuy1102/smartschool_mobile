@@ -7,6 +7,10 @@ class LoginProvider extends GetConnect {
   //login
   Future<dynamic> login(LoginRequestModel model) async {
     final response = await post(loginUrl, model.toJson());
-    return response;
+    if (!response.status.connectionError) {
+      return response;
+    } else {
+      return null;
+    }
   }
 }
