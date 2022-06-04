@@ -217,7 +217,7 @@ String? validatePassword(String? value) {
   if (value == null ||
       value.isEmpty ||
       spaceRegex.hasMatch(value) ||
-      value.length < 8) {
+      value.length < 6) {
     return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
   } else {
     return null;

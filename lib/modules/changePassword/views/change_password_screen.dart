@@ -25,20 +25,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     double h = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.blue.shade900,
+                size: 24.0.sp,
+              ),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
           resizeToAvoidBottomInset: true,
           body: SizedBox(
               width: double.infinity,
               height: double.infinity,
-              // decoration: const BoxDecoration(
-              //     image: DecorationImage(
-              //         image: AssetImage('assets/images/background_login.jpg'),
-              //         fit: BoxFit.fill)),
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                         height: h * 0.2,
                         width: w,
                         child: Image.asset('assets/images/lock.png'),

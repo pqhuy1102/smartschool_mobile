@@ -36,7 +36,7 @@ class LoginController extends GetxController {
     isLoading(true);
     final res = await _loginProvider.login(
         LoginRequestModel(email: email.trim(), password: password.trim()));
-    if (!res.hasError) {
+    if (res != null && !res.hasError) {
       _authenticationManager.login(res.body['token']);
       _authenticationManager
           .changePasswordFirstTimeStatus(res.body['is_activate']);
@@ -48,11 +48,17 @@ class LoginController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white);
       isLoading(false);
-    } else {
+    } else if (res != null && res.hasError) {
       final error = res.body['message'] == "Wrong password"
           ? "Sai mật khẩu"
           : res.body['message'];
       Get.snackbar('Lỗi ', error,
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      isLoading(false);
+    } else {
+      Get.snackbar('Lỗi ', "Bạn chưa kết nối internet!",
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);

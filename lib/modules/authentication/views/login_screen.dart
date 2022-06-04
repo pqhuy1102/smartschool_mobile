@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
+import 'package:smartschool_mobile/routes/app_pages.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/images/background_login.jpg'),
-                  fit: BoxFit.fill)),
+                  fit: BoxFit.cover)),
           child: Center(
               child: SingleChildScrollView(
             child: Column(
@@ -67,11 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             TextFormField(
                               controller:
                                   _loginController.emailEditingController,
-                              validator: (value) => validateEmail(value),
+                              validator: (value) => validateMSSV(value),
                               style: TextStyle(fontSize: 14.0.sp),
                               decoration: inputDecoration(
                                 'Mã số sinh viên',
-                                Icons.email,
+                                Icons.person_pin,
                               ),
                             ),
                             const SizedBox(
@@ -101,11 +102,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.toNamed(Routes.forgotPassword);
+                                    },
                                     child: Text(
                                       'Quên mật khẩu?',
                                       style: TextStyle(
-                                          fontSize: 12.0.sp,
+                                          fontSize: 14.0.sp,
                                           color: Colors.black),
                                     ))),
                             const SizedBox(
@@ -129,6 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Obx((() {
                                   if (_loginController.isLoading.value) {
                                     return const SizedBox(
+                                      height: 30,
                                       child: CircularProgressIndicator(
                                           valueColor:
                                               AlwaysStoppedAnimation<Color>(
@@ -206,7 +210,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
 }
 
 //validate email function
-String? validateEmail(String? value) {
+String? validateMSSV(String? value) {
   // String emailPattern =
   //     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
   //     r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
@@ -214,7 +218,7 @@ String? validateEmail(String? value) {
   // RegExp emailRegex = RegExp(emailPattern);
   //  !emailRegex.hasMatch(value)
   if (value == null || value.isEmpty) {
-    return 'Email không hợp lệ, vui lòng nhập lại!';
+    return 'Mã số sinh viên không hợp lệ, vui lòng nhập lại!';
   } else {
     return null;
   }
