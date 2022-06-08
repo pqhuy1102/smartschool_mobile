@@ -41,14 +41,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 2),
                   child: Image.asset(
-                    'assets/images/logo-hcmus-new.png',
+                    'assets/images/new_logo.png',
                     fit: BoxFit.contain,
-                    height: 200.0,
-                    width: 180.0,
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(bottom: 10, top: 10),
+                    margin: const EdgeInsets.only(bottom: 10, top: 0),
                     child: Text(
                       'đăng nhập'.toUpperCase(),
                       style: TextStyle(

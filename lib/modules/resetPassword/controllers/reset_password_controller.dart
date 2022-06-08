@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/resetPassword/models/reset_password_request_model.dart';
 import 'package:smartschool_mobile/modules/resetPassword/providers/reset_password_provider.dart';
+import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class ResetPasswordController extends GetxController {
   var isLoading = false.obs;
@@ -30,6 +31,7 @@ class ResetPasswordController extends GetxController {
           colorText: Colors.white);
       isLoading(false);
       clearTextField();
+      Get.toNamed(Routes.login);
     } else {
       Get.snackbar('Lỗi ', "Có lỗi xảy ra!",
           snackPosition: SnackPosition.TOP,

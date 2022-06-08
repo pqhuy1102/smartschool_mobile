@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:smartschool_mobile/constants.dart';
 import 'package:smartschool_mobile/modules/notification/models/update_notification_token_request_model.dart';
 
 class NotificationProvider extends GetConnect {
   final String updateNotificationTokenUrl =
-      "http://13.228.244.196:6002/user/update-notification-token";
+      "${Constant.apiDomain}/user/update-notification-token";
   final String testNotificationUrl =
-      "http://13.228.244.196:6002/user/test-notification";
+      "${Constant.apiDomain}/user/test-notification";
 
   //update notification token
   Future<String?> updateNotificationToken(

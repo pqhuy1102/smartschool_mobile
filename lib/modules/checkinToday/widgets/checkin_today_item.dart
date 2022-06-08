@@ -6,8 +6,7 @@ class CheckinTodayItem extends StatelessWidget {
       {Key? key,
       required this.date,
       required this.time,
-      required this.subjectId,
-      required this.className,
+      required this.course,
       required this.room,
       required this.endTime,
       required this.startTime,
@@ -15,8 +14,7 @@ class CheckinTodayItem extends StatelessWidget {
       : super(key: key);
   final String date;
   final String time;
-  final String subjectId;
-  final String className;
+  final String course;
   final String room;
   final String status;
   final String startTime;
@@ -25,7 +23,7 @@ class CheckinTodayItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(0, 0, 0, 22),
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 4),
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -48,14 +46,16 @@ class CheckinTodayItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    // ignore: unnecessary_string_interpolations
-                    "$subjectId - $className",
-                    style: TextStyle(
-                        fontSize: 18.0.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600),
-                  ),
+                  Flexible(
+                    child: Text(
+                      // ignore: unnecessary_string_interpolations
+                      "$course",
+                      style: TextStyle(
+                          fontSize: 16.0.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  )
                   // ElevatedButton(
                   //     style: ElevatedButton.styleFrom(
                   //       padding: const EdgeInsets.symmetric(

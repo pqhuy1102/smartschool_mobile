@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class DetailSubjectItem extends StatelessWidget {
   const DetailSubjectItem(
@@ -22,7 +20,7 @@ class DetailSubjectItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-        padding: const EdgeInsets.fromLTRB(16, 10, 16, 20),
+        padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.blue.shade900, width: 2)),
@@ -38,23 +36,23 @@ class DetailSubjectItem extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 14.0.sp, color: Colors.grey.shade600),
                 ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 6),
-                      primary: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4.0.sp),
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.toNamed(Routes.addComplain);
-                    },
-                    child: Text("Phản ánh",
-                        style: TextStyle(
-                            fontSize: 16.0.sp,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600)))
+                // ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //       padding: const EdgeInsets.symmetric(
+                //           vertical: 4, horizontal: 6),
+                //       primary: Colors.red,
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(4.0.sp),
+                //       ),
+                //     ),
+                //     onPressed: () {
+                //       Get.toNamed(Routes.addComplain);
+                //     },
+                //     child: Text("Phản ánh",
+                //         style: TextStyle(
+                //             fontSize: 16.0.sp,
+                //             color: Colors.white,
+                //             fontWeight: FontWeight.w600)))
               ],
             ),
             Container(
@@ -62,13 +60,13 @@ class DetailSubjectItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
+                  Flexible(
                     child: Text(
                       // ignore: unnecessary_string_interpolations
                       "$subjectId",
-                      overflow: TextOverflow.ellipsis,
+                      // overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 18.0.sp,
+                          fontSize: 16.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),

@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:smartschool_mobile/constants.dart';
 import 'package:smartschool_mobile/modules/authentication/model/login_request_model.dart';
 
 class LoginProvider extends GetConnect {
-  final String loginUrl = 'http://13.228.244.196:6002/login';
+  final String loginUrl = '${Constant.apiDomain}/login';
 
   //login
   Future<dynamic> login(LoginRequestModel model) async {

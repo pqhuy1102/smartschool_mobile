@@ -50,33 +50,29 @@ class SplashScreen extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: ExactAssetImage('assets/images/background_login.jpg'),
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
       ),
       child: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
           children: <Widget>[
             Container(
-                margin: const EdgeInsets.only(top: 100, bottom: 20),
+                margin: const EdgeInsets.only(top: 100, bottom: 10),
                 child: Image.asset(
-                  'assets/images/logo-hcmus-new.png',
+                  'assets/images/new_logo.png',
                   fit: BoxFit.contain,
-                  height: 200.0,
-                  width: 180.0,
                 )),
             Text(
-              "Welcome to",
+              "Chào mừng đến",
               style: TextStyle(
                   color: Colors.red[300],
                   fontSize: 26.0.sp,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w600),
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
-                "bCheckin HCMUS",
+                "Student Connect",
                 style: TextStyle(
                     color: Colors.blue[900],
                     fontSize: 26.0.sp,

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:smartschool_mobile/modules/authentication/views/login_screen.dart';
 import 'package:smartschool_mobile/modules/changePassword/views/change_password_first_time_screen.dart';
 import 'package:smartschool_mobile/modules/changePassword/views/change_password_screen.dart';
 import 'package:smartschool_mobile/modules/checkinToday/bindings/get_inday_attendance_bindings.dart';
@@ -25,6 +26,10 @@ class AppPages {
     GetPage(
       name: Routes.splash,
       page: () => SplashScreen(),
+    ),
+    GetPage(
+      name: Routes.login,
+      page: () => const LoginScreen(),
     ),
     GetPage(
         name: Routes.dashboard,

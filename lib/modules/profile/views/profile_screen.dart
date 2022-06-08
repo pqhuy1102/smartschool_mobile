@@ -156,26 +156,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                'cập nhật thông tin'.toUpperCase(),
-                                style: TextStyle(
-                                    fontSize: 14.0.sp,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
-                                minimumSize: const Size.fromHeight(40),
-                                primary: Colors.blue.shade900,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6.0.sp),
-                                ),
-                              )),
-                        )
+                        // Container(
+                        //   margin: const EdgeInsets.symmetric(horizontal: 10),
+                        //   child: ElevatedButton(
+                        //       onPressed: () {},
+                        //       child: Text(
+                        //         'cập nhật thông tin'.toUpperCase(),
+                        //         style: TextStyle(
+                        //             fontSize: 14.0.sp,
+                        //             fontWeight: FontWeight.bold),
+                        //       ),
+                        //       style: ElevatedButton.styleFrom(
+                        //         padding:
+                        //             const EdgeInsets.symmetric(vertical: 16),
+                        //         minimumSize: const Size.fromHeight(40),
+                        //         primary: Colors.blue.shade900,
+                        //         shape: RoundedRectangleBorder(
+                        //           borderRadius: BorderRadius.circular(6.0.sp),
+                        //         ),
+                        //       )),
+                        // )
                       ],
                     ))),
                   );

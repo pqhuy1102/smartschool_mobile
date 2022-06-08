@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:smartschool_mobile/constants.dart';
 
 class GetIndayAttendanceProvider extends GetConnect {
   final String getIndayAttendanceUrl =
-      'http://13.228.244.196:6002/user/inday-attendance?time_offset=7';
+      '${Constant.apiDomain}/user/inday-attendance?time_offset=7';
 
   Future<List<dynamic>> getIndayAttendance(headers) async {
     final response = await get(getIndayAttendanceUrl, headers: headers);

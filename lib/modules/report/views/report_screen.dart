@@ -86,35 +86,52 @@ class _ReportScreenState extends State<ReportScreen> {
                       height: 20,
                     ),
                     Obx(() {
-                      return Expanded(
-                          child: ListView.builder(
-                              itemCount:
-                                  _reportController.userCoursesList.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  child: OverviewSubjectItem(
-                                    subjectName:
-                                        "${_reportController.userCoursesList[index]['name']}",
-                                    validSession: _reportController
-                                        .userCoursesList[index]['attendance'],
-                                    absenceSession: _reportController
-                                        .userCoursesList[index]['absence'],
-                                    lateSession: 0,
-                                    totalSession: _reportController
-                                        .userCoursesList[index]['total'],
-                                    className: "18CTT",
-                                    subjectId:
-                                        "${_reportController.userCoursesList[index]['course_id']}",
-                                  ),
-                                  onTap: () {
-                                    _reportController.getCourseAttendance(
-                                        _reportController.userCoursesList[index]
-                                                ['id']
-                                            .toString());
-                                    Get.toNamed(Routes.subjectDetailReport);
-                                  },
-                                );
-                              }));
+                      if (_reportController.userCoursesList.isEmpty) {
+                        return Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/no_data.gif',
+                            ),
+                            Center(
+                                child: Text(
+                              'Danh sách trống! ',
+                              style: TextStyle(
+                                  fontSize: 16.0.sp,
+                                  fontWeight: FontWeight.w600),
+                            ))
+                          ],
+                        );
+                      } else {
+                        return Expanded(
+                            child: ListView.builder(
+                                itemCount:
+                                    _reportController.userCoursesList.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    child: OverviewSubjectItem(
+                                      subjectName:
+                                          "${_reportController.userCoursesList[index]['name']}",
+                                      validSession: _reportController
+                                          .userCoursesList[index]['attendance'],
+                                      absenceSession: _reportController
+                                          .userCoursesList[index]['absence'],
+                                      lateSession: 0,
+                                      totalSession: _reportController
+                                          .userCoursesList[index]['total'],
+                                      className: "18CTT",
+                                      subjectId:
+                                          "${_reportController.userCoursesList[index]['course_id']}",
+                                    ),
+                                    onTap: () {
+                                      _reportController.getCourseAttendance(
+                                          _reportController
+                                              .userCoursesList[index]['id']
+                                              .toString());
+                                      Get.toNamed(Routes.subjectDetailReport);
+                                    },
+                                  );
+                                }));
+                      }
                     })
                   ],
                 ),

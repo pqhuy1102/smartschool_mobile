@@ -9,6 +9,9 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
   CheckinTodayScreen({Key? key}) : super(key: key);
   final f = DateFormat('dd/MM/yyyy HH:mm');
 
+  late final GetIndayAttendanceController _getIndayAttendanceController =
+      Get.put(GetIndayAttendanceController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,8 +38,8 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            body: SafeArea(child: controller.obx((data) {
-              if (data!.isEmpty) {
+            body: SafeArea(child: Obx(() {
+              if (_getIndayAttendanceController.indayAttendanceList.isEmpty) {
                 return Column(
                   children: [
                     Image.asset(
@@ -52,30 +55,31 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
                 );
               } else {
                 return ListView.builder(
-                    itemCount: data.length,
+                    itemCount: _getIndayAttendanceController
+                        .indayAttendanceList.length,
                     itemBuilder: ((context, index) {
                       return Container(
                         margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
                         child: CheckinTodayItem(
-                            startTime: formatDate(data[index]['start_time'])
+                            startTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['start_time'])
                                 .substring(10),
-                            endTime: formatDate(data[index]['end_time'])
+                            endTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['end_time'])
                                 .substring(10),
-                            date: data[index]['check_in_time'] == null
+                            date: _getIndayAttendanceController.indayAttendanceList[index]['check_in_time'] == null
                                 ? ""
-                                : formatDate(data[index]['check_in_time'])
+                                : formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
                                     .substring(0, 10),
-                            time: data[index]['check_in_time'] == null
-                                ? ""
+                            time: _getIndayAttendanceController.indayAttendanceList[index]
+                                        ['check_in_time'] ==
+                                    null
+                                ? "--/--"
                                 : "Điểm danh lúc: " +
-                                    formatDate(data[index]['check_in_time'])
+                                    formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
                                         .substring(10),
-                            subjectId: data[index]['course'],
-                            className: "18CTT1",
-                            room: data[index]['room'],
-                            status: data[index]['check_in_status'] == ""
-                                ? "Chưa điểm danh"
-                                : data[index]['check_in_status']),
+                            course: _getIndayAttendanceController
+                                .indayAttendanceList[index]['course'],
+                            room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
+                            status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? "Chưa điểm danh" : _getIndayAttendanceController.indayAttendanceList[index]['check_in_status']),
                       );
                     }));
               }
