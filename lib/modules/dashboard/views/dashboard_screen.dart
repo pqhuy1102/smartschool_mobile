@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
+import 'package:smartschool_mobile/modules/checkinToday/controllers/get_inday_attendance_controller.dart';
+import 'package:smartschool_mobile/modules/checkinToday/widgets/checkin_today_item.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
-import 'package:smartschool_mobile/modules/dashboard/widgets/checkin_time_items.dart';
-import 'package:smartschool_mobile/modules/dashboard/widgets/dashboard_items.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
@@ -28,6 +28,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       Get.put(DashBoardController());
   final LoginController _loginController = Get.put(LoginController());
   late FirebaseMessaging messaging;
+
+  late final GetIndayAttendanceController _getIndayAttendanceController =
+      Get.put(GetIndayAttendanceController());
 
   final shift = "2022-06-01 09:55:22-2022-06-01 11:55:22";
 
@@ -314,98 +317,175 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               ? '${_loginController.username}'
                               : '${_authenticationManager.username}',
                           style: TextStyle(
-                              fontSize: 18.5.sp, fontWeight: FontWeight.bold))
+                              fontSize: 18.5.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 225, 113, 0)))
                     ]),
               ))),
         ),
 
+        // Container(
+        //   height: 18.0.h,
+        //   width: double.infinity,
+        //   margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+        //   child: Container(
+        //       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+        //       child: Column(
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           Text(
+        //             'latest checkin'.tr,
+        //             style: TextStyle(
+        //                 color: Colors.white,
+        //                 fontSize: 18.sp,
+        //                 fontWeight: FontWeight.w600),
+        //           ),
+        //           Row(
+        //             children: [
+        //               Container(
+        //                 margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
+        //                 child: const CheckinTimeItem(
+        //                   title: '7:30',
+        //                   icon: Icons.arrow_drop_down,
+        //                   status: 'in',
+        //                 ),
+        //               ),
+        //               Container(
+        //                 margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
+        //                 child: const CheckinTimeItem(
+        //                   title: 'I.44',
+        //                   icon: Icons.room,
+        //                   status: 'room',
+        //                 ),
+        //               ),
+        //               const CheckinTimeItem(
+        //                 title: '15/02/2022',
+        //                 icon: Icons.date_range,
+        //                 status: 'date',
+        //               ),
+        //             ],
+        //           )
+        //         ],
+        //       )),
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(10),
+        //     color: Colors.blue.shade900,
+        //   ),
+        // ),
+
+        const SizedBox(
+          height: 15.0,
+        ),
+
         Container(
-          height: 18.0.h,
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-          child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'latest checkin'.tr,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
-                        child: const CheckinTimeItem(
-                          title: '7:30',
-                          icon: Icons.arrow_drop_down,
-                          status: 'in',
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
-                        child: const CheckinTimeItem(
-                          title: 'I.44',
-                          icon: Icons.room,
-                          status: 'room',
-                        ),
-                      ),
-                      const CheckinTimeItem(
-                        title: '15/02/2022',
-                        icon: Icons.date_range,
-                        status: 'date',
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.blue.shade900,
+          margin: const EdgeInsets.only(left: 10),
+          child: Text(
+            "Điểm danh hôm nay",
+            style: TextStyle(
+                fontSize: 18.sp,
+                color: Colors.blue.shade900,
+                fontWeight: FontWeight.w700),
           ),
         ),
 
+        Obx(() {
+          if (_getIndayAttendanceController.indayAttendanceList.isEmpty) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/no_schedule_today.gif',
+                  ),
+                  Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Center(
+                          child: Text(
+                        'Hôm nay bạn không có ca học nào! ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            letterSpacing: 0.8,
+                            fontSize: 16.0.sp,
+                            fontWeight: FontWeight.w600),
+                      )))
+                ],
+              ),
+            );
+          } else {
+            return Expanded(
+                child: SizedBox(
+              height: 100.0,
+              child: ListView.builder(
+                  itemCount:
+                      _getIndayAttendanceController.indayAttendanceList.length,
+                  itemBuilder: ((context, index) {
+                    return Container(
+                      margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
+                      child: CheckinTodayItem(
+                          startTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['start_time'])
+                              .substring(10),
+                          endTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['end_time'])
+                              .substring(10),
+                          date: _getIndayAttendanceController.indayAttendanceList[index]
+                                      ['check_in_time'] ==
+                                  null
+                              ? ""
+                              : formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                  .substring(0, 10),
+                          time: _getIndayAttendanceController.indayAttendanceList[index]
+                                      ['check_in_time'] ==
+                                  null
+                              ? "--/--"
+                              : "Điểm danh lúc: " +
+                                  formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                      .substring(10),
+                          course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
+                          room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
+                          status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? "Chưa điểm danh" : _getIndayAttendanceController.indayAttendanceList[index]['check_in_status']),
+                    );
+                  })),
+            ));
+          }
+        })
+
         //Dashboard element
-        Expanded(
-          child: GridView.count(
-            primary: false,
-            padding: const EdgeInsets.all(10),
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            crossAxisCount: 2,
-            children: [
-              InkWell(
-                child: DashBoardItem(
-                  title: 'checkin today'.tr,
-                  icon: Icons.date_range_sharp,
-                  color: const Color.fromARGB(255, 4, 170, 9),
-                  iconBackground: Colors.green.shade100,
-                ),
-                onTap: () {
-                  Get.toNamed(Routes.dashboard + Routes.checkinToday);
-                },
-              ),
-              DashBoardItem(
-                title: 'absence'.tr,
-                icon: Icons.person_off,
-                color: const Color.fromARGB(255, 255, 17, 0),
-                iconBackground: Colors.red.shade100,
-              ),
-              InkWell(
-                child: DashBoardItem(
-                  title: 'late/earlier'.tr,
-                  icon: Icons.timer_outlined,
-                  color: const Color.fromARGB(255, 0, 140, 255),
-                  iconBackground: Colors.blue.shade100,
-                ),
-              ),
-            ],
-          ),
-        )
+        // Expanded(
+        //   child: GridView.count(
+        //     primary: false,
+        //     padding: const EdgeInsets.all(10),
+        //     crossAxisSpacing: 20,
+        //     mainAxisSpacing: 20,
+        //     crossAxisCount: 2,
+        //     children: [
+        //       InkWell(
+        //         child: DashBoardItem(
+        //           title: 'checkin today'.tr,
+        //           icon: Icons.date_range_sharp,
+        //           color: const Color.fromARGB(255, 4, 170, 9),
+        //           iconBackground: Colors.green.shade100,
+        //         ),
+        //         onTap: () {
+        //           Get.toNamed(Routes.dashboard + Routes.checkinToday);
+        //         },
+        //       ),
+        //       DashBoardItem(
+        //         title: 'absence'.tr,
+        //         icon: Icons.person_off,
+        //         color: const Color.fromARGB(255, 255, 17, 0),
+        //         iconBackground: Colors.red.shade100,
+        //       ),
+        //       InkWell(
+        //         child: DashBoardItem(
+        //           title: 'late/earlier'.tr,
+        //           icon: Icons.timer_outlined,
+        //           color: const Color.fromARGB(255, 0, 140, 255),
+        //           iconBackground: Colors.blue.shade100,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // )
       ],
     );
   }
@@ -457,5 +537,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       return outputDate;
     }
     return "";
+  }
+
+  String formatDate(String date) {
+    DateTime parseDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(date, true).toLocal();
+    var inputDate = DateTime.parse(parseDate.toString());
+    var outputFormat = DateFormat('dd/MM/yyyy hh:mm a');
+    var outputDate = outputFormat.format(inputDate);
+    return outputDate;
   }
 }

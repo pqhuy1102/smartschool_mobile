@@ -16,12 +16,12 @@ class OnBoard extends StatelessWidget {
 
     return Obx(() {
       return (_authManager.isLogged.value &&
-              (_loginController.isActivate.value ||
+              (_loginController.isActivated.value ||
                   _authManager.isActivated.value))
           ? const DashBoardScreen()
           : (_authManager.isLogged.value &&
-                  !_loginController.isActivate.value &&
-                  !_authManager.isActivated.value)
+                  !(_loginController.isActivated.value ||
+                      _authManager.isActivated.value))
               ? const ChangePasswordFirstTimeScreen()
               : const LoginScreen();
     });

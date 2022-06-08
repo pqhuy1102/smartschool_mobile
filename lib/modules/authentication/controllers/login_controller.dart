@@ -13,7 +13,7 @@ class LoginController extends GetxController {
 
   var username = "".obs;
 
-  var isActivate = false.obs;
+  var isActivated = false.obs;
 
   TextEditingController? emailEditingController;
   TextEditingController? passwordEditingController;
@@ -42,7 +42,8 @@ class LoginController extends GetxController {
           .changePasswordFirstTimeStatus(res.body['is_activate']);
       username.value = res.body['username'];
       _authenticationManager.saveUsernameToStorage(res.body['username']);
-      isActivate.value = res.body['is_activate'];
+      isActivated.value = res.body['is_activate'];
+
       Get.snackbar('Thành công', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,

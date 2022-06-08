@@ -6,13 +6,7 @@ import 'package:smartschool_mobile/LocaleString.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'routes/routes.dart';
 import 'package:get_storage/get_storage.dart';
-// import 'package:device_preview/device_preview.dart';
-
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   // If you're going to use other Firebase services in the background, such as Firestore,
-//   // make sure you call `initializeApp` before using other Firebase services.
-//   await Firebase.initializeApp();
-// }
+import 'package:flutter/services.dart';
 
 void main() async {
   //initialize for data persistency
@@ -30,6 +24,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Sizer(builder: (context, orientation, deviceType) {
       return GetMaterialApp(
         translations: LocaleString(),

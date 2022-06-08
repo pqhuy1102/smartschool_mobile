@@ -102,19 +102,19 @@ class SettingsScreen extends StatelessWidget {
                     Get.toNamed(Routes.dashboard + Routes.profile);
                   },
                 ),
-                SettingItem(
-                  title: "about us".tr,
-                  icon: Icons.people_alt,
-                ),
-                InkWell(
-                  child: SettingItem(
-                    title: "language".tr,
-                    icon: Icons.translate,
-                  ),
-                  onTap: () {
-                    handleChangeLanguage(context);
-                  },
-                ),
+                // SettingItem(
+                //   title: "about us".tr,
+                //   icon: Icons.people_alt,
+                // ),
+                // InkWell(
+                //   child: SettingItem(
+                //     title: "language".tr,
+                //     icon: Icons.translate,
+                //   ),
+                //   onTap: () {
+                //     handleChangeLanguage(context);
+                //   },
+                // ),
                 InkWell(
                   child: SettingItem(
                     title: "change password".tr,
@@ -134,7 +134,8 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () {
                     Get.defaultDialog(
                         title: 'Đăng xuất',
-                        titleStyle: TextStyle(fontSize: 18.0.sp),
+                        titleStyle: TextStyle(
+                            fontSize: 18.0.sp, fontWeight: FontWeight.w600),
                         middleText: 'Bạn có muốn đăng xuất không?',
                         middleTextStyle: TextStyle(
                             fontSize: 14.0.sp, fontWeight: FontWeight.w500),

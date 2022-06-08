@@ -154,29 +154,28 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                       Image.asset(
                         'assets/images/qr-code-instruction.gif',
                       ),
-                      Obx((() {
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                  height: 24.0,
-                                  width: 24.0,
-                                  child: Checkbox(
-                                      value: _qrCodeController
-                                          .isNeverDisplayAgain.value,
-                                      onChanged: (value) {
-                                        _qrCodeController
-                                            .isNeverDisplayAgain.value = value!;
-                                        _qrCodeController.box.write(
-                                            'isNeverDisplayAgain', value);
-                                      })),
-                              const SizedBox(width: 4.0),
-                              Text(
-                                "Không hiển thị lại!",
-                                style: TextStyle(fontSize: 12.0.sp),
-                              )
-                            ]);
-                      }))
+                      Obx((() => Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                    height: 30.0,
+                                    width: 30.0,
+                                    child: Checkbox(
+                                        activeColor: Colors.blue.shade900,
+                                        value: _qrCodeController
+                                            .isNeverDisplayAgain.value,
+                                        onChanged: (value) {
+                                          _qrCodeController.isNeverDisplayAgain
+                                              .value = value!;
+                                          _qrCodeController.box.write(
+                                              'isNeverDisplayAgain', value);
+                                        })),
+                                const SizedBox(width: 4.0),
+                                Text(
+                                  "Không hiển thị lại!",
+                                  style: TextStyle(fontSize: 12.0.sp),
+                                )
+                              ])))
                     ]),
                   )),
               actions: [
@@ -192,4 +191,6 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
               ],
             ));
   }
+
+  void handleCheckbox() {}
 }

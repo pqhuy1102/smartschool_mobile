@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:smartschool_mobile/constants.dart';
 import 'package:smartschool_mobile/modules/report/models/user_course_attendance_response_model.dart';
 
 class ReportProvider extends GetConnect {
-  final String userSemesterListUrl =
-      'http://13.228.244.196:6002/user/semesters';
+  final String userSemesterListUrl = '${Constant.apiDomain}/user/semesters';
   final String userCoursesInSemesterListUrl =
-      'http://13.228.244.196:6002/user/courses-in-semester?semester_id=';
+      '${Constant.apiDomain}/user/courses-in-semester?semester_id=';
   final String userCourseAttendaceListUrl =
-      'http://13.228.244.196:6002/user/course-attendance?course_id=';
+      '${Constant.apiDomain}/user/course-attendance?course_id=';
 
   Future<List<dynamic>> getUserSemestersList(headers) async {
     final response = await get(userSemesterListUrl, headers: headers);
