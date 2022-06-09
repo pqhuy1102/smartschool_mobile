@@ -449,7 +449,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                       .substring(10),
                           course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
                           room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
-                          status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_getIndayAttendanceController.indayAttendanceList[index]['end_time']) : _getIndayAttendanceController.indayAttendanceList[index]['check_in_status']),
+                          status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_getIndayAttendanceController.indayAttendanceList[index]['end_time']) : convertCheckinTodayStatus(_getIndayAttendanceController.indayAttendanceList[index]['check_in_status'])),
                     );
                   })),
             ));
@@ -563,6 +563,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       return "Vắng";
     } else {
       return "Chưa điểm danh";
+    }
+  }
+
+  String convertCheckinTodayStatus(String status) {
+    if (status == "Late") {
+      return "Đi trễ";
+    } else {
+      return "Hợp lệ";
     }
   }
 }
