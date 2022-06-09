@@ -25,13 +25,13 @@ class ResetPasswordController extends GetxController {
     final res = await _resetPasswordProvider
         .resetPassword(ResetPasswordRequestModel(email: email.trim()));
     if (!res.hasError) {
+      Get.back();
       Get.snackbar('Thành công', res.body['message'],
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,
           colorText: Colors.white);
       isLoading(false);
       clearTextField();
-      Get.toNamed(Routes.login);
     } else {
       Get.snackbar('Lỗi ', "Có lỗi xảy ra!",
           snackPosition: SnackPosition.TOP,

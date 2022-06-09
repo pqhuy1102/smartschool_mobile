@@ -61,6 +61,8 @@ class SplashScreen extends StatelessWidget {
                 child: Image.asset(
                   'assets/images/new_logo.png',
                   fit: BoxFit.contain,
+                  height: 250.0,
+                  width: 250.0,
                 )),
             Text(
               "Chào mừng đến",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
+import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/changePassword/models/change_password_first_time_request_model.dart';
 import 'package:smartschool_mobile/modules/changePassword/providers/change_password_provider.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
@@ -12,6 +13,7 @@ class ChangePasswordFirstTimeController extends GetxController {
 
   late final ChangePasswordProvider _changePasswordProvider;
   late final AuthenticationManager _authenticationManager;
+  late final LoginController _loginController;
 
   TextEditingController? newPasswordEditingController;
   TextEditingController? reNewPasswordEditingController;
@@ -21,6 +23,7 @@ class ChangePasswordFirstTimeController extends GetxController {
     super.onInit();
     _changePasswordProvider = Get.put(ChangePasswordProvider());
     _authenticationManager = Get.find();
+    _loginController = Get.find();
 
     newPasswordEditingController = TextEditingController();
     reNewPasswordEditingController = TextEditingController();
@@ -48,7 +51,10 @@ class ChangePasswordFirstTimeController extends GetxController {
           colorText: Colors.white);
       isLoading(false);
       clearTextField();
-      Get.toNamed(Routes.dashboard);
+      _authenticationManager.saveChangePassStatus(true);
+      _authenticationManager
+          .saveUsernameToStorage(_loginController.username.value);
+      Get.offNamed(Routes.dashboard);
     } else {
       Get.snackbar('Lỗi ', 'Đổi mật khẩu thất bại!',
           snackPosition: SnackPosition.TOP,

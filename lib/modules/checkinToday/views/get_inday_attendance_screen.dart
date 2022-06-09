@@ -65,7 +65,9 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
                                 .substring(10),
                             endTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['end_time'])
                                 .substring(10),
-                            date: _getIndayAttendanceController.indayAttendanceList[index]['check_in_time'] == null
+                            date: _getIndayAttendanceController.indayAttendanceList[index]
+                                        ['check_in_time'] ==
+                                    null
                                 ? ""
                                 : formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
                                     .substring(0, 10),
@@ -76,8 +78,7 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
                                 : "Điểm danh lúc: " +
                                     formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
                                         .substring(10),
-                            course: _getIndayAttendanceController
-                                .indayAttendanceList[index]['course'],
+                            course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
                             room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
                             status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? "Chưa điểm danh" : _getIndayAttendanceController.indayAttendanceList[index]['check_in_status']),
                       );
@@ -94,4 +95,6 @@ class CheckinTodayScreen extends GetView<GetIndayAttendanceController> {
     var outputDate = outputFormat.format(inputDate);
     return outputDate;
   }
+
+  
 }

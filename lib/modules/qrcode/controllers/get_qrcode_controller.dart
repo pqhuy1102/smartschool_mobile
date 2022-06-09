@@ -34,7 +34,7 @@ class GetQrCodeController extends GetxController {
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       decreaseCounter();
       if (countDown.value == 0) {
-        countDown.value = 30;
+        countDown.value = 15;
         getQrCode();
       }
     });
@@ -47,7 +47,7 @@ class GetQrCodeController extends GetxController {
   }
 
   Future<void> getQrCode() async {
-    countDown.value = 30;
+    countDown.value = 15;
     isLoading(true);
     String? token = _authenticationManager.getToken();
     Map<String, String> headers = {

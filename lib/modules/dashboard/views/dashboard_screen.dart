@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
@@ -8,6 +9,7 @@ import 'package:smartschool_mobile/modules/checkinToday/controllers/get_inday_at
 import 'package:smartschool_mobile/modules/checkinToday/widgets/checkin_today_item.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
+import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
@@ -22,11 +24,11 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int selectedPosition = 0;
-  final AuthenticationManager _authenticationManager =
-      Get.put(AuthenticationManager());
+
   final DashBoardController _dashBoardController =
       Get.put(DashBoardController());
-  final LoginController _loginController = Get.put(LoginController());
+
+  final ProfileController _profileController = Get.put(ProfileController());
   late FirebaseMessaging messaging;
 
   late final GetIndayAttendanceController _getIndayAttendanceController =
@@ -218,9 +220,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 appBar: (selectedPosition == 0)
                     ? (AppBar(
                         title: Text(
-                          'SmartSchool',
+                          'StudentConnect',
                           style: TextStyle(
-                              fontSize: 25.sp,
+                              fontSize: 24.sp,
                               color: Colors.blue.shade900,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 0.2),
@@ -291,9 +293,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               selectedPosition = 0;
             });
             return false;
-          } else {
+          } else if (selectedPosition == 0) {
             return true;
           }
+          return true;
         });
   }
 
@@ -308,14 +311,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 text: TextSpan(
                     text: 'hello'.tr,
                     style: TextStyle(
-                      fontSize: 18.sp,
-                      color: Colors.black,
-                    ),
+                        fontSize: 18.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
-                          text: _authenticationManager.username.value == ""
-                              ? '${_loginController.username}'
-                              : '${_authenticationManager.username}',
+                          text: _profileController.userName.value,
                           style: TextStyle(
                               fontSize: 18.5.sp,
                               fontWeight: FontWeight.bold,
@@ -375,7 +376,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         // ),
 
         const SizedBox(
-          height: 15.0,
+          height: 16.0,
         ),
 
         Container(
@@ -390,7 +391,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
 
         Obx(() {
-          if (_getIndayAttendanceController.indayAttendanceList.isEmpty) {
+          if (_getIndayAttendanceController.isLoading.isTrue) {
+            return Center(
+              child: SpinKitFadingFour(
+                color: Colors.blue.shade900,
+                size: 40.0.sp,
+              ),
+            );
+          } else if (_getIndayAttendanceController
+              .indayAttendanceList.isEmpty) {
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -399,13 +408,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     'assets/images/no_schedule_today.gif',
                   ),
                   Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 40),
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
                       child: Center(
                           child: Text(
                         'Hôm nay bạn không có ca học nào! ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            letterSpacing: 0.8,
+                            letterSpacing: 1,
                             fontSize: 16.0.sp,
                             fontWeight: FontWeight.w600),
                       )))
@@ -442,7 +451,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                       .substring(10),
                           course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
                           room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
-                          status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? "Chưa điểm danh" : _getIndayAttendanceController.indayAttendanceList[index]['check_in_status']),
+                          status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_getIndayAttendanceController.indayAttendanceList[index]['end_time']) : _getIndayAttendanceController.indayAttendanceList[index]['check_in_status']),
                     );
                   })),
             ));
@@ -546,5 +555,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     var outputFormat = DateFormat('dd/MM/yyyy hh:mm a');
     var outputDate = outputFormat.format(inputDate);
     return outputDate;
+  }
+
+  String checkStatusCheckin(String endTime) {
+    DateTime now = DateTime.now();
+    DateTime endTimeConvert = DateTime.parse(endTime).toLocal();
+    if (now.compareTo(endTimeConvert) > 0) {
+      return "Vắng";
+    } else {
+      return "Chưa điểm danh";
+    }
   }
 }
