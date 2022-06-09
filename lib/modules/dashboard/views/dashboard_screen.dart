@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
-import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/checkinToday/controllers/get_inday_attendance_controller.dart';
 import 'package:smartschool_mobile/modules/checkinToday/widgets/checkin_today_item.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
@@ -222,7 +220,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         title: Text(
                           'StudentConnect',
                           style: TextStyle(
-                              fontSize: 24.sp,
+                              fontSize: 22.sp,
                               color: Colors.blue.shade900,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 0.2),
@@ -515,6 +513,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               icon: Icons.home,
               isSelected: selectedPosition == 0,
               onTap: () {
+                _getIndayAttendanceController.getIndayAttendance();
                 setState(() {
                   selectedPosition = 0;
                 });
