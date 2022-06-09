@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/checkinToday/providers/get_inday_attendance_provider.dart';
@@ -17,7 +18,7 @@ class GetIndayAttendanceController extends GetxController {
     _authenticationManager = Get.find();
     _getIndayAttendanceProvider = Get.put(GetIndayAttendanceProvider());
 
-    // getIndayAttendance();
+    getIndayAttendance();
   }
 
   Future<void> getIndayAttendance() async {
@@ -26,7 +27,17 @@ class GetIndayAttendanceController extends GetxController {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
     };
+    isLoading(true);
     var res = await _getIndayAttendanceProvider.getIndayAttendance(headers);
-    indayAttendanceList.value = res;
+    if (res != null) {
+      isLoading(false);
+      indayAttendanceList.value = res;
+    } else {
+      isLoading(false);
+      Get.snackbar('Lỗi ', "Không tải được ca học hôm nay!",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+    }
   }
 }

@@ -91,7 +91,7 @@ class CheckinTodayItem extends StatelessWidget {
                         ),
 
                         // ignore: unnecessary_string_interpolations
-                        Text("$startTime-$endTime",
+                        Text("$startTime -$endTime",
                             style: TextStyle(
                                 fontSize: 14.0.sp,
                                 color: Colors.black,
