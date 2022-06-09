@@ -25,7 +25,7 @@ class GetQrCodeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _authenticationManager = Get.find();
+    _authenticationManager = Get.put(AuthenticationManager());
 
     //get qr code first time
     getQrCode();

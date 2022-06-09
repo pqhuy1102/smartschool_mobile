@@ -46,7 +46,6 @@ class LoginController extends GetxController {
         _authenticationManager
             .changePasswordFirstTimeStatus(res.body['is_activate']);
       }
-      print(_authenticationManager.isLogged);
 
       Get.snackbar('Thành công', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.TOP,
