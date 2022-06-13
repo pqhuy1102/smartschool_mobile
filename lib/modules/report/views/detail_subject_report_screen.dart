@@ -159,18 +159,13 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                               .checkInTime ==
                                           null
                                       ? formatDate(_reportController
-                                              .filterCourseAttendance[index]
-                                              .startTime
-                                              .toString()
-                                              .substring(0, 10))
-                                          .substring(0, 10)
-                                      : formatDate(
-                                          _reportController
-                                              .filterCourseAttendance[index]
-                                              .checkInTime
-                                              .toString()
-                                              .substring(0, 10),
-                                        ).substring(0, 10),
+                                          .filterCourseAttendance[index]
+                                          .startTime
+                                          .toString()
+                                          .substring(0, 10))
+                                      : formatDateTime(_reportController
+                                          .filterCourseAttendance[index]
+                                          .checkInTime),
                                   subjectId:
                                       _reportController.selectedCourse.value,
                                   className: "",
@@ -200,6 +195,15 @@ class SubjectDetailReportScreen extends StatelessWidget {
 
   String formatDate(date) {
     DateTime parseDate = DateFormat("yyyy-MM-dd").parse(date, true).toLocal();
+    var inputDate = DateTime.parse(parseDate.toString());
+    var outputFormat = DateFormat('dd/MM/yyyy');
+    var outputDate = outputFormat.format(inputDate);
+    return outputDate;
+  }
+
+  String formatDateTime(String date) {
+    DateTime parseDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(date, true).toLocal();
     var inputDate = DateTime.parse(parseDate.toString());
     var outputFormat = DateFormat('dd/MM/yyyy hh:mm a');
     var outputDate = outputFormat.format(inputDate);

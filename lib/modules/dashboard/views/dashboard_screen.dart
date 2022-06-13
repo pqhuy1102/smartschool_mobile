@@ -307,16 +307,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 text: TextSpan(
                     text: 'hello'.tr,
                     style: TextStyle(
-                        fontSize: 18.sp,
+                        fontSize: 16.0.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
                           text: _profileController.userName.value,
                           style: TextStyle(
-                              fontSize: 18.5.sp,
+                              fontSize: 18.0.sp,
                               fontWeight: FontWeight.bold,
-                              color: const Color.fromARGB(255, 225, 113, 0)))
+                              color: Colors.red[300]))
                     ]),
               ))),
         ),
@@ -411,7 +411,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             letterSpacing: 1,
-                            fontSize: 16.0.sp,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w600),
                       )))
                 ],

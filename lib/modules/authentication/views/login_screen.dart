@@ -31,14 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 2),
-                  child: Image.asset(
-                    'assets/images/new_logo.png',
-                    fit: BoxFit.contain,
-                    height: 250.0,
-                    width: 250.0,
-                  ),
+                Image.asset(
+                  'assets/images/new_logo.png',
+                  fit: BoxFit.contain,
+                  height: 250.0,
+                  width: 250.0,
                 ),
                 Container(
                     margin: const EdgeInsets.only(bottom: 10, top: 0),

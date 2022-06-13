@@ -54,16 +54,15 @@ class SplashScreen extends StatelessWidget {
         ),
       ),
       child: Center(
+          child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-                margin: const EdgeInsets.only(top: 100, bottom: 10),
-                child: Image.asset(
-                  'assets/images/new_logo.png',
-                  fit: BoxFit.contain,
-                  height: 250.0,
-                  width: 250.0,
-                )),
+            Image.asset(
+              'assets/images/new_logo.png',
+              fit: BoxFit.contain,
+              height: 250.0,
+              width: 250.0,
+            ),
             Text(
               "Chào mừng đến",
               style: TextStyle(
@@ -82,7 +81,7 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 30),
+              margin: const EdgeInsets.symmetric(vertical: 14),
               child: SpinKitFadingFour(
                 color: Colors.blue.shade900,
                 size: 40.0.sp,
@@ -90,7 +89,7 @@ class SplashScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
+      )),
     ));
   }
 

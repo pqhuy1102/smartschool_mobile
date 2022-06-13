@@ -47,29 +47,24 @@ class AttendanceList {
     required this.checkInStatus,
   });
 
-  DateTime startTime;
-  DateTime endTime;
-  DateTime? checkInTime;
+  String startTime;
+  String endTime;
+  String? checkInTime;
   String room;
   String checkInStatus;
 
   factory AttendanceList.fromJson(Map<String, dynamic> json) => AttendanceList(
-        startTime: DateTime.parse(json["start_time"]),
-        endTime: DateTime.parse(json["end_time"]),
-        checkInTime: json["check_in_time"] == null
-            ? null
-            : DateTime.parse(json["check_in_time"]),
+        startTime: json["start_time"],
+        endTime: json["end_time"],
+        checkInTime: json["check_in_time"],
         room: json["room"],
         checkInStatus: json["check_in_status"],
       );
 
   Map<String, dynamic> toJson() => {
-        "start_time": startTime.toIso8601String(),
-        "end_time": endTime.toIso8601String(),
-        // ignore: prefer_null_aware_operators, unnecessary_null_comparison
-        "check_in_time":
-            // ignore: prefer_null_aware_operators
-            checkInTime == null ? null : checkInTime?.toIso8601String(),
+        "start_time": startTime,
+        "end_time": endTime,
+        "check_in_time": checkInTime,
         "room": room,
         "check_in_status": checkInStatus,
       };
