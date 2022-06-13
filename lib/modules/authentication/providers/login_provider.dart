@@ -5,7 +5,6 @@ import 'package:smartschool_mobile/modules/authentication/model/login_request_mo
 class LoginProvider extends GetConnect {
   final String loginUrl = '${Constant.apiDomain}/login';
 
-  //login
   Future<dynamic> login(LoginRequestModel model) async {
     final response = await post(loginUrl, model.toJson());
     if (!response.status.connectionError) {

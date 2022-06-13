@@ -10,6 +10,7 @@ class GetIndayAttendanceController extends GetxController {
 
   late final GetIndayAttendanceProvider _getIndayAttendanceProvider;
 
+  //initialize inday attendance list
   var indayAttendanceList = [].obs;
 
   @override

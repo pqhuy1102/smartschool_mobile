@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final getQrCodeResponseModel = getQrCodeResponseModelFromJson(jsonString);
-
 import 'dart:convert';
 
 GetQrCodeResponseModel getQrCodeResponseModelFromJson(String str) =>

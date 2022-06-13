@@ -1,4 +1,4 @@
-package com.example.smartschool_mobile
+package com.phenikaamaas.studentconnect
 
 import io.flutter.embedding.android.FlutterActivity
 

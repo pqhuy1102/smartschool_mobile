@@ -190,7 +190,9 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                   )),
               actions: [
                 TextButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      Get.back();
+                    },
                     child: Text(
                       'Đóng',
                       style: TextStyle(
@@ -201,6 +203,4 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
               ],
             ));
   }
-
-  void handleCheckbox() {}
 }

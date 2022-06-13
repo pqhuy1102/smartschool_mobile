@@ -30,7 +30,7 @@ class ReportProvider extends GetConnect {
     }
   }
 
-  Future<UserCourseAttendanceResponeModel?> getUserCourseAttendace(
+  Future<UserCourseAttendanceResponeModel?> getUserCourseAttendance(
       headers, String selectedCourseId) async {
     final String url = userCourseAttendaceListUrl + selectedCourseId;
     final response = await get(url, headers: headers);

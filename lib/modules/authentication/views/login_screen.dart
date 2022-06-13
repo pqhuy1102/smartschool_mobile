@@ -1,12 +1,9 @@
-// ignore_for_file: unnecessary_new, unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 
-// ignore: must_be_immutable
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -21,8 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double w = MediaQuery.of(context).size.width;
-    // double h = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
@@ -35,8 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Center(
               child: SingleChildScrollView(
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // ignore: prefer_const_literals_to_create_immutables
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 2),
@@ -152,9 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       const EdgeInsets.symmetric(vertical: 16),
                                   minimumSize: const Size.fromHeight(40),
                                   primary: Colors.blue.shade900,
-                                  shape: new RoundedRectangleBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(6.0.sp),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0.sp),
                                   ),
                                 ))
                           ],

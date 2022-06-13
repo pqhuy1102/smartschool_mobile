@@ -32,8 +32,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   late final GetIndayAttendanceController _getIndayAttendanceController =
       Get.put(GetIndayAttendanceController());
 
-  final shift = "2022-06-01 09:55:22-2022-06-01 11:55:22";
-
   @override
   void initState() {
     super.initState();
@@ -218,9 +216,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 appBar: (selectedPosition == 0)
                     ? (AppBar(
                         title: Text(
-                          'StudentConnect',
+                          'Trang chủ',
                           style: TextStyle(
-                              fontSize: 22.sp,
+                              fontSize: 24.0.sp,
                               color: Colors.blue.shade900,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 0.2),
@@ -234,14 +232,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             },
                             icon: const Icon(Icons.notifications),
                             color: Colors.blue.shade900,
-                            iconSize: 30.0.sp,
+                            iconSize: 24.0.sp,
                           ),
                         ],
                         leading: IconButton(
                           icon: Icon(
                             Icons.settings,
                             color: Colors.blue.shade900,
-                            size: 26.0.sp,
+                            size: 24.0.sp,
                           ),
                           onPressed: () {
                             Get.toNamed(Routes.dashboard + Routes.settings);
@@ -267,7 +265,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         title: Text(
                           'Báo cáo',
                           style: TextStyle(
-                              fontSize: 26.sp,
+                              fontSize: 24.0.sp,
                               color: Colors.blue.shade900,
                               fontWeight: FontWeight.w600),
                         ),
@@ -406,7 +404,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     'assets/images/no_schedule_today.gif',
                   ),
                   Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
                       child: Center(
                           child: Text(
                         'Hôm nay bạn không có ca học nào! ',
