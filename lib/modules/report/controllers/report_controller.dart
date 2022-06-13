@@ -65,7 +65,7 @@ class ReportController extends GetxController {
       'Authorization': 'Bearer $token',
     };
     var res = await ReportProvider()
-        .getUserCourseAttendace(headers, selectedCourseId);
+        .getUserCourseAttendance(headers, selectedCourseId);
     if (res != null) {
       isLoading(false);
       userCourseAttendanceList.value = res.attendanceList;

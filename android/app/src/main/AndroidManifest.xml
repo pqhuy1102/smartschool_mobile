@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.smartschool_mobile">
+    package="com.phenikaamaas.studentconnect">
    <application
-        android:label="smartschool_mobile"
+        android:label="Student Connect"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

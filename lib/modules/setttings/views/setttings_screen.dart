@@ -80,7 +80,7 @@ class SettingsScreen extends StatelessWidget {
         title: Text(
           'settings'.tr,
           style: TextStyle(
-              fontSize: 26.0.sp,
+              fontSize: 24.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),

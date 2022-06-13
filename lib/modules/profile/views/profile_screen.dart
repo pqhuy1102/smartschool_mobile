@@ -88,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: Text(
                 'Cá nhân',
                 style: TextStyle(
-                    fontSize: 26.sp,
+                    fontSize: 24.0.sp,
                     color: Colors.blue.shade900,
                     fontWeight: FontWeight.w600),
               ),
@@ -262,6 +262,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget nameTextField() {
     return TextFormField(
+        readOnly: true,
         initialValue: _profileController.userData?.studentName,
         style: TextStyle(
           fontSize: 14.0.sp,
@@ -289,6 +290,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget studentClassTextField() {
     return TextFormField(
+      readOnly: true,
       initialValue: _profileController.userData?.studentClass,
       style: TextStyle(
         fontSize: 14.0.sp,
@@ -317,6 +319,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget studentIdTextField() {
     return TextFormField(
+      readOnly: true,
       initialValue: _profileController.userData?.studentId,
       style: TextStyle(
         fontSize: 14.0.sp,
@@ -345,6 +348,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget genderTextField() {
     return TextFormField(
+      readOnly: true,
       initialValue: _profileController.userData?.gender,
       style: TextStyle(
         fontSize: 14.0.sp,
@@ -373,6 +377,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget emailTextField() {
     return TextFormField(
+      readOnly: true,
       initialValue: _profileController.userData?.email,
       style: TextStyle(
         fontSize: 14.0.sp,
@@ -401,6 +406,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget phoneNumberTextField() {
     return TextFormField(
+      readOnly: true,
       initialValue: _profileController.userData?.phoneNumber,
       style: TextStyle(
         fontSize: 14.0.sp,
