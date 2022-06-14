@@ -36,7 +36,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           Text(
                             'Học kỳ',
                             style: TextStyle(
-                                fontSize: 14.0.sp,
+                                fontSize: 13.0.sp,
                                 color: Colors.grey.shade600,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -63,7 +63,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                           child: Text(
                                             "${sem['title']} ${sem['year']}",
                                             style: TextStyle(
-                                                fontSize: 14.0.sp,
+                                                fontSize: 13.0.sp,
                                                 fontWeight: FontWeight.w600),
                                           ),
                                         ),

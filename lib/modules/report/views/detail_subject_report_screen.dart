@@ -53,12 +53,12 @@ class SubjectDetailReportScreen extends StatelessWidget {
                       Icon(
                         Icons.filter_alt,
                         color: Colors.grey.shade600,
-                        size: 14.0.sp,
+                        size: 13.0.sp,
                       ),
                       Text(
                         "Lọc danh sách",
                         style: TextStyle(
-                            fontSize: 14.0.sp,
+                            fontSize: 13.0.sp,
                             color: Colors.grey.shade600,
                             fontWeight: FontWeight.w600),
                       )
@@ -71,7 +71,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                           child: Text(
                             'Tất cả',
                             style: TextStyle(
-                                fontSize: 14.0.sp,
+                                fontSize: 13.0.sp,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -81,7 +81,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                           child: Text(
                             'Hợp lệ',
                             style: TextStyle(
-                                fontSize: 14.0.sp,
+                                fontSize: 13.0.sp,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -91,7 +91,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                           child: Text(
                             'Đi trễ',
                             style: TextStyle(
-                                fontSize: 14.0.sp,
+                                fontSize: 13.0.sp,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -101,7 +101,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                           child: Text(
                             'Vắng',
                             style: TextStyle(
-                                fontSize: 14.0.sp,
+                                fontSize: 13.0.sp,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500),
                           ),
