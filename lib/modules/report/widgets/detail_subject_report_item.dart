@@ -89,6 +89,7 @@ class DetailSubjectItem extends StatelessWidget {
                       Icon(
                         Icons.access_time_filled_rounded,
                         color: Colors.blue.shade900,
+                        size: 14.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
                       Text("$startTime -$endTime",
@@ -106,6 +107,7 @@ class DetailSubjectItem extends StatelessWidget {
                       Icon(
                         Icons.location_on,
                         color: Colors.blue.shade900,
+                        size: 14.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
                       Text("$room",
@@ -122,7 +124,7 @@ class DetailSubjectItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               child: Text("• $status",
                   style: TextStyle(
-                      fontSize: 15.0.sp,
+                      fontSize: 14.0.sp,
                       color: status == "Hợp lệ"
                           ? Colors.green.shade600
                           : status == "Đi trễ"

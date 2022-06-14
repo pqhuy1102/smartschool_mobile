@@ -51,7 +51,7 @@ class CheckinTodayItem extends StatelessWidget {
                       // ignore: unnecessary_string_interpolations
                       "$course",
                       style: TextStyle(
-                          fontSize: 16.0.sp,
+                          fontSize: 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),
@@ -87,7 +87,7 @@ class CheckinTodayItem extends StatelessWidget {
                         Icon(
                           Icons.access_time_filled_rounded,
                           color: Colors.blue.shade900,
-                          size: 30,
+                          size: 14.0.sp,
                         ),
 
                         // ignore: unnecessary_string_interpolations
@@ -104,7 +104,7 @@ class CheckinTodayItem extends StatelessWidget {
                       Icon(
                         Icons.location_on,
                         color: Colors.blue.shade900,
-                        size: 30,
+                        size: 18.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
                       Text("$room",
@@ -122,7 +122,7 @@ class CheckinTodayItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 6),
               child: Text("• $status",
                   style: TextStyle(
-                      fontSize: 15.0.sp,
+                      fontSize: 14.0.sp,
                       color: status == "Attend"
                           ? Colors.green.shade700
                           : Colors.red.shade600,

@@ -19,7 +19,7 @@ class NotificationScreen extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.blue.shade900,
-            size: 24.0.sp,
+            size: 18.0.sp,
           ),
           onPressed: () {
             Get.back();
@@ -28,7 +28,7 @@ class NotificationScreen extends StatelessWidget {
         title: Text(
           'Thông báo',
           style: TextStyle(
-              fontSize: 24.0.sp,
+              fontSize: 17.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),

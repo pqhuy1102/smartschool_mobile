@@ -54,7 +54,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     child: Text(
                       "quên mật khẩu".toUpperCase(),
                       style: TextStyle(
-                          fontSize: 20.0.sp,
+                          fontSize: 18.0.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue.shade900),
                     ),
@@ -105,13 +105,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 child: Obx((() {
                                   if (_resetPasswordController
                                       .isLoading.value) {
-                                    return const SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.white)),
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(
+                                          width: 12,
+                                        ),
+                                        Text(
+                                          'Đang gửi đi...',
+                                          style: TextStyle(
+                                              fontSize: 14.0.sp,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
                                     );
                                   } else {
                                     return Text(
@@ -126,7 +136,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 14),
                                   minimumSize: const Size.fromHeight(40),
-                                  primary: Colors.blue.shade900,
+                                  primary:
+                                      _resetPasswordController.isLoading.value
+                                          ? Colors.grey
+                                          : Colors.blue.shade900,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(6.0.sp),
                                   ),

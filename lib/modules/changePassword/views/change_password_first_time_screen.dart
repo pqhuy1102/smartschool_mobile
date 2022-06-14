@@ -46,7 +46,7 @@ class _ChangePasswordFirstTimeScreenState
                         child: Text(
                           "đặt lại mật khẩu".toUpperCase(),
                           style: TextStyle(
-                              fontSize: 20.0.sp,
+                              fontSize: 18.0.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.blue.shade900),
                         ),
@@ -128,13 +128,23 @@ class _ChangePasswordFirstTimeScreenState
                                   child: Obx((() {
                                     if (_changePasswordFirstTimeController
                                         .isLoading.value) {
-                                      return const SizedBox(
-                                        height: 20,
-                                        width: 20,
-                                        child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.white)),
+                                      return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
+                                          const SizedBox(
+                                            width: 12,
+                                          ),
+                                          Text(
+                                            'Đang cập nhật...',
+                                            style: TextStyle(
+                                                fontSize: 14.0.sp,
+                                                fontWeight: FontWeight.w600),
+                                          )
+                                        ],
                                       );
                                     } else {
                                       return Text(

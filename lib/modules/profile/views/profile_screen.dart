@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPressed: () {
                     Get.defaultDialog(
                         title: 'Đăng xuất',
-                        titleStyle: TextStyle(fontSize: 18.0.sp),
+                        titleStyle: TextStyle(fontSize: 16.0.sp),
                         middleText: 'Bạn có muốn đăng xuất không?',
                         middleTextStyle: TextStyle(fontSize: 14.0.sp),
                         backgroundColor: Colors.white,
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   fontSize: 14.0.sp, color: Colors.white),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.blue.shade900,
+                              primary: Colors.red.shade600,
                               padding: const EdgeInsets.all(10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4.0.sp),
@@ -72,14 +72,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   icon: const Icon(Icons.logout),
                   color: Colors.blue.shade900,
-                  iconSize: 24.0.sp,
+                  iconSize: 18.0.sp,
                 )
               ],
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.blue.shade900,
-                  size: 24.0.sp,
+                  size: 18.0.sp,
                 ),
                 onPressed: () {
                   Get.back();
@@ -88,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: Text(
                 'Cá nhân',
                 style: TextStyle(
-                    fontSize: 24.0.sp,
+                    fontSize: 17.0.sp,
                     color: Colors.blue.shade900,
                     fontWeight: FontWeight.w600),
               ),
@@ -122,39 +122,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: nameTextField(),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 22,
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           child: studentIdTextField(),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 22,
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           child: studentClassTextField(),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 22,
                         ),
                         Container(
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             child: genderTextField()),
                         const SizedBox(
-                          height: 20,
+                          height: 22,
                         ),
                         Container(
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             child: emailTextField()),
                         const SizedBox(
-                          height: 20,
+                          height: 22,
                         ),
                         Container(
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             child: phoneNumberTextField()),
                         const SizedBox(
-                          height: 20,
+                          height: 22,
                         ),
                         // Container(
                         //   margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Stack(
         children: [
           SizedBox(
-              height: 22.0.h,
+              height: 20.0.h,
               child: const CircleAvatar(
                   radius: 100,
                   backgroundImage: AssetImage('assets/images/avatar.png'))),
