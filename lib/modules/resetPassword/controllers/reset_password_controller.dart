@@ -25,7 +25,8 @@ class ResetPasswordController extends GetxController {
         .resetPassword(ResetPasswordRequestModel(email: email.trim()));
     if (!res.hasError) {
       Get.back();
-      Get.snackbar('Thành công', res.body['message'],
+      Get.snackbar(
+          'Thành công', "Mật khẩu mới đã được gửi tới email của bạn!",
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,
           colorText: Colors.white);

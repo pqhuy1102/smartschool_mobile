@@ -154,10 +154,14 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 _reportController.filterCourseAttendance.length,
                             itemBuilder: ((context, index) {
                               return DetailSubjectItem(
-                                  date: _reportController
-                                              .filterCourseAttendance[index]
-                                              .checkInTime ==
-                                          null
+                                  startTime: formatDateTime(_reportController
+                                          .filterCourseAttendance[index]
+                                          .startTime)
+                                      .substring(10),
+                                  endTime:
+                                      formatDateTime(_reportController.filterCourseAttendance[index].endTime)
+                                          .substring(10),
+                                  date: _reportController.filterCourseAttendance[index].checkInTime == null
                                       ? formatDate(_reportController
                                           .filterCourseAttendance[index]
                                           .startTime
@@ -166,20 +170,12 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                       : formatDateTime(_reportController
                                           .filterCourseAttendance[index]
                                           .checkInTime),
-                                  subjectId:
-                                      _reportController.selectedCourse.value,
+                                  subjectId: _reportController.selectedCourse.value,
                                   className: "",
-                                  room:
-                                      "${_reportController.filterCourseAttendance[index].room}",
-                                  status: _reportController
-                                              .filterCourseAttendance[index]
-                                              .checkInStatus ==
-                                          "Attend"
+                                  room: "${_reportController.filterCourseAttendance[index].room}",
+                                  status: _reportController.filterCourseAttendance[index].checkInStatus == "Attend"
                                       ? "Hợp lệ"
-                                      : _reportController
-                                                  .filterCourseAttendance[index]
-                                                  .checkInStatus ==
-                                              "Late"
+                                      : _reportController.filterCourseAttendance[index].checkInStatus == "Late"
                                           ? "Đi trễ"
                                           : "Vắng");
                             })));

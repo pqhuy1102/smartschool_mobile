@@ -8,13 +8,17 @@ class DetailSubjectItem extends StatelessWidget {
       required this.subjectId,
       required this.className,
       required this.room,
-      required this.status})
+      required this.status,
+      required this.startTime,
+      required this.endTime})
       : super(key: key);
   final String date;
   final String subjectId;
   final String className;
   final String room;
   final String status;
+  final String startTime;
+  final String endTime;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +37,10 @@ class DetailSubjectItem extends StatelessWidget {
                 Text(
                   // ignore: unnecessary_string_interpolations
                   "$date",
-                  style:
-                      TextStyle(fontSize: 14.0.sp, color: Colors.grey.shade600),
+                  style: TextStyle(
+                      fontSize: 14.0.sp,
+                      color: Colors.grey.shade600,
+                      fontWeight: FontWeight.w600),
                 ),
                 // ElevatedButton(
                 //     style: ElevatedButton.styleFrom(
@@ -70,6 +76,30 @@ class DetailSubjectItem extends StatelessWidget {
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 4),
+              child: Row(
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_time_filled_rounded,
+                        color: Colors.blue.shade900,
+                      ),
+                      // ignore: unnecessary_string_interpolations
+                      Text("$startTime -$endTime",
+                          style: TextStyle(
+                              fontSize: 14.0.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500))
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 6,
                   ),
                   Row(
                     children: [

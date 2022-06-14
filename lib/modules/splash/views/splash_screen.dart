@@ -58,16 +58,15 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Image.asset(
-              'assets/images/new_logo.png',
+              'assets/images/logo.png',
               fit: BoxFit.contain,
-              height: 250.0,
-              width: 250.0,
+              height: 25.0.h,
             ),
             Text(
               "Chào mừng đến",
               style: TextStyle(
                   color: Colors.red[300],
-                  fontSize: 26.0.sp,
+                  fontSize: 24.0.sp,
                   fontWeight: FontWeight.w600),
             ),
             Container(
@@ -81,10 +80,10 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 14),
+              margin: const EdgeInsets.symmetric(vertical: 16),
               child: SpinKitFadingFour(
                 color: Colors.blue.shade900,
-                size: 40.0.sp,
+                size: 35.0.sp,
               ),
             )
           ],

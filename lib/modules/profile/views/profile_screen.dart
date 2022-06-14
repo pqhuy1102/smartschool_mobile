@@ -307,7 +307,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: 2,
         )),
         prefixIcon: Icon(
-          Icons.person_search_outlined,
+          Icons.class_,
           color: Colors.blue.shade900,
           size: 20.0.sp,
         ),
@@ -336,7 +336,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: 2,
         )),
         prefixIcon: Icon(
-          Icons.person_search_outlined,
+          Icons.person_search,
           color: Colors.blue.shade900,
           size: 20.0.sp,
         ),
@@ -365,7 +365,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: 2,
         )),
         prefixIcon: Icon(
-          Icons.person_pin,
+          Icons.people,
           color: Colors.blue.shade900,
           size: 20.0.sp,
         ),
@@ -423,7 +423,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: 2,
         )),
         prefixIcon: Icon(
-          Icons.phone_iphone,
+          Icons.phone_sharp,
           color: Colors.blue.shade900,
           size: 20.0.sp,
         ),
