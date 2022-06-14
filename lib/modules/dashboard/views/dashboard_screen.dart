@@ -195,8 +195,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         child: SafeArea(
             child: Scaffold(
                 floatingActionButton: SizedBox(
-                  width: 18.0.w,
-                  height: 18.0.h,
+                  width: 16.0.w,
+                  height: 16.0.h,
                   child: FittedBox(
                     child: FloatingActionButton(
                       onPressed: () =>
@@ -218,7 +218,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         title: Text(
                           'Trang chủ',
                           style: TextStyle(
-                              fontSize: 24.0.sp,
+                              fontSize: 17.0.sp,
                               color: Colors.blue.shade900,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 0.2),
@@ -232,14 +232,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             },
                             icon: const Icon(Icons.notifications),
                             color: Colors.blue.shade900,
-                            iconSize: 24.0.sp,
+                            iconSize: 18.0.sp,
                           ),
                         ],
                         leading: IconButton(
                           icon: Icon(
                             Icons.settings,
                             color: Colors.blue.shade900,
-                            size: 24.0.sp,
+                            size: 18.0.sp,
                           ),
                           onPressed: () {
                             Get.toNamed(Routes.dashboard + Routes.settings);
@@ -254,7 +254,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           icon: Icon(
                             Icons.arrow_back_ios,
                             color: Colors.blue.shade900,
-                            size: 24.0.sp,
+                            size: 18.0.sp,
                           ),
                           onPressed: () {
                             setState(() {
@@ -265,7 +265,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         title: Text(
                           'Báo cáo',
                           style: TextStyle(
-                              fontSize: 24.0.sp,
+                              fontSize: 18.0.sp,
                               color: Colors.blue.shade900,
                               fontWeight: FontWeight.w600),
                         ),
@@ -307,7 +307,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 text: TextSpan(
                     text: 'hello'.tr,
                     style: TextStyle(
-                        fontSize: 16.0.sp,
+                        fontSize: 14.0.sp,
                         color: Colors.black,
                         letterSpacing: 0.8,
                         fontWeight: FontWeight.w500),
@@ -315,7 +315,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       TextSpan(
                           text: _profileController.userName.value,
                           style: TextStyle(
-                              fontSize: 16.0.sp,
+                              fontSize: 15.0.sp,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 0.4,
                               color: Colors.red[300]))
@@ -382,7 +382,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           child: Text(
             "Điểm danh hôm nay",
             style: TextStyle(
-                fontSize: 18.sp,
+                fontSize: 15.sp,
                 color: Colors.blue.shade900,
                 fontWeight: FontWeight.w700),
           ),

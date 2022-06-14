@@ -20,7 +20,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.blue.shade900,
-            size: 24.0.sp,
+            size: 18.0.sp,
           ),
           onPressed: () {
             Get.back();
@@ -29,7 +29,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
         title: Text(
           'Báo cáo chi tiết',
           style: TextStyle(
-              fontSize: 24.0.sp,
+              fontSize: 17.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),
@@ -38,7 +38,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-        margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+        margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
         decoration: const BoxDecoration(color: Colors.white70),
         child: SafeArea(
             child: Column(
@@ -53,6 +53,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                       Icon(
                         Icons.filter_alt,
                         color: Colors.grey.shade600,
+                        size: 14.0.sp,
                       ),
                       Text(
                         "Lọc danh sách",

@@ -37,7 +37,7 @@ class OverviewSubjectItem extends StatelessWidget {
               child: Icon(
                 Icons.collections_bookmark,
                 color: Colors.blue.shade900,
-                size: 24.0.sp,
+                size: 20.0.sp,
               ),
             ),
             Expanded(
@@ -58,7 +58,7 @@ class OverviewSubjectItem extends StatelessWidget {
                     children: [
                       // ignore: unnecessary_string_interpolations
                       Text(
-                        '• Số buổi hợp lệ',
+                        '• Số buổi đi học',
                         style: TextStyle(
                             fontSize: 14.0.sp, fontWeight: FontWeight.w400),
                       ),

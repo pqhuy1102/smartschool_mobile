@@ -38,7 +38,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: Colors.blue.shade900,
-                size: 24.0.sp,
+                size: 18.0.sp,
               ),
               onPressed: () {
                 Get.back();
@@ -48,7 +48,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
             title: Text(
               'Mã QR',
               style: TextStyle(
-                  fontSize: 26.sp,
+                  fontSize: 17.0.sp,
                   color: Colors.blue.shade900,
                   fontWeight: FontWeight.w600),
             ),
@@ -104,7 +104,8 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                         child: ElevatedButton(
                           child: Text(
                             "Làm mới".toUpperCase(),
-                            style: TextStyle(fontSize: 16.sp),
+                            style: TextStyle(
+                                fontSize: 14.0.sp, fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue.shade900,

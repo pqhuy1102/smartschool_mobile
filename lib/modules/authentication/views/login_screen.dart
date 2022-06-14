@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.black),
                                     ))),
                             const SizedBox(
-                              height: 10,
+                              height: 12,
                             ),
                             ElevatedButton(
                                 onPressed: () async {
@@ -124,13 +124,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child: Obx((() {
                                   if (_loginController.isLoading.value) {
-                                    return const SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.white)),
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(
+                                          width: 12,
+                                        ),
+                                        Text(
+                                          'Đang đăng nhập...',
+                                          style: TextStyle(
+                                              fontSize: 14.0.sp,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
                                     );
                                   } else {
                                     return Text(

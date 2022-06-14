@@ -66,7 +66,7 @@ class SplashScreen extends StatelessWidget {
               "Chào mừng đến",
               style: TextStyle(
                   color: Colors.red[300],
-                  fontSize: 24.0.sp,
+                  fontSize: 22.0.sp,
                   fontWeight: FontWeight.w600),
             ),
             Container(
@@ -75,7 +75,7 @@ class SplashScreen extends StatelessWidget {
                 "Student Connect",
                 style: TextStyle(
                     color: Colors.blue[900],
-                    fontSize: 26.0.sp,
+                    fontSize: 24.0.sp,
                     fontWeight: FontWeight.w700),
               ),
             ),
