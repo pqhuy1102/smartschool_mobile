@@ -115,10 +115,8 @@ class _ReportScreenState extends State<ReportScreen> {
                                           .userCoursesList[index]['attendance'],
                                       absenceSession: _reportController
                                           .userCoursesList[index]['absence'],
-                                      lateSession: 0,
                                       totalSession: _reportController
                                           .userCoursesList[index]['total'],
-                                      className: "18CTT",
                                       subjectId:
                                           "${_reportController.userCoursesList[index]['course_id']}",
                                     ),

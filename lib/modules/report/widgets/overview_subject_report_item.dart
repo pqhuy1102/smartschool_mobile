@@ -2,22 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class OverviewSubjectItem extends StatelessWidget {
-  const OverviewSubjectItem(
-      {Key? key,
-      required this.subjectName,
-      required this.subjectId,
-      required this.className,
-      required this.totalSession,
-      required this.validSession,
-      required this.absenceSession,
-      required this.lateSession})
-      : super(key: key);
+  const OverviewSubjectItem({
+    Key? key,
+    required this.subjectName,
+    required this.subjectId,
+    required this.totalSession,
+    required this.validSession,
+    required this.absenceSession,
+  }) : super(key: key);
   final String subjectName;
   final int validSession;
   final int absenceSession;
-  final int lateSession;
   final int totalSession;
-  final String className;
   final String subjectId;
 
   @override
@@ -50,14 +46,7 @@ class OverviewSubjectItem extends StatelessWidget {
                 children: [
                   Text(
                     // ignore: unnecessary_string_interpolations
-                    '$subjectId - $className',
-                    style: TextStyle(
-                        fontSize: 14.0.sp, fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    // ignore: unnecessary_string_interpolations
-                    '$subjectName',
-                    overflow: TextOverflow.ellipsis,
+                    '$subjectId - $subjectName',
                     style: TextStyle(
                         fontSize: 14.0.sp, fontWeight: FontWeight.w600),
                   ),
@@ -101,22 +90,6 @@ class OverviewSubjectItem extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // ignore: unnecessary_string_interpolations
-                      Text(
-                        '• Số buổi trễ',
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w400),
-                      ),
-                      Text(
-                        '$lateSession' '/' '$totalSession ' 'buổi',
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w600),
-                      )
-                    ],
                   ),
                 ],
               ),
