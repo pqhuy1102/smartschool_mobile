@@ -214,12 +214,6 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
 
 //validate email function
 String? validateMSSV(String? value) {
-  // String emailPattern =
-  //     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-  //     r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-  //     r"{0,253}[a-zA-Z0-9])?)*$";
-  // RegExp emailRegex = RegExp(emailPattern);
-  //  !emailRegex.hasMatch(value)
   if (value == null || value.isEmpty) {
     return 'Mã số sinh viên không hợp lệ, vui lòng nhập lại!';
   } else {

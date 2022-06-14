@@ -305,7 +305,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               alignment: Alignment.topLeft,
               child: RichText(
                 text: TextSpan(
-                    text: 'hello'.tr,
+                    text: _profileController.userName.value == ""
+                        ? ""
+                        : 'hello'.tr,
                     style: TextStyle(
                         fontSize: 14.0.sp,
                         color: Colors.black,
@@ -322,63 +324,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     ]),
               ))),
         ),
-
-        // Container(
-        //   height: 18.0.h,
-        //   width: double.infinity,
-        //   margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-        //   child: Container(
-        //       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-        //       child: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: [
-        //           Text(
-        //             'latest checkin'.tr,
-        //             style: TextStyle(
-        //                 color: Colors.white,
-        //                 fontSize: 18.sp,
-        //                 fontWeight: FontWeight.w600),
-        //           ),
-        //           Row(
-        //             children: [
-        //               Container(
-        //                 margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
-        //                 child: const CheckinTimeItem(
-        //                   title: '7:30',
-        //                   icon: Icons.arrow_drop_down,
-        //                   status: 'in',
-        //                 ),
-        //               ),
-        //               Container(
-        //                 margin: const EdgeInsets.fromLTRB(0, 0, 18, 0),
-        //                 child: const CheckinTimeItem(
-        //                   title: 'I.44',
-        //                   icon: Icons.room,
-        //                   status: 'room',
-        //                 ),
-        //               ),
-        //               const CheckinTimeItem(
-        //                 title: '15/02/2022',
-        //                 icon: Icons.date_range,
-        //                 status: 'date',
-        //               ),
-        //             ],
-        //           )
-        //         ],
-        //       )),
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(10),
-        //     color: Colors.blue.shade900,
-        //   ),
-        // ),
-
         const SizedBox(
           height: 16.0,
         ),
-
         Container(
-          margin: const EdgeInsets.only(left: 10),
+          margin: const EdgeInsets.only(left: 10, bottom: 10),
           child: Text(
             "Điểm danh hôm nay",
             style: TextStyle(
@@ -387,7 +337,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 fontWeight: FontWeight.w700),
           ),
         ),
-
         Obx(() {
           if (_getIndayAttendanceController.isLoading.isTrue) {
             return Center(
@@ -455,44 +404,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             ));
           }
         })
-
-        //Dashboard element
-        // Expanded(
-        //   child: GridView.count(
-        //     primary: false,
-        //     padding: const EdgeInsets.all(10),
-        //     crossAxisSpacing: 20,
-        //     mainAxisSpacing: 20,
-        //     crossAxisCount: 2,
-        //     children: [
-        //       InkWell(
-        //         child: DashBoardItem(
-        //           title: 'checkin today'.tr,
-        //           icon: Icons.date_range_sharp,
-        //           color: const Color.fromARGB(255, 4, 170, 9),
-        //           iconBackground: Colors.green.shade100,
-        //         ),
-        //         onTap: () {
-        //           Get.toNamed(Routes.dashboard + Routes.checkinToday);
-        //         },
-        //       ),
-        //       DashBoardItem(
-        //         title: 'absence'.tr,
-        //         icon: Icons.person_off,
-        //         color: const Color.fromARGB(255, 255, 17, 0),
-        //         iconBackground: Colors.red.shade100,
-        //       ),
-        //       InkWell(
-        //         child: DashBoardItem(
-        //           title: 'late/earlier'.tr,
-        //           icon: Icons.timer_outlined,
-        //           color: const Color.fromARGB(255, 0, 140, 255),
-        //           iconBackground: Colors.blue.shade100,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // )
       ],
     );
   }

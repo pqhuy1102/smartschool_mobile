@@ -102,19 +102,6 @@ class SettingsScreen extends StatelessWidget {
                     Get.toNamed(Routes.dashboard + Routes.profile);
                   },
                 ),
-                // SettingItem(
-                //   title: "about us".tr,
-                //   icon: Icons.people_alt,
-                // ),
-                // InkWell(
-                //   child: SettingItem(
-                //     title: "language".tr,
-                //     icon: Icons.translate,
-                //   ),
-                //   onTap: () {
-                //     handleChangeLanguage(context);
-                //   },
-                // ),
                 InkWell(
                   child: SettingItem(
                     title: "change password".tr,
