@@ -138,7 +138,7 @@ class SettingsScreen extends StatelessWidget {
                             fontSize: 18.0.sp, fontWeight: FontWeight.w600),
                         middleText: 'Bạn có muốn đăng xuất không?',
                         middleTextStyle: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w500),
+                            fontSize: 12.0.sp, fontWeight: FontWeight.w500),
                         backgroundColor: Colors.white,
                         radius: 10.0,
                         confirm: ElevatedButton(

@@ -72,7 +72,7 @@ class DetailSubjectItem extends StatelessWidget {
                       "$subjectId",
                       // overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 16.0.sp,
+                          fontSize: 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),
