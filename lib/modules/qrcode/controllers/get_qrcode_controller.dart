@@ -59,7 +59,7 @@ class GetQrCodeController extends GetxController {
       qrCodeString.value = res.qrString;
       isLoading(false);
     } else {
-      Get.snackbar('Error ', 'Không tìm thấy dữ liệu!',
+      Get.snackbar('Error ', 'Không thể tải mã QR!',
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);

@@ -106,7 +106,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                   if (_resetPasswordController
                                       .isLoading.value) {
                                     return const SizedBox(
-                                      height: 30,
+                                      height: 20,
+                                      width: 20,
                                       child: CircularProgressIndicator(
                                           valueColor:
                                               AlwaysStoppedAnimation<Color>(
@@ -123,7 +124,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 })),
                                 style: ElevatedButton.styleFrom(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 16),
+                                      const EdgeInsets.symmetric(vertical: 14),
                                   minimumSize: const Size.fromHeight(40),
                                   primary: Colors.blue.shade900,
                                   shape: RoundedRectangleBorder(

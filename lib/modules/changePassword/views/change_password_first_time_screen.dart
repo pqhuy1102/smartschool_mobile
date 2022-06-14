@@ -129,6 +129,8 @@ class _ChangePasswordFirstTimeScreenState
                                     if (_changePasswordFirstTimeController
                                         .isLoading.value) {
                                       return const SizedBox(
+                                        height: 20,
+                                        width: 20,
                                         child: CircularProgressIndicator(
                                             valueColor:
                                                 AlwaysStoppedAnimation<Color>(
@@ -145,7 +147,7 @@ class _ChangePasswordFirstTimeScreenState
                                   })),
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
+                                        vertical: 14),
                                     minimumSize: const Size.fromHeight(40),
                                     primary: Colors.blue.shade900,
                                     shape: RoundedRectangleBorder(

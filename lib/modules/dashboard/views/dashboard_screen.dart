@@ -309,13 +309,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     style: TextStyle(
                         fontSize: 16.0.sp,
                         color: Colors.black,
+                        letterSpacing: 0.8,
                         fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
                           text: _profileController.userName.value,
                           style: TextStyle(
-                              fontSize: 18.0.sp,
+                              fontSize: 16.0.sp,
                               fontWeight: FontWeight.bold,
+                              letterSpacing: 0.4,
                               color: Colors.red[300]))
                     ]),
               ))),
@@ -407,10 +409,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       child: Center(
                           child: Text(
-                        'Hôm nay bạn không có ca học nào! ',
+                        'Bạn không có ca học nào! ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            letterSpacing: 1,
+                            letterSpacing: 0.8,
                             fontSize: 14.0.sp,
                             fontWeight: FontWeight.w600),
                       )))

@@ -32,10 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/images/new_logo.png',
+                  'assets/images/logo.png',
                   fit: BoxFit.contain,
-                  height: 250.0,
-                  width: 250.0,
+                  height: 25.0.h,
                 ),
                 Container(
                     margin: const EdgeInsets.only(bottom: 10, top: 0),
@@ -48,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     )),
                 //Login form
                 Container(
-                    margin: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(16),
                     child: Form(
                         key: _formKey,
                         autovalidateMode: _autovalidateMode,
@@ -59,14 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller:
                                   _loginController.emailEditingController,
                               validator: (value) => validateMSSV(value),
-                              style: TextStyle(fontSize: 14.0.sp),
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  fontWeight: FontWeight.w500),
                               decoration: inputDecoration(
                                 'Mã số sinh viên',
                                 Icons.person_pin,
                               ),
                             ),
                             const SizedBox(
-                              height: 25,
+                              height: 20,
                             ),
                             Obx(
                               () => TextFormField(
@@ -75,7 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 controller:
                                     _loginController.passwordEditingController,
                                 validator: (value) => validatePassword(value),
-                                style: TextStyle(fontSize: 14.0.sp),
+                                style: TextStyle(
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.w500),
                                 decoration: inputDecoration(
                                   'Mật khẩu',
                                   Icons.lock,
@@ -122,7 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Obx((() {
                                   if (_loginController.isLoading.value) {
                                     return const SizedBox(
-                                      height: 30,
+                                      height: 20,
+                                      width: 20,
                                       child: CircularProgressIndicator(
                                           valueColor:
                                               AlwaysStoppedAnimation<Color>(
@@ -139,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 })),
                                 style: ElevatedButton.styleFrom(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 16),
+                                      const EdgeInsets.symmetric(vertical: 14),
                                   minimumSize: const Size.fromHeight(40),
                                   primary: Colors.blue.shade900,
                                   shape: RoundedRectangleBorder(

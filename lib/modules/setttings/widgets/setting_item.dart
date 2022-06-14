@@ -10,7 +10,7 @@ class SettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
+        padding: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey.shade400)),
           color: Colors.white,
@@ -23,7 +23,7 @@ class SettingItem extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 15.0.sp, fontWeight: FontWeight.w600),
           ),
         ));
   }
