@@ -42,23 +42,6 @@ class DetailSubjectItem extends StatelessWidget {
                       color: Colors.grey.shade600,
                       fontWeight: FontWeight.w600),
                 ),
-                // ElevatedButton(
-                //     style: ElevatedButton.styleFrom(
-                //       padding: const EdgeInsets.symmetric(
-                //           vertical: 4, horizontal: 6),
-                //       primary: Colors.red,
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(4.0.sp),
-                //       ),
-                //     ),
-                //     onPressed: () {
-                //       Get.toNamed(Routes.addComplain);
-                //     },
-                //     child: Text("Phản ánh",
-                //         style: TextStyle(
-                //             fontSize: 16.0.sp,
-                //             color: Colors.white,
-                //             fontWeight: FontWeight.w600)))
               ],
             ),
             Container(

@@ -156,33 +156,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(
                           height: 22,
                         ),
-                        // Container(
-                        //   margin: const EdgeInsets.symmetric(horizontal: 10),
-                        //   child: ElevatedButton(
-                        //       onPressed: () {},
-                        //       child: Text(
-                        //         'cập nhật thông tin'.toUpperCase(),
-                        //         style: TextStyle(
-                        //             fontSize: 14.0.sp,
-                        //             fontWeight: FontWeight.bold),
-                        //       ),
-                        //       style: ElevatedButton.styleFrom(
-                        //         padding:
-                        //             const EdgeInsets.symmetric(vertical: 16),
-                        //         minimumSize: const Size.fromHeight(40),
-                        //         primary: Colors.blue.shade900,
-                        //         shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(6.0.sp),
-                        //         ),
-                        //       )),
-                        // )
                       ],
                     ))),
                   );
                 } else {
-                  return const Center(
-                    child: Text('Data not found!'),
-                  );
+                  return Center(
+                      child: Text(
+                          'Không tìm thấy dữ liệu, vui lòng thử lại!',
+                          style: TextStyle(
+                            fontSize: 14.0.sp,
+                          )));
                 }
               }
             })));
@@ -201,64 +184,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
-  // Widget bottomSheet() {
-  //   return Container(
-  //     height: 16.0.h,
-  //     width: MediaQuery.of(context).size.width,
-  //     margin: const EdgeInsets.symmetric(
-  //       horizontal: 20,
-  //       vertical: 20,
-  //     ),
-  //     child: Column(
-  //       children: <Widget>[
-  //         Text(
-  //           "Chọn ảnh đại diện",
-  //           style: TextStyle(
-  //             fontSize: 14.0.sp,
-  //           ),
-  //         ),
-  //         const SizedBox(
-  //           height: 20,
-  //         ),
-  //         Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             children: <Widget>[
-  //               ElevatedButton.icon(
-  //                 icon: const Icon(
-  //                   Icons.camera,
-  //                 ),
-  //                 onPressed: () {
-  //                   _profileController.getImage(ImageSource.camera);
-  //                 },
-  //                 label: Text(
-  //                   "Chụp ảnh",
-  //                   style: TextStyle(color: Colors.white, fontSize: 14.0.sp),
-  //                 ),
-  //                 style: ElevatedButton.styleFrom(
-  //                     primary: Colors.blue.shade900,
-  //                     side: BorderSide.none,
-  //                     padding: const EdgeInsets.all(10)),
-  //               ),
-  //               ElevatedButton.icon(
-  //                 icon: const Icon(Icons.image),
-  //                 onPressed: () {
-  //                   _profileController.getImage(ImageSource.gallery);
-  //                 },
-  //                 label: Text(
-  //                   "Thư viện",
-  //                   style: TextStyle(color: Colors.white, fontSize: 14.0.sp),
-  //                 ),
-  //                 style: ElevatedButton.styleFrom(
-  //                     primary: Colors.blue.shade900,
-  //                     side: BorderSide.none,
-  //                     padding: const EdgeInsets.all(10)),
-  //               ),
-  //             ])
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget nameTextField() {
     return TextFormField(
