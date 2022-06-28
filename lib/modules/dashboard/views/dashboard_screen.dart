@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -24,13 +26,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   int selectedPosition = 0;
 
   final DashBoardController _dashBoardController =
-      Get.put(DashBoardController());
+  Get.put(DashBoardController());
 
   final ProfileController _profileController = Get.put(ProfileController());
   late FirebaseMessaging messaging;
 
   late final GetIndayAttendanceController _getIndayAttendanceController =
-      Get.put(GetIndayAttendanceController());
+  Get.put(GetIndayAttendanceController());
 
   @override
   void initState() {
@@ -118,12 +120,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             text: message.data['shift'] == null
                                 ? 'Không có dữ liệu'
                                 : formatUtcToLocalTime(message.data['shift']
-                                        .toString()
-                                        .substring(0, 18)) +
-                                    '-' +
-                                    formatUtcToLocalTime(message.data['shift']
-                                        .toString()
-                                        .substring(20)),
+                                .toString()
+                                .substring(0, 18)) +
+                                '-' +
+                                formatUtcToLocalTime(message.data['shift']
+                                    .toString()
+                                    .substring(20)),
                             style: TextStyle(
                                 fontSize: 14.0.sp,
                                 color: Colors.green,
@@ -147,7 +149,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             text: message.data['checkintime'] == null
                                 ? "Không có dữ liệu"
                                 : formatUtcToLocalTime(
-                                    message.data['checkintime']),
+                                message.data['checkintime']),
                             style: TextStyle(
                                 fontSize: 14.0.sp,
                                 color: Colors.green,
@@ -177,7 +179,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     updateNotiToken();
   }
 
-  void updateNotiToken() {
+  void updateNotiToken() async {
+    if (Platform.isIOS) {
+      await FirebaseMessaging.instance.requestPermission(
+          sound: true, badge: true, alert: true, provisional: true);
+    }
     messaging.getToken().then((value) {
       _dashBoardController.fcmToken.value = value!;
       _dashBoardController
@@ -211,78 +217,78 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ),
                 extendBodyBehindAppBar: true,
                 floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
+                FloatingActionButtonLocation.centerDocked,
                 bottomNavigationBar: _buildBottomTab(),
                 appBar: (selectedPosition == 0)
                     ? (AppBar(
-                        title: Text(
-                          'Trang chủ',
-                          style: TextStyle(
-                              fontSize: 17.0.sp,
-                              color: Colors.blue.shade900,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.2),
-                        ),
-                        actions: [
-                          IconButton(
-                            // ignore: avoid_returning_null_for_void
-                            onPressed: () {
-                              Get.toNamed(
-                                  Routes.dashboard + Routes.notification);
-                            },
-                            icon: const Icon(Icons.notifications),
-                            color: Colors.blue.shade900,
-                            iconSize: 18.0.sp,
-                          ),
-                        ],
-                        leading: IconButton(
-                          icon: Icon(
-                            Icons.settings,
-                            color: Colors.blue.shade900,
-                            size: 18.0.sp,
-                          ),
-                          onPressed: () {
-                            Get.toNamed(Routes.dashboard + Routes.settings);
-                          },
-                        ),
-                        centerTitle: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ))
+                  title: Text(
+                    'Trang chủ',
+                    style: TextStyle(
+                        fontSize: 17.0.sp,
+                        color: Colors.blue.shade900,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.2),
+                  ),
+                  actions: [
+                    IconButton(
+                      // ignore: avoid_returning_null_for_void
+                      onPressed: () {
+                        Get.toNamed(
+                            Routes.dashboard + Routes.notification);
+                      },
+                      icon: const Icon(Icons.notifications),
+                      color: Colors.blue.shade900,
+                      iconSize: 18.0.sp,
+                    ),
+                  ],
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.blue.shade900,
+                      size: 18.0.sp,
+                    ),
+                    onPressed: () {
+                      Get.toNamed(Routes.dashboard + Routes.settings);
+                    },
+                  ),
+                  centerTitle: true,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                ))
                     : (AppBar(
-                        leading: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.blue.shade900,
-                            size: 18.0.sp,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              selectedPosition = 0;
-                            });
-                          },
-                        ),
-                        title: Text(
-                          'Báo cáo',
-                          style: TextStyle(
-                              fontSize: 18.0.sp,
-                              color: Colors.blue.shade900,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        centerTitle: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      )),
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.blue.shade900,
+                      size: 18.0.sp,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        selectedPosition = 0;
+                      });
+                    },
+                  ),
+                  title: Text(
+                    'Báo cáo',
+                    style: TextStyle(
+                        fontSize: 18.0.sp,
+                        color: Colors.blue.shade900,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  centerTitle: true,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                )),
                 body: Container(
                     decoration: const BoxDecoration(color: Colors.white70),
                     child: SafeArea(
                         child: IndexedStack(
-                      index: selectedPosition,
-                      children: [
-                        _dashboardScreen(),
-                        const ReportScreen(),
-                      ],
-                    ))))),
+                          index: selectedPosition,
+                          children: [
+                            _dashboardScreen(),
+                            const ReportScreen(),
+                          ],
+                        ))))),
         onWillPop: () async {
           if (selectedPosition == 1) {
             setState(() {
@@ -301,28 +307,29 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       children: [
         Container(
           margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-          child: Obx(() => Align(
-              alignment: Alignment.topLeft,
-              child: RichText(
-                text: TextSpan(
-                    text: _profileController.userName.value == ""
-                        ? ""
-                        : 'hello'.tr,
-                    style: TextStyle(
-                        fontSize: 14.0.sp,
-                        color: Colors.black,
-                        letterSpacing: 0.8,
-                        fontWeight: FontWeight.w500),
-                    children: [
-                      TextSpan(
-                          text: _profileController.userName.value,
-                          style: TextStyle(
-                              fontSize: 15.0.sp,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.4,
-                              color: Colors.red[300]))
-                    ]),
-              ))),
+          child: Obx(() =>
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: RichText(
+                    text: TextSpan(
+                        text: _profileController.userName.value == ""
+                            ? ""
+                            : 'hello'.tr,
+                        style: TextStyle(
+                            fontSize: 14.0.sp,
+                            color: Colors.black,
+                            letterSpacing: 0.8,
+                            fontWeight: FontWeight.w500),
+                        children: [
+                          TextSpan(
+                              text: _profileController.userName.value,
+                              style: TextStyle(
+                                  fontSize: 15.0.sp,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.4,
+                                  color: Colors.red[300]))
+                        ]),
+                  ))),
         ),
         const SizedBox(
           height: 16.0,
@@ -358,50 +365,67 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       child: Center(
                           child: Text(
-                        'Bạn không có ca học nào! ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            letterSpacing: 0.8,
-                            fontSize: 14.0.sp,
-                            fontWeight: FontWeight.w600),
-                      )))
+                            'Bạn không có ca học nào! ',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                letterSpacing: 0.8,
+                                fontSize: 14.0.sp,
+                                fontWeight: FontWeight.w600),
+                          )))
                 ],
               ),
             );
           } else {
             return Expanded(
                 child: SizedBox(
-              height: 100.0,
-              child: ListView.builder(
-                  itemCount:
+                  height: 100.0,
+                  child: ListView.builder(
+                      itemCount:
                       _getIndayAttendanceController.indayAttendanceList.length,
-                  itemBuilder: ((context, index) {
-                    return Container(
-                      margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
-                      child: CheckinTodayItem(
-                          startTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['start_time'])
-                              .substring(10),
-                          endTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['end_time'])
-                              .substring(10),
-                          date: _getIndayAttendanceController.indayAttendanceList[index]
-                                      ['check_in_time'] ==
+                      itemBuilder: ((context, index) {
+                        return Container(
+                          margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
+                          child: CheckinTodayItem(
+                              startTime: formatDate(
+                                  _getIndayAttendanceController
+                                      .indayAttendanceList[index]['start_time'])
+                                  .substring(10),
+                              endTime: formatDate(_getIndayAttendanceController
+                                  .indayAttendanceList[index]['end_time'])
+                                  .substring(10),
+                              date: _getIndayAttendanceController
+                                  .indayAttendanceList[index]
+                              ['check_in_time'] ==
                                   null
-                              ? ""
-                              : formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                  ? ""
+                                  : formatDate(_getIndayAttendanceController
+                                  .indayAttendanceList[index]['check_in_time'])
                                   .substring(0, 10),
-                          time: _getIndayAttendanceController.indayAttendanceList[index]
-                                      ['check_in_time'] ==
+                              time: _getIndayAttendanceController
+                                  .indayAttendanceList[index]
+                              ['check_in_time'] ==
                                   null
-                              ? "--/--"
-                              : "Điểm danh lúc: " +
-                                  formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                  ? "--/--"
+                                  : "Điểm danh lúc: " +
+                                  formatDate(_getIndayAttendanceController
+                                      .indayAttendanceList[index]['check_in_time'])
                                       .substring(10),
-                          course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
-                          room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
-                          status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_getIndayAttendanceController.indayAttendanceList[index]['end_time']) : convertCheckinTodayStatus(_getIndayAttendanceController.indayAttendanceList[index]['check_in_status'])),
-                    );
-                  })),
-            ));
+                              course: _getIndayAttendanceController
+                                  .indayAttendanceList[index]['course'],
+                              room: _getIndayAttendanceController
+                                  .indayAttendanceList[index]['room'],
+                              status: _getIndayAttendanceController
+                                  .indayAttendanceList[index]['check_in_status'] ==
+                                  ""
+                                  ? checkStatusCheckin(
+                                  _getIndayAttendanceController
+                                      .indayAttendanceList[index]['end_time'])
+                                  : convertCheckinTodayStatus(
+                                  _getIndayAttendanceController
+                                      .indayAttendanceList[index]['check_in_status'])),
+                        );
+                      })),
+                ));
           }
         })
       ],
@@ -449,7 +473,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   String formatUtcToLocalTime(String? dateUtc) {
     if (dateUtc != null) {
       DateTime date =
-          DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateUtc, true).toLocal();
+      DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateUtc, true).toLocal();
       var inputDate = DateTime.parse(date.toString());
       var outputFormat = DateFormat('dd/MM/yyyy hh:mm a');
       var outputDate = outputFormat.format(inputDate);
@@ -460,7 +484,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   String formatDate(String date) {
     DateTime parseDate =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(date, true).toLocal();
+    DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(date, true).toLocal();
     var inputDate = DateTime.parse(parseDate.toString());
     var outputFormat = DateFormat('dd/MM/yyyy hh:mm a');
     var outputDate = outputFormat.format(inputDate);
