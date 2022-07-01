@@ -12,8 +12,7 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -79,7 +78,7 @@ class NotificationScreen extends StatelessWidget {
           }
         }))),
       ),
-    ));
+    );
   }
 }
 

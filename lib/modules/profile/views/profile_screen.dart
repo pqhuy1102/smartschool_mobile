@@ -17,158 +17,155 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final LoginController _loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            extendBodyBehindAppBar: true,
-            resizeToAvoidBottomInset: true,
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Get.defaultDialog(
-                        title: 'Đăng xuất',
-                        titleStyle: TextStyle(fontSize: 16.0.sp),
-                        middleText: 'Bạn có muốn đăng xuất không?',
-                        middleTextStyle: TextStyle(fontSize: 14.0.sp),
-                        backgroundColor: Colors.white,
-                        radius: 10.0,
-                        confirm: ElevatedButton(
-                            onPressed: (() {
-                              _loginController.logout();
-                            }),
-                            child: Text(
-                              'Đăng xuất',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp, color: Colors.white),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.red.shade600,
-                              padding: const EdgeInsets.all(10),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0.sp),
-                              ),
-                            )),
-                        cancel: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4.0.sp),
-                                  side:
-                                      BorderSide(color: Colors.blue.shade900)),
-                            ),
-                            onPressed: (() {
-                              Get.back();
-                            }),
-                            child: Text(
-                              'Hủy bỏ',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.blue.shade900),
-                            )),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 18));
-                  },
-                  icon: const Icon(Icons.logout),
-                  color: Colors.blue.shade900,
-                  iconSize: 18.0.sp,
-                )
-              ],
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.blue.shade900,
-                  size: 18.0.sp,
-                ),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
-              title: Text(
-                'Cá nhân',
-                style: TextStyle(
-                    fontSize: 17.0.sp,
-                    color: Colors.blue.shade900,
-                    fontWeight: FontWeight.w600),
-              ),
-              centerTitle: true,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
+    return Scaffold(
+        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.defaultDialog(
+                    title: 'Đăng xuất',
+                    titleStyle: TextStyle(fontSize: 16.0.sp),
+                    middleText: 'Bạn có muốn đăng xuất không?',
+                    middleTextStyle: TextStyle(fontSize: 14.0.sp),
+                    backgroundColor: Colors.white,
+                    radius: 10.0,
+                    confirm: ElevatedButton(
+                        onPressed: (() {
+                          _loginController.logout();
+                        }),
+                        child: Text(
+                          'Đăng xuất',
+                          style:
+                              TextStyle(fontSize: 14.0.sp, color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red.shade600,
+                          padding: const EdgeInsets.all(10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.0.sp),
+                          ),
+                        )),
+                    cancel: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0.sp),
+                              side: BorderSide(color: Colors.blue.shade900)),
+                        ),
+                        onPressed: (() {
+                          Get.back();
+                        }),
+                        child: Text(
+                          'Hủy bỏ',
+                          style: TextStyle(
+                              fontSize: 14.0.sp, color: Colors.blue.shade900),
+                        )),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 18));
+              },
+              icon: const Icon(Icons.logout),
+              color: Colors.blue.shade900,
+              iconSize: 18.0.sp,
+            )
+          ],
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.blue.shade900,
+              size: 18.0.sp,
             ),
-            body: Obx(() {
-              if (_profileController.isLoading.value == true) {
-                return Center(
-                  child: SpinKitFadingFour(
-                    color: Colors.blue.shade900,
-                    size: 50.0,
-                  ),
-                );
-              } else {
-                if (_profileController.userData != null) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    child: SafeArea(
-                        child: Form(
-                            child: ListView(
-                      children: [
-                        imageProfile(),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: nameTextField(),
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: studentIdTextField(),
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: studentClassTextField(),
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            child: genderTextField()),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            child: emailTextField()),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            child: phoneNumberTextField()),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                      ],
-                    ))),
-                  );
-                } else {
-                  return Center(
-                      child: Text(
-                          'Không tìm thấy dữ liệu, vui lòng thử lại!',
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          title: Text(
+            'Cá nhân',
+            style: TextStyle(
+                fontSize: 17.0.sp,
+                color: Colors.blue.shade900,
+                fontWeight: FontWeight.w600),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Obx(() {
+          if (_profileController.isLoading.value == true) {
+            return Center(
+              child: SpinKitFadingFour(
+                color: Colors.blue.shade900,
+                size: 50.0,
+              ),
+            );
+          } else {
+            if (_profileController.userData != null) {
+              return Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: SafeArea(
+                    child: Form(
+                        child: ListView(
+                  children: [
+                    imageProfile(),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      child: nameTextField(),
+                    ),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      child: studentIdTextField(),
+                    ),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      child: studentClassTextField(),
+                    ),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: genderTextField()),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: emailTextField()),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                    Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: phoneNumberTextField()),
+                    const SizedBox(
+                      height: 22,
+                    ),
+                  ],
+                ))),
+              );
+            } else {
+              return Center(
+                  child:
+                      Text('Không tìm thấy dữ liệu, vui lòng thử lại!',
                           style: TextStyle(
                             fontSize: 14.0.sp,
                           )));
-                }
-              }
-            })));
+            }
+          }
+        }));
   }
 
   Widget imageProfile() {

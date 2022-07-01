@@ -64,8 +64,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final LoginController _loginController = Get.put(LoginController());
 
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -173,6 +172,6 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           )),
-    ));
+    );
   }
 }
