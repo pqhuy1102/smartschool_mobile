@@ -20,138 +20,134 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.blue.shade900,
-                size: 24.0.sp,
-              ),
-              onPressed: () {
-                Get.back();
-              },
+    return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.blue.shade900,
+              size: 24.0.sp,
             ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
+            onPressed: () {
+              Get.back();
+            },
           ),
-          resizeToAvoidBottomInset: true,
-          body: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 50, 0, 20),
-                    height: h * 0.2,
-                    width: w,
-                    child: Image.asset('assets/images/lock.png'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        resizeToAvoidBottomInset: true,
+        body: SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+                  height: h * 0.2,
+                  width: w,
+                  child: Image.asset('assets/images/lock.png'),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                  child: Text(
+                    "quên mật khẩu".toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 18.0.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue.shade900),
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                    child: Text(
-                      "quên mật khẩu".toUpperCase(),
-                      style: TextStyle(
-                          fontSize: 18.0.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade900),
-                    ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 30),
-                      child: Center(
-                        child: Text(
-                          'Chọn “Gửi” để nhận email hướng dẫn đặt lại mật khẩu đến email sinh viên của bạn',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 14.0.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade600),
-                        ),
-                      )),
-                  Form(
-                      key: _formKey,
-                      autovalidateMode: _autovalidateMode,
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 30),
-                            child: TextFormField(
-                              controller: _resetPasswordController
-                                  .emailEditingController,
-                              validator: (value) => validateEmail(value),
-                              style: TextStyle(fontSize: 14.0.sp),
-                              decoration: inputDecoration(
-                                  'Email của bạn', Icons.email),
-                            ),
+                ),
+                Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 30),
+                    child: Center(
+                      child: Text(
+                        'Chọn “Gửi” để nhận email hướng dẫn đặt lại mật khẩu đến email sinh viên của bạn',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14.0.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade600),
+                      ),
+                    )),
+                Form(
+                    key: _formKey,
+                    autovalidateMode: _autovalidateMode,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                          child: TextFormField(
+                            controller:
+                                _resetPasswordController.emailEditingController,
+                            validator: (value) => validateEmail(value),
+                            style: TextStyle(fontSize: 14.0.sp),
+                            decoration:
+                                inputDecoration('Email của bạn', Icons.email),
                           ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    await _resetPasswordController
-                                        .resetPassword(_resetPasswordController
-                                            .emailEditingController!.text);
-                                  } else {
-                                    setState(() {
-                                      _autovalidateMode =
-                                          AutovalidateMode.onUserInteraction;
-                                    });
-                                  }
-                                },
-                                child: Obx((() {
-                                  if (_resetPasswordController
-                                      .isLoading.value) {
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const CircularProgressIndicator(
-                                          color: Colors.white,
-                                        ),
-                                        const SizedBox(
-                                          width: 12,
-                                        ),
-                                        Text(
-                                          'Đang gửi đi...',
-                                          style: TextStyle(
-                                              fontSize: 14.0.sp,
-                                              fontWeight: FontWeight.w600),
-                                        )
-                                      ],
-                                    );
-                                  } else {
-                                    return Text(
-                                      'gửi'.toUpperCase(),
-                                      style: TextStyle(
-                                          fontSize: 14.0.sp,
-                                          fontWeight: FontWeight.bold),
-                                    );
-                                  }
-                                })),
-                                style: ElevatedButton.styleFrom(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 14),
-                                  minimumSize: const Size.fromHeight(40),
-                                  primary:
-                                      _resetPasswordController.isLoading.value
-                                          ? Colors.grey
-                                          : Colors.blue.shade900,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(6.0.sp),
-                                  ),
-                                )),
-                          )
-                        ],
-                      )),
-                ],
-              ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  await _resetPasswordController.resetPassword(
+                                      _resetPasswordController
+                                          .emailEditingController!.text);
+                                } else {
+                                  setState(() {
+                                    _autovalidateMode =
+                                        AutovalidateMode.onUserInteraction;
+                                  });
+                                }
+                              },
+                              child: Obx((() {
+                                if (_resetPasswordController.isLoading.value) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                      const SizedBox(
+                                        width: 12,
+                                      ),
+                                      Text(
+                                        'Đang gửi đi...',
+                                        style: TextStyle(
+                                            fontSize: 14.0.sp,
+                                            fontWeight: FontWeight.w600),
+                                      )
+                                    ],
+                                  );
+                                } else {
+                                  return Text(
+                                    'gửi'.toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 14.0.sp,
+                                        fontWeight: FontWeight.bold),
+                                  );
+                                }
+                              })),
+                              style: ElevatedButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 14),
+                                minimumSize: const Size.fromHeight(40),
+                                primary:
+                                    _resetPasswordController.isLoading.value
+                                        ? Colors.grey
+                                        : Colors.blue.shade900,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0.sp),
+                                ),
+                              )),
+                        )
+                      ],
+                    )),
+              ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
 

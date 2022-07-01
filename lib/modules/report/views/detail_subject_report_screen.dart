@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -64,57 +65,132 @@ class SubjectDetailReportScreen extends StatelessWidget {
                     ],
                   ),
                   Obx(() {
-                    return DropdownButton(
-                      items: [
-                        DropdownMenuItem(
-                          child: Text(
-                            'Tất cả',
-                            style: TextStyle(
-                                fontSize: 13.0.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
+                    return SizedBox(
+                        width: 34.0.w,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.blueGrey,
+                                  width: 1,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: DropdownButtonFormField2(
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            isExpanded: true,
+                            value: _reportController.filterValue.value,
+                            onChanged: (selectedValue) {
+                              _reportController.filterValue.value =
+                                  selectedValue.toString();
+                              _reportController.filterCourseAttendanceFun(
+                                  selectedValue.toString());
+                            },
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black45,
+                            ),
+                            iconSize: 30,
+                            buttonHeight: 34,
+                            buttonPadding:
+                                const EdgeInsets.only(left: 20, right: 10),
+                            dropdownDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            items: [
+                              DropdownMenuItem(
+                                child: Text(
+                                  'Tất cả',
+                                  style: TextStyle(
+                                      fontSize: 13.0.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                value: "1",
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  'Hợp lệ',
+                                  style: TextStyle(
+                                      fontSize: 13.0.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                value: "2",
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  'Đi trễ',
+                                  style: TextStyle(
+                                      fontSize: 13.0.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                value: "3",
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  'Vắng',
+                                  style: TextStyle(
+                                      fontSize: 13.0.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                value: "4",
+                              ),
+                            ],
                           ),
-                          value: "1",
-                        ),
-                        DropdownMenuItem(
-                          child: Text(
-                            'Hợp lệ',
-                            style: TextStyle(
-                                fontSize: 13.0.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          value: "2",
-                        ),
-                        DropdownMenuItem(
-                          child: Text(
-                            'Đi trễ',
-                            style: TextStyle(
-                                fontSize: 13.0.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          value: "3",
-                        ),
-                        DropdownMenuItem(
-                          child: Text(
-                            'Vắng',
-                            style: TextStyle(
-                                fontSize: 13.0.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          value: "4",
-                        ),
-                      ],
-                      value: _reportController.filterValue.value,
-                      onChanged: (selectedValue) {
-                        _reportController.filterValue.value =
-                            selectedValue.toString();
-                        _reportController.filterCourseAttendanceFun(
-                            selectedValue.toString());
-                      },
-                    );
+                        ));
+                    // return DropdownButton(
+                    //   items: [
+                    //     DropdownMenuItem(
+                    //       child: Text(
+                    //         'Tất cả',
+                    //         style: TextStyle(
+                    //             fontSize: 13.0.sp,
+                    //             color: Colors.black,
+                    //             fontWeight: FontWeight.w500),
+                    //       ),
+                    //       value: "1",
+                    //     ),
+                    //     DropdownMenuItem(
+                    //       child: Text(
+                    //         'Hợp lệ',
+                    //         style: TextStyle(
+                    //             fontSize: 13.0.sp,
+                    //             color: Colors.black,
+                    //             fontWeight: FontWeight.w500),
+                    //       ),
+                    //       value: "2",
+                    //     ),
+                    //     DropdownMenuItem(
+                    //       child: Text(
+                    //         'Đi trễ',
+                    //         style: TextStyle(
+                    //             fontSize: 13.0.sp,
+                    //             color: Colors.black,
+                    //             fontWeight: FontWeight.w500),
+                    //       ),
+                    //       value: "3",
+                    //     ),
+                    //     DropdownMenuItem(
+                    //       child: Text(
+                    //         'Vắng',
+                    //         style: TextStyle(
+                    //             fontSize: 13.0.sp,
+                    //             color: Colors.black,
+                    //             fontWeight: FontWeight.w500),
+                    //       ),
+                    //       value: "4",
+                    //     ),
+                    //   ],
+                    //   value: _reportController.filterValue.value,
+                    //   onChanged: (selectedValue) {
+                    //     _reportController.filterValue.value =
+                    //         selectedValue.toString();
+                    //     _reportController.filterCourseAttendanceFun(
+                    //         selectedValue.toString());
+                    //   },
+                    // );
                   })
                 ],
               ),
