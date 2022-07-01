@@ -192,97 +192,83 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: SafeArea(
-            child: Scaffold(
-                floatingActionButton: SizedBox(
-                  width: 16.0.w,
-                  height: 16.0.h,
-                  child: FittedBox(
-                    child: FloatingActionButton(
-                      onPressed: () =>
-                          Get.toNamed(Routes.dashboard + Routes.qrcode),
-                      backgroundColor: Colors.blue.shade900,
-                      child: const Icon(
-                        Icons.qr_code_2,
-                        size: 37,
-                      ),
-                    ),
+        child: Scaffold(
+            floatingActionButton: SizedBox(
+              width: 16.0.w,
+              height: 16.0.h,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  onPressed: () =>
+                      Get.toNamed(Routes.dashboard + Routes.qrcode),
+                  backgroundColor: Colors.blue.shade900,
+                  child: const Icon(
+                    Icons.qr_code_2,
+                    size: 37,
                   ),
                 ),
-                extendBodyBehindAppBar: true,
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
-                bottomNavigationBar: _buildBottomTab(),
-                appBar: (selectedPosition == 0)
-                    ? (AppBar(
-                        title: Text(
-                          'Trang chủ',
-                          style: TextStyle(
-                              fontSize: 17.0.sp,
-                              color: Colors.blue.shade900,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.2),
-                        ),
-                        actions: [
-                          IconButton(
-                            // ignore: avoid_returning_null_for_void
-                            onPressed: () {
-                              Get.toNamed(
-                                  Routes.dashboard + Routes.notification);
-                            },
-                            icon: const Icon(Icons.notifications),
-                            color: Colors.blue.shade900,
-                            iconSize: 18.0.sp,
-                          ),
-                        ],
-                        leading: IconButton(
-                          icon: Icon(
-                            Icons.settings,
-                            color: Colors.blue.shade900,
-                            size: 18.0.sp,
-                          ),
-                          onPressed: () {
-                            Get.toNamed(Routes.dashboard + Routes.settings);
-                          },
-                        ),
-                        centerTitle: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ))
-                    : (AppBar(
-                        leading: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.blue.shade900,
-                            size: 18.0.sp,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              selectedPosition = 0;
-                            });
-                          },
-                        ),
-                        title: Text(
-                          'Báo cáo',
-                          style: TextStyle(
-                              fontSize: 18.0.sp,
-                              color: Colors.blue.shade900,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        centerTitle: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      )),
-                body: Container(
-                    decoration: const BoxDecoration(color: Colors.white70),
-                    child: SafeArea(
-                        child: IndexedStack(
-                      index: selectedPosition,
-                      children: [
-                        _dashboardScreen(),
-                        const ReportScreen(),
-                      ],
-                    ))))),
+              ),
+            ),
+            extendBodyBehindAppBar: true,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            bottomNavigationBar: _buildBottomTab(),
+            appBar: (selectedPosition == 0)
+                ? (AppBar(
+                    title: Text(
+                      'Trang chủ',
+                      style: TextStyle(
+                          fontSize: 17.0.sp,
+                          color: Colors.blue.shade900,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.2),
+                    ),
+                    actions: [
+                      IconButton(
+                        // ignore: avoid_returning_null_for_void
+                        onPressed: () {
+                          Get.toNamed(Routes.dashboard + Routes.notification);
+                        },
+                        icon: const Icon(Icons.notifications),
+                        color: Colors.blue.shade900,
+                        iconSize: 18.0.sp,
+                      ),
+                    ],
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.blue.shade900,
+                        size: 18.0.sp,
+                      ),
+                      onPressed: () {
+                        Get.toNamed(Routes.dashboard + Routes.settings);
+                      },
+                    ),
+                    centerTitle: true,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ))
+                : (AppBar(
+                    title: Text(
+                      'Báo cáo',
+                      style: TextStyle(
+                          fontSize: 18.0.sp,
+                          color: Colors.blue.shade900,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    centerTitle: true,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  )),
+            body: Container(
+                decoration: const BoxDecoration(color: Colors.white70),
+                child: SafeArea(
+                    child: IndexedStack(
+                  index: selectedPosition,
+                  children: [
+                    _dashboardScreen(),
+                    const ReportScreen(),
+                  ],
+                )))),
         onWillPop: () async {
           if (selectedPosition == 1) {
             setState(() {

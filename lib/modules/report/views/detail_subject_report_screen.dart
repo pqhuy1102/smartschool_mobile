@@ -12,8 +12,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: IconButton(
@@ -187,7 +186,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
           ],
         )),
       ),
-    ));
+    );
   }
 
   String formatDate(date) {

@@ -29,8 +29,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
     }
 
     return WillPopScope(
-        child: SafeArea(
-            child: Scaffold(
+        child: Scaffold(
           extendBodyBehindAppBar: true,
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
@@ -127,7 +126,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                   ),
                 )),
               )),
-        )),
+        ),
         onWillPop: () async {
           _getIndayAttendanceController.getIndayAttendance();
           return true;
