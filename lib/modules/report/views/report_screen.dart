@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
 import 'package:smartschool_mobile/modules/report/widgets/overview_subject_report_item.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({Key? key}) : super(key: key);
@@ -50,12 +51,23 @@ class _ReportScreenState extends State<ReportScreen> {
                                           width: 1,
                                           style: BorderStyle.solid),
                                       borderRadius: BorderRadius.circular(8)),
-                                  child: DropdownButton(
+                                  child: DropdownButtonFormField2(
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none),
                                     isExpanded: true,
-                                    underline: DropdownButtonHideUnderline(
-                                        child: Container()),
                                     value: _reportController
                                         .currentSemesterValue.value,
+                                    icon: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.black45,
+                                    ),
+                                    iconSize: 30,
+                                    buttonHeight: 30,
+                                    buttonPadding: const EdgeInsets.only(
+                                        left: 20, right: 10),
+                                    dropdownDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
                                     items: _reportController.userSemestersList
                                         .map((sem) {
                                       return DropdownMenuItem(

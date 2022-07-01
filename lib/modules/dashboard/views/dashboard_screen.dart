@@ -8,6 +8,7 @@ import 'package:smartschool_mobile/modules/checkinToday/widgets/checkin_today_it
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
 import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
+import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
@@ -27,6 +28,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       Get.put(DashBoardController());
 
   final ProfileController _profileController = Get.put(ProfileController());
+
+  final ReportController _reportController = Get.put(ReportController());
   late FirebaseMessaging messaging;
 
   late final GetIndayAttendanceController _getIndayAttendanceController =
@@ -421,6 +424,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               icon: Icons.bar_chart,
               isSelected: selectedPosition == 1,
               onTap: () {
+                _reportController.getUserSemestersList();
                 setState(() {
                   selectedPosition = 1;
                 });
