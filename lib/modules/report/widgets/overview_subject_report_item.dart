@@ -24,76 +24,86 @@ class OverviewSubjectItem extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.blue.shade900, width: 2)),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            Container(
-              height: 60,
-              width: 60,
-              margin: const EdgeInsets.symmetric(horizontal: 14),
-              decoration: BoxDecoration(
-                  color: Colors.blue.shade100,
-                  borderRadius: BorderRadius.circular(65)),
-              child: Icon(
-                Icons.collections_bookmark,
-                color: Colors.blue.shade900,
-                size: 20.0.sp,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  margin: const EdgeInsets.symmetric(horizontal: 14),
+                  decoration: BoxDecoration(
+                      color: Colors.blue.shade100,
+                      borderRadius: BorderRadius.circular(65)),
+                  child: Icon(
+                    Icons.collections_bookmark,
+                    color: Colors.blue.shade900,
+                    size: 20.0.sp,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        // ignore: unnecessary_string_interpolations
+                        '$subjectId - $subjectName',
+                        style: TextStyle(
+                            fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Container(
+              margin: const EdgeInsets.only(left: 14),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // ignore: unnecessary_string_interpolations
                   Text(
-                    // ignore: unnecessary_string_interpolations
-                    '$subjectId - $subjectName',
+                    '• Số buổi đi học',
+                    style: TextStyle(
+                        fontSize: 14.0.sp, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    '$validSession' '/' '$totalSession ' 'buổi',
                     style: TextStyle(
                         fontSize: 14.0.sp, fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // ignore: unnecessary_string_interpolations
-                      Text(
-                        '• Số buổi đi học',
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w400),
-                      ),
-                      Text(
-                        '$validSession' '/' '$totalSession ' 'buổi',
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // ignore: unnecessary_string_interpolations
-                      Text(
-                        '• Số buổi vắng',
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w400),
-                      ),
-                      Text(
-                        '$absenceSession' '/' '$totalSession ' 'buổi',
-                        style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                 ],
               ),
-            )
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 14),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // ignore: unnecessary_string_interpolations
+                  Text(
+                    '• Số buổi vắng',
+                    style: TextStyle(
+                        fontSize: 14.0.sp, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    '$absenceSession' '/' '$totalSession ' 'buổi',
+                    style: TextStyle(
+                        fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ));
   }

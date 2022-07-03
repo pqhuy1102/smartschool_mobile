@@ -109,7 +109,9 @@ class _ChangePasswordFirstTimeScreenState
                               ),
                               ElevatedButton(
                                   onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
+                                    if (!_changePasswordFirstTimeController
+                                            .isLoading.value &&
+                                        _formKey.currentState!.validate()) {
                                       await _changePasswordFirstTimeController
                                           .changePasswordFirstTime(
                                               _changePasswordFirstTimeController
@@ -182,11 +184,12 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
   final ChangePasswordFirstTimeController _changePassController =
       Get.put(ChangePasswordFirstTimeController());
   return InputDecoration(
+    errorMaxLines: 3,
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
     labelText: labelText,
     prefixText: prefix,
-    labelStyle: TextStyle(color: Colors.blue.shade900),
+    labelStyle: TextStyle(color: Colors.blue.shade900, fontSize: 13.0.sp),
     prefixIcon: Icon(
       iconData,
       size: 20.0.sp,

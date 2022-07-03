@@ -289,30 +289,27 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-          child: Obx(() => Align(
-              alignment: Alignment.topLeft,
-              child: RichText(
-                text: TextSpan(
-                    text: _profileController.userName.value == ""
-                        ? ""
-                        : 'hello'.tr,
-                    style: TextStyle(
-                        fontSize: 14.0.sp,
-                        color: Colors.black,
-                        letterSpacing: 0.8,
-                        fontWeight: FontWeight.w500),
+            margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+            child: Obx(() => Align(
+                  alignment: Alignment.topLeft,
+                  child: Row(
                     children: [
-                      TextSpan(
-                          text: _profileController.userName.value,
-                          style: TextStyle(
-                              fontSize: 15.0.sp,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.4,
-                              color: Colors.red[300]))
-                    ]),
-              ))),
-        ),
+                      Text(
+                        "Xin chào, ",
+                        style: TextStyle(
+                            fontSize: 13.0.sp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Flexible(
+                          child: Text(_profileController.userName.value,
+                              style: TextStyle(
+                                  fontSize: 13.0.sp,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.red[300])))
+                    ],
+                  ),
+                ))),
         const SizedBox(
           height: 16.0,
         ),
@@ -321,7 +318,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           child: Text(
             "Điểm danh hôm nay",
             style: TextStyle(
-                fontSize: 15.sp,
+                fontSize: 15.0.sp,
                 color: Colors.blue.shade900,
                 fontWeight: FontWeight.w700),
           ),
@@ -351,7 +348,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             letterSpacing: 0.8,
-                            fontSize: 14.0.sp,
+                            fontSize: 13.0.sp,
                             fontWeight: FontWeight.w600),
                       )))
                 ],

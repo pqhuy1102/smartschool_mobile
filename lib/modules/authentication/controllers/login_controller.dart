@@ -56,13 +56,13 @@ class LoginController extends GetxController {
       final error = res.body['message'] == "Wrong password"
           ? "Sai mật khẩu"
           : res.body['message'];
-      Get.snackbar('Lỗi ', error,
+      Get.snackbar('Đăng nhập thất bại', error,
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);
       isLoading(false);
     } else {
-      Get.snackbar('Lỗi ', "Bạn chưa kết nối internet!",
+      Get.snackbar('Đăng nhập thất bại', "Bạn chưa kết nối internet!",
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);

@@ -43,7 +43,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           ),
                           Obx(() {
                             return SizedBox(
-                                width: 50.0.w,
+                                width: 60.0.w,
                                 child: Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(
@@ -62,9 +62,9 @@ class _ReportScreenState extends State<ReportScreen> {
                                       color: Colors.black45,
                                     ),
                                     iconSize: 30,
-                                    buttonHeight: 30,
-                                    buttonPadding: const EdgeInsets.only(
-                                        left: 20, right: 10),
+                                    buttonHeight: 33,
+                                    // buttonPadding: const EdgeInsets.only(
+                                    //     left: 20, right: 10),
                                     dropdownDecoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                     ),
@@ -108,7 +108,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                 child: Text(
                               'Danh sách trống! ',
                               style: TextStyle(
-                                  fontSize: 16.0.sp,
+                                  fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w600),
                             ))
                           ],

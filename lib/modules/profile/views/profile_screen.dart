@@ -176,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 20.0.h,
               child: const CircleAvatar(
                   radius: 100,
-                  backgroundImage: AssetImage('assets/images/avatar.png'))),
+                  backgroundImage: AssetImage('assets/images/avt.png'))),
         ],
       ),
     );
@@ -195,11 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               borderSide: BorderSide(
             color: Colors.blue.shade900,
           )),
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-            color: Colors.blue.shade900,
-            width: 2,
-          )),
+          focusedBorder: InputBorder.none,
           prefixIcon: Icon(
             Icons.person,
             color: Colors.blue.shade900,
@@ -223,11 +219,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderSide: BorderSide(
           color: Colors.blue.shade900,
         )),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          color: Colors.blue.shade900,
-          width: 2,
-        )),
+        focusedBorder: InputBorder.none,
         prefixIcon: Icon(
           Icons.class_,
           color: Colors.blue.shade900,
@@ -252,13 +244,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderSide: BorderSide(
           color: Colors.blue.shade900,
         )),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          color: Colors.blue.shade900,
-          width: 2,
-        )),
+        focusedBorder: InputBorder.none,
         prefixIcon: Icon(
-          Icons.person_search,
+          Icons.badge,
           color: Colors.blue.shade900,
           size: 20.0.sp,
         ),
@@ -281,11 +269,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderSide: BorderSide(
           color: Colors.blue.shade900,
         )),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          color: Colors.blue.shade900,
-          width: 2,
-        )),
+        focusedBorder: InputBorder.none,
         prefixIcon: Icon(
           Icons.people,
           color: Colors.blue.shade900,
@@ -310,11 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderSide: BorderSide(
           color: Colors.blue.shade900,
         )),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          color: Colors.blue.shade900,
-          width: 2,
-        )),
+        focusedBorder: InputBorder.none,
         prefixIcon: Icon(
           Icons.email,
           color: Colors.blue.shade900,
@@ -339,11 +319,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderSide: BorderSide(
           color: Colors.blue.shade900,
         )),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          color: Colors.blue.shade900,
-          width: 2,
-        )),
+        focusedBorder: InputBorder.none,
         prefixIcon: Icon(
           Icons.phone_sharp,
           color: Colors.blue.shade900,

@@ -23,7 +23,7 @@ class SettingItem extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: TextStyle(fontSize: 15.0.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600),
           ),
         ));
   }

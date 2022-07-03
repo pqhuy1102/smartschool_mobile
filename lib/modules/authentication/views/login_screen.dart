@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'Quên mật khẩu?',
                                       style: TextStyle(
-                                          fontSize: 14.0.sp,
+                                          fontSize: 13.0.sp,
                                           color: Colors.black),
                                     ))),
                             const SizedBox(
@@ -109,7 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             ElevatedButton(
                                 onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (!_loginController.isLoading.value &&
+                                      _formKey.currentState!.validate()) {
                                     await _loginController.login(
                                         _loginController
                                             .emailEditingController!.text,
@@ -174,6 +175,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
   final LoginController _loginController = Get.put(LoginController());
 
   return InputDecoration(
+    errorMaxLines: 3,
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
     labelText: labelText,
@@ -225,11 +227,10 @@ String? validateMSSV(String? value) {
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null ||
-      value.isEmpty ||
-      spaceRegex.hasMatch(value) ||
-      value.length < 6) {
+  if (value == null || value.isEmpty || spaceRegex.hasMatch(value)) {
     return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
+  } else if (value.length < 6) {
+    return 'Mật khẩu cần tối thiểu 6 kí tự!';
   } else {
     return null;
   }
