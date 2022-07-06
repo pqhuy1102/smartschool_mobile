@@ -90,7 +90,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                         child: Text(
                           "Tải lại",
                           style: TextStyle(
-                              fontSize: 13.0.sp, fontWeight: FontWeight.w700),
+                              fontSize: 13.0.sp, fontWeight: FontWeight.w600),
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue.shade900,

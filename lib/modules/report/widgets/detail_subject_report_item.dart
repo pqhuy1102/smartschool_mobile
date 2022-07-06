@@ -65,7 +65,7 @@ class DetailSubjectItem extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 4),
-              child: Row(
+              child: Wrap(
                 children: [
                   Row(
                     children: [
@@ -82,24 +82,21 @@ class DetailSubjectItem extends StatelessWidget {
                               fontWeight: FontWeight.w500))
                     ],
                   ),
-                  const SizedBox(
-                    width: 6,
-                  ),
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on,
+                        Icons.location_on_rounded,
                         color: Colors.blue.shade900,
-                        size: 14.0.sp,
+                        size: 16.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
-                      Text("$room",
+                      Text(" $room",
                           style: TextStyle(
                               fontSize: 14.0.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.w500))
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

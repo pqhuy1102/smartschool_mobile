@@ -61,7 +61,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         child: Text(
                           "Tải lại",
                           style: TextStyle(
-                              fontSize: 13.0.sp, fontWeight: FontWeight.w700),
+                              fontSize: 13.0.sp, fontWeight: FontWeight.w600),
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue.shade900,
@@ -74,7 +74,9 @@ class _ReportScreenState extends State<ReportScreen> {
                             borderRadius: BorderRadius.circular(8.0.sp),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          _reportController.getUserSemestersList();
+                        },
                       ),
                     ],
                   ),
@@ -121,8 +123,6 @@ class _ReportScreenState extends State<ReportScreen> {
                                         ),
                                         iconSize: 30,
                                         buttonHeight: 30,
-                                        buttonPadding: const EdgeInsets.only(
-                                            left: 20, right: 10),
                                         dropdownDecoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15),
@@ -170,8 +170,8 @@ class _ReportScreenState extends State<ReportScreen> {
                                     child: Text(
                                   'Danh sách trống! ',
                                   style: TextStyle(
-                                      fontSize: 16.0.sp,
-                                      fontWeight: FontWeight.w600),
+                                      fontSize: 13.0.sp,
+                                      fontWeight: FontWeight.w500),
                                 ))
                               ],
                             );

@@ -46,14 +46,14 @@ class NotificationScreen extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(10, 40, 10, 20),
                   child: Image.asset(
                     'assets/images/empty_notification.png',
-                    height: 24.0.h,
+                    height: 22.0.h,
                     fit: BoxFit.contain,
                   ),
                 ),
                 Text(
                   'Bạn không có thông báo nào!',
                   style:
-                      TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w500),
+                      TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600),
                 )
               ],
             ));

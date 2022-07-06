@@ -29,11 +29,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       Get.put(DashBoardController());
 
   final ReportController _reportController = Get.put(ReportController());
-    final LoginController _loginController = Get.put(LoginController());
+  final LoginController _loginController = Get.put(LoginController());
 
   late FirebaseMessaging messaging;
-    final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
-
+  final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
 
   late final GetIndayAttendanceController _getIndayAttendanceController =
       Get.put(GetIndayAttendanceController());
@@ -295,23 +294,22 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
           child: Obx(() => Align(
               alignment: Alignment.topLeft,
-              child: RichText(
-                text: TextSpan(
-                    text: 'hello'.tr,
-                    style: TextStyle(
-                        fontSize: 14.0.sp,
-                        color: Colors.black,
-                        letterSpacing: 0.8,
-                        fontWeight: FontWeight.w500),
-                    children: [
-                      TextSpan(
-                          text: _loginController.username.value == "" ? _authmanager.username.value : _loginController.username.value,
-                          style: TextStyle(
-                              fontSize: 15.0.sp,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.4,
-                              color: Colors.red[300]))
-                    ]),
+              child: Row(
+                children: [
+                  Text('hello'.tr,
+                      style: TextStyle(
+                          fontSize: 13.0.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600)),
+                  Text(
+                      _loginController.username.value == ""
+                          ? _authmanager.username.value
+                          : _loginController.username.value,
+                      style: TextStyle(
+                          fontSize: 14.0.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.red[300]))
+                ],
               ))),
         ),
         const SizedBox(
@@ -363,7 +361,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     child: Text(
                       "Tải lại",
                       style: TextStyle(
-                          fontSize: 13.0.sp, fontWeight: FontWeight.w700),
+                          fontSize: 13.0.sp, fontWeight: FontWeight.w600),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue.shade900,
@@ -407,8 +405,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             letterSpacing: 0.8,
-                            fontSize: 14.0.sp,
-                            fontWeight: FontWeight.w600),
+                            fontSize: 13.0.sp,
+                            fontWeight: FontWeight.w500),
                       )))
                 ],
               ),
