@@ -13,26 +13,16 @@ class AuthenticationManager extends GetxController with CacheManager {
     removeUsername();
   }
 
-  void login(String? token) async {
+  void login(String? token, String? name) async {
     isLogged.value = true;
 
     //Token is cached
     await saveToken(token);
+    await saveUsername(name);
   }
 
   void changePasswordFirstTimeStatus(bool isActivate) async {
     await saveChangePassStatus(isActivate);
-  }
-
-  void saveUsernameToStorage(String name) async {
-    await saveUsername(name);
-  }
-
-  void changeUsername() {
-    final name = getUsername();
-    if (name != null) {
-      username.value = name;
-    }
   }
 
   void changePassStatus() {
@@ -44,6 +34,10 @@ class AuthenticationManager extends GetxController with CacheManager {
 
   void checkLoginStatus() {
     final token = getToken();
+    final name = getUsername();
+    if (name != null) {
+      username.value = name;
+    }
     if (token != null) {
       isLogged.value = true;
     }

@@ -102,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
           } else {
-            if (_profileController.userData != null) {
+            if (_profileController.hasInternet.isTrue) {
               return Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -158,11 +158,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
               );
             } else {
               return Center(
-                  child:
-                      Text('Không tìm thấy dữ liệu, vui lòng thử lại!',
-                          style: TextStyle(
-                            fontSize: 14.0.sp,
-                          )));
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/lost_internet.jpg',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Obx(() {
+                      if (_profileController.isLoading.value) {
+                        return Center(
+                          child: SpinKitFadingFour(
+                            color: Colors.blue.shade900,
+                            size: 50.0,
+                          ),
+                        );
+                      } else {
+                        return Text('Không có kết nối, vui lòng thử lại!',
+                            style: TextStyle(
+                              fontSize: 14.0.sp,
+                              color: Colors.grey.shade700,
+                            ));
+                      }
+                    }),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      child: Text(
+                        "Tải lại",
+                        style: TextStyle(
+                            fontSize: 13.0.sp, fontWeight: FontWeight.w700),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue.shade900,
+                        // onSurface: Colors.transparent,
+                        // shadowColor: Colors.transparent,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 14, horizontal: 50),
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0.sp),
+                        ),
+                      ),
+                      onPressed: () {
+                        _profileController.getProfileUser();
+                      },
+                    ),
+                  ],
+                ),
+              );
             }
           }
         }));

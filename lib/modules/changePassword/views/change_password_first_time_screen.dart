@@ -90,8 +90,26 @@ class _ChangePasswordFirstTimeScreenState
                                     controller:
                                         _changePasswordFirstTimeController
                                             .reNewPasswordEditingController,
-                                    validator: (value) =>
-                                        validatePassword(value),
+                                    validator: (value) {
+                                      if (value !=
+                                          _changePasswordFirstTimeController
+                                              .newPasswordEditingController!
+                                              .text) {
+                                        return 'Mật khẩu xác nhận không khớp với mật khẩu mới!';
+                                      }
+                                      String spacePattern = r'\s';
+                                      RegExp spaceRegex = RegExp(spacePattern);
+
+                                      if (value == null || value.isEmpty) {
+                                        return 'Mật khẩu không được để trống!';
+                                      } else if (spaceRegex.hasMatch(value)) {
+                                        return 'Mật khẩu không được chứa khoảng trắng!';
+                                      } else if (value.length < 8) {
+                                        return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
+                                      } else {
+                                        return null;
+                                      }
+                                    },
                                     style: TextStyle(fontSize: 14.0.sp),
                                     decoration: inputDecoration(
                                       "Xác nhận mật khẩu mới",
@@ -109,7 +127,9 @@ class _ChangePasswordFirstTimeScreenState
                               ),
                               ElevatedButton(
                                   onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
+                                    if (_formKey.currentState!.validate() &&
+                                        _changePasswordFirstTimeController
+                                            .isLoading.isFalse) {
                                       await _changePasswordFirstTimeController
                                           .changePasswordFirstTime(
                                               _changePasswordFirstTimeController
@@ -226,11 +246,13 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null ||
-      value.isEmpty ||
-      spaceRegex.hasMatch(value) ||
-      value.length < 6) {
-    return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
+
+  if (value == null || value.isEmpty) {
+    return 'Mật khẩu không được để trống!';
+  } else if (spaceRegex.hasMatch(value)) {
+    return 'Mật khẩu không được chứa khoảng trắng!';
+  } else if (value.length < 8) {
+    return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
   } else {
     return null;
   }

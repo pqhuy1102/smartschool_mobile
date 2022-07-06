@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
+import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/checkinToday/controllers/get_inday_attendance_controller.dart';
 import 'package:smartschool_mobile/modules/checkinToday/widgets/checkin_today_item.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
-import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
 import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
@@ -27,10 +28,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   final DashBoardController _dashBoardController =
       Get.put(DashBoardController());
 
-  final ProfileController _profileController = Get.put(ProfileController());
-
   final ReportController _reportController = Get.put(ReportController());
+    final LoginController _loginController = Get.put(LoginController());
+
   late FirebaseMessaging messaging;
+    final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
+
 
   late final GetIndayAttendanceController _getIndayAttendanceController =
       Get.put(GetIndayAttendanceController());
@@ -294,9 +297,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               alignment: Alignment.topLeft,
               child: RichText(
                 text: TextSpan(
-                    text: _profileController.userName.value == ""
-                        ? ""
-                        : 'hello'.tr,
+                    text: 'hello'.tr,
                     style: TextStyle(
                         fontSize: 14.0.sp,
                         color: Colors.black,
@@ -304,7 +305,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
-                          text: _profileController.userName.value,
+                          text: _loginController.username.value == "" ? _authmanager.username.value : _loginController.username.value,
                           style: TextStyle(
                               fontSize: 15.0.sp,
                               fontWeight: FontWeight.bold,
@@ -327,7 +328,62 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           ),
         ),
         Obx(() {
-          if (_getIndayAttendanceController.isLoading.isTrue) {
+          if (_getIndayAttendanceController.hasInternet.isFalse) {
+            return Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/lost_internet.jpg',
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Obx(() {
+                    if (_getIndayAttendanceController.isLoading.value) {
+                      return Center(
+                        child: SpinKitFadingFour(
+                          color: Colors.blue.shade900,
+                          size: 50.0,
+                        ),
+                      );
+                    } else {
+                      return Text('Không có kết nối, vui lòng thử lại!',
+                          style: TextStyle(
+                            fontSize: 14.0.sp,
+                            color: Colors.grey.shade700,
+                          ));
+                    }
+                  }),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    child: Text(
+                      "Tải lại",
+                      style: TextStyle(
+                          fontSize: 13.0.sp, fontWeight: FontWeight.w700),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue.shade900,
+                      // onSurface: Colors.transparent,
+                      // shadowColor: Colors.transparent,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 14, horizontal: 50),
+
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0.sp),
+                      ),
+                    ),
+                    onPressed: () {
+                      _getIndayAttendanceController.getIndayAttendance();
+                    },
+                  ),
+                ],
+              ),
+            );
+          } else if (_getIndayAttendanceController.isLoading.isTrue) {
             return Center(
               child: SpinKitFadingFour(
                 color: Colors.blue.shade900,

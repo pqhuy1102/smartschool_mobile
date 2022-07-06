@@ -13,6 +13,7 @@ class ChangePasswordFirstTimeController extends GetxController {
 
   late final ChangePasswordProvider _changePasswordProvider;
   late final AuthenticationManager _authenticationManager;
+  // ignore: unused_field
   late final LoginController _loginController;
 
   TextEditingController? newPasswordEditingController;
@@ -52,8 +53,7 @@ class ChangePasswordFirstTimeController extends GetxController {
       isLoading(false);
       clearTextField();
       _authenticationManager.saveChangePassStatus(true);
-      _authenticationManager
-          .saveUsernameToStorage(_loginController.username.value);
+
       Get.offNamed(Routes.dashboard);
     } else {
       Get.snackbar('Lỗi ', 'Đổi mật khẩu thất bại!',

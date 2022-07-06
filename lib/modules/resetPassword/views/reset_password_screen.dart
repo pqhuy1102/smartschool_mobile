@@ -90,7 +90,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: ElevatedButton(
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate() &&
+                                    _resetPasswordController
+                                        .isLoading.isFalse) {
                                   await _resetPasswordController.resetPassword(
                                       _resetPasswordController
                                           .emailEditingController!.text);
@@ -156,6 +158,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
+    errorMaxLines: 3,
     labelText: labelText,
     prefixText: prefix,
     labelStyle: TextStyle(color: Colors.blue.shade900),

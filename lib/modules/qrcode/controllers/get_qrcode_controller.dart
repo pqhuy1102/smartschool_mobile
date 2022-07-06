@@ -1,14 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 
 import 'package:smartschool_mobile/modules/qrcode/providers/get_qrcode_provider.dart';
 
 class GetQrCodeController extends GetxController {
   final isLoading = false.obs;
+
+  var hasInternet = false.obs;
 
   final qrCodeString = ''.obs;
 
@@ -25,7 +27,10 @@ class GetQrCodeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     _authenticationManager = Get.put(AuthenticationManager());
+
+    getInternetStatus();
 
     //get qr code first time
     getQrCode();
@@ -40,6 +45,14 @@ class GetQrCodeController extends GetxController {
     });
 
     readIsNeverAskAgain();
+
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final hasInternetYet = status == InternetConnectionStatus.connected;
+      hasInternet.value = hasInternetYet;
+      if (hasInternet.isTrue) {
+        getQrCode();
+      }
+    });
   }
 
   decreaseCounter() {
@@ -59,10 +72,6 @@ class GetQrCodeController extends GetxController {
       qrCodeString.value = res.qrString;
       isLoading(false);
     } else {
-      Get.snackbar('Error ', 'Không thể tải mã QR!',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
       isLoading(false);
     }
   }
@@ -71,6 +80,10 @@ class GetQrCodeController extends GetxController {
     if (box.read('isNeverDisplayAgain') != null) {
       isNeverDisplayAgain.value = box.read('isNeverDisplayAgain');
     }
+  }
+
+  void getInternetStatus() async {
+    hasInternet.value = await InternetConnectionChecker().hasConnection;
   }
 
   @override

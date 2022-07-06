@@ -116,7 +116,26 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       .isReNewPasswordHidden.value,
                                   controller: _changePasswordController
                                       .reNewPasswordEditingController,
-                                  validator: (value) => validatePassword(value),
+                                  validator: (value) {
+                                    if (value !=
+                                        _changePasswordController
+                                            .newPasswordEditingController!
+                                            .text) {
+                                      return 'Mật khẩu xác nhận không khớp với mật khẩu mới!';
+                                    }
+                                    String spacePattern = r'\s';
+                                    RegExp spaceRegex = RegExp(spacePattern);
+
+                                    if (value == null || value.isEmpty) {
+                                      return 'Mật khẩu không được để trống!';
+                                    } else if (spaceRegex.hasMatch(value)) {
+                                      return 'Mật khẩu không được chứa khoảng trắng!';
+                                    } else if (value.length < 8) {
+                                      return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
+                                    } else {
+                                      return null;
+                                    }
+                                  },
                                   style: TextStyle(fontSize: 14.0.sp),
                                   decoration: inputDecoration(
                                     "Xác nhận mật khẩu mới",
@@ -133,7 +152,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             ),
                             ElevatedButton(
                                 onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (_formKey.currentState!.validate() &&
+                                      _changePasswordController
+                                          .isLoading.isFalse) {
                                     await _changePasswordController
                                         .changePassword(
                                             _changePasswordController
@@ -209,6 +230,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
+    errorMaxLines: 3,
     labelText: labelText,
     prefixText: prefix,
     labelStyle: TextStyle(color: Colors.blue.shade900),
@@ -253,11 +275,13 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null ||
-      value.isEmpty ||
-      spaceRegex.hasMatch(value) ||
-      value.length < 8) {
-    return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
+
+  if (value == null || value.isEmpty) {
+    return 'Mật khẩu không được để trống!';
+  } else if (spaceRegex.hasMatch(value)) {
+    return 'Mật khẩu không được chứa khoảng trắng!';
+  } else if (value.length < 8) {
+    return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
   } else {
     return null;
   }
