@@ -219,7 +219,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                             child: Text(
                           'Danh sách trống! ',
                           style: TextStyle(
-                              fontSize: 16.0.sp, fontWeight: FontWeight.w600),
+                              fontSize: 13.0.sp, fontWeight: FontWeight.w600),
                         ))
                       ],
                     );

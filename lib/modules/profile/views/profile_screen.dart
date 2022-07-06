@@ -191,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text(
                         "Tải lại",
                         style: TextStyle(
-                            fontSize: 13.0.sp, fontWeight: FontWeight.w700),
+                            fontSize: 13.0.sp, fontWeight: FontWeight.w600),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue.shade900,
@@ -232,10 +232,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget nameTextField() {
     return TextFormField(
-        readOnly: true,
+        enabled: false,
         initialValue: _profileController.userData?.studentName,
         style: TextStyle(
-          fontSize: 14.0.sp,
+          fontSize: 13.0.sp,
           fontWeight: FontWeight.w500,
         ),
         decoration: InputDecoration(
@@ -260,10 +260,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget studentClassTextField() {
     return TextFormField(
-      readOnly: true,
+      enabled: false,
       initialValue: _profileController.userData?.studentClass,
       style: TextStyle(
-        fontSize: 14.0.sp,
+        fontSize: 13.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -289,10 +289,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget studentIdTextField() {
     return TextFormField(
-      readOnly: true,
+      enabled: false,
       initialValue: _profileController.userData?.studentId,
       style: TextStyle(
-        fontSize: 14.0.sp,
+        fontSize: 13.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -306,7 +306,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: 2,
         )),
         prefixIcon: Icon(
-          Icons.person_search,
+          Icons.badge,
           color: Colors.blue.shade900,
           size: 20.0.sp,
         ),
@@ -318,10 +318,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget genderTextField() {
     return TextFormField(
-      readOnly: true,
+      enabled: false,
       initialValue: _profileController.userData?.gender,
       style: TextStyle(
-        fontSize: 14.0.sp,
+        fontSize: 13.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -347,10 +347,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget emailTextField() {
     return TextFormField(
-      readOnly: true,
-      initialValue: _profileController.userData?.email,
+      enabled: false,
+      initialValue: "pqhuy18@apcs.fitus.edu.vn",
       style: TextStyle(
-        fontSize: 14.0.sp,
+        fontSize: 13.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -376,10 +376,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget phoneNumberTextField() {
     return TextFormField(
-      readOnly: true,
+      enabled: false,
       initialValue: _profileController.userData?.phoneNumber,
       style: TextStyle(
-        fontSize: 14.0.sp,
+        fontSize: 13.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(

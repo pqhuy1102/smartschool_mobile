@@ -61,10 +61,10 @@ class CheckinTodayItem extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 6),
-              child: Row(
+              child: Wrap(
                 children: [
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    margin: const EdgeInsets.fromLTRB(2, 0, 0, 0),
                     child: Row(
                       children: [
                         Icon(
@@ -78,23 +78,23 @@ class CheckinTodayItem extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 14.0.sp,
                                 color: Colors.black,
-                                fontWeight: FontWeight.w600))
+                                fontWeight: FontWeight.w500))
                       ],
                     ),
                   ),
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on,
+                        Icons.location_on_rounded,
                         color: Colors.blue.shade900,
-                        size: 18.0.sp,
+                        size: 16.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
-                      Text("$room",
+                      Text(" $room",
                           style: TextStyle(
                               fontSize: 14.0.sp,
                               color: Colors.black,
-                              fontWeight: FontWeight.w600))
+                              fontWeight: FontWeight.w500))
                     ],
                   ),
                 ],
@@ -102,15 +102,16 @@ class CheckinTodayItem extends StatelessWidget {
             ),
 
             Container(
-              margin: const EdgeInsets.only(top: 6),
-              child: Text("• $status",
-                  style: TextStyle(
-                      fontSize: 14.0.sp,
-                      color: status == "Attend"
-                          ? Colors.green.shade700
-                          : Colors.red.shade600,
-                      fontWeight: FontWeight.w600)),
-            )
+                margin: const EdgeInsets.only(top: 6),
+                child: Text("• $status",
+                    style: TextStyle(
+                        fontSize: 14.0.sp,
+                        color: status == "Hợp lệ"
+                            ? Colors.green.shade700
+                            : status == "Đi trễ"
+                                ? Colors.orange.shade700
+                                : Colors.red,
+                        fontWeight: FontWeight.w600)))
           ],
         ));
   }
