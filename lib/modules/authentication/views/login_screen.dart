@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'Quên mật khẩu?',
                                       style: TextStyle(
-                                          fontSize: 14.0.sp,
+                                          fontSize: 13.0.sp,
                                           color: Colors.black),
                                     ))),
                             const SizedBox(
@@ -109,7 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             ElevatedButton(
                                 onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (_formKey.currentState!.validate() &&
+                                      _loginController.isLoading.isFalse) {
                                     await _loginController.login(
                                         _loginController
                                             .emailEditingController!.text,
@@ -179,6 +180,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
     labelText: labelText,
     labelStyle: TextStyle(color: Colors.blue.shade900),
     prefixText: prefix,
+    errorMaxLines: 3,
     prefixIcon: Icon(
       iconData,
       size: 20.0.sp,
@@ -225,11 +227,13 @@ String? validateMSSV(String? value) {
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null ||
-      value.isEmpty ||
-      spaceRegex.hasMatch(value) ||
-      value.length < 6) {
-    return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
+
+  if (value == null || value.isEmpty) {
+    return 'Mật khẩu không được để trống!';
+  } else if (spaceRegex.hasMatch(value)) {
+    return 'Mật khẩu không được chứa khoảng trắng!';
+  } else if (value.length < 8) {
+    return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
   } else {
     return null;
   }

@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/checkinToday/providers/get_inday_attendance_provider.dart';
 
 class GetIndayAttendanceController extends GetxController {
+  var hasInternet = false.obs;
+
   final isLoading = false.obs;
 
   late final AuthenticationManager _authenticationManager;
@@ -19,7 +21,17 @@ class GetIndayAttendanceController extends GetxController {
     _authenticationManager = Get.find();
     _getIndayAttendanceProvider = Get.put(GetIndayAttendanceProvider());
 
+    getInternetStatus();
+
     getIndayAttendance();
+
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final hasInternetYet = status == InternetConnectionStatus.connected;
+      hasInternet.value = hasInternetYet;
+      if (hasInternet.isTrue) {
+        getIndayAttendance();
+      }
+    });
   }
 
   Future<void> getIndayAttendance() async {
@@ -35,10 +47,10 @@ class GetIndayAttendanceController extends GetxController {
       indayAttendanceList.value = res;
     } else {
       isLoading(false);
-      Get.snackbar('Lỗi ', "Không tải được ca học hôm nay!",
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
     }
+  }
+
+  void getInternetStatus() async {
+    hasInternet.value = await InternetConnectionChecker().hasConnection;
   }
 }

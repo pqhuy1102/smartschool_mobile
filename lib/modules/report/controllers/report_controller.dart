@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/report/providers/report_provider.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ReportController extends GetxController {
+  var hasInternet = false.obs;
+
   var isLoading = false.obs;
 
   late final AuthenticationManager _authenticationManager;
@@ -28,10 +31,18 @@ class ReportController extends GetxController {
   void onInit() {
     super.onInit();
     _authenticationManager = Get.find();
+
+    getInternetStatus();
+
     getUserSemestersList();
 
-    //handle scroll course attendance list
-    scrollController.addListener(() {});
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final hasInternetYet = status == InternetConnectionStatus.connected;
+      hasInternet.value = hasInternetYet;
+      if (hasInternet.isTrue) {
+        getUserSemestersList();
+      }
+    });
   }
 
   Future<void> getUserSemestersList() async {
@@ -101,8 +112,9 @@ class ReportController extends GetxController {
     }
   }
 
-  //get more course attendance data by scrolling
-  void getMoreData() {}
+  void getInternetStatus() async {
+    hasInternet.value = await InternetConnectionChecker().hasConnection;
+  }
 
   @override
   void dispose() {
