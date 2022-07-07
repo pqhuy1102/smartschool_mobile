@@ -208,7 +208,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               child: FittedBox(
                 child: FloatingActionButton(
                   onPressed: () =>
-                      Get.offNamed(Routes.dashboard + Routes.qrcode),
+                      Get.toNamed(Routes.dashboard + Routes.qrcode),
                   backgroundColor: Colors.blue.shade900,
                   child: const Icon(
                     Icons.qr_code_2,
