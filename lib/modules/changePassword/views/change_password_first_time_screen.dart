@@ -91,17 +91,15 @@ class _ChangePasswordFirstTimeScreenState
                                         _changePasswordFirstTimeController
                                             .reNewPasswordEditingController,
                                     validator: (value) {
-                                      if (value !=
+                                      String spacePattern = r'\s';
+                                      RegExp spaceRegex = RegExp(spacePattern);
+                                      if (value == null || value.isEmpty) {
+                                        return 'Mật khẩu không được để trống!';
+                                      } else if (value !=
                                           _changePasswordFirstTimeController
                                               .newPasswordEditingController!
                                               .text) {
                                         return 'Mật khẩu xác nhận không khớp với mật khẩu mới!';
-                                      }
-                                      String spacePattern = r'\s';
-                                      RegExp spaceRegex = RegExp(spacePattern);
-
-                                      if (value == null || value.isEmpty) {
-                                        return 'Mật khẩu không được để trống!';
                                       } else if (spaceRegex.hasMatch(value)) {
                                         return 'Mật khẩu không được chứa khoảng trắng!';
                                       } else if (value.length < 8) {
@@ -204,6 +202,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
+    errorMaxLines: 3,
     labelText: labelText,
     prefixText: prefix,
     labelStyle: TextStyle(color: Colors.blue.shade900),

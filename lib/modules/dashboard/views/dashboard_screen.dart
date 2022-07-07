@@ -4,11 +4,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
-import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/checkinToday/controllers/get_inday_attendance_controller.dart';
 import 'package:smartschool_mobile/modules/checkinToday/widgets/checkin_today_item.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
+import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
 import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
 import 'package:smartschool_mobile/modules/report/views/report_screen.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
@@ -29,7 +29,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       Get.put(DashBoardController());
 
   final ReportController _reportController = Get.put(ReportController());
-  final LoginController _loginController = Get.put(LoginController());
+  final ProfileController _profileController = Get.put(ProfileController());
 
   late FirebaseMessaging messaging;
   final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
@@ -172,7 +172,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               child: Text("Đóng",
                   style: TextStyle(
                       fontSize: 12.0.sp, color: Colors.blue.shade900)),
-              onPressed: () => Get.back(),
+              onPressed: () {
+                Get.back();
+                Get.offNamed(Routes.dashboard);
+                _getIndayAttendanceController.getIndayAttendance();
+              },
             ),
           ],
         ),
@@ -204,7 +208,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               child: FittedBox(
                 child: FloatingActionButton(
                   onPressed: () =>
-                      Get.toNamed(Routes.dashboard + Routes.qrcode),
+                      Get.offNamed(Routes.dashboard + Routes.qrcode),
                   backgroundColor: Colors.blue.shade900,
                   child: const Icon(
                     Icons.qr_code_2,
@@ -302,9 +306,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           color: Colors.black,
                           fontWeight: FontWeight.w600)),
                   Text(
-                      _loginController.username.value == ""
+                      _profileController.userName.value == ""
                           ? _authmanager.username.value
-                          : _loginController.username.value,
+                          : _profileController.userName.value,
                       style: TextStyle(
                           fontSize: 14.0.sp,
                           fontWeight: FontWeight.w700,

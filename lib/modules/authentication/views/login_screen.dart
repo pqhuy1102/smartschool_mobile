@@ -232,8 +232,6 @@ String? validatePassword(String? value) {
     return 'Mật khẩu không được để trống!';
   } else if (spaceRegex.hasMatch(value)) {
     return 'Mật khẩu không được chứa khoảng trắng!';
-  } else if (value.length < 8) {
-    return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
   } else {
     return null;
   }
