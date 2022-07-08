@@ -24,6 +24,8 @@ class GetQrCodeController extends GetxController {
 
   final box = GetStorage();
 
+  final qrCodeSize = 350.0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -84,6 +86,14 @@ class GetQrCodeController extends GetxController {
 
   void getInternetStatus() async {
     hasInternet.value = await InternetConnectionChecker().hasConnection;
+  }
+
+  void handleQrSize() {
+    if (qrCodeSize.value == 350.0) {
+      qrCodeSize.value = 420.0;
+    } else {
+      qrCodeSize.value = 350.0;
+    }
   }
 
   @override

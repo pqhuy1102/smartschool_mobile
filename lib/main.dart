@@ -8,12 +8,15 @@ import 'routes/routes.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/services.dart';
 
+// Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
+
 void main() async {
   //initialize for data persistency
   await GetStorage.init();
   //initialize for firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 

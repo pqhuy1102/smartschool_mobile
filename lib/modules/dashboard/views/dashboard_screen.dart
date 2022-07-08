@@ -24,164 +24,171 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int selectedPosition = 0;
+  late FirebaseMessaging messaging;
 
   final DashBoardController _dashBoardController =
       Get.put(DashBoardController());
-
   final ReportController _reportController = Get.put(ReportController());
   final ProfileController _profileController = Get.put(ProfileController());
-
-  late FirebaseMessaging messaging;
   final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
-
   late final GetIndayAttendanceController _getIndayAttendanceController =
       Get.put(GetIndayAttendanceController());
+
+  void requestAndRegisterNotification() async {
+    messaging = FirebaseMessaging.instance;
+
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      badge: true,
+      provisional: false,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        Get.dialog(
+          AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(14.0))),
+            title: Center(
+              child: Text(
+                '${message.data['message']}',
+                style:
+                    TextStyle(fontSize: 15.0.sp, fontWeight: FontWeight.bold),
+              ),
+            ),
+            content: Container(
+                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                                text: 'Môn học: ',
+                                style: TextStyle(
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.bold)),
+                            TextSpan(
+                              text: message.data['course'] == null
+                                  ? "Không có dữ liệu"
+                                  : '${message.data['course']}',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                                text: 'Phòng học: ',
+                                style: TextStyle(
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.bold)),
+                            TextSpan(
+                              text: message.data['room'] == null
+                                  ? "Không có dữ liệu"
+                                  : '${message.data['room']}',
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                                text: 'Ca học: ',
+                                style: TextStyle(
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.bold)),
+                            TextSpan(
+                              text: message.data['shift'] == null
+                                  ? 'Không có dữ liệu'
+                                  : formatUtcToLocalTime(message.data['shift']
+                                          .toString()
+                                          .substring(0, 18)) +
+                                      '-' +
+                                      formatUtcToLocalTime(message.data['shift']
+                                          .toString()
+                                          .substring(20)),
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                                text: 'Điểm danh lúc: ',
+                                style: TextStyle(
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.bold)),
+                            TextSpan(
+                              text: message.data['checkintime'] == null
+                                  ? "Không có dữ liệu"
+                                  : formatUtcToLocalTime(
+                                      message.data['checkintime']),
+                              style: TextStyle(
+                                  fontSize: 14.0.sp,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                    ],
+                  ),
+                )),
+            actions: [
+              TextButton(
+                child: Text("Đóng",
+                    style: TextStyle(
+                        fontSize: 12.0.sp, color: Colors.blue.shade900)),
+                onPressed: () {
+                  Get.back();
+                  Get.offNamed(Routes.dashboard);
+                  _getIndayAttendanceController.getIndayAttendance();
+                },
+              ),
+            ],
+          ),
+        );
+      });
+    } else {}
+  }
 
   @override
   void initState() {
     super.initState();
 
-    messaging = FirebaseMessaging.instance;
-
-    messaging.getInitialMessage();
-
-    //foreground state
-    FirebaseMessaging.onMessage.listen((message) {
-      //display notification dialog
-      Get.dialog(
-        AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14.0))),
-          title: Center(
-            child: Text(
-              '${message.data['message']}',
-              style: TextStyle(fontSize: 15.0.sp, fontWeight: FontWeight.bold),
-            ),
-          ),
-          content: Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Môn học: ',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  fontWeight: FontWeight.bold)),
-                          TextSpan(
-                            text: message.data['course'] == null
-                                ? "Không có dữ liệu"
-                                : '${message.data['course']}',
-                            style: TextStyle(
-                                fontSize: 14.0.sp,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Phòng học: ',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  fontWeight: FontWeight.bold)),
-                          TextSpan(
-                            text: message.data['room'] == null
-                                ? "Không có dữ liệu"
-                                : '${message.data['room']}',
-                            style: TextStyle(
-                                fontSize: 14.0.sp,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Ca học: ',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  fontWeight: FontWeight.bold)),
-                          TextSpan(
-                            text: message.data['shift'] == null
-                                ? 'Không có dữ liệu'
-                                : formatUtcToLocalTime(message.data['shift']
-                                        .toString()
-                                        .substring(0, 18)) +
-                                    '-' +
-                                    formatUtcToLocalTime(message.data['shift']
-                                        .toString()
-                                        .substring(20)),
-                            style: TextStyle(
-                                fontSize: 14.0.sp,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Điểm danh lúc: ',
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  fontWeight: FontWeight.bold)),
-                          TextSpan(
-                            text: message.data['checkintime'] == null
-                                ? "Không có dữ liệu"
-                                : formatUtcToLocalTime(
-                                    message.data['checkintime']),
-                            style: TextStyle(
-                                fontSize: 14.0.sp,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                  ],
-                ),
-              )),
-          actions: [
-            TextButton(
-              child: Text("Đóng",
-                  style: TextStyle(
-                      fontSize: 12.0.sp, color: Colors.blue.shade900)),
-              onPressed: () {
-                Get.back();
-                Get.offNamed(Routes.dashboard);
-                _getIndayAttendanceController.getIndayAttendance();
-              },
-            ),
-          ],
-        ),
-      );
-    });
+    requestAndRegisterNotification();
 
     updateNotiToken();
   }
