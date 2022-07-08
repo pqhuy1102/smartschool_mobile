@@ -112,11 +112,9 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                 );
               } else {
                 return Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 30),
+                    margin: const EdgeInsets.only(top: 30.0),
                     child: SafeArea(
-                      child: Center(
-                          child: SingleChildScrollView(
+                      child: SingleChildScrollView(
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -129,14 +127,104 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                   ),
                                 );
                               } else {
-                                return QrImage(
-                                  size: 300,
-                                  data: _qrCodeController.qrCodeString.value,
+                                return GestureDetector(
+                                  child: Container(
+                                    margin: const EdgeInsets.all(12.0),
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          width: 48,
+                                          height: 48,
+                                          decoration: BoxDecoration(
+                                            border: Border(
+                                              top: BorderSide(
+                                                  color: Colors.blue.shade900,
+                                                  width: 8),
+                                              left: BorderSide(
+                                                  color: Colors.blue.shade900,
+                                                  width: 8),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          right: 0,
+                                          child: Container(
+                                            width: 48,
+                                            height: 48,
+                                            decoration: BoxDecoration(
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 8),
+                                                right: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 8),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: Container(
+                                            width: 48,
+                                            height: 48,
+                                            decoration: BoxDecoration(
+                                              border: Border(
+                                                top: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 8),
+                                                right: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 8),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          left: 0,
+                                          child: Container(
+                                            width: 48,
+                                            height: 48,
+                                            decoration: BoxDecoration(
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 8),
+                                                left: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 8),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: QrImage(
+                                            size: _qrCodeController
+                                                .qrCodeSize.value,
+                                            embeddedImage: const AssetImage(
+                                                'assets/images/logo_mini.png'),
+                                            embeddedImageStyle:
+                                                QrEmbeddedImageStyle(
+                                                    size: const Size(60, 60)),
+                                            foregroundColor:
+                                                Colors.blue.shade900,
+                                            data: _qrCodeController
+                                                .qrCodeString.value,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  onTap: () => _qrCodeController.handleQrSize(),
                                 );
                               }
                             }),
                             const SizedBox(
-                              height: 20,
+                              height: 30,
                             ),
                             Obx(() {
                               return Row(
@@ -169,10 +257,9 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                   primary: Colors.blue.shade900,
                                   // onSurface: Colors.transparent,
                                   // shadowColor: Colors.transparent,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 14, horizontal: 40),
 
-                                  minimumSize: const Size.fromHeight(40),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0.sp),
                                   ),
@@ -184,7 +271,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                             ),
                           ],
                         ),
-                      )),
+                      ),
                     ));
               }
             })),
