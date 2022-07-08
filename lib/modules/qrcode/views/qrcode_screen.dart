@@ -130,6 +130,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                 );
                               } else {
                                 return QrImage(
+                                  size: 300,
                                   data: _qrCodeController.qrCodeString.value,
                                 );
                               }
