@@ -24,7 +24,7 @@ class GetQrCodeController extends GetxController {
 
   final box = GetStorage();
 
-  final qrCodeSize = 350.0.obs;
+  final qrCodeSize = 300.0.obs;
 
   @override
   void onInit() {
@@ -89,10 +89,10 @@ class GetQrCodeController extends GetxController {
   }
 
   void handleQrSize() {
-    if (qrCodeSize.value == 350.0) {
-      qrCodeSize.value = 420.0;
-    } else {
+    if (qrCodeSize.value == 300.0) {
       qrCodeSize.value = 350.0;
+    } else {
+      qrCodeSize.value = 300.0;
     }
   }
 

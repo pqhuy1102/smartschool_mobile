@@ -129,7 +129,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                               } else {
                                 return GestureDetector(
                                   child: Container(
-                                    margin: const EdgeInsets.all(12.0),
+                                    margin: const EdgeInsets.all(10.0),
                                     child: Stack(
                                       children: [
                                         Container(
@@ -201,7 +201,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.all(20.0),
+                                          padding: const EdgeInsets.all(10.0),
                                           child: QrImage(
                                             size: _qrCodeController
                                                 .qrCodeSize.value,
