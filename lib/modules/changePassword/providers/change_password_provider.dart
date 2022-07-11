@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:smartschool_mobile/constants.dart';
-import 'package:smartschool_mobile/modules/changePassword/models/change_password_first_time_response_model.dart';
 import 'package:smartschool_mobile/modules/changePassword/models/change_password_first_time_request_model.dart';
 import 'package:smartschool_mobile/modules/changePassword/models/change_password_request_model.dart';
-import 'package:smartschool_mobile/modules/changePassword/models/change_password_response_model.dart';
 
 class ChangePasswordProvider extends GetConnect {
   final String changePasswordUrl =
