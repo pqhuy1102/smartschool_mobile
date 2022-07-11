@@ -117,17 +117,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   controller: _changePasswordController
                                       .reNewPasswordEditingController,
                                   validator: (value) {
-                                    if (value !=
+                                    String spacePattern = r'\s';
+                                    RegExp spaceRegex = RegExp(spacePattern);
+                                    if (value == null || value.isEmpty) {
+                                      return 'Mật khẩu không được để trống!';
+                                    } else if (value !=
                                         _changePasswordController
                                             .newPasswordEditingController!
                                             .text) {
                                       return 'Mật khẩu xác nhận không khớp với mật khẩu mới!';
-                                    }
-                                    String spacePattern = r'\s';
-                                    RegExp spaceRegex = RegExp(spacePattern);
-
-                                    if (value == null || value.isEmpty) {
-                                      return 'Mật khẩu không được để trống!';
                                     } else if (spaceRegex.hasMatch(value)) {
                                       return 'Mật khẩu không được chứa khoảng trắng!';
                                     } else if (value.length < 8) {

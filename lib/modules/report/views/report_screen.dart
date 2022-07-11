@@ -171,7 +171,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   'Danh sách trống! ',
                                   style: TextStyle(
                                       fontSize: 13.0.sp,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600),
                                 ))
                               ],
                             );

@@ -221,7 +221,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Stack(
         children: [
           SizedBox(
-              height: 20.0.h,
+              height: 24.0.h,
               child: const CircleAvatar(
                   radius: 100,
                   backgroundImage: AssetImage('assets/images/avatar.png'))),

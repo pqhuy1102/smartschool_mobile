@@ -6,7 +6,9 @@ class LoginProvider extends GetConnect {
   final String loginUrl = '${Constant.apiDomain}/login';
 
   Future<dynamic> login(LoginRequestModel model) async {
-    final response = await post(loginUrl, model.toJson());
+    final response = await post(loginUrl, model.toJson(), headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    });
     if (!response.status.connectionError) {
       return response;
     } else {
