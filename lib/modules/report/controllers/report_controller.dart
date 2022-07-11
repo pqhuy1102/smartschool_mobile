@@ -46,15 +46,22 @@ class ReportController extends GetxController {
   }
 
   Future<void> getUserSemestersList() async {
+    isLoading(true);
     String? token = _authenticationManager.getToken();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
     };
     var res = await ReportProvider().getUserSemestersList(headers);
-    userSemestersList.value = res;
-    currentSemesterValue.value = userSemestersList.last['id'].toString();
-    getCoursesInSemester();
+
+    if (res != null) {
+      userSemestersList.value = res.body["semester_list"];
+      currentSemesterValue.value = userSemestersList.last['id'].toString();
+      getCoursesInSemester();
+      isLoading(false);
+    } else {
+      isLoading(false);
+    }
   }
 
   Future<void> getCoursesInSemester() async {
