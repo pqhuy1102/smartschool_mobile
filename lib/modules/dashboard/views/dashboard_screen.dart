@@ -417,7 +417,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         style: TextStyle(
                             letterSpacing: 0.8,
                             fontSize: 13.0.sp,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w600),
                       )))
                 ],
               ),

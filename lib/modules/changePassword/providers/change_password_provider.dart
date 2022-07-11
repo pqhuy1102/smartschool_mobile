@@ -12,27 +12,25 @@ class ChangePasswordProvider extends GetConnect {
   final String changePasswordFirstTimeUrl =
       '${Constant.apiDomain}/user/change-password-firsttime';
 
-  Future<ChangePasswordResponseModel?> changePassword(
+  Future<dynamic> changePassword(
       ChangePasswordRequestModel model, headers) async {
-    final response =
-        await put(changePasswordUrl, model.toJson(), headers: headers);
+    final response = await put(
+      changePasswordUrl,
+      model.toJson(),
+      headers: headers,
+    );
 
     if (response.statusCode == HttpStatus.ok) {
-      return ChangePasswordResponseModel.fromJson(response.body);
+      return true;
     } else {
-      return null;
+      return response;
     }
   }
 
-  Future<ChangePasswordFirstTimeResponseModel?> changePasswordFirstTime(
+  Future<dynamic> changePasswordFirstTime(
       ChangePasswordFirstTimeRequestModel model, headers) async {
     final response = await post(changePasswordFirstTimeUrl, model.toJson(),
         headers: headers);
-
-    if (response.statusCode == HttpStatus.ok) {
-      return ChangePasswordFirstTimeResponseModel.fromJson(response.body);
-    } else {
-      return null;
-    }
+    return response;
   }
 }

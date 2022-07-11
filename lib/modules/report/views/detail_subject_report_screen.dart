@@ -140,57 +140,6 @@ class SubjectDetailReportScreen extends StatelessWidget {
                             ],
                           ),
                         ));
-                    // return DropdownButton(
-                    //   items: [
-                    //     DropdownMenuItem(
-                    //       child: Text(
-                    //         'Tất cả',
-                    //         style: TextStyle(
-                    //             fontSize: 13.0.sp,
-                    //             color: Colors.black,
-                    //             fontWeight: FontWeight.w500),
-                    //       ),
-                    //       value: "1",
-                    //     ),
-                    //     DropdownMenuItem(
-                    //       child: Text(
-                    //         'Hợp lệ',
-                    //         style: TextStyle(
-                    //             fontSize: 13.0.sp,
-                    //             color: Colors.black,
-                    //             fontWeight: FontWeight.w500),
-                    //       ),
-                    //       value: "2",
-                    //     ),
-                    //     DropdownMenuItem(
-                    //       child: Text(
-                    //         'Đi trễ',
-                    //         style: TextStyle(
-                    //             fontSize: 13.0.sp,
-                    //             color: Colors.black,
-                    //             fontWeight: FontWeight.w500),
-                    //       ),
-                    //       value: "3",
-                    //     ),
-                    //     DropdownMenuItem(
-                    //       child: Text(
-                    //         'Vắng',
-                    //         style: TextStyle(
-                    //             fontSize: 13.0.sp,
-                    //             color: Colors.black,
-                    //             fontWeight: FontWeight.w500),
-                    //       ),
-                    //       value: "4",
-                    //     ),
-                    //   ],
-                    //   value: _reportController.filterValue.value,
-                    //   onChanged: (selectedValue) {
-                    //     _reportController.filterValue.value =
-                    //         selectedValue.toString();
-                    //     _reportController.filterCourseAttendanceFun(
-                    //         selectedValue.toString());
-                    //   },
-                    // );
                   })
                 ],
               ),

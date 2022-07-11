@@ -133,16 +133,16 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                     child: Stack(
                                       children: [
                                         Container(
-                                          width: 48,
-                                          height: 48,
+                                          width: 45,
+                                          height: 45,
                                           decoration: BoxDecoration(
                                             border: Border(
                                               top: BorderSide(
                                                   color: Colors.blue.shade900,
-                                                  width: 8),
+                                                  width: 5),
                                               left: BorderSide(
                                                   color: Colors.blue.shade900,
-                                                  width: 8),
+                                                  width: 5),
                                             ),
                                           ),
                                         ),
@@ -150,16 +150,16 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                           bottom: 0,
                                           right: 0,
                                           child: Container(
-                                            width: 48,
-                                            height: 48,
+                                            width: 45,
+                                            height: 45,
                                             decoration: BoxDecoration(
                                               border: Border(
                                                 bottom: BorderSide(
                                                     color: Colors.blue.shade900,
-                                                    width: 8),
+                                                    width: 5),
                                                 right: BorderSide(
                                                     color: Colors.blue.shade900,
-                                                    width: 8),
+                                                    width: 5),
                                               ),
                                             ),
                                           ),
@@ -168,16 +168,16 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                           top: 0,
                                           right: 0,
                                           child: Container(
-                                            width: 48,
-                                            height: 48,
+                                            width: 45,
+                                            height: 45,
                                             decoration: BoxDecoration(
                                               border: Border(
                                                 top: BorderSide(
                                                     color: Colors.blue.shade900,
-                                                    width: 8),
+                                                    width: 5),
                                                 right: BorderSide(
                                                     color: Colors.blue.shade900,
-                                                    width: 8),
+                                                    width: 5),
                                               ),
                                             ),
                                           ),
@@ -186,22 +186,22 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                           bottom: 0,
                                           left: 0,
                                           child: Container(
-                                            width: 48,
-                                            height: 48,
+                                            width: 45,
+                                            height: 45,
                                             decoration: BoxDecoration(
                                               border: Border(
                                                 bottom: BorderSide(
                                                     color: Colors.blue.shade900,
-                                                    width: 8),
+                                                    width: 5),
                                                 left: BorderSide(
                                                     color: Colors.blue.shade900,
-                                                    width: 8),
+                                                    width: 5),
                                               ),
                                             ),
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.all(10.0),
+                                          padding: const EdgeInsets.all(5.0),
                                           child: QrImage(
                                             size: _qrCodeController
                                                 .qrCodeSize.value,
@@ -209,7 +209,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                                 'assets/images/logo_mini.png'),
                                             embeddedImageStyle:
                                                 QrEmbeddedImageStyle(
-                                                    size: const Size(60, 60)),
+                                                    size: const Size(55, 55)),
                                             foregroundColor:
                                                 Colors.blue.shade900,
                                             data: _qrCodeController
