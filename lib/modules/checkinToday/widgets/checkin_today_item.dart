@@ -67,6 +67,9 @@ class CheckinTodayItem extends StatelessWidget {
                     margin: const EdgeInsets.fromLTRB(2, 0, 0, 0),
                     child: Row(
                       children: [
+                        const SizedBox(
+                          width: 2,
+                        ),
                         Icon(
                           Icons.access_time_filled_rounded,
                           color: Colors.blue.shade900,
@@ -85,7 +88,7 @@ class CheckinTodayItem extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on_rounded,
+                        Icons.location_on,
                         color: Colors.blue.shade900,
                         size: 16.0.sp,
                       ),

@@ -13,6 +13,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -55,18 +57,21 @@ class SubjectDetailReportScreen extends StatelessWidget {
                         color: Colors.grey.shade600,
                         size: 13.0.sp,
                       ),
-                      Text(
-                        "Lọc danh sách",
-                        style: TextStyle(
-                            fontSize: 13.0.sp,
-                            color: Colors.grey.shade600,
-                            fontWeight: FontWeight.w600),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: Text(
+                          "Lọc danh sách",
+                          style: TextStyle(
+                              fontSize: 13.0.sp,
+                              color: Colors.grey.shade600,
+                              fontWeight: FontWeight.w600),
+                        ),
                       )
                     ],
                   ),
                   Obx(() {
                     return SizedBox(
-                        width: 34.0.w,
+                        width: textScale >= 1.3 ? 38.0.w : 32.0.w,
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(
@@ -89,8 +94,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               Icons.arrow_drop_down,
                               color: Colors.black45,
                             ),
-                            iconSize: 30,
-                            buttonHeight: 34,
+                            iconSize: 28,
+                            buttonHeight: 30,
                             buttonPadding:
                                 const EdgeInsets.only(left: 20, right: 10),
                             dropdownDecoration: BoxDecoration(
