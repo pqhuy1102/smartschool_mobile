@@ -53,7 +53,10 @@ class OverviewSubjectItem extends StatelessWidget {
                         // ignore: unnecessary_string_interpolations
                         '$subjectId - $subjectName',
                         style: TextStyle(
-                            fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+                            fontSize: textScale > 1.5
+                                ? 14.0.sp / textScale * 1.5
+                                : 14.0.sp,
+                            fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(
                         height: 15,
@@ -76,7 +79,10 @@ class OverviewSubjectItem extends StatelessWidget {
                           Text(
                             '• Số buổi đi học:',
                             style: TextStyle(
-                                fontSize: 14.0.sp, fontWeight: FontWeight.w400),
+                                fontSize: textScale > 1.5
+                                    ? 14.0.sp / textScale * 1.5
+                                    : 14.0.sp,
+                                fontWeight: FontWeight.w400),
                             maxLines: 2,
                           ),
                           Text(
@@ -85,7 +91,10 @@ class OverviewSubjectItem extends StatelessWidget {
                             '$totalSession '
                             'buổi',
                             style: TextStyle(
-                                fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+                                fontSize: textScale > 1.5
+                                    ? 14.0.sp / textScale * 1.5
+                                    : 14.0.sp,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       )
@@ -95,7 +104,10 @@ class OverviewSubjectItem extends StatelessWidget {
                           Text(
                             '• Số buổi đi học:',
                             style: TextStyle(
-                                fontSize: 14.0.sp, fontWeight: FontWeight.w400),
+                                fontSize: textScale > 1.5
+                                    ? 14.0.sp / textScale * 1.5
+                                    : 14.0.sp,
+                                fontWeight: FontWeight.w400),
                           ),
                           Flexible(
                             child: Text(
@@ -104,7 +116,9 @@ class OverviewSubjectItem extends StatelessWidget {
                               '$totalSession '
                               'buổi',
                               style: TextStyle(
-                                  fontSize: 14.0.sp,
+                                  fontSize: textScale > 1.5
+                                      ? 14.0.sp / textScale * 1.5
+                                      : 14.0.sp,
                                   fontWeight: FontWeight.w600),
                             ),
                           )
@@ -123,12 +137,18 @@ class OverviewSubjectItem extends StatelessWidget {
                         Text(
                           '• Số buổi vắng:',
                           style: TextStyle(
-                              fontSize: 14.0.sp, fontWeight: FontWeight.w400),
+                              fontSize: textScale > 1.5
+                                  ? 14.0.sp / textScale * 1.5
+                                  : 14.0.sp,
+                              fontWeight: FontWeight.w400),
                         ),
                         Text(
                           '$absenceSession' '/' '$totalSession ' 'buổi',
                           style: TextStyle(
-                              fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+                              fontSize: textScale > 1.5
+                                  ? 14.0.sp / textScale * 1.5
+                                  : 14.0.sp,
+                              fontWeight: FontWeight.w600),
                         )
                       ],
                     )
@@ -138,12 +158,18 @@ class OverviewSubjectItem extends StatelessWidget {
                         Text(
                           '• Số buổi vắng:',
                           style: TextStyle(
-                              fontSize: 14.0.sp, fontWeight: FontWeight.w400),
+                              fontSize: textScale > 1.5
+                                  ? 14.0.sp / textScale * 1.5
+                                  : 14.0.sp,
+                              fontWeight: FontWeight.w400),
                         ),
                         Text(
                           '$absenceSession' '/' '$totalSession ' 'buổi',
                           style: TextStyle(
-                              fontSize: 14.0.sp, fontWeight: FontWeight.w600),
+                              fontSize: textScale > 1.5
+                                  ? 14.0.sp / textScale * 1.5
+                                  : 14.0.sp,
+                              fontWeight: FontWeight.w600),
                         )
                       ],
                     ),

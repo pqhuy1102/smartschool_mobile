@@ -62,7 +62,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                         child: Text(
                           "Lọc danh sách",
                           style: TextStyle(
-                              fontSize: 13.0.sp,
+                              fontSize: (textScale > 1.5
+                                  ? 13.0.sp / textScale * 1.5
+                                  : 13.0.sp),
                               color: Colors.grey.shade600,
                               fontWeight: FontWeight.w600),
                         ),
@@ -106,7 +108,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Tất cả',
                                   style: TextStyle(
-                                      fontSize: 13.0.sp,
+                                      fontSize: textScale > 1.5
+                                          ? 13.0.sp / textScale * 1.5
+                                          : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -116,7 +120,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Hợp lệ',
                                   style: TextStyle(
-                                      fontSize: 13.0.sp,
+                                      fontSize: textScale > 1.5
+                                          ? 13.0.sp / textScale * 1.5
+                                          : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -126,7 +132,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Đi trễ',
                                   style: TextStyle(
-                                      fontSize: 13.0.sp,
+                                      fontSize: textScale > 1.5
+                                          ? 13.0.sp / textScale * 1.5
+                                          : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -136,7 +144,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Vắng',
                                   style: TextStyle(
-                                      fontSize: 13.0.sp,
+                                      fontSize: textScale > 1.5
+                                          ? 13.0.sp / textScale * 1.5
+                                          : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -173,7 +183,10 @@ class SubjectDetailReportScreen extends StatelessWidget {
                             child: Text(
                           'Danh sách trống! ',
                           style: TextStyle(
-                              fontSize: 13.0.sp, fontWeight: FontWeight.w600),
+                              fontSize: textScale > 1.5
+                                  ? 13.0.sp / textScale * 1.5
+                                  : 13.0.sp,
+                              fontWeight: FontWeight.w600),
                         ))
                       ],
                     );
