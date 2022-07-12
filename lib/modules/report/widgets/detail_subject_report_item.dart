@@ -69,6 +69,9 @@ class DetailSubjectItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      const SizedBox(
+                        width: 2,
+                      ),
                       Icon(
                         Icons.access_time_filled_rounded,
                         color: Colors.blue.shade900,
@@ -85,7 +88,7 @@ class DetailSubjectItem extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on_rounded,
+                        Icons.location_on,
                         color: Colors.blue.shade900,
                         size: 16.0.sp,
                       ),

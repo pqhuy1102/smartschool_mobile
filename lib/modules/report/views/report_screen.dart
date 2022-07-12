@@ -19,6 +19,8 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return SafeArea(
         child: Scaffold(
             extendBodyBehindAppBar: true,
@@ -102,7 +104,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               ),
                               Obx(() {
                                 return SizedBox(
-                                    width: 50.0.w,
+                                    width: textScale >= 1.3 ? 60.0.w : 50.0.w,
                                     child: Container(
                                       decoration: BoxDecoration(
                                           border: Border.all(
@@ -119,10 +121,10 @@ class _ReportScreenState extends State<ReportScreen> {
                                             .currentSemesterValue.value,
                                         icon: const Icon(
                                           Icons.arrow_drop_down,
-                                          color: Colors.black45,
+                                          color: Colors.black,
                                         ),
-                                        iconSize: 30,
-                                        buttonHeight: 30,
+                                        iconSize: 26,
+                                        buttonHeight: 29,
                                         dropdownDecoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15),

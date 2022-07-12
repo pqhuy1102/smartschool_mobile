@@ -346,31 +346,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget emailTextField() {
-    return TextFormField(
-      enabled: false,
-      initialValue: "pqhuy18@apcs.fitus.edu.vn",
-      style: TextStyle(
-        fontSize: 13.0.sp,
-        fontWeight: FontWeight.w500,
-      ),
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-            borderSide: BorderSide(
-          color: Colors.blue.shade900,
-        )),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          color: Colors.blue.shade900,
-          width: 2,
-        )),
-        prefixIcon: Icon(
-          Icons.email,
-          color: Colors.blue.shade900,
-          size: 20.0.sp,
-        ),
-        labelText: "Email",
-        labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
-      ),
+    return Row(
+      children: [
+        Expanded(
+            child: TextFormField(
+          enabled: false,
+          initialValue: _profileController.userData?.email,
+          style: TextStyle(
+            fontSize: 13.0.sp,
+            fontWeight: FontWeight.w500,
+          ),
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+                borderSide: BorderSide(
+              color: Colors.blue.shade900,
+            )),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+              color: Colors.blue.shade900,
+              width: 2,
+            )),
+            prefixIcon: Icon(
+              Icons.email,
+              color: Colors.blue.shade900,
+              size: 20.0.sp,
+            ),
+            labelText: "Email",
+            labelStyle:
+                TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
+          ),
+        ))
+      ],
     );
   }
 
