@@ -22,6 +22,8 @@ class DetailSubjectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Container(
         margin: const EdgeInsets.fromLTRB(8, 0, 8, 24),
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
@@ -38,7 +40,8 @@ class DetailSubjectItem extends StatelessWidget {
                   // ignore: unnecessary_string_interpolations
                   "$date",
                   style: TextStyle(
-                      fontSize: 14.0.sp,
+                      fontSize:
+                          textScale > 1.5 ? 14.0.sp / textScale * 1.5 : 14.0.sp,
                       color: Colors.grey.shade600,
                       fontWeight: FontWeight.w600),
                 ),
@@ -55,7 +58,9 @@ class DetailSubjectItem extends StatelessWidget {
                       "$subjectId",
                       // overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 14.0.sp,
+                          fontSize: textScale > 1.5
+                              ? 14.0.sp / textScale * 1.5
+                              : 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),
@@ -80,7 +85,9 @@ class DetailSubjectItem extends StatelessWidget {
                       // ignore: unnecessary_string_interpolations
                       Text("$startTime -$endTime",
                           style: TextStyle(
-                              fontSize: 14.0.sp,
+                              fontSize: textScale > 1.5
+                                  ? 14.0.sp / textScale * 1.5
+                                  : 14.0.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.w500))
                     ],
@@ -95,7 +102,9 @@ class DetailSubjectItem extends StatelessWidget {
                       // ignore: unnecessary_string_interpolations
                       Text(" $room",
                           style: TextStyle(
-                              fontSize: 14.0.sp,
+                              fontSize: textScale > 1.5
+                                  ? 14.0.sp / textScale * 1.5
+                                  : 14.0.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.w500))
                     ],
@@ -107,7 +116,8 @@ class DetailSubjectItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               child: Text("• $status",
                   style: TextStyle(
-                      fontSize: 14.0.sp,
+                      fontSize:
+                          textScale > 1.5 ? 14.0.sp / textScale * 1.5 : 14.0.sp,
                       color: status == "Hợp lệ"
                           ? Colors.green.shade600
                           : status == "Đi trễ"
