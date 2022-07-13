@@ -123,14 +123,14 @@ class SettingsScreen extends StatelessWidget {
                         title: 'Đăng xuất',
                         titleStyle: TextStyle(
                             fontSize: textScale > 1.4
-                                ? 16.0.sp / textScale * 1.4
-                                : 16.0.sp,
+                                ? 15.0.sp / textScale * 1.4
+                                : 15.0.sp,
                             fontWeight: FontWeight.w600),
                         middleText: 'Bạn có muốn đăng xuất không?',
                         middleTextStyle: TextStyle(
                             fontSize: textScale > 1.4
-                                ? 12.0.sp / textScale * 1.4
-                                : 12.0.sp,
+                                ? 14.0.sp / textScale * 1.4
+                                : 14.0.sp,
                             fontWeight: FontWeight.w500),
                         backgroundColor: Colors.white,
                         radius: 10.0,
