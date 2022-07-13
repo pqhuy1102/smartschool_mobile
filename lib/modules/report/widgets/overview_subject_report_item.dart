@@ -53,8 +53,8 @@ class OverviewSubjectItem extends StatelessWidget {
                         // ignore: unnecessary_string_interpolations
                         '$subjectId - $subjectName',
                         style: TextStyle(
-                            fontSize: textScale > 1.5
-                                ? 14.0.sp / textScale * 1.5
+                            fontSize: textScale > 1.4
+                                ? 14.0.sp / textScale * 1.4
                                 : 14.0.sp,
                             fontWeight: FontWeight.w600),
                       ),
@@ -71,7 +71,7 @@ class OverviewSubjectItem extends StatelessWidget {
             ),
             Container(
                 margin: const EdgeInsets.only(left: 16, right: 18),
-                child: textScale >= 1.3
+                child: textScale > 1.3
                     ? Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +79,8 @@ class OverviewSubjectItem extends StatelessWidget {
                           Text(
                             '• Số buổi đi học:',
                             style: TextStyle(
-                                fontSize: textScale > 1.5
-                                    ? 14.0.sp / textScale * 1.5
+                                fontSize: textScale > 1.4
+                                    ? 14.0.sp / textScale * 1.4
                                     : 14.0.sp,
                                 fontWeight: FontWeight.w400),
                             maxLines: 2,
@@ -91,8 +91,8 @@ class OverviewSubjectItem extends StatelessWidget {
                             '$totalSession '
                             'buổi',
                             style: TextStyle(
-                                fontSize: textScale > 1.5
-                                    ? 14.0.sp / textScale * 1.5
+                                fontSize: textScale > 1.4
+                                    ? 14.0.sp / textScale * 1.4
                                     : 14.0.sp,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -104,8 +104,8 @@ class OverviewSubjectItem extends StatelessWidget {
                           Text(
                             '• Số buổi đi học:',
                             style: TextStyle(
-                                fontSize: textScale > 1.5
-                                    ? 14.0.sp / textScale * 1.5
+                                fontSize: textScale > 1.4
+                                    ? 14.0.sp / textScale * 1.4
                                     : 14.0.sp,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -116,8 +116,8 @@ class OverviewSubjectItem extends StatelessWidget {
                               '$totalSession '
                               'buổi',
                               style: TextStyle(
-                                  fontSize: textScale > 1.5
-                                      ? 14.0.sp / textScale * 1.5
+                                  fontSize: textScale > 1.4
+                                      ? 14.0.sp / textScale * 1.4
                                       : 14.0.sp,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -129,7 +129,7 @@ class OverviewSubjectItem extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(left: 16, right: 18),
-              child: textScale >= 1.3
+              child: textScale > 1.3
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,16 +137,16 @@ class OverviewSubjectItem extends StatelessWidget {
                         Text(
                           '• Số buổi vắng:',
                           style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 14.0.sp / textScale * 1.5
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
                                   : 14.0.sp,
                               fontWeight: FontWeight.w400),
                         ),
                         Text(
                           '$absenceSession' '/' '$totalSession ' 'buổi',
                           style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 14.0.sp / textScale * 1.5
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
                                   : 14.0.sp,
                               fontWeight: FontWeight.w600),
                         )
@@ -158,16 +158,16 @@ class OverviewSubjectItem extends StatelessWidget {
                         Text(
                           '• Số buổi vắng:',
                           style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 14.0.sp / textScale * 1.5
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
                                   : 14.0.sp,
                               fontWeight: FontWeight.w400),
                         ),
                         Text(
                           '$absenceSession' '/' '$totalSession ' 'buổi',
                           style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 14.0.sp / textScale * 1.5
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
                                   : 14.0.sp,
                               fontWeight: FontWeight.w600),
                         )

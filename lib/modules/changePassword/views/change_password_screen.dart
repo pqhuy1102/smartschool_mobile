@@ -23,6 +23,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -57,7 +59,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: Text(
                         "đặt lại mật khẩu".toUpperCase(),
                         style: TextStyle(
-                            fontSize: 18.0.sp,
+                            fontSize: textScale > 1.4
+                                ? 18.0.sp / textScale * 1.4
+                                : 18.0.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue.shade900),
                       ),
@@ -75,7 +79,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   controller: _changePasswordController
                                       .oldPasswordEditingController,
                                   validator: (value) => validatePassword(value),
-                                  style: TextStyle(fontSize: 14.0.sp),
+                                  style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                  ),
                                   decoration: inputDecoration(
                                     "Mật khẩu cũ",
                                     Icons.lock,
@@ -96,7 +104,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   controller: _changePasswordController
                                       .newPasswordEditingController,
                                   validator: (value) => validatePassword(value),
-                                  style: TextStyle(fontSize: 14.0.sp),
+                                  style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                  ),
                                   decoration: inputDecoration(
                                     "Mật khẩu mới",
                                     Icons.lock,
@@ -187,7 +199,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                         Text(
                                           'Đang cập nhật...',
                                           style: TextStyle(
-                                              fontSize: 14.0.sp,
+                                              fontSize: textScale > 1.4
+                                                  ? 14.0.sp / textScale * 1.4
+                                                  : 14.0.sp,
                                               fontWeight: FontWeight.w600),
                                         )
                                       ],
@@ -196,7 +210,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     return Text(
                                       'cập nhật'.toUpperCase(),
                                       style: TextStyle(
-                                          fontSize: 14.0.sp,
+                                          fontSize: textScale > 1.4
+                                              ? 14.0.sp / textScale * 1.4
+                                              : 14.0.sp,
                                           fontWeight: FontWeight.bold),
                                     );
                                   }

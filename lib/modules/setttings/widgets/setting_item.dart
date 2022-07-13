@@ -9,6 +9,8 @@ class SettingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
@@ -23,7 +25,9 @@ class SettingItem extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: TextStyle(fontSize: 15.0.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                fontSize: textScale > 1.4 ? 14.0.sp / textScale * 1.4 : 14.0.sp,
+                fontWeight: FontWeight.w600),
           ),
         ));
   }

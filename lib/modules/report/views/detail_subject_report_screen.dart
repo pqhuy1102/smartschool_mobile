@@ -62,8 +62,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                         child: Text(
                           "Lọc danh sách",
                           style: TextStyle(
-                              fontSize: (textScale > 1.5
-                                  ? 13.0.sp / textScale * 1.5
+                              fontSize: (textScale > 1.4
+                                  ? 13.0.sp / textScale * 1.4
                                   : 13.0.sp),
                               color: Colors.grey.shade600,
                               fontWeight: FontWeight.w600),
@@ -97,7 +97,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               color: Colors.black45,
                             ),
                             iconSize: 28,
-                            buttonHeight: 30,
+                            buttonHeight: 32,
                             buttonPadding:
                                 const EdgeInsets.only(left: 20, right: 10),
                             dropdownDecoration: BoxDecoration(
@@ -108,8 +108,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Tất cả',
                                   style: TextStyle(
-                                      fontSize: textScale > 1.5
-                                          ? 13.0.sp / textScale * 1.5
+                                      fontSize: textScale > 1.4
+                                          ? 13.0.sp / textScale * 1.4
                                           : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
@@ -120,8 +120,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Hợp lệ',
                                   style: TextStyle(
-                                      fontSize: textScale > 1.5
-                                          ? 13.0.sp / textScale * 1.5
+                                      fontSize: textScale > 1.4
+                                          ? 13.0.sp / textScale * 1.4
                                           : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
@@ -132,8 +132,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Đi trễ',
                                   style: TextStyle(
-                                      fontSize: textScale > 1.5
-                                          ? 13.0.sp / textScale * 1.5
+                                      fontSize: textScale > 1.4
+                                          ? 13.0.sp / textScale * 1.4
                                           : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
@@ -144,8 +144,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                 child: Text(
                                   'Vắng',
                                   style: TextStyle(
-                                      fontSize: textScale > 1.5
-                                          ? 13.0.sp / textScale * 1.5
+                                      fontSize: textScale > 1.4
+                                          ? 13.0.sp / textScale * 1.4
                                           : 13.0.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
@@ -183,8 +183,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                             child: Text(
                           'Danh sách trống! ',
                           style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 13.0.sp / textScale * 1.5
+                              fontSize: textScale > 1.4
+                                  ? 13.0.sp / textScale * 1.4
                                   : 13.0.sp,
                               fontWeight: FontWeight.w600),
                         ))

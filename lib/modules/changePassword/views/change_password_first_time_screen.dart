@@ -25,6 +25,8 @@ class _ChangePasswordFirstTimeScreenState
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: true,
@@ -46,7 +48,9 @@ class _ChangePasswordFirstTimeScreenState
                         child: Text(
                           "đặt lại mật khẩu".toUpperCase(),
                           style: TextStyle(
-                              fontSize: 18.0.sp,
+                              fontSize: textScale > 1.4
+                                  ? 18.0.sp / textScale * 1.4
+                                  : 18.0.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.blue.shade900),
                         ),
@@ -67,7 +71,11 @@ class _ChangePasswordFirstTimeScreenState
                                             .newPasswordEditingController,
                                     validator: (value) =>
                                         validatePassword(value),
-                                    style: TextStyle(fontSize: 14.0.sp),
+                                    style: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                    ),
                                     decoration: inputDecoration(
                                       "Mật khẩu mới",
                                       Icons.lock,
@@ -108,7 +116,11 @@ class _ChangePasswordFirstTimeScreenState
                                         return null;
                                       }
                                     },
-                                    style: TextStyle(fontSize: 14.0.sp),
+                                    style: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                    ),
                                     decoration: inputDecoration(
                                       "Xác nhận mật khẩu mới",
                                       Icons.lock,
@@ -159,7 +171,9 @@ class _ChangePasswordFirstTimeScreenState
                                           Text(
                                             'Đang cập nhật...',
                                             style: TextStyle(
-                                                fontSize: 14.0.sp,
+                                                fontSize: textScale > 1.4
+                                                    ? 14.0.sp / textScale * 1.4
+                                                    : 14.0.sp,
                                                 fontWeight: FontWeight.w600),
                                           )
                                         ],
@@ -168,7 +182,9 @@ class _ChangePasswordFirstTimeScreenState
                                       return Text(
                                         'cập nhật'.toUpperCase(),
                                         style: TextStyle(
-                                            fontSize: 14.0.sp,
+                                            fontSize: textScale > 1.4
+                                                ? 14.0.sp / textScale * 1.4
+                                                : 14.0.sp,
                                             fontWeight: FontWeight.bold),
                                       );
                                     }

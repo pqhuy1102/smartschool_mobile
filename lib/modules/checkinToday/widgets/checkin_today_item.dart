@@ -38,7 +38,7 @@ class CheckinTodayItem extends StatelessWidget {
               "$time $date",
               style: TextStyle(
                   fontSize:
-                      textScale > 1.5 ? 14.0.sp / textScale * 1.5 : 14.0.sp,
+                      textScale > 1.4 ? 13.0.sp / textScale * 1.4 : 13.0.sp,
                   color: Colors.grey.shade600,
                   fontWeight: FontWeight.w500),
             ),
@@ -54,8 +54,8 @@ class CheckinTodayItem extends StatelessWidget {
                       // ignore: unnecessary_string_interpolations
                       "$course",
                       style: TextStyle(
-                          fontSize: textScale > 1.5
-                              ? 14.0.sp / textScale * 1.5
+                          fontSize: textScale > 1.4
+                              ? 14.0.sp / textScale * 1.4
                               : 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
@@ -73,7 +73,7 @@ class CheckinTodayItem extends StatelessWidget {
                     child: Row(
                       children: [
                         const SizedBox(
-                          width: 2,
+                          width: 1,
                         ),
                         Icon(
                           Icons.access_time_filled_rounded,
@@ -82,28 +82,29 @@ class CheckinTodayItem extends StatelessWidget {
                         ),
 
                         // ignore: unnecessary_string_interpolations
-                        Text("$startTime -$endTime",
-                            style: TextStyle(
-                                fontSize: textScale > 1.5
-                                    ? 14.0.sp / textScale * 1.5
-                                    : 14.0.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500))
+                        Flexible(
+                            child: Text("$startTime -$endTime",
+                                style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500)))
                       ],
                     ),
                   ),
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on,
+                        Icons.room_rounded,
                         color: Colors.blue.shade900,
                         size: 16.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
                       Text(" $room",
                           style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 14.0.sp / textScale * 1.5
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
                                   : 14.0.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.w500))
@@ -117,8 +118,8 @@ class CheckinTodayItem extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 6),
                 child: Text("• $status",
                     style: TextStyle(
-                        fontSize: textScale > 1.5
-                            ? 14.0.sp / textScale * 1.5
+                        fontSize: textScale > 1.4
+                            ? 14.0.sp / textScale * 1.4
                             : 14.0.sp,
                         color: status == "Hợp lệ"
                             ? Colors.green.shade700

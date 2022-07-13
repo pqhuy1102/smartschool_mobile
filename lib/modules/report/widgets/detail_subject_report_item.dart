@@ -41,7 +41,7 @@ class DetailSubjectItem extends StatelessWidget {
                   "$date",
                   style: TextStyle(
                       fontSize:
-                          textScale > 1.5 ? 14.0.sp / textScale * 1.5 : 14.0.sp,
+                          textScale > 1.4 ? 14.0.sp / textScale * 1.4 : 14.0.sp,
                       color: Colors.grey.shade600,
                       fontWeight: FontWeight.w600),
                 ),
@@ -58,8 +58,8 @@ class DetailSubjectItem extends StatelessWidget {
                       "$subjectId",
                       // overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: textScale > 1.5
-                              ? 14.0.sp / textScale * 1.5
+                          fontSize: textScale > 1.4
+                              ? 14.0.sp / textScale * 1.4
                               : 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
@@ -82,28 +82,32 @@ class DetailSubjectItem extends StatelessWidget {
                         color: Colors.blue.shade900,
                         size: 14.0.sp,
                       ),
+                      const SizedBox(
+                        width: 2,
+                      ),
                       // ignore: unnecessary_string_interpolations
-                      Text("$startTime -$endTime",
-                          style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 14.0.sp / textScale * 1.5
-                                  : 14.0.sp,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500))
+                      Flexible(
+                          child: Text("$startTime -$endTime",
+                              style: TextStyle(
+                                  fontSize: textScale > 1.4
+                                      ? 14.0.sp / textScale * 1.4
+                                      : 14.0.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500)))
                     ],
                   ),
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on,
+                        Icons.room_rounded,
                         color: Colors.blue.shade900,
                         size: 16.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
                       Text(" $room",
                           style: TextStyle(
-                              fontSize: textScale > 1.5
-                                  ? 14.0.sp / textScale * 1.5
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
                                   : 14.0.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.w500))
@@ -117,7 +121,7 @@ class DetailSubjectItem extends StatelessWidget {
               child: Text("• $status",
                   style: TextStyle(
                       fontSize:
-                          textScale > 1.5 ? 14.0.sp / textScale * 1.5 : 14.0.sp,
+                          textScale > 1.4 ? 14.0.sp / textScale * 1.4 : 14.0.sp,
                       color: status == "Hợp lệ"
                           ? Colors.green.shade600
                           : status == "Đi trễ"
