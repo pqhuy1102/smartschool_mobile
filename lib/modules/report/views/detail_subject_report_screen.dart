@@ -14,6 +14,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textScale = MediaQuery.of(context).textScaleFactor;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -31,7 +32,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
         title: Text(
           'Báo cáo chi tiết',
           style: TextStyle(
-              fontSize: 17.0.sp,
+              fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),
@@ -73,7 +74,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                   ),
                   Obx(() {
                     return SizedBox(
-                        width: textScale > 1.2 ? 35.0.w : 32.0.w,
+                        width: textScale > 1.2 ? 36.0.w : 35.0.w,
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(
@@ -97,7 +98,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               color: Colors.black45,
                             ),
                             iconSize: 28,
-                            buttonHeight: 32,
+                            buttonHeight: shortestSide > 600 ? 50 : 30,
                             buttonPadding:
                                 const EdgeInsets.only(left: 20, right: 10),
                             dropdownDecoration: BoxDecoration(
@@ -184,7 +185,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                           'Danh sách trống! ',
                           style: TextStyle(
                               fontSize: textScale > 1.4
-                                  ? 13.0.sp / textScale * 1.4
+                                  ? 13.0.sp / textScale * 1.3
                                   : 13.0.sp,
                               fontWeight: FontWeight.w600),
                         ))

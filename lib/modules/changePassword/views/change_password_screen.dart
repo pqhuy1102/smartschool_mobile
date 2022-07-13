@@ -146,7 +146,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       return null;
                                     }
                                   },
-                                  style: TextStyle(fontSize: 14.0.sp),
+                                  style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                  ),
                                   decoration: inputDecoration(
                                     "Xác nhận mật khẩu mới",
                                     Icons.lock,

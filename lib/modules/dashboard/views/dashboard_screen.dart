@@ -207,6 +207,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return WillPopScope(
         child: Scaffold(
             floatingActionButton: SizedBox(
@@ -233,7 +235,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     title: Text(
                       'Trang chủ',
                       style: TextStyle(
-                          fontSize: 17.0.sp,
+                          fontSize: textScale > 1.4
+                              ? 17.0.sp / textScale * 1.4
+                              : 17.0.sp,
                           color: Colors.blue.shade900,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.2),
@@ -267,7 +271,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     title: Text(
                       'Báo cáo',
                       style: TextStyle(
-                          fontSize: 18.0.sp,
+                          fontSize: textScale > 1.4
+                              ? 17.0.sp / textScale * 1.4
+                              : 17.0.sp,
                           color: Colors.blue.shade900,
                           fontWeight: FontWeight.w600),
                     ),
@@ -368,8 +374,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       return Text('Không có kết nối, vui lòng thử lại!',
                           style: TextStyle(
                             fontSize: textScale > 1.4
-                                ? 14.0.sp / textScale * 1.4
-                                : 14.0.sp,
+                                ? 13.0.sp / textScale * 1.3
+                                : 13.0.sp,
                             color: Colors.grey.shade700,
                           ));
                     }
@@ -429,7 +435,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         style: TextStyle(
                             letterSpacing: 0.8,
                             fontSize: textScale > 1.4
-                                ? 13.0.sp / textScale * 1.4
+                                ? 13.0.sp / textScale * 1.3
                                 : 13.0.sp,
                             fontWeight: FontWeight.w600),
                       )))
