@@ -195,8 +195,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         return Text('Không có kết nối, vui lòng thử lại!',
                             style: TextStyle(
                               fontSize: textScale > 1.4
-                                  ? 14.0.sp / textScale * 1.4
-                                  : 14.0.sp,
+                                  ? 13.0.sp / textScale * 1.3
+                                  : 13.0.sp,
                               color: Colors.grey.shade700,
                             ));
                       }

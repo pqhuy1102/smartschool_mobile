@@ -20,6 +20,7 @@ class _ReportScreenState extends State<ReportScreen> {
   @override
   Widget build(BuildContext context) {
     final textScale = MediaQuery.of(context).textScaleFactor;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
     return SafeArea(
         child: Scaffold(
             extendBodyBehindAppBar: true,
@@ -50,7 +51,9 @@ class _ReportScreenState extends State<ReportScreen> {
                           return Text(
                               'Không có kết nối, vui lòng thử lại!',
                               style: TextStyle(
-                                fontSize: 14.0.sp,
+                                fontSize: textScale > 1.4
+                                    ? 13.0.sp / textScale * 1.3
+                                    : 13.0.sp,
                                 color: Colors.grey.shade700,
                               ));
                         }
@@ -125,7 +128,8 @@ class _ReportScreenState extends State<ReportScreen> {
                                           color: Colors.black,
                                         ),
                                         iconSize: 26,
-                                        buttonHeight: 31,
+                                        buttonHeight:
+                                            shortestSide < 600 ? 32 : 45,
                                         dropdownDecoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15),
@@ -178,7 +182,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   'Danh sách trống! ',
                                   style: TextStyle(
                                       fontSize: textScale > 1.4
-                                          ? 13.0.sp / textScale * 1.4
+                                          ? 13.0.sp / textScale * 1.3
                                           : 13.0.sp,
                                       fontWeight: FontWeight.w600),
                                 ))

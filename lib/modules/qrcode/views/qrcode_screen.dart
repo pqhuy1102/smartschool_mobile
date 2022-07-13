@@ -46,7 +46,8 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
               title: Text(
                 'Mã QR',
                 style: TextStyle(
-                    fontSize: 17.0.sp,
+                    fontSize:
+                        textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
                     color: Colors.blue.shade900,
                     fontWeight: FontWeight.w600),
               ),
@@ -80,8 +81,8 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                               'Không có kết nối, vui lòng thử lại!',
                               style: TextStyle(
                                 fontSize: textScale > 1.4
-                                    ? 14.0.sp / textScale * 1.4
-                                    : 14.0.sp,
+                                    ? 13.0.sp / textScale * 1.3
+                                    : 13.0.sp,
                                 color: Colors.grey.shade700,
                               ));
                         }

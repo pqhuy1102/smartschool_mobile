@@ -29,7 +29,7 @@ class NotificationScreen extends StatelessWidget {
         title: Text(
           'Thông báo',
           style: TextStyle(
-              fontSize: 17.0.sp,
+              fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),
@@ -56,7 +56,7 @@ class NotificationScreen extends StatelessWidget {
                   'Bạn không có thông báo nào!',
                   style: TextStyle(
                       fontSize:
-                          textScale > 1.4 ? 13.0.sp / textScale * 1.4 : 13.0.sp,
+                          textScale > 1.4 ? 13.0.sp / textScale * 1.3 : 13.0.sp,
                       fontWeight: FontWeight.w600),
                 )
               ],
