@@ -37,7 +37,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         'assets/images/lost_internet.jpg',
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 8,
                       ),
                       Obx(() {
                         if (_reportController.isLoading.value) {
@@ -65,14 +65,17 @@ class _ReportScreenState extends State<ReportScreen> {
                         child: Text(
                           "Tải lại",
                           style: TextStyle(
-                              fontSize: 13.0.sp, fontWeight: FontWeight.w600),
+                              fontSize: textScale > 1.4
+                                  ? 13.0.sp / textScale * 1.4
+                                  : 13.0.sp,
+                              fontWeight: FontWeight.w600),
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue.shade900,
                           // onSurface: Colors.transparent,
                           // shadowColor: Colors.transparent,
                           padding: const EdgeInsets.symmetric(
-                              vertical: 14, horizontal: 50),
+                              vertical: 12, horizontal: 45),
 
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0.sp),
@@ -88,7 +91,8 @@ class _ReportScreenState extends State<ReportScreen> {
               } else {
                 return Container(
                   decoration: const BoxDecoration(color: Colors.white70),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: SafeArea(
                     child: Column(
                       children: [
@@ -129,7 +133,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                         ),
                                         iconSize: 26,
                                         buttonHeight:
-                                            shortestSide < 600 ? 32 : 45,
+                                            shortestSide < 600 ? 32 : 50,
                                         dropdownDecoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15),
