@@ -98,7 +98,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                               color: Colors.black45,
                             ),
                             iconSize: 28,
-                            buttonHeight: shortestSide > 600 ? 50 : 30,
+                            buttonHeight: shortestSide > 600 ? 52 : 30,
                             buttonPadding:
                                 const EdgeInsets.only(left: 20, right: 10),
                             dropdownDecoration: BoxDecoration(

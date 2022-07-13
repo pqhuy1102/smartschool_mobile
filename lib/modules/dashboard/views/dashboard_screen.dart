@@ -351,7 +351,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
         Obx(() {
           if (_getIndayAttendanceController.hasInternet.isFalse) {
-            return Center(
+            return SingleChildScrollView(child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -360,7 +360,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     'assets/images/lost_internet.jpg',
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
                   Obx(() {
                     if (_getIndayAttendanceController.isLoading.value) {
@@ -397,7 +397,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       // onSurface: Colors.transparent,
                       // shadowColor: Colors.transparent,
                       padding: const EdgeInsets.symmetric(
-                          vertical: 14, horizontal: 50),
+                          vertical: 12, horizontal: 45),
 
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0.sp),
@@ -409,7 +409,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                 ],
               ),
-            );
+            ),);
           } else if (_getIndayAttendanceController.isLoading.isTrue) {
             return Center(
               child: SpinKitFadingFour(
