@@ -20,7 +20,6 @@ class _ReportScreenState extends State<ReportScreen> {
   @override
   Widget build(BuildContext context) {
     final textScale = MediaQuery.of(context).textScaleFactor;
-
     return SafeArea(
         child: Scaffold(
             extendBodyBehindAppBar: true,
@@ -106,7 +105,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               ),
                               Obx(() {
                                 return SizedBox(
-                                    width: textScale >= 1.3 ? 60.0.w : 50.0.w,
+                                    width: textScale >= 1.2 ? 60.0.w : 50.0.w,
                                     child: Container(
                                       decoration: BoxDecoration(
                                           border: Border.all(

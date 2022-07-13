@@ -73,7 +73,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                   ),
                   Obx(() {
                     return SizedBox(
-                        width: textScale >= 1.3 ? 38.0.w : 32.0.w,
+                        width: textScale > 1.2 ? 35.0.w : 32.0.w,
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(
