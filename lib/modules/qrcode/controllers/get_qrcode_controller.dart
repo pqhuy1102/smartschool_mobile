@@ -96,6 +96,10 @@ class GetQrCodeController extends GetxController {
     }
   }
 
+  void handleQrSizeTablet() {
+    qrCodeSize.value = 300.0;
+  }
+
   @override
   void dispose() {
     super.dispose();

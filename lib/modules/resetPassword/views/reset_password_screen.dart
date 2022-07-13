@@ -28,7 +28,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             icon: Icon(
               Icons.arrow_back_ios,
               color: Colors.blue.shade900,
-              size: 24.0.sp,
+              size: 18.0.sp,
             ),
             onPressed: () {
               Get.back();
