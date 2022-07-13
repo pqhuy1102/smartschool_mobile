@@ -231,7 +231,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
 //validate email function
 String? validateMSSV(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Mã số sinh viên không hợp lệ, vui lòng nhập lại!';
+    return 'Mã số sinh viên không được để trống!';
   } else {
     return null;
   }

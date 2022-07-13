@@ -77,6 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontSize: textScale > 1.4
                                   ? 14.0.sp / textScale * 1.4
                                   : 14.0.sp,
+                              fontWeight: FontWeight.w600,
                               color: Colors.blue.shade900),
                         )),
                     contentPadding: const EdgeInsets.symmetric(
@@ -268,10 +269,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             color: Colors.blue.shade900,
             width: 2,
           )),
-          prefixIcon: Icon(
-            Icons.person,
-            color: Colors.blue.shade900,
-            size: 20.0.sp,
+          prefixIcon: Container(
+            margin: const EdgeInsets.only(right: 8),
+            child: Icon(
+              Icons.person,
+              color: Colors.blue.shade900,
+              size: 20.0.sp,
+            ),
           ),
           labelText: "Họ tên",
           labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
@@ -298,10 +302,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: Colors.blue.shade900,
           width: 2,
         )),
-        prefixIcon: Icon(
-          Icons.class_,
-          color: Colors.blue.shade900,
-          size: 20.0.sp,
+        prefixIcon: Container(
+          margin: const EdgeInsets.only(right: 8),
+          child: Icon(
+            Icons.class_,
+            color: Colors.blue.shade900,
+            size: 20.0.sp,
+          ),
         ),
         labelText: "Lớp học",
         labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
@@ -329,10 +336,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: Colors.blue.shade900,
           width: 2,
         )),
-        prefixIcon: Icon(
-          Icons.badge,
-          color: Colors.blue.shade900,
-          size: 20.0.sp,
+        prefixIcon: Container(
+          margin: const EdgeInsets.only(right: 8),
+          child: Icon(
+            Icons.badge,
+            color: Colors.blue.shade900,
+            size: 20.0.sp,
+          ),
         ),
         labelText: "Mã sinh viên",
         labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
@@ -360,10 +370,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: Colors.blue.shade900,
           width: 2,
         )),
-        prefixIcon: Icon(
-          Icons.people,
-          color: Colors.blue.shade900,
-          size: 20.0.sp,
+        prefixIcon: Container(
+          margin: const EdgeInsets.only(right: 8),
+          child: Icon(
+            Icons.people,
+            color: Colors.blue.shade900,
+            size: 20.0.sp,
+          ),
         ),
         labelText: "Giới tính",
         labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),
@@ -394,10 +407,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Colors.blue.shade900,
               width: 2,
             )),
-            prefixIcon: Icon(
-              Icons.email,
-              color: Colors.blue.shade900,
-              size: 20.0.sp,
+            prefixIcon: Container(
+              margin: const EdgeInsets.only(right: 8),
+              child: Icon(
+                Icons.email,
+                color: Colors.blue.shade900,
+                size: 20.0.sp,
+              ),
             ),
             labelText: "Email",
             labelStyle:
@@ -428,10 +444,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: Colors.blue.shade900,
           width: 2,
         )),
-        prefixIcon: Icon(
-          Icons.phone_sharp,
-          color: Colors.blue.shade900,
-          size: 20.0.sp,
+        prefixIcon: Container(
+          margin: const EdgeInsets.only(right: 8),
+          child: Icon(
+            Icons.phone_sharp,
+            color: Colors.blue.shade900,
+            size: 20.0.sp,
+          ),
         ),
         labelText: "Số điện thoại",
         labelStyle: TextStyle(fontSize: 14.0.sp, color: Colors.blue.shade900),

@@ -51,7 +51,7 @@ class ResetPasswordController extends GetxController {
         isLoading(false);
         clearTextField();
       } else {
-        Get.snackbar('Lỗi ', "Reset mật khẩu thất bại!",
+        Get.snackbar('Lỗi ', res.body["message"],
             snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.red,
             colorText: Colors.white);
