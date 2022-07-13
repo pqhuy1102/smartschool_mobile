@@ -237,13 +237,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget imageProfile() {
-    return const Center(
-      child: FittedBox(
+    return Center(
+        child: SizedBox(
+      height: 20.0.h,
+      child: const FittedBox(
           fit: BoxFit.fill,
           child: CircleAvatar(
               radius: 100,
-              backgroundImage: AssetImage('assets/images/avatar.png'))),
-    );
+              backgroundImage: AssetImage('assets/images/usericon.png'))),
+    ));
   }
 
   Widget nameTextField() {
