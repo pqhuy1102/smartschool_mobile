@@ -15,8 +15,11 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final ProfileController _profileController = Get.put(ProfileController());
   final LoginController _loginController = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: true,
@@ -26,9 +29,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Get.defaultDialog(
                     title: 'Đăng xuất',
-                    titleStyle: TextStyle(fontSize: 16.0.sp),
+                    titleStyle: TextStyle(
+                      fontSize:
+                          textScale > 1.4 ? 15.0.sp / textScale * 1.4 : 15.0.sp,
+                    ),
                     middleText: 'Bạn có muốn đăng xuất không?',
-                    middleTextStyle: TextStyle(fontSize: 14.0.sp),
+                    middleTextStyle: TextStyle(
+                        fontSize: textScale > 1.4
+                            ? 14.0.sp / textScale * 1.4
+                            : 14.0.sp),
                     backgroundColor: Colors.white,
                     radius: 10.0,
                     confirm: ElevatedButton(
@@ -37,8 +46,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         }),
                         child: Text(
                           'Đăng xuất',
-                          style:
-                              TextStyle(fontSize: 14.0.sp, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
+                                  : 14.0.sp,
+                              color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.red.shade600,
@@ -62,7 +74,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Text(
                           'Hủy bỏ',
                           style: TextStyle(
-                              fontSize: 14.0.sp, color: Colors.blue.shade900),
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
+                                  : 14.0.sp,
+                              color: Colors.blue.shade900),
                         )),
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 14, vertical: 18));
@@ -85,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Text(
             'Cá nhân',
             style: TextStyle(
-                fontSize: 17.0.sp,
+                fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
                 color: Colors.blue.shade900,
                 fontWeight: FontWeight.w600),
           ),
@@ -179,7 +194,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       } else {
                         return Text('Không có kết nối, vui lòng thử lại!',
                             style: TextStyle(
-                              fontSize: 14.0.sp,
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
+                                  : 14.0.sp,
                               color: Colors.grey.shade700,
                             ));
                       }
@@ -191,7 +208,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text(
                         "Tải lại",
                         style: TextStyle(
-                            fontSize: 13.0.sp, fontWeight: FontWeight.w600),
+                            fontSize: textScale > 1.4
+                                ? 13.0.sp / textScale * 1.4
+                                : 13.0.sp,
+                            fontWeight: FontWeight.w600),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue.shade900,
@@ -217,25 +237,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget imageProfile() {
-    return Center(
-      child: Stack(
-        children: [
-          SizedBox(
-              height: 24.0.h,
-              child: const CircleAvatar(
-                  radius: 100,
-                  backgroundImage: AssetImage('assets/images/avatar.png'))),
-        ],
-      ),
+    return const Center(
+      child: FittedBox(
+          fit: BoxFit.fill,
+          child: CircleAvatar(
+              radius: 100,
+              backgroundImage: AssetImage('assets/images/avatar.png'))),
     );
   }
 
   Widget nameTextField() {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return TextFormField(
         enabled: false,
         initialValue: _profileController.userData?.studentName,
         style: TextStyle(
-          fontSize: 13.0.sp,
+          fontSize: textScale > 1.0 ? 11.0.sp / textScale : 11.0.sp,
           fontWeight: FontWeight.w500,
         ),
         decoration: InputDecoration(
@@ -259,11 +277,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget studentClassTextField() {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return TextFormField(
       enabled: false,
       initialValue: _profileController.userData?.studentClass,
       style: TextStyle(
-        fontSize: 13.0.sp,
+        fontSize: textScale > 1.0 ? 11.0.sp / textScale : 11.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -288,11 +308,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget studentIdTextField() {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return TextFormField(
       enabled: false,
       initialValue: _profileController.userData?.studentId,
       style: TextStyle(
-        fontSize: 13.0.sp,
+        fontSize: textScale > 1.0 ? 11.0.sp / textScale : 11.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -317,11 +339,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget genderTextField() {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return TextFormField(
       enabled: false,
       initialValue: _profileController.userData?.gender,
       style: TextStyle(
-        fontSize: 13.0.sp,
+        fontSize: textScale > 1.0 ? 11.0.sp / textScale : 11.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -346,6 +370,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget emailTextField() {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Row(
       children: [
         Expanded(
@@ -353,7 +379,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           enabled: false,
           initialValue: _profileController.userData?.email,
           style: TextStyle(
-            fontSize: 13.0.sp,
+            fontSize: textScale > 1.0 ? 11.0.sp / textScale : 11.0.sp,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
@@ -381,11 +407,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget phoneNumberTextField() {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return TextFormField(
       enabled: false,
       initialValue: _profileController.userData?.phoneNumber,
       style: TextStyle(
-        fontSize: 13.0.sp,
+        fontSize: textScale > 1.0 ? 11.0.sp / textScale : 11.0.sp,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(

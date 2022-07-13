@@ -12,6 +12,8 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -52,8 +54,10 @@ class NotificationScreen extends StatelessWidget {
                 ),
                 Text(
                   'Bạn không có thông báo nào!',
-                  style:
-                      TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      fontSize:
+                          textScale > 1.4 ? 13.0.sp / textScale * 1.4 : 13.0.sp,
+                      fontWeight: FontWeight.w600),
                 )
               ],
             ));

@@ -281,7 +281,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     child: IndexedStack(
                   index: selectedPosition,
                   children: [
-                    _dashboardScreen(),
+                    _dashboardScreen(context),
                     const ReportScreen(),
                   ],
                 )))),
@@ -298,7 +298,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         });
   }
 
-  Widget _dashboardScreen() {
+  Widget _dashboardScreen(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Column(
       children: [
         Container(
@@ -309,17 +311,22 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 children: [
                   Text('hello'.tr,
                       style: TextStyle(
-                          fontSize: 13.0.sp,
+                          fontSize: textScale > 1.4
+                              ? 14.0.sp / textScale * 1.4
+                              : 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600)),
-                  Text(
-                      _profileController.userName.value == ""
-                          ? _authmanager.username.value
-                          : _profileController.userName.value,
-                      style: TextStyle(
-                          fontSize: 14.0.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.red[300]))
+                  Flexible(
+                      child: Text(
+                          _profileController.userName.value == ""
+                              ? _authmanager.username.value
+                              : _profileController.userName.value,
+                          style: TextStyle(
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
+                                  : 14.0.sp,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.red[300])))
                 ],
               ))),
         ),
@@ -331,7 +338,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           child: Text(
             "Điểm danh hôm nay",
             style: TextStyle(
-                fontSize: 15.sp,
+                fontSize: textScale > 1.4 ? 15.0.sp / textScale * 1.4 : 15.0.sp,
                 color: Colors.blue.shade900,
                 fontWeight: FontWeight.w700),
           ),
@@ -360,7 +367,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     } else {
                       return Text('Không có kết nối, vui lòng thử lại!',
                           style: TextStyle(
-                            fontSize: 14.0.sp,
+                            fontSize: textScale > 1.4
+                                ? 14.0.sp / textScale * 1.4
+                                : 14.0.sp,
                             color: Colors.grey.shade700,
                           ));
                     }
@@ -372,7 +381,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     child: Text(
                       "Tải lại",
                       style: TextStyle(
-                          fontSize: 13.0.sp, fontWeight: FontWeight.w600),
+                          fontSize: textScale > 1.4
+                              ? 13.0.sp / textScale * 1.4
+                              : 13.0.sp,
+                          fontWeight: FontWeight.w600),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue.shade900,
@@ -416,7 +428,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             letterSpacing: 0.8,
-                            fontSize: 13.0.sp,
+                            fontSize: textScale > 1.4
+                                ? 13.0.sp / textScale * 1.4
+                                : 13.0.sp,
                             fontWeight: FontWeight.w600),
                       )))
                 ],

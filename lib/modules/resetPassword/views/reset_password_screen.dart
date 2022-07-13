@@ -20,6 +20,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -53,7 +55,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: Text(
                     "quên mật khẩu".toUpperCase(),
                     style: TextStyle(
-                        fontSize: 18.0.sp,
+                        fontSize: textScale > 1.4
+                            ? 18.0.sp / textScale * 1.4
+                            : 18.0.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue.shade900),
                   ),
@@ -65,7 +69,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         'Chọn “Gửi” để nhận email hướng dẫn đặt lại mật khẩu đến email sinh viên của bạn',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 14.0.sp,
+                            fontSize: textScale > 1.4
+                                ? 14.0.sp / textScale * 1.4
+                                : 14.0.sp,
                             fontWeight: FontWeight.w500,
                             color: Colors.grey.shade600),
                       ),
@@ -81,7 +87,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             controller:
                                 _resetPasswordController.emailEditingController,
                             validator: (value) => validateEmail(value),
-                            style: TextStyle(fontSize: 14.0.sp),
+                            style: TextStyle(
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
+                                  : 14.0.sp,
+                            ),
                             decoration:
                                 inputDecoration('Email của bạn', Icons.email),
                           ),
@@ -117,7 +127,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                       Text(
                                         'Đang gửi đi...',
                                         style: TextStyle(
-                                            fontSize: 14.0.sp,
+                                            fontSize: textScale > 1.4
+                                                ? 14.0.sp / textScale * 1.4
+                                                : 14.0.sp,
                                             fontWeight: FontWeight.w600),
                                       )
                                     ],
@@ -126,7 +138,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                   return Text(
                                     'gửi'.toUpperCase(),
                                     style: TextStyle(
-                                        fontSize: 14.0.sp,
+                                        fontSize: textScale > 1.4
+                                            ? 14.0.sp / textScale * 1.4
+                                            : 14.0.sp,
                                         fontWeight: FontWeight.bold),
                                   );
                                 }

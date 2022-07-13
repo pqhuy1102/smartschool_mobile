@@ -18,6 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
@@ -41,7 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       'đăng nhập'.toUpperCase(),
                       style: TextStyle(
-                          fontSize: 20.0.sp,
+                          fontSize: textScale > 1.4
+                              ? 20.0.sp / textScale * 1.4
+                              : 20.0.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue.shade900),
                     )),
@@ -59,7 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _loginController.emailEditingController,
                               validator: (value) => validateMSSV(value),
                               style: TextStyle(
-                                  fontSize: 14.0.sp,
+                                  fontSize: textScale > 1.4
+                                      ? 14.0.sp / textScale * 1.4
+                                      : 14.0.sp,
                                   fontWeight: FontWeight.w500),
                               decoration: inputDecoration(
                                 'Mã số sinh viên',
@@ -77,7 +83,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     _loginController.passwordEditingController,
                                 validator: (value) => validatePassword(value),
                                 style: TextStyle(
-                                    fontSize: 14.0.sp,
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
                                     fontWeight: FontWeight.w500),
                                 decoration: inputDecoration(
                                   'Mật khẩu',
@@ -101,7 +109,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'Quên mật khẩu?',
                                       style: TextStyle(
-                                          fontSize: 13.0.sp,
+                                          fontSize: textScale > 1.4
+                                              ? 13.0.sp / textScale * 1.4
+                                              : 13.0.sp,
                                           color: Colors.black),
                                     ))),
                             const SizedBox(
@@ -138,7 +148,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         Text(
                                           'Đang đăng nhập...',
                                           style: TextStyle(
-                                              fontSize: 14.0.sp,
+                                              fontSize: textScale > 1.4
+                                                  ? 14.0.sp / textScale * 1.4
+                                                  : 14.0.sp,
                                               fontWeight: FontWeight.w600),
                                         )
                                       ],
@@ -147,7 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     return Text(
                                       'đăng nhập'.toUpperCase(),
                                       style: TextStyle(
-                                          fontSize: 14.0.sp,
+                                          fontSize: textScale > 1.4
+                                              ? 14.0.sp / textScale * 1.4
+                                              : 14.0.sp,
                                           fontWeight: FontWeight.bold),
                                     );
                                   }

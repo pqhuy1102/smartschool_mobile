@@ -98,8 +98,8 @@ class _ReportScreenState extends State<ReportScreen> {
                               Text(
                                 'Học kỳ',
                                 style: TextStyle(
-                                    fontSize: textScale > 1.5
-                                        ? 13.0.sp / textScale * 1.5
+                                    fontSize: textScale > 1.4
+                                        ? 13.0.sp / textScale * 1.4
                                         : 13.0.sp,
                                     color: Colors.grey.shade600,
                                     fontWeight: FontWeight.w600),
@@ -126,7 +126,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                           color: Colors.black,
                                         ),
                                         iconSize: 26,
-                                        buttonHeight: 29,
+                                        buttonHeight: 31,
                                         dropdownDecoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15),
@@ -139,10 +139,10 @@ class _ReportScreenState extends State<ReportScreen> {
                                               child: Text(
                                                 "${sem['title']} ${sem['year']}",
                                                 style: TextStyle(
-                                                    fontSize: textScale > 1.5
+                                                    fontSize: textScale > 1.4
                                                         ? 13.0.sp /
                                                             textScale *
-                                                            1.5
+                                                            1.4
                                                         : 13.0.sp,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -178,8 +178,8 @@ class _ReportScreenState extends State<ReportScreen> {
                                     child: Text(
                                   'Danh sách trống! ',
                                   style: TextStyle(
-                                      fontSize: textScale > 1.5
-                                          ? 13.0.sp / textScale * 1.5
+                                      fontSize: textScale > 1.4
+                                          ? 13.0.sp / textScale * 1.4
                                           : 13.0.sp,
                                       fontWeight: FontWeight.w600),
                                 ))

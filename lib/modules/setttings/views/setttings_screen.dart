@@ -63,6 +63,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginController _loginController = Get.put(LoginController());
+    final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +80,7 @@ class SettingsScreen extends StatelessWidget {
         title: Text(
           'settings'.tr,
           style: TextStyle(
-              fontSize: 17.0.sp,
+              fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),
@@ -121,10 +122,16 @@ class SettingsScreen extends StatelessWidget {
                     Get.defaultDialog(
                         title: 'Đăng xuất',
                         titleStyle: TextStyle(
-                            fontSize: 16.0.sp, fontWeight: FontWeight.w600),
+                            fontSize: textScale > 1.4
+                                ? 16.0.sp / textScale * 1.4
+                                : 16.0.sp,
+                            fontWeight: FontWeight.w600),
                         middleText: 'Bạn có muốn đăng xuất không?',
                         middleTextStyle: TextStyle(
-                            fontSize: 12.0.sp, fontWeight: FontWeight.w500),
+                            fontSize: textScale > 1.4
+                                ? 12.0.sp / textScale * 1.4
+                                : 12.0.sp,
+                            fontWeight: FontWeight.w500),
                         backgroundColor: Colors.white,
                         radius: 10.0,
                         confirm: ElevatedButton(
@@ -134,7 +141,9 @@ class SettingsScreen extends StatelessWidget {
                             child: Text(
                               'Đăng xuất',
                               style: TextStyle(
-                                  fontSize: 14.0.sp,
+                                  fontSize: textScale > 1.4
+                                      ? 14.0.sp / textScale * 1.4
+                                      : 14.0.sp,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -153,7 +162,7 @@ class SettingsScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4.0.sp),
                                   side: BorderSide(
-                                      color: Colors.blue.shade900, width: 1.5)),
+                                      color: Colors.blue.shade900, width: 1.4)),
                             ),
                             onPressed: (() {
                               Get.back();
@@ -161,7 +170,9 @@ class SettingsScreen extends StatelessWidget {
                             child: Text(
                               'Hủy bỏ',
                               style: TextStyle(
-                                  fontSize: 14.0.sp,
+                                  fontSize: textScale > 1.4
+                                      ? 14.0.sp / textScale * 1.4
+                                      : 14.0.sp,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.blue.shade900),
                             )),

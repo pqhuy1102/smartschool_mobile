@@ -25,6 +25,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
     if (_qrCodeController.isNeverDisplayAgain.isFalse) {
       Future.delayed(Duration.zero, () => showInstruction(context));
     }
+    final textScale = MediaQuery.of(context).textScaleFactor;
 
     return WillPopScope(
         child: Scaffold(
@@ -78,7 +79,9 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                           return Text(
                               'Không có kết nối, vui lòng thử lại!',
                               style: TextStyle(
-                                fontSize: 14.0.sp,
+                                fontSize: textScale > 1.4
+                                    ? 14.0.sp / textScale * 1.4
+                                    : 14.0.sp,
                                 color: Colors.grey.shade700,
                               ));
                         }
@@ -90,7 +93,10 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                         child: Text(
                           "Tải lại",
                           style: TextStyle(
-                              fontSize: 13.0.sp, fontWeight: FontWeight.w600),
+                              fontSize: textScale > 1.4
+                                  ? 13.0.sp / textScale * 1.4
+                                  : 13.0.sp,
+                              fontWeight: FontWeight.w600),
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue.shade900,
@@ -234,12 +240,15 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                     Icons.replay_outlined,
                                     size: 20.0.sp,
                                   ),
-                                  Text(
+                                  Flexible(
+                                      child: Text(
                                     "Tự động cập nhật sau ${_qrCodeController.countDown.value} giây",
                                     style: TextStyle(
-                                        fontSize: 14.0.sp,
+                                        fontSize: textScale > 1.4
+                                            ? 13.0.sp / textScale * 1.4
+                                            : 13.0.sp,
                                         fontWeight: FontWeight.w500),
-                                  )
+                                  ))
                                 ],
                               );
                             }),
@@ -250,7 +259,9 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                                 child: Text(
                                   "Làm mới".toUpperCase(),
                                   style: TextStyle(
-                                      fontSize: 14.0.sp,
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 style: ElevatedButton.styleFrom(
