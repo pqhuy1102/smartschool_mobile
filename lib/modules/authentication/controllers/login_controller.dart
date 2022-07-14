@@ -37,16 +37,14 @@ class LoginController extends GetxController {
     final res = await _loginProvider.login(
         LoginRequestModel(email: email.trim(), password: password.trim()));
     if (res != null && !res.hasError) {
-      _authenticationManager.login(res.body['token']);
+      _authenticationManager.login(res.body['token'], res.body['username']);
       username.value = res.body['username'];
 
-      _authenticationManager.saveUsernameToStorage(res.body['username']);
       isActivated.value = res.body['is_activate'];
       if (isActivated.value) {
         _authenticationManager
             .changePasswordFirstTimeStatus(res.body['is_activate']);
       }
-
       Get.snackbar('Thành công', 'Đăng nhập thành công!',
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,

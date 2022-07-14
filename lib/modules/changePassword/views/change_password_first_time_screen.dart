@@ -25,6 +25,8 @@ class _ChangePasswordFirstTimeScreenState
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: true,
@@ -46,7 +48,9 @@ class _ChangePasswordFirstTimeScreenState
                         child: Text(
                           "đặt lại mật khẩu".toUpperCase(),
                           style: TextStyle(
-                              fontSize: 18.0.sp,
+                              fontSize: textScale > 1.4
+                                  ? 18.0.sp / textScale * 1.4
+                                  : 18.0.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.blue.shade900),
                         ),
@@ -67,7 +71,11 @@ class _ChangePasswordFirstTimeScreenState
                                             .newPasswordEditingController,
                                     validator: (value) =>
                                         validatePassword(value),
-                                    style: TextStyle(fontSize: 14.0.sp),
+                                    style: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                    ),
                                     decoration: inputDecoration(
                                       "Mật khẩu mới",
                                       Icons.lock,
@@ -90,9 +98,29 @@ class _ChangePasswordFirstTimeScreenState
                                     controller:
                                         _changePasswordFirstTimeController
                                             .reNewPasswordEditingController,
-                                    validator: (value) =>
-                                        validatePassword(value),
-                                    style: TextStyle(fontSize: 14.0.sp),
+                                    validator: (value) {
+                                      String spacePattern = r'\s';
+                                      RegExp spaceRegex = RegExp(spacePattern);
+                                      if (value == null || value.isEmpty) {
+                                        return 'Mật khẩu không được để trống!';
+                                      } else if (value !=
+                                          _changePasswordFirstTimeController
+                                              .newPasswordEditingController!
+                                              .text) {
+                                        return 'Mật khẩu xác nhận không khớp với mật khẩu mới!';
+                                      } else if (spaceRegex.hasMatch(value)) {
+                                        return 'Mật khẩu không được chứa khoảng trắng!';
+                                      } else if (value.length < 8) {
+                                        return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    style: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                    ),
                                     decoration: inputDecoration(
                                       "Xác nhận mật khẩu mới",
                                       Icons.lock,
@@ -109,7 +137,9 @@ class _ChangePasswordFirstTimeScreenState
                               ),
                               ElevatedButton(
                                   onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
+                                    if (_formKey.currentState!.validate() &&
+                                        _changePasswordFirstTimeController
+                                            .isLoading.isFalse) {
                                       await _changePasswordFirstTimeController
                                           .changePasswordFirstTime(
                                               _changePasswordFirstTimeController
@@ -141,7 +171,9 @@ class _ChangePasswordFirstTimeScreenState
                                           Text(
                                             'Đang cập nhật...',
                                             style: TextStyle(
-                                                fontSize: 14.0.sp,
+                                                fontSize: textScale > 1.4
+                                                    ? 14.0.sp / textScale * 1.4
+                                                    : 14.0.sp,
                                                 fontWeight: FontWeight.w600),
                                           )
                                         ],
@@ -150,7 +182,9 @@ class _ChangePasswordFirstTimeScreenState
                                       return Text(
                                         'cập nhật'.toUpperCase(),
                                         style: TextStyle(
-                                            fontSize: 14.0.sp,
+                                            fontSize: textScale > 1.4
+                                                ? 14.0.sp / textScale * 1.4
+                                                : 14.0.sp,
                                             fontWeight: FontWeight.bold),
                                       );
                                     }
@@ -184,6 +218,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
+    errorMaxLines: 3,
     labelText: labelText,
     prefixText: prefix,
     labelStyle: TextStyle(color: Colors.blue.shade900),
@@ -226,11 +261,13 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null ||
-      value.isEmpty ||
-      spaceRegex.hasMatch(value) ||
-      value.length < 6) {
-    return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
+
+  if (value == null || value.isEmpty) {
+    return 'Mật khẩu không được để trống!';
+  } else if (spaceRegex.hasMatch(value)) {
+    return 'Mật khẩu không được chứa khoảng trắng!';
+  } else if (value.length < 8) {
+    return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
   } else {
     return null;
   }

@@ -23,188 +23,221 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.blue.shade900,
-                size: 18.0.sp,
-              ),
-              onPressed: () {
-                Get.back();
-              },
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
+    return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.blue.shade900,
+              size: 18.0.sp,
             ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
+            onPressed: () {
+              Get.back();
+            },
           ),
-          resizeToAvoidBottomInset: true,
-          body: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        height: h * 0.2,
-                        width: w,
-                        child: Image.asset('assets/images/lock.png'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        resizeToAvoidBottomInset: true,
+        body: SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      height: h * 0.2,
+                      width: w,
+                      child: Image.asset('assets/images/lock.png'),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      child: Text(
+                        "đặt lại mật khẩu".toUpperCase(),
+                        style: TextStyle(
+                            fontSize: textScale > 1.4
+                                ? 18.0.sp / textScale * 1.4
+                                : 18.0.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade900),
                       ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 20),
-                        child: Text(
-                          "đặt lại mật khẩu".toUpperCase(),
-                          style: TextStyle(
-                              fontSize: 18.0.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue.shade900),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(20),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              Obx(
-                                () => TextFormField(
-                                    obscureText: _changePasswordController
-                                        .isOldPasswordHidden.value,
-                                    controller: _changePasswordController
-                                        .oldPasswordEditingController,
-                                    validator: (value) =>
-                                        validatePassword(value),
-                                    style: TextStyle(fontSize: 14.0.sp),
-                                    decoration: inputDecoration(
-                                      "Mật khẩu cũ",
-                                      Icons.lock,
-                                      1,
-                                      surfixIconData: _changePasswordController
-                                              .isOldPasswordHidden.value
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    )),
-                              ),
-                              const SizedBox(
-                                height: 25,
-                              ),
-                              Obx(
-                                () => TextFormField(
-                                    obscureText: _changePasswordController
-                                        .isNewPasswordHidden.value,
-                                    controller: _changePasswordController
-                                        .newPasswordEditingController,
-                                    validator: (value) =>
-                                        validatePassword(value),
-                                    style: TextStyle(fontSize: 14.0.sp),
-                                    decoration: inputDecoration(
-                                      "Mật khẩu mới",
-                                      Icons.lock,
-                                      2,
-                                      surfixIconData: _changePasswordController
-                                              .isNewPasswordHidden.value
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    )),
-                              ),
-                              const SizedBox(
-                                height: 25,
-                              ),
-                              Obx(
-                                () => TextFormField(
-                                    obscureText: _changePasswordController
-                                        .isReNewPasswordHidden.value,
-                                    controller: _changePasswordController
-                                        .reNewPasswordEditingController,
-                                    validator: (value) =>
-                                        validatePassword(value),
-                                    style: TextStyle(fontSize: 14.0.sp),
-                                    decoration: inputDecoration(
-                                      "Xác nhận mật khẩu mới",
-                                      Icons.lock,
-                                      3,
-                                      surfixIconData: _changePasswordController
-                                              .isReNewPasswordHidden.value
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    )),
-                              ),
-                              const SizedBox(
-                                height: 25,
-                              ),
-                              ElevatedButton(
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      await _changePasswordController
-                                          .changePassword(
-                                              _changePasswordController
-                                                  .oldPasswordEditingController!
-                                                  .text,
-                                              _changePasswordController
-                                                  .newPasswordEditingController!
-                                                  .text,
-                                              _changePasswordController
-                                                  .reNewPasswordEditingController!
-                                                  .text);
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            Obx(
+                              () => TextFormField(
+                                  obscureText: _changePasswordController
+                                      .isOldPasswordHidden.value,
+                                  controller: _changePasswordController
+                                      .oldPasswordEditingController,
+                                  validator: (value) => validatePassword(value),
+                                  style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                  ),
+                                  decoration: inputDecoration(
+                                    "Mật khẩu cũ",
+                                    Icons.lock,
+                                    1,
+                                    surfixIconData: _changePasswordController
+                                            .isOldPasswordHidden.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Obx(
+                              () => TextFormField(
+                                  obscureText: _changePasswordController
+                                      .isNewPasswordHidden.value,
+                                  controller: _changePasswordController
+                                      .newPasswordEditingController,
+                                  validator: (value) => validatePassword(value),
+                                  style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                  ),
+                                  decoration: inputDecoration(
+                                    "Mật khẩu mới",
+                                    Icons.lock,
+                                    2,
+                                    surfixIconData: _changePasswordController
+                                            .isNewPasswordHidden.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Obx(
+                              () => TextFormField(
+                                  obscureText: _changePasswordController
+                                      .isReNewPasswordHidden.value,
+                                  controller: _changePasswordController
+                                      .reNewPasswordEditingController,
+                                  validator: (value) {
+                                    String spacePattern = r'\s';
+                                    RegExp spaceRegex = RegExp(spacePattern);
+                                    if (value == null || value.isEmpty) {
+                                      return 'Mật khẩu không được để trống!';
+                                    } else if (value !=
+                                        _changePasswordController
+                                            .newPasswordEditingController!
+                                            .text) {
+                                      return 'Mật khẩu xác nhận không khớp với mật khẩu mới!';
+                                    } else if (spaceRegex.hasMatch(value)) {
+                                      return 'Mật khẩu không được chứa khoảng trắng!';
+                                    } else if (value.length < 8) {
+                                      return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
                                     } else {
-                                      setState(() {
-                                        _autovalidateMode =
-                                            AutovalidateMode.onUserInteraction;
-                                      });
+                                      return null;
                                     }
                                   },
-                                  child: Obx((() {
-                                    if (_changePasswordController
-                                        .isLoading.value) {
-                                      return Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const CircularProgressIndicator(
-                                            color: Colors.white,
-                                          ),
-                                          const SizedBox(
-                                            width: 12,
-                                          ),
-                                          Text(
-                                            'Đang cập nhật...',
-                                            style: TextStyle(
-                                                fontSize: 14.0.sp,
-                                                fontWeight: FontWeight.w600),
-                                          )
-                                        ],
-                                      );
-                                    } else {
-                                      return Text(
-                                        'cập nhật'.toUpperCase(),
-                                        style: TextStyle(
-                                            fontSize: 14.0.sp,
-                                            fontWeight: FontWeight.bold),
-                                      );
-                                    }
-                                  })),
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 14),
-                                    minimumSize: const Size.fromHeight(40),
-                                    primary: Colors.blue.shade900,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(6.0.sp),
-                                    ),
-                                  ))
-                            ],
-                          ),
+                                  style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                  ),
+                                  decoration: inputDecoration(
+                                    "Xác nhận mật khẩu mới",
+                                    Icons.lock,
+                                    3,
+                                    surfixIconData: _changePasswordController
+                                            .isReNewPasswordHidden.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate() &&
+                                      _changePasswordController
+                                          .isLoading.isFalse) {
+                                    await _changePasswordController
+                                        .changePassword(
+                                            _changePasswordController
+                                                .oldPasswordEditingController!
+                                                .text,
+                                            _changePasswordController
+                                                .newPasswordEditingController!
+                                                .text,
+                                            _changePasswordController
+                                                .reNewPasswordEditingController!
+                                                .text);
+                                  } else {
+                                    setState(() {
+                                      _autovalidateMode =
+                                          AutovalidateMode.onUserInteraction;
+                                    });
+                                  }
+                                },
+                                child: Obx((() {
+                                  if (_changePasswordController
+                                      .isLoading.value) {
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(
+                                          width: 12,
+                                        ),
+                                        Text(
+                                          'Đang cập nhật...',
+                                          style: TextStyle(
+                                              fontSize: textScale > 1.4
+                                                  ? 14.0.sp / textScale * 1.4
+                                                  : 14.0.sp,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    );
+                                  } else {
+                                    return Text(
+                                      'cập nhật'.toUpperCase(),
+                                      style: TextStyle(
+                                          fontSize: textScale > 1.4
+                                              ? 14.0.sp / textScale * 1.4
+                                              : 14.0.sp,
+                                          fontWeight: FontWeight.bold),
+                                    );
+                                  }
+                                })),
+                                style: ElevatedButton.styleFrom(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
+                                  minimumSize: const Size.fromHeight(40),
+                                  primary: Colors.blue.shade900,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0.sp),
+                                  ),
+                                ))
+                          ],
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-              ))),
-    );
+              ),
+            )));
   }
 }
 
@@ -215,6 +248,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
     helperText: helperText,
+    errorMaxLines: 3,
     labelText: labelText,
     prefixText: prefix,
     labelStyle: TextStyle(color: Colors.blue.shade900),
@@ -259,11 +293,13 @@ InputDecoration inputDecoration(String labelText, IconData iconData, int id,
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null ||
-      value.isEmpty ||
-      spaceRegex.hasMatch(value) ||
-      value.length < 8) {
-    return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
+
+  if (value == null || value.isEmpty) {
+    return 'Mật khẩu không được để trống!';
+  } else if (spaceRegex.hasMatch(value)) {
+    return 'Mật khẩu không được chứa khoảng trắng!';
+  } else if (value.length < 8) {
+    return 'Mật khẩu cần chứa ít nhất 8 kí tự!';
   } else {
     return null;
   }

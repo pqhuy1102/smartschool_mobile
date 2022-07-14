@@ -22,6 +22,8 @@ class DetailSubjectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Container(
         margin: const EdgeInsets.fromLTRB(8, 0, 8, 24),
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
@@ -38,7 +40,8 @@ class DetailSubjectItem extends StatelessWidget {
                   // ignore: unnecessary_string_interpolations
                   "$date",
                   style: TextStyle(
-                      fontSize: 14.0.sp,
+                      fontSize:
+                          textScale > 1.4 ? 14.0.sp / textScale * 1.4 : 14.0.sp,
                       color: Colors.grey.shade600,
                       fontWeight: FontWeight.w600),
                 ),
@@ -55,7 +58,9 @@ class DetailSubjectItem extends StatelessWidget {
                       "$subjectId",
                       // overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 14.0.sp,
+                          fontSize: textScale > 1.4
+                              ? 14.0.sp / textScale * 1.4
+                              : 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),
@@ -65,41 +70,49 @@ class DetailSubjectItem extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 4),
-              child: Row(
+              child: Wrap(
                 children: [
                   Row(
                     children: [
+                      const SizedBox(
+                        width: 2,
+                      ),
                       Icon(
                         Icons.access_time_filled_rounded,
                         color: Colors.blue.shade900,
                         size: 14.0.sp,
                       ),
+                      const SizedBox(
+                        width: 2,
+                      ),
                       // ignore: unnecessary_string_interpolations
-                      Text("$startTime -$endTime",
-                          style: TextStyle(
-                              fontSize: 14.0.sp,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500))
+                      Flexible(
+                          child: Text("$startTime -$endTime",
+                              style: TextStyle(
+                                  fontSize: textScale > 1.4
+                                      ? 14.0.sp / textScale * 1.4
+                                      : 14.0.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500)))
                     ],
-                  ),
-                  const SizedBox(
-                    width: 6,
                   ),
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on,
+                        Icons.room_rounded,
                         color: Colors.blue.shade900,
-                        size: 14.0.sp,
+                        size: 16.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
-                      Text("$room",
+                      Text(" $room",
                           style: TextStyle(
-                              fontSize: 14.0.sp,
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
+                                  : 14.0.sp,
                               color: Colors.black,
                               fontWeight: FontWeight.w500))
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -107,7 +120,8 @@ class DetailSubjectItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               child: Text("• $status",
                   style: TextStyle(
-                      fontSize: 14.0.sp,
+                      fontSize:
+                          textScale > 1.4 ? 14.0.sp / textScale * 1.4 : 14.0.sp,
                       color: status == "Hợp lệ"
                           ? Colors.green.shade600
                           : status == "Đi trễ"

@@ -12,8 +12,9 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -28,7 +29,7 @@ class NotificationScreen extends StatelessWidget {
         title: Text(
           'Thông báo',
           style: TextStyle(
-              fontSize: 17.0.sp,
+              fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
               color: Colors.blue.shade900,
               fontWeight: FontWeight.w600),
         ),
@@ -47,14 +48,16 @@ class NotificationScreen extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(10, 40, 10, 20),
                   child: Image.asset(
                     'assets/images/empty_notification.png',
-                    height: 24.0.h,
+                    height: 22.0.h,
                     fit: BoxFit.contain,
                   ),
                 ),
                 Text(
                   'Bạn không có thông báo nào!',
-                  style:
-                      TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize:
+                          textScale > 1.4 ? 13.0.sp / textScale * 1.3 : 13.0.sp,
+                      fontWeight: FontWeight.w600),
                 )
               ],
             ));
@@ -79,7 +82,7 @@ class NotificationScreen extends StatelessWidget {
           }
         }))),
       ),
-    ));
+    );
   }
 }
 

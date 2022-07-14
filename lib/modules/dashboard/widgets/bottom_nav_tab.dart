@@ -15,6 +15,8 @@ class BottomNavTab extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return InkWell(
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 18),
@@ -35,7 +37,13 @@ class BottomNavTab extends StatelessWidget {
                     color: isSelected
                         ? Colors.blue.shade900
                         : Colors.grey.shade800,
-                    fontSize: isSelected ? 15.0.sp : 14.0.sp,
+                    fontSize: isSelected
+                        ? (textScale > 1.4
+                            ? 14.0.sp / textScale * 1.4
+                            : 14.0.sp)
+                        : (textScale > 1.4
+                            ? 13.0.sp / textScale * 1.4
+                            : 13.0.sp),
                     fontWeight: isSelected ? FontWeight.w600 : FontWeight.w300,
                     letterSpacing: 0.8),
               ),

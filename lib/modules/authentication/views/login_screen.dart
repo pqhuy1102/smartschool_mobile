@@ -18,6 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
@@ -41,7 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       'đăng nhập'.toUpperCase(),
                       style: TextStyle(
-                          fontSize: 20.0.sp,
+                          fontSize: textScale > 1.4
+                              ? 20.0.sp / textScale * 1.4
+                              : 20.0.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue.shade900),
                     )),
@@ -59,7 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _loginController.emailEditingController,
                               validator: (value) => validateMSSV(value),
                               style: TextStyle(
-                                  fontSize: 14.0.sp,
+                                  fontSize: textScale > 1.4
+                                      ? 14.0.sp / textScale * 1.4
+                                      : 14.0.sp,
                                   fontWeight: FontWeight.w500),
                               decoration: inputDecoration(
                                 'Mã số sinh viên',
@@ -77,7 +83,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     _loginController.passwordEditingController,
                                 validator: (value) => validatePassword(value),
                                 style: TextStyle(
-                                    fontSize: 14.0.sp,
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
                                     fontWeight: FontWeight.w500),
                                 decoration: inputDecoration(
                                   'Mật khẩu',
@@ -101,7 +109,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'Quên mật khẩu?',
                                       style: TextStyle(
-                                          fontSize: 14.0.sp,
+                                          fontSize: textScale > 1.4
+                                              ? 13.0.sp / textScale * 1.4
+                                              : 13.0.sp,
                                           color: Colors.black),
                                     ))),
                             const SizedBox(
@@ -109,7 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             ElevatedButton(
                                 onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (_formKey.currentState!.validate() &&
+                                      _loginController.isLoading.isFalse) {
                                     await _loginController.login(
                                         _loginController
                                             .emailEditingController!.text,
@@ -137,7 +148,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         Text(
                                           'Đang đăng nhập...',
                                           style: TextStyle(
-                                              fontSize: 14.0.sp,
+                                              fontSize: textScale > 1.4
+                                                  ? 14.0.sp / textScale * 1.4
+                                                  : 14.0.sp,
                                               fontWeight: FontWeight.w600),
                                         )
                                       ],
@@ -146,7 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     return Text(
                                       'đăng nhập'.toUpperCase(),
                                       style: TextStyle(
-                                          fontSize: 14.0.sp,
+                                          fontSize: textScale > 1.4
+                                              ? 14.0.sp / textScale * 1.4
+                                              : 14.0.sp,
                                           fontWeight: FontWeight.bold),
                                     );
                                   }
@@ -179,6 +194,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
     labelText: labelText,
     labelStyle: TextStyle(color: Colors.blue.shade900),
     prefixText: prefix,
+    errorMaxLines: 3,
     prefixIcon: Icon(
       iconData,
       size: 20.0.sp,
@@ -215,7 +231,7 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
 //validate email function
 String? validateMSSV(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Mã số sinh viên không hợp lệ, vui lòng nhập lại!';
+    return 'Mã số sinh viên không được để trống!';
   } else {
     return null;
   }
@@ -225,11 +241,11 @@ String? validateMSSV(String? value) {
 String? validatePassword(String? value) {
   String spacePattern = r'\s';
   RegExp spaceRegex = RegExp(spacePattern);
-  if (value == null ||
-      value.isEmpty ||
-      spaceRegex.hasMatch(value) ||
-      value.length < 6) {
-    return 'Mật khẩu không hợp lệ, vui lòng nhập lại!';
+
+  if (value == null || value.isEmpty) {
+    return 'Mật khẩu không được để trống!';
+  } else if (spaceRegex.hasMatch(value)) {
+    return 'Mật khẩu không được chứa khoảng trắng!';
   } else {
     return null;
   }

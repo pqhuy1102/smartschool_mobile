@@ -22,6 +22,8 @@ class CheckinTodayItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Container(
         margin: const EdgeInsets.fromLTRB(0, 0, 0, 4),
         padding: const EdgeInsets.all(18),
@@ -35,7 +37,8 @@ class CheckinTodayItem extends StatelessWidget {
               // ignore: unnecessary_string_interpolations
               "$time $date",
               style: TextStyle(
-                  fontSize: 14.0.sp,
+                  fontSize:
+                      textScale > 1.4 ? 13.0.sp / textScale * 1.4 : 13.0.sp,
                   color: Colors.grey.shade600,
                   fontWeight: FontWeight.w500),
             ),
@@ -51,7 +54,9 @@ class CheckinTodayItem extends StatelessWidget {
                       // ignore: unnecessary_string_interpolations
                       "$course",
                       style: TextStyle(
-                          fontSize: 14.0.sp,
+                          fontSize: textScale > 1.4
+                              ? 14.0.sp / textScale * 1.4
+                              : 14.0.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),
@@ -61,12 +66,15 @@ class CheckinTodayItem extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 6),
-              child: Row(
+              child: Wrap(
                 children: [
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    margin: const EdgeInsets.fromLTRB(2, 0, 0, 0),
                     child: Row(
                       children: [
+                        const SizedBox(
+                          width: 1,
+                        ),
                         Icon(
                           Icons.access_time_filled_rounded,
                           color: Colors.blue.shade900,
@@ -74,27 +82,32 @@ class CheckinTodayItem extends StatelessWidget {
                         ),
 
                         // ignore: unnecessary_string_interpolations
-                        Text("$startTime -$endTime",
-                            style: TextStyle(
-                                fontSize: 14.0.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600))
+                        Flexible(
+                            child: Text("$startTime -$endTime",
+                                style: TextStyle(
+                                    fontSize: textScale > 1.4
+                                        ? 14.0.sp / textScale * 1.4
+                                        : 14.0.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500)))
                       ],
                     ),
                   ),
                   Row(
                     children: [
                       Icon(
-                        Icons.location_on,
+                        Icons.room_rounded,
                         color: Colors.blue.shade900,
-                        size: 18.0.sp,
+                        size: 16.0.sp,
                       ),
                       // ignore: unnecessary_string_interpolations
-                      Text("$room",
+                      Text(" $room",
                           style: TextStyle(
-                              fontSize: 14.0.sp,
+                              fontSize: textScale > 1.4
+                                  ? 14.0.sp / textScale * 1.4
+                                  : 14.0.sp,
                               color: Colors.black,
-                              fontWeight: FontWeight.w600))
+                              fontWeight: FontWeight.w500))
                     ],
                   ),
                 ],
@@ -102,15 +115,18 @@ class CheckinTodayItem extends StatelessWidget {
             ),
 
             Container(
-              margin: const EdgeInsets.only(top: 6),
-              child: Text("• $status",
-                  style: TextStyle(
-                      fontSize: 14.0.sp,
-                      color: status == "Attend"
-                          ? Colors.green.shade700
-                          : Colors.red.shade600,
-                      fontWeight: FontWeight.w600)),
-            )
+                margin: const EdgeInsets.only(top: 6),
+                child: Text("• $status",
+                    style: TextStyle(
+                        fontSize: textScale > 1.4
+                            ? 14.0.sp / textScale * 1.4
+                            : 14.0.sp,
+                        color: status == "Hợp lệ"
+                            ? Colors.green.shade700
+                            : status == "Đi trễ"
+                                ? Colors.orange.shade700
+                                : Colors.red,
+                        fontWeight: FontWeight.w600)))
           ],
         ));
   }

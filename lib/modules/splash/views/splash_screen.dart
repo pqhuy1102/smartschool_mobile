@@ -17,7 +17,6 @@ class SplashScreen extends StatelessWidget {
   Future<void> initializeSettings() async {
     _authmanager.checkLoginStatus();
     _authmanager.changePassStatus();
-    _authmanager.changeUsername();
     //Simulate other services for 3 seconds
     await Future.delayed(const Duration(seconds: 2));
   }
@@ -29,7 +28,7 @@ class SplashScreen extends StatelessWidget {
       builder: (context, snapshot) {
         //check connection state before move to OnBoard screen
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return waitingView();
+          return waitingView(context);
         } else {
           if (snapshot.hasError) {
             return errorView(snapshot);
@@ -42,7 +41,9 @@ class SplashScreen extends StatelessWidget {
   }
 
   //waiting view
-  Scaffold waitingView() {
+  Scaffold waitingView(BuildContext context) {
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
         body: Container(
       width: double.infinity,
@@ -66,7 +67,8 @@ class SplashScreen extends StatelessWidget {
               "Chào mừng đến",
               style: TextStyle(
                   color: Colors.red[300],
-                  fontSize: 22.0.sp,
+                  fontSize:
+                      textScale > 1.4 ? 22.0.sp / textScale * 1.4 : 22.0.sp,
                   fontWeight: FontWeight.w600),
             ),
             Container(
@@ -75,7 +77,8 @@ class SplashScreen extends StatelessWidget {
                 "Student Connect",
                 style: TextStyle(
                     color: Colors.blue[900],
-                    fontSize: 24.0.sp,
+                    fontSize:
+                        textScale > 1.4 ? 23.0.sp / textScale * 1.4 : 23.0.sp,
                     fontWeight: FontWeight.w700),
               ),
             ),

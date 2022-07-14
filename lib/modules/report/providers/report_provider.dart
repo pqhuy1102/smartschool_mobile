@@ -10,12 +10,12 @@ class ReportProvider extends GetConnect {
   final String userCourseAttendaceListUrl =
       '${Constant.apiDomain}/user/course-attendance?course_id=';
 
-  Future<List<dynamic>> getUserSemestersList(headers) async {
+  Future<dynamic> getUserSemestersList(headers) async {
     final response = await get(userSemesterListUrl, headers: headers);
-    if (response.status.hasError) {
-      return Future.error(response.statusText.toString());
+    if (response.statusCode == HttpStatus.ok) {
+      return response;
     } else {
-      return response.body['semester_list'];
+      return null;
     }
   }
 

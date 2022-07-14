@@ -1,7 +1,4 @@
-// ignore_for_file: deprecated_member_use
-
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -22,48 +19,56 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
   final GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
   final GetIndayAttendanceController _getIndayAttendanceController =
       Get.put(GetIndayAttendanceController());
+
   @override
   Widget build(BuildContext context) {
     if (_qrCodeController.isNeverDisplayAgain.isFalse) {
       Future.delayed(Duration.zero, () => showInstruction(context));
     }
+    final textScale = MediaQuery.of(context).textScaleFactor;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
 
     return WillPopScope(
-        child: SafeArea(
-            child: Scaffold(
-          extendBodyBehindAppBar: true,
-          resizeToAvoidBottomInset: true,
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.blue.shade900,
-                size: 18.0.sp,
-              ),
-              onPressed: () {
-                Get.back();
-                _getIndayAttendanceController.getIndayAttendance();
-              },
-            ),
-            title: Text(
-              'Mã QR',
-              style: TextStyle(
-                  fontSize: 17.0.sp,
+        child: Scaffold(
+            extendBodyBehindAppBar: true,
+            resizeToAvoidBottomInset: true,
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
                   color: Colors.blue.shade900,
-                  fontWeight: FontWeight.w600),
+                  size: 18.0.sp,
+                ),
+                onPressed: () {
+                  Get.back();
+                  _getIndayAttendanceController.getIndayAttendance();
+                },
+              ),
+              title: Text(
+                'Mã QR',
+                style: TextStyle(
+                    fontSize:
+                        textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
+                    color: Colors.blue.shade900,
+                    fontWeight: FontWeight.w600),
+              ),
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
             ),
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
-          body: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: SafeArea(
-                child: Center(
-                    child: SingleChildScrollView(
+            body: Obx(() {
+              if (_qrCodeController.hasInternet.isFalse) {
+                return Center(
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Image.asset(
+                        'assets/images/lost_internet.jpg',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Obx(() {
                         if (_qrCodeController.isLoading.value) {
                           return Center(
@@ -73,61 +78,231 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                             ),
                           );
                         } else {
-                          return QrImage(
-                            data: _qrCodeController.qrCodeString.value,
-                          );
+                          return Text(
+                              'Không có kết nối, vui lòng thử lại!',
+                              style: TextStyle(
+                                fontSize: textScale > 1.4
+                                    ? 13.0.sp / textScale * 1.3
+                                    : 13.0.sp,
+                                color: Colors.grey.shade700,
+                              ));
                         }
                       }),
                       const SizedBox(
                         height: 20,
                       ),
-                      Obx(() {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.replay_outlined,
-                              size: 20.0.sp,
-                            ),
-                            Text(
-                              "Tự động cập nhật sau ${_qrCodeController.countDown.value} giây",
-                              style: TextStyle(
-                                  fontSize: 14.0.sp,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        );
-                      }),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 30, horizontal: 10),
-                        child: ElevatedButton(
-                          child: Text(
-                            "Làm mới".toUpperCase(),
-                            style: TextStyle(
-                                fontSize: 14.0.sp, fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blue.shade900,
-                            // onSurface: Colors.transparent,
-                            // shadowColor: Colors.transparent,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-
-                            minimumSize: const Size.fromHeight(40),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0.sp),
-                            ),
-                          ),
-                          onPressed: () {
-                            _qrCodeController.getQrCode();
-                          },
+                      ElevatedButton(
+                        child: Text(
+                          "Tải lại",
+                          style: TextStyle(
+                              fontSize: textScale > 1.4
+                                  ? 13.0.sp / textScale * 1.4
+                                  : 13.0.sp,
+                              fontWeight: FontWeight.w600),
                         ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue.shade900,
+                          // onSurface: Colors.transparent,
+                          // shadowColor: Colors.transparent,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 14, horizontal: 50),
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0.sp),
+                          ),
+                        ),
+                        onPressed: () {
+                          _qrCodeController.getQrCode();
+                        },
                       ),
                     ],
                   ),
-                )),
-              )),
-        )),
+                );
+              } else {
+                return Container(
+                    margin: const EdgeInsets.only(top: 30.0),
+                    child: SafeArea(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Obx(() {
+                              if (_qrCodeController.isLoading.value) {
+                                return Center(
+                                  child: SpinKitFadingFour(
+                                    color: Colors.blue.shade900,
+                                    size: 50.0,
+                                  ),
+                                );
+                              } else {
+                                return GestureDetector(
+                                    child: Container(
+                                      margin: const EdgeInsets.all(10.0),
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            width: 45,
+                                            height: 45,
+                                            decoration: BoxDecoration(
+                                              border: Border(
+                                                top: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 5),
+                                                left: BorderSide(
+                                                    color: Colors.blue.shade900,
+                                                    width: 5),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            right: 0,
+                                            child: Container(
+                                              width: 45,
+                                              height: 45,
+                                              decoration: BoxDecoration(
+                                                border: Border(
+                                                  bottom: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      width: 5),
+                                                  right: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      width: 5),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 0,
+                                            right: 0,
+                                            child: Container(
+                                              width: 45,
+                                              height: 45,
+                                              decoration: BoxDecoration(
+                                                border: Border(
+                                                  top: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      width: 5),
+                                                  right: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      width: 5),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            left: 0,
+                                            child: Container(
+                                              width: 45,
+                                              height: 45,
+                                              decoration: BoxDecoration(
+                                                border: Border(
+                                                  bottom: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      width: 5),
+                                                  left: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      width: 5),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: shortestSide > 600
+                                                ? const EdgeInsets.all(14.0)
+                                                : const EdgeInsets.all(5.0),
+                                            child: QrImage(
+                                              size: shortestSide < 600
+                                                  ? _qrCodeController
+                                                      .qrCodeSize.value
+                                                  : 400.0,
+                                              embeddedImage: const AssetImage(
+                                                  'assets/images/logo_mini.png'),
+                                              embeddedImageStyle:
+                                                  QrEmbeddedImageStyle(
+                                                      size: const Size(55, 55)),
+                                              foregroundColor:
+                                                  Colors.blue.shade900,
+                                              data: _qrCodeController
+                                                  .qrCodeString.value,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      if (shortestSide > 600) {
+                                        _qrCodeController.handleQrSizeTablet();
+                                      } else {
+                                        _qrCodeController.handleQrSize();
+                                      }
+                                    });
+                              }
+                            }),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Obx(() {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.replay_outlined,
+                                    size: 20.0.sp,
+                                  ),
+                                  Flexible(
+                                      child: Text(
+                                    "Tự động cập nhật sau ${_qrCodeController.countDown.value} giây",
+                                    style: TextStyle(
+                                        fontSize: textScale > 1.4
+                                            ? 13.0.sp / textScale * 1.4
+                                            : 13.0.sp,
+                                        fontWeight: FontWeight.w500),
+                                  ))
+                                ],
+                              );
+                            }),
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 30, horizontal: 10),
+                              child: ElevatedButton(
+                                child: Text(
+                                  "Làm mới".toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue.shade900,
+                                  // onSurface: Colors.transparent,
+                                  // shadowColor: Colors.transparent,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 14, horizontal: 40),
+
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0.sp),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  _qrCodeController.getQrCode();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ));
+              }
+            })),
         onWillPop: () async {
           _getIndayAttendanceController.getIndayAttendance();
           return true;
@@ -169,8 +344,8 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                    height: 30.0,
-                                    width: 30.0,
+                                    height: 35.0,
+                                    width: 35.0,
                                     child: Checkbox(
                                         activeColor: Colors.blue.shade900,
                                         value: _qrCodeController

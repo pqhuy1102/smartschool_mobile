@@ -33,7 +33,7 @@ mixin CacheManager {
     await box.remove(CacheManagerKey.ISACTIVATE.toString());
   }
 
-  Future<bool> saveUsername(String name) async {
+  Future<bool> saveUsername(String? name) async {
     final box = GetStorage();
     await box.write(CacheManagerKey.USERNAME.toString(), name);
     return true;
