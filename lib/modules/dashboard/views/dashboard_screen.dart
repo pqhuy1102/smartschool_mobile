@@ -195,7 +195,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     updateNotiToken();
   }
 
-  void updateNotiToken() {
+  void updateNotiToken() async {
     if (Platform.isIOS) {
       await FirebaseMessaging.instance.requestPermission(
           sound: true, badge: true, alert: true, provisional: true);
