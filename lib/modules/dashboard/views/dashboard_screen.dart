@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -193,7 +195,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     updateNotiToken();
   }
 
-  void updateNotiToken() {
+  void updateNotiToken() async {
+    if (Platform.isIOS) {
+      await FirebaseMessaging.instance.requestPermission(
+          sound: true, badge: true, alert: true, provisional: true);
+    }
     messaging.getToken().then((value) {
       _dashBoardController.fcmToken.value = value!;
       _dashBoardController
