@@ -17,7 +17,6 @@ class ChangePasswordProvider extends GetConnect {
       model.toJson(),
       headers: headers,
     );
-
     if (response.statusCode == HttpStatus.ok) {
       return true;
     } else {

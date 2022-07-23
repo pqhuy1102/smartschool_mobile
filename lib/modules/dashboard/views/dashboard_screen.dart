@@ -288,7 +288,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     elevation: 0,
                   )),
             body: Container(
-                decoration: const BoxDecoration(color: Colors.white70),
+                decoration: const BoxDecoration(color: Colors.white),
                 child: SafeArea(
                     child: IndexedStack(
                   index: selectedPosition,
@@ -357,65 +357,56 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
         Obx(() {
           if (_getIndayAttendanceController.hasInternet.isFalse) {
-            return SingleChildScrollView(child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/lost_internet.jpg',
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Obx(() {
-                    if (_getIndayAttendanceController.isLoading.value) {
-                      return Center(
-                        child: SpinKitFadingFour(
-                          color: Colors.blue.shade900,
-                          size: 50.0,
-                        ),
-                      );
-                    } else {
-                      return Text('Không có kết nối, vui lòng thử lại!',
-                          style: TextStyle(
-                            fontSize: textScale > 1.4
-                                ? 13.0.sp / textScale * 1.3
-                                : 13.0.sp,
-                            color: Colors.grey.shade700,
-                          ));
-                    }
-                  }),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    child: Text(
-                      "Tải lại",
-                      style: TextStyle(
+            return SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/lost_internet.jpg',
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text('Không có kết nối, vui lòng thử lại!',
+                        style: TextStyle(
                           fontSize: textScale > 1.4
-                              ? 13.0.sp / textScale * 1.4
+                              ? 13.0.sp / textScale * 1.3
                               : 13.0.sp,
-                          fontWeight: FontWeight.w600),
+                          color: Colors.grey.shade700,
+                        )),
+                    const SizedBox(
+                      height: 20,
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue.shade900,
-                      // onSurface: Colors.transparent,
-                      // shadowColor: Colors.transparent,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 45),
-
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0.sp),
+                    ElevatedButton(
+                      child: Text(
+                        "Tải lại",
+                        style: TextStyle(
+                            fontSize: textScale > 1.4
+                                ? 13.0.sp / textScale * 1.4
+                                : 13.0.sp,
+                            fontWeight: FontWeight.w600),
                       ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue.shade900,
+                        // onSurface: Colors.transparent,
+                        // shadowColor: Colors.transparent,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 45),
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0.sp),
+                        ),
+                      ),
+                      onPressed: () {
+                        _getIndayAttendanceController.getIndayAttendance();
+                      },
                     ),
-                    onPressed: () {
-                      _getIndayAttendanceController.getIndayAttendance();
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),);
+            );
           } else if (_getIndayAttendanceController.isLoading.isTrue) {
             return Center(
               child: SpinKitFadingFour(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
@@ -39,25 +38,13 @@ class _ReportScreenState extends State<ReportScreen> {
                       const SizedBox(
                         height: 8,
                       ),
-                      Obx(() {
-                        if (_reportController.isLoading.value) {
-                          return Center(
-                            child: SpinKitFadingFour(
-                              color: Colors.blue.shade900,
-                              size: 50.0,
-                            ),
-                          );
-                        } else {
-                          return Text(
-                              'Không có kết nối, vui lòng thử lại!',
-                              style: TextStyle(
-                                fontSize: textScale > 1.4
-                                    ? 13.0.sp / textScale * 1.3
-                                    : 13.0.sp,
-                                color: Colors.grey.shade700,
-                              ));
-                        }
-                      }),
+                      Text('Không có kết nối, vui lòng thử lại!',
+                          style: TextStyle(
+                            fontSize: textScale > 1.4
+                                ? 13.0.sp / textScale * 1.3
+                                : 13.0.sp,
+                            color: Colors.grey.shade700,
+                          )),
                       const SizedBox(
                         height: 20,
                       ),
@@ -90,7 +77,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 );
               } else {
                 return Container(
-                  decoration: const BoxDecoration(color: Colors.white70),
+                  decoration: const BoxDecoration(color: Colors.white),
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: SafeArea(

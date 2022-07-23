@@ -39,27 +39,28 @@ class UserCourseAttendanceResponeModel {
 }
 
 class AttendanceList {
-  AttendanceList({
-    required this.startTime,
-    required this.endTime,
-    required this.checkInTime,
-    required this.room,
-    required this.checkInStatus,
-  });
+  AttendanceList(
+      {required this.startTime,
+      required this.endTime,
+      required this.checkInTime,
+      required this.room,
+      required this.checkInStatus,
+      required this.scheduleId});
 
   String startTime;
   String endTime;
   String? checkInTime;
   String room;
   String checkInStatus;
+  int scheduleId;
 
   factory AttendanceList.fromJson(Map<String, dynamic> json) => AttendanceList(
-        startTime: json["start_time"],
-        endTime: json["end_time"],
-        checkInTime: json["check_in_time"],
-        room: json["room"],
-        checkInStatus: json["check_in_status"],
-      );
+      startTime: json["start_time"],
+      endTime: json["end_time"],
+      checkInTime: json["check_in_time"],
+      room: json["room"],
+      checkInStatus: json["check_in_status"],
+      scheduleId: json["schedule_id"]);
 
   Map<String, dynamic> toJson() => {
         "start_time": startTime,
@@ -67,5 +68,6 @@ class AttendanceList {
         "check_in_time": checkInTime,
         "room": room,
         "check_in_status": checkInStatus,
+        "schedule_id": scheduleId
       };
 }

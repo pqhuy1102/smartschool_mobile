@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/authentication/model/login_request_model.dart';
 import 'package:smartschool_mobile/modules/authentication/providers/login_provider.dart';
@@ -15,6 +16,8 @@ class LoginController extends GetxController {
 
   var isActivated = false.obs;
 
+  var hasInternet = false.obs;
+
   TextEditingController? emailEditingController;
   TextEditingController? passwordEditingController;
 
@@ -27,8 +30,15 @@ class LoginController extends GetxController {
     _loginProvider = Get.put(LoginProvider());
     _authenticationManager = Get.find();
 
+    getInternetStatus();
+
     emailEditingController = TextEditingController();
     passwordEditingController = TextEditingController();
+
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final hasInternetYet = status == InternetConnectionStatus.connected;
+      hasInternet.value = hasInternetYet;
+    });
   }
 
   //login
@@ -36,35 +46,38 @@ class LoginController extends GetxController {
     isLoading(true);
     final res = await _loginProvider.login(
         LoginRequestModel(email: email.trim(), password: password.trim()));
-    if (res != null && !res.hasError) {
-      _authenticationManager.login(res.body['token'], res.body['username']);
-      username.value = res.body['username'];
 
-      isActivated.value = res.body['is_activate'];
-      if (isActivated.value) {
-        _authenticationManager
-            .changePasswordFirstTimeStatus(res.body['is_activate']);
-      }
-      Get.snackbar('Thành công', 'Đăng nhập thành công!',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.green,
-          colorText: Colors.white);
-      isLoading(false);
-    } else if (res != null && res.hasError) {
-      final error = res.body['message'] == "Wrong password"
-          ? "Sai mật khẩu"
-          : res.body['message'];
-      Get.snackbar('Lỗi ', error,
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
-      isLoading(false);
-    } else {
+    if (hasInternet.isFalse) {
       Get.snackbar('Lỗi ', "Bạn chưa kết nối internet!",
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);
       isLoading(false);
+    } else {
+      if (!res.hasError) {
+        _authenticationManager.login(res.body['token'], res.body['username']);
+        username.value = res.body['username'];
+
+        isActivated.value = res.body['is_activate'];
+        if (isActivated.value) {
+          _authenticationManager
+              .changePasswordFirstTimeStatus(res.body['is_activate']);
+        }
+        Get.snackbar('Thành công', 'Đăng nhập thành công!',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.green,
+            colorText: Colors.white);
+        isLoading(false);
+      } else {
+        final error = res.body['message'] == "Wrong password"
+            ? "Sai mật khẩu"
+            : res.body['message'];
+        Get.snackbar('Lỗi ', error,
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        isLoading(false);
+      }
     }
   }
 
@@ -82,5 +95,9 @@ class LoginController extends GetxController {
   //toggle password
   void togglePasswordVisibility() {
     isPasswordHidden(!isPasswordHidden.value);
+  }
+
+  void getInternetStatus() async {
+    hasInternet.value = await InternetConnectionChecker().hasConnection;
   }
 }

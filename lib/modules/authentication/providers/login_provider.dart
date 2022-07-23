@@ -9,10 +9,6 @@ class LoginProvider extends GetConnect {
     final response = await post(loginUrl, model.toJson(), headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     });
-    if (!response.status.connectionError) {
-      return response;
-    } else {
-      return null;
-    }
+    return response;
   }
 }

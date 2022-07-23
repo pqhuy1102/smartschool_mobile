@@ -42,7 +42,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
         ),
         body: Container(
           margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-          decoration: const BoxDecoration(color: Colors.white70),
+          decoration: const BoxDecoration(color: Colors.white),
           child: SafeArea(child: Obx(() {
             if (_reportController.hasInternet.isFalse) {
               return Center(
@@ -56,24 +56,13 @@ class SubjectDetailReportScreen extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    Obx(() {
-                      if (_reportController.isLoading.value) {
-                        return Center(
-                          child: SpinKitFadingFour(
-                            color: Colors.blue.shade900,
-                            size: 50.0,
-                          ),
-                        );
-                      } else {
-                        return Text('Không có kết nối, vui lòng thử lại!',
-                            style: TextStyle(
-                              fontSize: textScale > 1.4
-                                  ? 13.0.sp / textScale * 1.3
-                                  : 13.0.sp,
-                              color: Colors.grey.shade700,
-                            ));
-                      }
-                    }),
+                    Text('Không có kết nối, vui lòng thử lại!',
+                        style: TextStyle(
+                          fontSize: textScale > 1.4
+                              ? 13.0.sp / textScale * 1.3
+                              : 13.0.sp,
+                          color: Colors.grey.shade700,
+                        )),
                     const SizedBox(
                       height: 20,
                     ),
@@ -167,50 +156,58 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                   ),
                                   items: [
                                     DropdownMenuItem(
-                                      child: Text(
-                                        'Tất cả',
-                                        style: TextStyle(
-                                            fontSize: textScale > 1.4
-                                                ? 13.0.sp / textScale * 1.4
-                                                : 13.0.sp,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500),
+                                      child: Center(
+                                        child: Text(
+                                          'Tất cả',
+                                          style: TextStyle(
+                                              fontSize: textScale > 1.4
+                                                  ? 13.0.sp / textScale * 1.4
+                                                  : 13.0.sp,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                       value: "1",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text(
-                                        'Hợp lệ',
-                                        style: TextStyle(
-                                            fontSize: textScale > 1.4
-                                                ? 13.0.sp / textScale * 1.4
-                                                : 13.0.sp,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500),
+                                      child: Center(
+                                        child: Text(
+                                          'Hợp lệ',
+                                          style: TextStyle(
+                                              fontSize: textScale > 1.4
+                                                  ? 13.0.sp / textScale * 1.4
+                                                  : 13.0.sp,
+                                              color: Colors.green.shade800,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                       value: "2",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text(
-                                        'Đi trễ',
-                                        style: TextStyle(
-                                            fontSize: textScale > 1.4
-                                                ? 13.0.sp / textScale * 1.4
-                                                : 13.0.sp,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500),
+                                      child: Center(
+                                        child: Text(
+                                          'Đi trễ',
+                                          style: TextStyle(
+                                              fontSize: textScale > 1.4
+                                                  ? 13.0.sp / textScale * 1.4
+                                                  : 13.0.sp,
+                                              color: Colors.orange.shade800,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                       value: "3",
                                     ),
                                     DropdownMenuItem(
-                                      child: Text(
-                                        'Vắng',
-                                        style: TextStyle(
-                                            fontSize: textScale > 1.4
-                                                ? 13.0.sp / textScale * 1.4
-                                                : 13.0.sp,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500),
+                                      child: Center(
+                                        child: Text(
+                                          'Vắng',
+                                          style: TextStyle(
+                                              fontSize: textScale > 1.4
+                                                  ? 13.0.sp / textScale * 1.4
+                                                  : 13.0.sp,
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                       value: "4",
                                     ),
@@ -260,6 +257,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                       .filterCourseAttendance.length,
                                   itemBuilder: ((context, index) {
                                     return DetailSubjectItem(
+                                        scheduleId: _reportController
+                                            .filterCourseAttendance[index]
+                                            .scheduleId,
                                         startTime: formatDateTime(_reportController
                                                 .filterCourseAttendance[index]
                                                 .startTime)
@@ -276,8 +276,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                             : formatDateTime(_reportController
                                                 .filterCourseAttendance[index]
                                                 .checkInTime),
-                                        subjectId:
-                                            _reportController.selectedCourse.value,
+                                        subjectId: _reportController.selectedCourse.value,
                                         className: "",
                                         room: "${_reportController.filterCourseAttendance[index].room}",
                                         status: _reportController.filterCourseAttendance[index].checkInStatus == "Attend"
