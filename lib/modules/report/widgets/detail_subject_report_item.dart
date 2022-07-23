@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smartschool_mobile/modules/complain/controllers/complain_controller.dart';
+import 'package:smartschool_mobile/routes/routes.dart';
 
 class DetailSubjectItem extends StatelessWidget {
-  const DetailSubjectItem(
+  DetailSubjectItem(
       {Key? key,
+      required this.scheduleId,
       required this.date,
       required this.subjectId,
       required this.className,
@@ -19,6 +23,9 @@ class DetailSubjectItem extends StatelessWidget {
   final String status;
   final String startTime;
   final String endTime;
+  final int scheduleId;
+
+  final ComplainController _complainController = Get.put(ComplainController());
 
   @override
   Widget build(BuildContext context) {
@@ -116,18 +123,46 @@ class DetailSubjectItem extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 4),
-              child: Text("• $status",
-                  style: TextStyle(
-                      fontSize:
-                          textScale > 1.4 ? 14.0.sp / textScale * 1.4 : 14.0.sp,
-                      color: status == "Hợp lệ"
-                          ? Colors.green.shade600
-                          : status == "Đi trễ"
-                              ? Colors.orange.shade600
-                              : Colors.red.shade600,
-                      fontWeight: FontWeight.w600)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  child: Text("• $status",
+                      style: TextStyle(
+                          fontSize: textScale > 1.4
+                              ? 14.0.sp / textScale * 1.4
+                              : 14.0.sp,
+                          color: status == "Hợp lệ"
+                              ? Colors.green.shade600
+                              : status == "Đi trễ"
+                                  ? Colors.orange.shade600
+                                  : Colors.red.shade600,
+                          fontWeight: FontWeight.w600)),
+                ),
+                status != "Hợp lệ"
+                    ? ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 6),
+                          primary: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.0.sp),
+                          ),
+                        ),
+                        onPressed: () {
+                          _complainController.getComplainForm(scheduleId);
+                          Get.toNamed(Routes.addComplain);
+                        },
+                        child: Text("Phản ánh",
+                            style: TextStyle(
+                                fontSize: textScale > 1.4
+                                    ? 14.0.sp / textScale * 1.4
+                                    : 14.0.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600)))
+                    : const Text("")
+              ],
             )
           ],
         ));

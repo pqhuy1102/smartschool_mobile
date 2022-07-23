@@ -184,24 +184,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Obx(() {
-                      if (_profileController.isLoading.value) {
-                        return Center(
-                          child: SpinKitFadingFour(
-                            color: Colors.blue.shade900,
-                            size: 50.0,
-                          ),
-                        );
-                      } else {
-                        return Text('Không có kết nối, vui lòng thử lại!',
-                            style: TextStyle(
-                              fontSize: textScale > 1.4
-                                  ? 13.0.sp / textScale * 1.3
-                                  : 13.0.sp,
-                              color: Colors.grey.shade700,
-                            ));
-                      }
-                    }),
+                    Text('Không có kết nối, vui lòng thử lại!',
+                        style: TextStyle(
+                          fontSize: textScale > 1.4
+                              ? 13.0.sp / textScale * 1.3
+                              : 13.0.sp,
+                          color: Colors.grey.shade700,
+                        )),
                     const SizedBox(
                       height: 20,
                     ),
