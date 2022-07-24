@@ -131,8 +131,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                           Text(
                             _complainController.complainRequestData!.courseName,
                             style: TextStyle(
-                                fontSize: textScale > 1.4
-                                    ? 16.0.sp / textScale * 1.3
+                                fontSize: textScale >= 1.3
+                                    ? 15.0.sp / textScale * 1.3
                                     : 16.0.sp,
                                 fontWeight: FontWeight.w700),
                           ),
@@ -157,8 +157,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                         .toString()
                                         .substring(0, 10)),
                                     style: TextStyle(
-                                        fontSize: textScale > 1.4
-                                            ? 13.0.sp / textScale * 1.3
+                                        fontSize: textScale >= 1.3
+                                            ? 12.0.sp / textScale * 1.3
                                             : 13.0.sp,
                                         fontWeight: FontWeight.w500),
                                   )
@@ -181,8 +181,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                     _complainController
                                         .complainRequestData!.room,
                                     style: TextStyle(
-                                        fontSize: textScale > 1.4
-                                            ? 13.0.sp / textScale * 1.3
+                                        fontSize: textScale >= 1.3
+                                            ? 12.0.sp / textScale * 1.3
                                             : 13.0.sp,
                                         fontWeight: FontWeight.w500),
                                   )
@@ -206,8 +206,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                               Text(
                                 "${formatDateTime(_complainController.complainRequestData!.startTime).substring(0, 8)} - ${formatDateTime(_complainController.complainRequestData!.endTime).substring(0, 8)}",
                                 style: TextStyle(
-                                    fontSize: textScale > 1.4
-                                        ? 13.0.sp / textScale * 1.3
+                                    fontSize: textScale >= 1.3
+                                        ? 12.0.sp / textScale * 1.3
                                         : 13.0.sp,
                                     fontWeight: FontWeight.w500),
                               )
@@ -220,9 +220,9 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                             children: [
                               Text('Thời gian điểm danh: ',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: textScale > 1.4
-                                          ? 13.0.sp / textScale * 1.3
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: textScale >= 1.3
+                                          ? 12.0.sp / textScale * 1.3
                                           : 13.0.sp,
                                       color: Colors.black)),
                               Flexible(
@@ -232,8 +232,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                           "",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: textScale > 1.4
-                                            ? 12.0.sp / textScale * 1.3
+                                        fontSize: textScale >= 1.3
+                                            ? 11.0.sp / textScale * 1.3
                                             : 12.0.sp,
                                         color: Colors.grey.shade600,
                                       )))
@@ -244,30 +244,31 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                           ),
                           Row(
                             children: [
-                              Text('Trạng thái: ',
+                              Text('Trạng thái hiện tại: ',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: textScale > 1.4
-                                          ? 13.0.sp / textScale * 1.3
+                                      fontSize: textScale >= 1.3
+                                          ? 12.0.sp / textScale * 1.3
                                           : 13.0.sp,
                                       color: Colors.black)),
                               Text(
-                                  _complainController.complainRequestData!
-                                      .currentCheckInStatus,
+                                  _complainController
+                                      .complainRequestData!.currentCheckInStatus
+                                      .toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: textScale > 1.4
-                                          ? 13.0.sp / textScale * 1.3
+                                      fontSize: textScale >= 1.3
+                                          ? 12.0.sp / textScale * 1.3
                                           : 13.0.sp,
                                       color: _complainController
                                                   .complainRequestData!
                                                   .currentCheckInStatus ==
-                                              "Absence"
+                                              "Vắng"
                                           ? Colors.red
                                           : _complainController
                                                       .complainRequestData!
                                                       .currentCheckInStatus ==
-                                                  "Attend"
+                                                  "Hợp lệ"
                                               ? Colors.green.shade800
                                               : Colors.orange.shade600))
                             ],
@@ -281,12 +282,12 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                               Text('Thay đổi thành: ',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: textScale > 1.4
-                                        ? 13.0.sp / textScale * 1.3
+                                    fontSize: textScale >= 1.3
+                                        ? 12.0.sp / textScale * 1.3
                                         : 13.0.sp,
                                   )),
                               SizedBox(
-                                  width: textScale > 1.2 ? 35.0.w : 30.0.w,
+                                  width: textScale > 1.2 ? 33.0.w : 30.0.w,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
@@ -321,16 +322,18 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                               child: Text(
                                                 status,
                                                 style: TextStyle(
-                                                    color: status == "Attend"
+                                                    color: status.trim() ==
+                                                            "Hợp lệ"
                                                         ? Colors.green.shade800
-                                                        : status == "Late"
+                                                        : status.trim() ==
+                                                                "Đi trễ"
                                                             ? Colors
-                                                                .orange.shade800
+                                                                .orange.shade600
                                                             : Colors.red,
-                                                    fontSize: textScale > 1.4
-                                                        ? 13.0.sp /
+                                                    fontSize: textScale >= 1.3
+                                                        ? 11.0.sp /
                                                             textScale *
-                                                            1.4
+                                                            1.3
                                                         : 13.0.sp,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -356,12 +359,12 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                               Text('Gửi đến: ',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: textScale > 1.4
-                                        ? 13.0.sp / textScale * 1.3
+                                    fontSize: textScale >= 1.3
+                                        ? 12.0.sp / textScale * 1.3
                                         : 13.0.sp,
                                   )),
                               SizedBox(
-                                  width: textScale >= 1.2 ? 65.0.w : 58.0.w,
+                                  width: textScale >= 1.2 ? 60.0.w : 58.0.w,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
@@ -394,8 +397,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                           child: Text(
                                             teacher.name,
                                             style: TextStyle(
-                                                fontSize: textScale > 1.4
-                                                    ? 12.0.sp / textScale * 1.4
+                                                fontSize: textScale >= 1.3
+                                                    ? 11.0.sp / textScale * 1.2
                                                     : 12.0.sp,
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -413,13 +416,24 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Text('Nội dung phản ánh',
-                              style: TextStyle(
-                                  fontSize: textScale > 1.4
-                                      ? 13.0.sp / textScale * 1.3
-                                      : 13.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold)),
+                          Row(
+                            children: [
+                              Text('Nội dung phản ánh',
+                                  style: TextStyle(
+                                      fontSize: textScale >= 1.3
+                                          ? 12.0.sp / textScale * 1.3
+                                          : 13.0.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold)),
+                              Text('*',
+                                  style: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 13.0.sp / textScale * 1.3
+                                          : 13.0.sp,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
@@ -432,7 +446,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                   .complainReasonEditingController,
                               style: TextStyle(
                                 fontSize: textScale > 1.4
-                                    ? 13.0.sp / textScale * 1.3
+                                    ? 12.0.sp / textScale * 1.3
                                     : 13.0.sp,
                               ),
                               maxLines: null,
@@ -504,16 +518,16 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                   return Text(
                                     'hoàn tất'.toUpperCase(),
                                     style: TextStyle(
-                                        fontSize: textScale > 1.4
-                                            ? 14.0.sp / textScale * 1.4
-                                            : 14.0.sp,
+                                        fontSize: textScale >= 1.3
+                                            ? 13.0.sp / textScale * 1.3
+                                            : 13.0.sp,
                                         fontWeight: FontWeight.bold),
                                   );
                                 }
                               }),
                               style: ElevatedButton.styleFrom(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 14),
+                                    const EdgeInsets.symmetric(vertical: 12),
                                 minimumSize: const Size.fromHeight(40),
                                 primary: Colors.blue.shade900,
                                 shape: RoundedRectangleBorder(

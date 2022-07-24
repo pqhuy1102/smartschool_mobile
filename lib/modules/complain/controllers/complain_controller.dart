@@ -23,6 +23,14 @@ class ComplainController extends GetxController {
 
   final defaultRequestStatus = "".obs;
 
+  final complainList = [].obs;
+
+  final filterComplainList = [].obs;
+
+  final filterValue = 0.obs;
+
+  filterValueGetter() => filterValue.value;
+
   late final AuthenticationManager _authenticationManager;
 
   TextEditingController? complainReasonEditingController;
@@ -53,6 +61,7 @@ class ComplainController extends GetxController {
       'Authorization': 'Bearer $token',
     };
     var res = await ComplainProvider().getComplainForm(headers, scheduleId);
+
     if (res != null) {
       _complainRequestData = res;
       defaultTeacherId.value = res.teacherList.first.id.toString();
@@ -61,6 +70,83 @@ class ComplainController extends GetxController {
     } else {
       _complainRequestData = null;
       isLoading(false);
+    }
+  }
+
+  Future<void> deleteComplainForm(int selectedForm) async {
+    isLoading(true);
+
+    String? token = _authenticationManager.getToken();
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    var res =
+        await ComplainProvider().deleteComplainForm(headers, selectedForm);
+
+    if (hasInternet.isFalse) {
+      Get.snackbar('Lỗi ', "Bạn chưa kết nối internet!",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      isLoading(false);
+    } else {
+      if (res != null) {
+        filterComplainList
+            .removeWhere((item) => item["form_id"] == selectedForm);
+        complainList.removeWhere((item) => item["form_id"] == selectedForm);
+        isLoading(false);
+        Get.back();
+        Get.snackbar('Thành công', 'Hủy phản ánh thành công!',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.green,
+            colorText: Colors.white);
+      } else {
+        isLoading(false);
+
+        Get.snackbar('Thất bại', 'Hủy phản ánh thất bại!',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+      }
+    }
+  }
+
+  Future<void> getComplainList(int selectedSemester) async {
+    isLoading(true);
+    filterValue.value = 0;
+    String? token = _authenticationManager.getToken();
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    var res =
+        await ComplainProvider().getComplainList(headers, selectedSemester);
+
+    if (res != null) {
+      complainList.value = res;
+      filterComplainList.value = res;
+      isLoading(false);
+    } else {
+      complainList.value = [];
+      isLoading(false);
+    }
+  }
+
+  void filterComplainListFun(int filterValue) {
+    if (filterValue == 0) {
+      filterComplainList.value = complainList;
+    } else if (filterValue == 1) {
+      filterComplainList.value = complainList
+          .where(
+              (complainItem) => complainItem["form_status"] == "Đang chờ duyệt")
+          .toList();
+    } else {
+      filterComplainList.value = complainList
+          .where((complainItem) =>
+              complainItem["form_status"] == "Chấp nhận" ||
+              complainItem["form_status"] == "Từ chối")
+          .toList();
     }
   }
 
@@ -96,7 +182,10 @@ class ComplainController extends GetxController {
               child: Text("Đóng",
                   style: TextStyle(
                       fontSize: 12.0.sp, color: Colors.blue.shade900)),
-              onPressed: () => Get.back(),
+              onPressed: () {
+                Get.back();
+                Get.back();
+              },
             ),
           ],
         ),

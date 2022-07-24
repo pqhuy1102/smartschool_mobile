@@ -46,7 +46,6 @@ class LoginController extends GetxController {
     isLoading(true);
     final res = await _loginProvider.login(
         LoginRequestModel(email: email.trim(), password: password.trim()));
-
     if (hasInternet.isFalse) {
       Get.snackbar('Lỗi ', "Bạn chưa kết nối internet!",
           snackPosition: SnackPosition.TOP,
@@ -69,13 +68,15 @@ class LoginController extends GetxController {
             colorText: Colors.white);
         isLoading(false);
       } else {
-        final error = res.body['message'] == "Wrong password"
-            ? "Sai mật khẩu"
-            : res.body['message'];
-        Get.snackbar('Lỗi ', error,
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: Colors.red,
-            colorText: Colors.white);
+        if (res != null) {
+          final error = res.body['message'] == "Wrong password"
+              ? "Sai mật khẩu"
+              : res.body['message'];
+          Get.snackbar('Lỗi ', error,
+              snackPosition: SnackPosition.TOP,
+              backgroundColor: Colors.red,
+              colorText: Colors.white);
+        }
         isLoading(false);
       }
     }

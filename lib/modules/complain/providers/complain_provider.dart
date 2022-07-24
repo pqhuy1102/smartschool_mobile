@@ -9,6 +9,10 @@ class ComplainProvider extends GetConnect {
       '${Constant.apiDomain}/user/get-form-request-change-attendance-status?schedule_id=';
   final String requestComplainUrl =
       '${Constant.apiDomain}/user/request-change-attendance-status';
+  final String getComplainListUrl =
+      '${Constant.apiDomain}/user/get-complain-form-request?semester_id=';
+  final String deleteComplainFormUrl =
+      '${Constant.apiDomain}/user/delete-complain-form?form_id=';
 
   Future<ComplainFormResponeModel?> getComplainForm(
       headers, int selectedSchedule) async {
@@ -21,12 +25,32 @@ class ComplainProvider extends GetConnect {
     }
   }
 
+  Future<dynamic> deleteComplainForm(headers, int selectedForm) async {
+    final response = await get(deleteComplainFormUrl + selectedForm.toString(),
+        headers: headers);
+    if (response.statusCode == HttpStatus.ok) {
+      return response;
+    } else {
+      return null;
+    }
+  }
+
   Future<dynamic> requestComplain(
       RequestComplainRequestModel model, headers) async {
     final response =
         await post(requestComplainUrl, model.toJson(), headers: headers);
     if (response.statusCode == HttpStatus.ok) {
       return true;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<dynamic>?> getComplainList(headers, int selectedSemester) async {
+    final response = await get(getComplainListUrl + selectedSemester.toString(),
+        headers: headers);
+    if (response.statusCode == HttpStatus.ok) {
+      return response.body["form_list"];
     } else {
       return null;
     }

@@ -407,72 +407,74 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ),
               ),
             );
-          } else if (_getIndayAttendanceController.isLoading.isTrue) {
-            return Center(
-              child: SpinKitFadingFour(
-                color: Colors.blue.shade900,
-                size: 40.0.sp,
-              ),
-            );
-          } else if (_getIndayAttendanceController
-              .indayAttendanceList.isEmpty) {
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/no_schedule_today.gif',
-                  ),
-                  Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      child: Center(
-                          child: Text(
-                        'Bạn không có ca học nào! ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            letterSpacing: 0.8,
-                            fontSize: textScale > 1.4
-                                ? 13.0.sp / textScale * 1.3
-                                : 13.0.sp,
-                            fontWeight: FontWeight.w600),
-                      )))
-                ],
-              ),
-            );
           } else {
-            return Expanded(
-                child: SizedBox(
-              height: 100.0,
-              child: ListView.builder(
-                  itemCount:
-                      _getIndayAttendanceController.indayAttendanceList.length,
-                  itemBuilder: ((context, index) {
-                    return Container(
-                      margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
-                      child: CheckinTodayItem(
-                          startTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['start_time'])
-                              .substring(10),
-                          endTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['end_time'])
-                              .substring(10),
-                          date: _getIndayAttendanceController.indayAttendanceList[index]
-                                      ['check_in_time'] ==
-                                  null
-                              ? ""
-                              : formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
-                                  .substring(0, 10),
-                          time: _getIndayAttendanceController.indayAttendanceList[index]
-                                      ['check_in_time'] ==
-                                  null
-                              ? "--/--"
-                              : "Điểm danh lúc: " +
-                                  formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
-                                      .substring(10),
-                          course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
-                          room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
-                          status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_getIndayAttendanceController.indayAttendanceList[index]['end_time']) : convertCheckinTodayStatus(_getIndayAttendanceController.indayAttendanceList[index]['check_in_status'])),
-                    );
-                  })),
-            ));
+            if (_getIndayAttendanceController.isLoading.isTrue) {
+              return Center(
+                child: SpinKitFadingFour(
+                  color: Colors.blue.shade900,
+                  size: 40.0.sp,
+                ),
+              );
+            } else if (_getIndayAttendanceController
+                .indayAttendanceList.isEmpty) {
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/no_schedule_today.gif',
+                    ),
+                    Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Center(
+                            child: Text(
+                          'Bạn không có ca học nào! ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              letterSpacing: 0.8,
+                              fontSize: textScale > 1.4
+                                  ? 13.0.sp / textScale * 1.3
+                                  : 13.0.sp,
+                              fontWeight: FontWeight.w600),
+                        )))
+                  ],
+                ),
+              );
+            } else {
+              return Expanded(
+                  child: SizedBox(
+                height: 100.0,
+                child: ListView.builder(
+                    itemCount: _getIndayAttendanceController
+                        .indayAttendanceList.length,
+                    itemBuilder: ((context, index) {
+                      return Container(
+                        margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
+                        child: CheckinTodayItem(
+                            startTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['start_time'])
+                                .substring(10),
+                            endTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['end_time'])
+                                .substring(10),
+                            date: _getIndayAttendanceController.indayAttendanceList[index]
+                                        ['check_in_time'] ==
+                                    null
+                                ? ""
+                                : formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                    .substring(0, 10),
+                            time: _getIndayAttendanceController.indayAttendanceList[index]
+                                        ['check_in_time'] ==
+                                    null
+                                ? "--/--"
+                                : "Điểm danh lúc: " +
+                                    formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                        .substring(10),
+                            course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
+                            room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
+                            status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_getIndayAttendanceController.indayAttendanceList[index]['end_time']) : convertCheckinTodayStatus(_getIndayAttendanceController.indayAttendanceList[index]['check_in_status'])),
+                      );
+                    })),
+              ));
+            }
           }
         })
       ],
