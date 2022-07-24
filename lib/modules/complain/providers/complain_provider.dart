@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:smartschool_mobile/constants.dart';
 import 'package:smartschool_mobile/modules/complain/models/complain_form_response_model.dart';
+import 'package:smartschool_mobile/modules/complain/models/detail_complain_form_response.dart';
 import 'package:smartschool_mobile/modules/complain/models/request_complain_request_model.dart';
 
 class ComplainProvider extends GetConnect {
@@ -13,6 +14,8 @@ class ComplainProvider extends GetConnect {
       '${Constant.apiDomain}/user/get-complain-form-request?semester_id=';
   final String deleteComplainFormUrl =
       '${Constant.apiDomain}/user/delete-complain-form?form_id=';
+  final String getDetailComplainFormUrl =
+      '${Constant.apiDomain}/user/get-form-request-detail?form_id=';
 
   Future<ComplainFormResponeModel?> getComplainForm(
       headers, int selectedSchedule) async {
@@ -20,6 +23,18 @@ class ComplainProvider extends GetConnect {
         headers: headers);
     if (response.statusCode == HttpStatus.ok) {
       return complainFormResponeModelFromJson(response.bodyString!);
+    } else {
+      return null;
+    }
+  }
+
+  Future<DetailComplainFormResponseModel?> getDetailComplainForm(
+      headers, int selectedForm) async {
+    final response = await get(
+        getDetailComplainFormUrl + selectedForm.toString(),
+        headers: headers);
+    if (response.statusCode == HttpStatus.ok) {
+      return detailComplainFormResponseModelFromJson(response.bodyString!);
     } else {
       return null;
     }

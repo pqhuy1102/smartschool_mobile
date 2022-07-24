@@ -4,6 +4,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/complain/models/complain_form_response_model.dart';
+import 'package:smartschool_mobile/modules/complain/models/detail_complain_form_response.dart';
 import 'package:smartschool_mobile/modules/complain/models/request_complain_request_model.dart';
 import 'package:smartschool_mobile/modules/complain/providers/complain_provider.dart';
 
@@ -18,6 +19,8 @@ class ComplainController extends GetxController {
 
   // ignore: prefer_typing_uninitialized_variables
   var _complainRequestData;
+  // ignore: prefer_typing_uninitialized_variables
+  var _detailComplainFormData;
 
   final defaultTeacherId = "".obs;
 
@@ -52,6 +55,8 @@ class ComplainController extends GetxController {
   }
 
   ComplainFormResponeModel? get complainRequestData => _complainRequestData;
+  DetailComplainFormResponseModel? get detailComplainFormData =>
+      _detailComplainFormData;
 
   Future<void> getComplainForm(int scheduleId) async {
     isLoading(true);
@@ -69,6 +74,26 @@ class ComplainController extends GetxController {
       isLoading(false);
     } else {
       _complainRequestData = null;
+      isLoading(false);
+    }
+  }
+
+  Future<void> getDetailComplainForm(int selectedForm) async {
+    isLoading(true);
+    String? token = _authenticationManager.getToken();
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    var res =
+        await ComplainProvider().getDetailComplainForm(headers, selectedForm);
+
+    if (res != null) {
+      _detailComplainFormData = res;
+      print(_detailComplainFormData.formDetail.currentStatus);
+      isLoading(false);
+    } else {
+      _detailComplainFormData = null;
       isLoading(false);
     }
   }

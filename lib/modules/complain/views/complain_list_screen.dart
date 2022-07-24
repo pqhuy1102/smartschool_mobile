@@ -8,6 +8,7 @@ import 'package:smartschool_mobile/modules/complain/widgets/complain_item.dart';
 import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
 // ignore: library_prefixes
 import 'package:cupertino_tabbar/cupertino_tabbar.dart' as CupertinoTabBar;
+import 'package:smartschool_mobile/routes/routes.dart';
 
 class ComplainListScreen extends StatefulWidget {
   const ComplainListScreen({Key? key}) : super(key: key);
@@ -281,7 +282,15 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                       formStatus: _complainController.filterComplainList[index]["form_status"] ?? "",
                                       requestStatus: _complainController.filterComplainList[index]["request_status"] ?? "",
                                       teacherName: _complainController.filterComplainList[index]["teacher_name"] ?? ""),
-                                  onTap: () {},
+                                  onTap: () {
+                                    _complainController.getDetailComplainForm(
+                                        _complainController
+                                                .filterComplainList[index]
+                                            ["form_id"]);
+                               
+                                    Get.toNamed(Routes.complainList +
+                                        Routes.detailComplainForm);
+                                  },
                                 );
                               }));
                     }
