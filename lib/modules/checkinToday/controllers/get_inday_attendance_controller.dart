@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:intl/intl.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/checkinToday/providers/get_inday_attendance_provider.dart';
 
@@ -41,7 +42,11 @@ class GetIndayAttendanceController extends GetxController {
       'Authorization': 'Bearer $token',
     };
     isLoading(true);
-    var res = await _getIndayAttendanceProvider.getIndayAttendance(headers);
+    var now = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    String today = formatter.format(now);
+    var res =
+        await _getIndayAttendanceProvider.getIndayAttendance(headers, today);
     if (res != null) {
       isLoading(false);
       indayAttendanceList.value = res;
