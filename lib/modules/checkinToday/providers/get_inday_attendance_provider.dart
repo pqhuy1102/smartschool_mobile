@@ -3,10 +3,10 @@ import 'package:smartschool_mobile/constants.dart';
 
 class GetIndayAttendanceProvider extends GetConnect {
   final String getIndayAttendanceUrl =
-      '${Constant.apiDomain}/user/inday-attendance?time_offset=2022-07-24';
+      '${Constant.apiDomain}/user/inday-attendance?time_offset=';
 
-  Future getIndayAttendance(headers) async {
-    final response = await get(getIndayAttendanceUrl, headers: headers);
+  Future getIndayAttendance(headers, String today) async {
+    final response = await get(getIndayAttendanceUrl + today, headers: headers);
     if (response.status.hasError) {
       return null;
     } else {
