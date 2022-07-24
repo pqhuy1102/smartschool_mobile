@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
+import 'package:smartschool_mobile/modules/report/controllers/report_controller.dart';
 import 'package:smartschool_mobile/modules/setttings/widgets/setting_item.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 
@@ -63,6 +64,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginController _loginController = Get.put(LoginController());
+    final ReportController _reportController = Get.put(ReportController());
     final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Scaffold(
@@ -100,6 +102,14 @@ class SettingsScreen extends StatelessWidget {
                       title: "personal information".tr, icon: Icons.person),
                   onTap: () {
                     Get.toNamed(Routes.dashboard + Routes.profile);
+                  },
+                ),
+                InkWell(
+                  child: const SettingItem(
+                      title: "Phản ánh", icon: Icons.report),
+                  onTap: () {
+                    _reportController.getUserSemestersList();
+                    Get.toNamed(Routes.complainList);
                   },
                 ),
                 InkWell(
