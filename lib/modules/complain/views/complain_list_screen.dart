@@ -144,7 +144,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                   decoration: const InputDecoration(
                                       border: InputBorder.none),
                                   isExpanded: true,
-                                  value: _reportController
+                                  value: _complainController
                                       .currentSemesterValue.value,
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
@@ -155,7 +155,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                   dropdownDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  items: _reportController.userSemestersList
+                                  items: _complainController.userSemestersList
                                       .map((sem) {
                                     return DropdownMenuItem(
                                       child: Center(
@@ -172,10 +172,10 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                     );
                                   }).toList(),
                                   onChanged: (value) {
-                                    _reportController.currentSemesterValue
+                                    _complainController.currentSemesterValue
                                         .value = value.toString();
                                     _complainController.getComplainList(
-                                        int.parse(_reportController
+                                        int.parse(_complainController
                                             .currentSemesterValue.value));
                                   },
                                 ),

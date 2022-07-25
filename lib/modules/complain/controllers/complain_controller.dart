@@ -7,6 +7,8 @@ import 'package:smartschool_mobile/modules/complain/models/complain_form_respons
 import 'package:smartschool_mobile/modules/complain/models/detail_complain_form_response.dart';
 import 'package:smartschool_mobile/modules/complain/models/request_complain_request_model.dart';
 import 'package:smartschool_mobile/modules/complain/providers/complain_provider.dart';
+import 'package:smartschool_mobile/modules/report/providers/report_provider.dart';
+import 'package:smartschool_mobile/routes/app_pages.dart';
 
 class ComplainController extends GetxController {
   var hasInternet = false.obs;
@@ -32,6 +34,10 @@ class ComplainController extends GetxController {
 
   final filterValue = 0.obs;
 
+  var userSemestersList = [].obs;
+
+  var currentSemesterValue = "".obs;
+
   filterValueGetter() => filterValue.value;
 
   late final AuthenticationManager _authenticationManager;
@@ -52,6 +58,27 @@ class ComplainController extends GetxController {
       hasInternet.value = hasInternetYet;
       if (hasInternet.isTrue) {}
     });
+
+    getUserSemestersList();
+  }
+
+  Future<void> getUserSemestersList() async {
+    isLoading(true);
+    String? token = _authenticationManager.getToken();
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    var res = await ReportProvider().getUserSemestersList(headers);
+
+    if (res != null) {
+      userSemestersList.value = res.body["semester_list"];
+      currentSemesterValue.value = userSemestersList.last['id'].toString();
+      getComplainList(int.parse(currentSemesterValue.value));
+      isLoading(false);
+    } else {
+      isLoading(false);
+    }
   }
 
   ComplainFormResponeModel? get complainRequestData => _complainRequestData;
@@ -90,7 +117,6 @@ class ComplainController extends GetxController {
 
     if (res != null) {
       _detailComplainFormData = res;
-      print(_detailComplainFormData.formDetail.currentStatus);
       isLoading(false);
     } else {
       _detailComplainFormData = null;
@@ -150,7 +176,7 @@ class ComplainController extends GetxController {
 
     if (res != null) {
       complainList.value = res;
-      filterComplainList.value = res;
+      filterComplainList.value = complainList.reversed.toList();
       isLoading(false);
     } else {
       complainList.value = [];
@@ -160,14 +186,16 @@ class ComplainController extends GetxController {
 
   void filterComplainListFun(int filterValue) {
     if (filterValue == 0) {
-      filterComplainList.value = complainList;
+      filterComplainList.value = complainList.reversed.toList();
     } else if (filterValue == 1) {
-      filterComplainList.value = complainList
+      filterComplainList.value = complainList.reversed
+          .toList()
           .where(
               (complainItem) => complainItem["form_status"] == "Đang chờ duyệt")
           .toList();
     } else {
-      filterComplainList.value = complainList
+      filterComplainList.value = complainList.reversed
+          .toList()
           .where((complainItem) =>
               complainItem["form_status"] == "Chấp nhận" ||
               complainItem["form_status"] == "Từ chối")
@@ -210,6 +238,8 @@ class ComplainController extends GetxController {
               onPressed: () {
                 Get.back();
                 Get.back();
+                getUserSemestersList();
+                Get.toNamed(Routes.complainList);
               },
             ),
           ],
