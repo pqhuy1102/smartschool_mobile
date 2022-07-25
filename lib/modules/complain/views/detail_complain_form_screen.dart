@@ -337,7 +337,40 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                   : 13.0.sp,
                             )),
                         const SizedBox(
-                          height: 30,
+                          height: 20,
+                        ),
+                        _complainController.detailComplainFormData!.formDetail
+                                    .rejectReason ==
+                                ""
+                            ? const Text("")
+                            : Text('Lí do từ chối',
+                                style: TextStyle(
+                                    fontSize: textScale >= 1.3
+                                        ? 12.0.sp / textScale * 1.3
+                                        : 13.0.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                        _complainController.detailComplainFormData!.formDetail
+                                    .rejectReason ==
+                                ""
+                            ? const Text("")
+                            : const SizedBox(
+                                height: 10,
+                              ),
+                        _complainController.detailComplainFormData!.formDetail
+                                    .rejectReason ==
+                                ""
+                            ? const Text("")
+                            : Text(
+                                '- ${_complainController.detailComplainFormData!.formDetail.rejectReason}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: textScale >= 1.3
+                                      ? 12.0.sp / textScale * 1.3
+                                      : 13.0.sp,
+                                )),
+                        const SizedBox(
+                          height: 20,
                         ),
                       ],
                     ),
