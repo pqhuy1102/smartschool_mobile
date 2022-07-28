@@ -211,7 +211,15 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                         : 13.0.sp,
                                     color: Colors.black)),
                             Flexible(
-                                child: Text("",
+                                child: Text(
+                                    _complainController.detailComplainFormData!
+                                                .formDetail.checkinTime ==
+                                            null
+                                        ? ""
+                                        : formatDateTime(_complainController
+                                            .detailComplainFormData!
+                                            .formDetail
+                                            .checkinTime),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: textScale >= 1.3
@@ -241,13 +249,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                     fontSize: textScale >= 1.3
                                         ? 13.0.sp / textScale * 1.3
                                         : 13.0.sp,
-                                    color: _complainController
-                                                .detailComplainFormData!
-                                                .formDetail
-                                                .currentStatus ==
-                                            "Vắng"
-                                        ? Colors.red
-                                        : Colors.orange.shade600))
+                                    color: Colors.black))
                           ],
                         ),
                         const SizedBox(
@@ -271,13 +273,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                     fontSize: textScale >= 1.3
                                         ? 13.0.sp / textScale * 1.3
                                         : 13.0.sp,
-                                    color: _complainController
-                                                .detailComplainFormData!
-                                                .formDetail
-                                                .requestStatus ==
-                                            "Hợp lệ"
-                                        ? Colors.green.shade900
-                                        : Colors.orange.shade600))
+                                    color: Colors.black))
                           ],
                         ),
                         const SizedBox(

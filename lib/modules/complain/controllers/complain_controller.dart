@@ -218,55 +218,66 @@ class ComplainController extends GetxController {
           toUserId: int.parse(defaultTeacherId.value),
         ),
         headers);
-    if (res != null) {
-      isRequestLoading(false);
-      clearTextField();
-      Get.dialog(
-        AlertDialog(
-          title: Text('Thành công!',
-              style: TextStyle(
-                  fontSize: 14.0.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.green.shade800)),
-          content: Text('Phản ánh của bạn đang được xét duyệt',
-              style: TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w500)),
-          actions: [
-            TextButton(
-              child: Text("Đóng",
-                  style: TextStyle(
-                      fontSize: 12.0.sp, color: Colors.blue.shade900)),
-              onPressed: () {
-                Get.back();
-                Get.back();
-                getUserSemestersList();
-                Get.toNamed(Routes.complainList);
-              },
-            ),
-          ],
-        ),
-      );
+
+    if (hasInternet.isFalse) {
+      Get.snackbar('Lỗi ', "Bạn chưa kết nối internet!",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      isLoading(false);
     } else {
-      isRequestLoading(false);
-      clearTextField();
-      Get.dialog(
-        AlertDialog(
-          title: Text('Thất bại!',
-              style: TextStyle(
-                  fontSize: 14.0.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.red)),
-          content: Text('Gửi phản ánh thất bại',
-              style: TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600)),
-          actions: [
-            TextButton(
-              child: Text("Đóng",
-                  style: TextStyle(
-                      fontSize: 12.0.sp, color: Colors.blue.shade900)),
-              onPressed: () => Get.back(),
-            ),
-          ],
-        ),
-      );
+      if (res != null) {
+        isRequestLoading(false);
+        clearTextField();
+        Get.dialog(
+          AlertDialog(
+            title: Text('Thành công!',
+                style: TextStyle(
+                    fontSize: 14.0.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.green.shade800)),
+            content: Text('Phản ánh của bạn đang được xét duyệt!',
+                style:
+                    TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w500)),
+            actions: [
+              TextButton(
+                child: Text("Đóng",
+                    style: TextStyle(
+                        fontSize: 12.0.sp, color: Colors.blue.shade900)),
+                onPressed: () {
+                  Get.back();
+                  Get.back();
+                  getUserSemestersList();
+                  Get.toNamed(Routes.complainList);
+                },
+              ),
+            ],
+          ),
+        );
+      } else {
+        isRequestLoading(false);
+        clearTextField();
+        Get.dialog(
+          AlertDialog(
+            title: Text('Thất bại!',
+                style: TextStyle(
+                    fontSize: 14.0.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.red)),
+            content: Text('Gửi phản ánh thất bại',
+                style:
+                    TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600)),
+            actions: [
+              TextButton(
+                child: Text("Đóng",
+                    style: TextStyle(
+                        fontSize: 12.0.sp, color: Colors.blue.shade900)),
+                onPressed: () => Get.back(),
+              ),
+            ],
+          ),
+        );
+      }
     }
   }
 
