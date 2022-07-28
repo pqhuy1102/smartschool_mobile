@@ -228,8 +228,12 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                               Flexible(
                                   child: Text(
                                       _complainController.complainRequestData
-                                              ?.checkInTime ??
-                                          "",
+                                                  ?.checkInTime ==
+                                              null
+                                          ? ""
+                                          : formatDateTime(_complainController
+                                              .complainRequestData!
+                                              .checkInTime),
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: textScale >= 1.3
@@ -260,17 +264,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                       fontSize: textScale >= 1.3
                                           ? 12.0.sp / textScale * 1.3
                                           : 13.0.sp,
-                                      color: _complainController
-                                                  .complainRequestData!
-                                                  .currentCheckInStatus ==
-                                              "Vắng"
-                                          ? Colors.red
-                                          : _complainController
-                                                      .complainRequestData!
-                                                      .currentCheckInStatus ==
-                                                  "Hợp lệ"
-                                              ? Colors.green.shade800
-                                              : Colors.orange.shade600))
+                                      color: Colors.black))
                             ],
                           ),
                           const SizedBox(
@@ -322,14 +316,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                               child: Text(
                                                 status,
                                                 style: TextStyle(
-                                                    color: status.trim() ==
-                                                            "Hợp lệ"
-                                                        ? Colors.green.shade800
-                                                        : status.trim() ==
-                                                                "Đi trễ"
-                                                            ? Colors
-                                                                .orange.shade600
-                                                            : Colors.red,
+                                                    color: Colors.black,
                                                     fontSize: textScale >= 1.3
                                                         ? 11.0.sp /
                                                             textScale *
@@ -551,9 +538,9 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
     return outputDate;
   }
 
-  String formatDateTime(String date) {
+  String formatDateTime(String? date) {
     DateTime parseDate =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(date, true).toLocal();
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(date!, true).toLocal();
     var inputDate = DateTime.parse(parseDate.toString());
     var outputFormat = DateFormat('hh:mm a, dd/MM/yyyy');
     var outputDate = outputFormat.format(inputDate);

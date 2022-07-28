@@ -232,7 +232,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                     },
                     useSeparators: true,
                     innerHorizontalPadding: 20.0,
-                    innerVerticalPadding: 16.0,
+                    innerVerticalPadding: 13.0,
                     fittedWhenScrollable: true,
                   ),
                   const SizedBox(
@@ -287,7 +287,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                         _complainController
                                                 .filterComplainList[index]
                                             ["form_id"]);
-                               
+
                                     Get.toNamed(Routes.complainList +
                                         Routes.detailComplainForm);
                                   },

@@ -261,7 +261,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     ],
                     leading: IconButton(
                       icon: Icon(
-                        Icons.settings,
+                        Icons.reorder,
                         color: Colors.blue.shade900,
                         size: 18.0.sp,
                       ),

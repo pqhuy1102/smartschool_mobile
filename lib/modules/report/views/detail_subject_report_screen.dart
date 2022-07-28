@@ -177,7 +177,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                               fontSize: textScale > 1.4
                                                   ? 13.0.sp / textScale * 1.4
                                                   : 13.0.sp,
-                                              color: Colors.green.shade800,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ),
@@ -191,7 +191,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                               fontSize: textScale > 1.4
                                                   ? 13.0.sp / textScale * 1.4
                                                   : 13.0.sp,
-                                              color: Colors.orange.shade800,
+                                                                                            color: Colors.black,
+
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ),
@@ -205,7 +206,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                               fontSize: textScale > 1.4
                                                   ? 13.0.sp / textScale * 1.4
                                                   : 13.0.sp,
-                                              color: Colors.red,
+                                                                                            color: Colors.black,
+
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ),
