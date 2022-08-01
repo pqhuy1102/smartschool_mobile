@@ -151,7 +151,7 @@ class LateController extends GetxController {
         lateFormList.removeWhere((item) => item["form_id"] == selectedForm);
         isLoading(false);
         Get.back();
-        Get.snackbar('Thành công', 'Hủy phản ánh thành công!',
+        Get.snackbar('Thành công', 'Hủy đơn xin phép thành công!',
             snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.green,
             colorText: Colors.white);
@@ -159,7 +159,7 @@ class LateController extends GetxController {
         isLoading(false);
         Get.back();
 
-        Get.snackbar('Thất bại', 'Hủy phản ánh thất bại!',
+        Get.snackbar('Thất bại', 'Hủy đơn xin phép thất bại!',
             snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.red,
             colorText: Colors.white);
