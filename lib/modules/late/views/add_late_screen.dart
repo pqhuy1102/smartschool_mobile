@@ -4,17 +4,17 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smartschool_mobile/modules/complain/controllers/complain_controller.dart';
+import 'package:smartschool_mobile/modules/late/controllers/late_controller.dart';
 
-class AddComplainScreen extends StatefulWidget {
-  const AddComplainScreen({Key? key}) : super(key: key);
+class AddLateScreen extends StatefulWidget {
+  const AddLateScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddComplainScreen> createState() => _AddComplainScreenState();
+  State<AddLateScreen> createState() => _AddLateScreenState();
 }
 
-class _AddComplainScreenState extends State<AddComplainScreen> {
-  final ComplainController _complainController = Get.put(ComplainController());
+class _AddLateScreenState extends State<AddLateScreen> {
+  final LateController _lateController = Get.put(LateController());
 
   final _formKey = GlobalKey<FormState>();
 
@@ -38,7 +38,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
             },
           ),
           title: Text(
-            'Thêm phản ánh',
+            'Thêm nghỉ phép/ đi trễ',
             style: TextStyle(
                 fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
                 color: Colors.blue.shade900,
@@ -49,7 +49,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
           elevation: 0,
         ),
         body: Obx((() {
-          if (_complainController.hasInternet.isFalse) {
+          if (_lateController.hasInternet.isFalse) {
             return Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,7 +97,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
               ),
             );
           } else {
-            if (_complainController.isLoading.isTrue) {
+            if (_lateController.isLoading.isTrue) {
               return Center(
                 child: SpinKitFadingFour(
                   color: Colors.blue.shade900,
@@ -105,10 +105,10 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                 ),
               );
             } else {
-              if (_complainController.complainRequestData == null) {
+              if (_lateController.complainRequestData == null) {
                 return Center(
                   child: Text(
-                    'Bạn không thể thêm phản ánh mới cho ca học này!',
+                    'Bạn không thể thêm đăng ký mới cho ca học này!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: textScale > 1.4
@@ -129,7 +129,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _complainController.complainRequestData!.courseName,
+                            _lateController.complainRequestData!.courseName,
                             style: TextStyle(
                                 fontSize: textScale >= 1.3
                                     ? 15.0.sp / textScale * 1.3
@@ -152,7 +152,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                     width: 6,
                                   ),
                                   Text(
-                                    formatDate(_complainController
+                                    formatDate(_lateController
                                         .complainRequestData!.startTime
                                         .toString()
                                         .substring(0, 10)),
@@ -178,8 +178,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                     width: 6,
                                   ),
                                   Text(
-                                    _complainController
-                                        .complainRequestData!.room,
+                                    _lateController.complainRequestData!.room,
                                     style: TextStyle(
                                         fontSize: textScale >= 1.3
                                             ? 12.0.sp / textScale * 1.3
@@ -204,7 +203,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                 width: 6,
                               ),
                               Text(
-                                "${formatDateTime(_complainController.complainRequestData!.startTime).substring(0, 8)} - ${formatDateTime(_complainController.complainRequestData!.endTime).substring(0, 8)}",
+                                "${formatDateTime(_lateController.complainRequestData!.startTime).substring(0, 8)} - ${formatDateTime(_lateController.complainRequestData!.endTime).substring(0, 8)}",
                                 style: TextStyle(
                                     fontSize: textScale >= 1.3
                                         ? 12.0.sp / textScale * 1.3
@@ -216,77 +215,22 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            children: [
-                              Text('Thời gian điểm danh: ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: textScale >= 1.3
-                                          ? 12.0.sp / textScale * 1.3
-                                          : 13.0.sp,
-                                      color: Colors.black)),
-                              Flexible(
-                                  child: Text(
-                                      _complainController.complainRequestData
-                                                  ?.checkInTime ==
-                                              null
-                                          ? ""
-                                          : formatDateTime(_complainController
-                                                  .complainRequestData!
-                                                  .checkInTime)
-                                              .substring(0, 8),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: textScale >= 1.3
-                                            ? 11.0.sp / textScale * 1.3
-                                            : 13.0.sp,
-                                        color: Colors.black,
-                                      )))
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              Text('Trạng thái hiện tại: ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: textScale >= 1.3
-                                          ? 12.0.sp / textScale * 1.3
-                                          : 13.0.sp,
-                                      color: Colors.black)),
-                              Text(
-                                  _complainController
-                                      .complainRequestData!.currentCheckInStatus
-                                      .toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: textScale >= 1.3
-                                          ? 12.0.sp / textScale * 1.3
-                                          : 13.0.sp,
-                                      color: Colors.black))
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Thay đổi thành: ',
+                              Text('Đăng ký: ',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: textScale >= 1.3
-                                        ? 11.0.sp / textScale * 1.3
+                                        ? 12.0.sp / textScale * 1.3
                                         : 13.0.sp,
                                   )),
                               const SizedBox(
                                 height: 10,
                               ),
                               SizedBox(
-                                  width: textScale > 1.2 ? 33.0.w : 60.0.w,
+                                  width: textScale > 1.2 ? 70.0.w : 60.0.w,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
@@ -298,7 +242,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                         decoration: const InputDecoration(
                                             border: InputBorder.none),
                                         isExpanded: true,
-                                        value: _complainController
+                                        value: _lateController
                                             .defaultRequestStatus.value,
                                         icon: const Icon(
                                           Icons.arrow_drop_down,
@@ -306,19 +250,20 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                         ),
                                         iconSize: 26,
                                         buttonHeight:
-                                            shortestSide > 600 ? 52 : 25,
+                                            shortestSide > 600 ? 52 : 27,
                                         buttonPadding: const EdgeInsets.only(
                                             left: 10, right: 5),
                                         dropdownDecoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15),
                                         ),
-                                        items: _complainController
+                                        items: _lateController
                                             .complainRequestData?.requestStatus
                                             .map((status) {
                                           return DropdownMenuItem(
                                             child: Text(
                                               status,
+                                              overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: textScale >= 1.3
@@ -332,8 +277,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                           );
                                         }).toList(),
                                         onChanged: (value) {
-                                          _complainController
-                                              .defaultRequestStatus
+                                          _lateController.defaultRequestStatus
                                               .value = value.toString();
                                         }),
                                   ))
@@ -357,7 +301,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                 height: 10,
                               ),
                               SizedBox(
-                                  width: textScale >= 1.2 ? 65.0.w : 60.0.w,
+                                  width: textScale > 1.2 ? 70.0.w : 60.0.w,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
@@ -369,7 +313,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                       decoration: const InputDecoration(
                                           border: InputBorder.none),
                                       isExpanded: true,
-                                      value: _complainController
+                                      value: _lateController
                                           .defaultTeacherId.value,
                                       icon: const Icon(
                                         Icons.arrow_drop_down,
@@ -377,18 +321,19 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                       ),
                                       iconSize: 26,
                                       buttonHeight:
-                                          shortestSide < 600 ? 25 : 50,
+                                          shortestSide < 600 ? 30 : 50,
                                       buttonPadding: const EdgeInsets.only(
-                                          left: 10, right: 10),
+                                          left: 10, right: 5),
                                       dropdownDecoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                       ),
-                                      items: _complainController
+                                      items: _lateController
                                           .complainRequestData?.teacherList
                                           .map((teacher) {
                                         return DropdownMenuItem(
                                           child: Text(
                                             teacher.name,
+                                            overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                                 fontSize: textScale >= 1.3
                                                     ? 11.0.sp / textScale * 1.2
@@ -399,8 +344,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                         );
                                       }).toList(),
                                       onChanged: (value) {
-                                        _complainController.defaultTeacherId
-                                            .value = value.toString();
+                                        _lateController.defaultTeacherId.value =
+                                            value.toString();
                                       },
                                     ),
                                   ))
@@ -411,7 +356,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                           ),
                           Row(
                             children: [
-                              Text('Nội dung phản ánh',
+                              Text('Lý do:',
                                   style: TextStyle(
                                       fontSize: textScale >= 1.3
                                           ? 12.0.sp / textScale * 1.3
@@ -435,7 +380,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                             autovalidateMode: _autovalidateMode,
                             child: TextFormField(
                               validator: (value) => validateReason(value),
-                              controller: _complainController
+                              controller: _lateController
                                   .complainReasonEditingController,
                               style: TextStyle(
                                 fontSize: textScale > 1.4
@@ -475,9 +420,8 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                           ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate() &&
-                                    _complainController
-                                        .isRequestLoading.isFalse) {
-                                  _complainController.requestComplain();
+                                    _lateController.isRequestLoading.isFalse) {
+                                  _lateController.requestLate();
                                 } else {
                                   setState(() {
                                     _autovalidateMode =
@@ -486,8 +430,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                                 }
                               },
                               child: Obx(() {
-                                if (_complainController
-                                    .isRequestLoading.isTrue) {
+                                if (_lateController.isRequestLoading.isTrue) {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -556,7 +499,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
   //validate email function
   String? validateReason(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Nội dung phản ánh không được để trống!';
+      return 'Lý do không được để trống!';
     } else {
       return null;
     }

@@ -17,4 +17,8 @@ abstract class Routes {
   static const addComplain = '/addComplain';
   static const complainList = '/complainList';
   static const detailComplainForm = '/detailComplainForm';
+  static const lateApplicationFormList = '/lateApplicationFormList';
+  static const chooseDateForLate = '/chooseDateForLate';
+  static const addLate = '/addLate';
+  static const detailLateForm = '/detailLateForm';
 }

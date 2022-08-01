@@ -4,26 +4,27 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smartschool_mobile/modules/complain/controllers/complain_controller.dart';
-import 'package:smartschool_mobile/modules/complain/widgets/complain_item.dart';
+import 'package:smartschool_mobile/modules/late/controllers/late_controller.dart';
 // ignore: library_prefixes
 import 'package:cupertino_tabbar/cupertino_tabbar.dart' as CupertinoTabBar;
+import 'package:smartschool_mobile/modules/late/widgets/late_application_item.dart';
 import 'package:smartschool_mobile/routes/routes.dart';
 
-class ComplainListScreen extends StatefulWidget {
-  const ComplainListScreen({Key? key}) : super(key: key);
+class LateApplicationFormListScreen extends StatefulWidget {
+  const LateApplicationFormListScreen({Key? key}) : super(key: key);
 
   @override
-  State<ComplainListScreen> createState() => _ComplainListScreenState();
+  State<LateApplicationFormListScreen> createState() =>
+      _LateApplicationFormListScreenState();
 }
 
-class _ComplainListScreenState extends State<ComplainListScreen> {
+class _LateApplicationFormListScreenState
+    extends State<LateApplicationFormListScreen> {
   @override
   Widget build(BuildContext context) {
     final textScale = MediaQuery.of(context).textScaleFactor;
     var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final ComplainController _complainController =
-        Get.put(ComplainController());
+    final LateController _lateController = Get.put(LateController());
 
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -39,7 +40,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
             },
           ),
           title: Text(
-            'Phản ánh',
+            'Nghỉ phép/ Đi trễ',
             style: TextStyle(
                 fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
                 color: Colors.blue.shade900,
@@ -49,11 +50,27 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
+        floatingActionButton: SizedBox(
+            height: 60.0,
+            width: 60.0,
+            child: FittedBox(
+              child: FloatingActionButton(
+                onPressed: () {
+                  Get.toNamed(Routes.lateApplicationFormList +
+                      Routes.chooseDateForLate);
+                },
+                backgroundColor: Colors.blue.shade900.withOpacity(1),
+                child: const Icon(
+                  Icons.add,
+                  size: 30.0,
+                ),
+              ),
+            )),
         body: Container(
           margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           decoration: const BoxDecoration(color: Colors.white),
           child: SafeArea(child: Obx(() {
-            if (_complainController.hasInternet.isFalse) {
+            if (_lateController.hasInternet.isFalse) {
               return Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,7 +160,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                   decoration: const InputDecoration(
                                       border: InputBorder.none),
                                   isExpanded: true,
-                                  value: _complainController
+                                  value: _lateController
                                       .currentSemesterValue.value,
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
@@ -154,7 +171,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                   dropdownDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  items: _complainController.userSemestersList
+                                  items: _lateController.userSemestersList
                                       .map((sem) {
                                     return DropdownMenuItem(
                                       child: Center(
@@ -171,10 +188,10 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                                     );
                                   }).toList(),
                                   onChanged: (value) {
-                                    _complainController.currentSemesterValue
-                                        .value = value.toString();
-                                    _complainController.getComplainList(
-                                        int.parse(_complainController
+                                    _lateController.currentSemesterValue.value =
+                                        value.toString();
+                                    _lateController.getLateFormList(int.parse(
+                                        _lateController
                                             .currentSemesterValue.value));
                                   },
                                 ),
@@ -195,7 +212,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                         Text(
                           "Tất cả",
                           style: TextStyle(
-                            color: _complainController.filterValue.value == 0
+                            color: _lateController.filterValue.value == 0
                                 ? Colors.black87
                                 : Colors.white,
                             fontSize: 11.0.sp,
@@ -206,7 +223,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                         Text(
                           "Chưa duyệt",
                           style: TextStyle(
-                            color: _complainController.filterValue.value == 1
+                            color: _lateController.filterValue.value == 1
                                 ? Colors.black87
                                 : Colors.white,
                             fontSize: 11.0.sp,
@@ -217,7 +234,7 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                         Text(
                           "Đã duyệt",
                           style: TextStyle(
-                            color: _complainController.filterValue.value == 2
+                            color: _lateController.filterValue.value == 2
                                 ? Colors.black87
                                 : Colors.white,
                             fontSize: 11.0.sp,
@@ -226,10 +243,10 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                           textAlign: TextAlign.center,
                         ),
                       ],
-                      _complainController.filterValueGetter,
+                      _lateController.filterValueGetter,
                       (index) {
-                        _complainController.filterValue.value = index;
-                        _complainController.filterComplainListFun(index);
+                        _lateController.filterValue.value = index;
+                        _lateController.filterLateFormListFun(index);
                       },
                       useSeparators: true,
                       innerHorizontalPadding: 20.0,
@@ -241,14 +258,14 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                     height: 20,
                   ),
                   Obx(() {
-                    if (_complainController.isLoading.isTrue) {
+                    if (_lateController.isLoading.isTrue) {
                       return Center(
                         child: SpinKitFadingFour(
                           color: Colors.blue.shade900,
                           size: 35.0.sp,
                         ),
                       );
-                    } else if (_complainController.filterComplainList.isEmpty) {
+                    } else if (_lateController.filterLateFormList.isEmpty) {
                       return Column(
                         children: [
                           Image.asset(
@@ -269,36 +286,36 @@ class _ComplainListScreenState extends State<ComplainListScreen> {
                       return Expanded(
                           child: ListView.builder(
                               itemCount:
-                                  _complainController.filterComplainList.length,
+                                  _lateController.filterLateFormList.length,
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  child: ComplainItem(
-                                      formId: _complainController
-                                          .filterComplainList[index]["form_id"],
-                                      courseName: _complainController
-                                                  .filterComplainList[index]
+                                  child: LateApplicationItem(
+                                      formId: _lateController
+                                          .filterLateFormList[index]["form_id"],
+                                      courseName: _lateController
+                                                  .filterLateFormList[index]
                                               ["course_name"] ??
                                           "",
-                                      createTime: formatDateTime(_complainController
-                                          .filterComplainList[index]
+                                      createTime: formatDateTime(_lateController
+                                          .filterLateFormList[index]
                                               ["created_time"]
                                           .toString()
                                           .substring(0, 18)),
                                       currentStatus:
-                                          _complainController.filterComplainList[index]
+                                          _lateController.filterLateFormList[index]
                                                   ["current_status"] ??
                                               "",
-                                      formStatus: _complainController.filterComplainList[index]["form_status"] ?? "",
-                                      requestStatus: _complainController.filterComplainList[index]["request_status"] ?? "",
-                                      teacherName: _complainController.filterComplainList[index]["teacher_name"] ?? ""),
+                                      formStatus: _lateController.filterLateFormList[index]["form_status"] ?? "",
+                                      requestStatus: _lateController.filterLateFormList[index]["request_status"] ?? "",
+                                      teacherName: _lateController.filterLateFormList[index]["teacher_name"] ?? ""),
                                   onTap: () {
-                                    _complainController.getDetailComplainForm(
-                                        _complainController
-                                                .filterComplainList[index]
+                                    _lateController.getDetailLateForm(
+                                        _lateController
+                                                .filterLateFormList[index]
                                             ["form_id"]);
 
-                                    Get.toNamed(Routes.complainList +
-                                        Routes.detailComplainForm);
+                                    Get.toNamed(Routes.lateApplicationFormList +
+                                        Routes.detailLateForm);
                                   },
                                 );
                               }));

@@ -120,7 +120,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                         ),
                                         iconSize: 26,
                                         buttonHeight:
-                                            shortestSide < 600 ? 32 : 50,
+                                            shortestSide < 600 ? 28 : 50,
                                         dropdownDecoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15),
@@ -134,10 +134,10 @@ class _ReportScreenState extends State<ReportScreen> {
                                                 "${sem['title']} ${sem['year']}",
                                                 style: TextStyle(
                                                     fontSize: textScale > 1.4
-                                                        ? 13.0.sp /
+                                                        ? 12.0.sp /
                                                             textScale *
-                                                            1.4
-                                                        : 13.0.sp,
+                                                            1.3
+                                                        : 12.0.sp,
                                                     fontWeight:
                                                         FontWeight.w600),
                                               ),

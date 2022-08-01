@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/complain/controllers/complain_controller.dart';
+import 'package:smartschool_mobile/modules/late/controllers/late_controller.dart';
 import 'package:smartschool_mobile/modules/setttings/widgets/setting_item.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 
@@ -66,6 +67,7 @@ class SettingsScreen extends StatelessWidget {
     final LoginController _loginController = Get.put(LoginController());
     final ComplainController _complainController =
         Get.put(ComplainController());
+    final LateController _lateController = Get.put(LateController());
     final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Scaffold(
@@ -111,6 +113,15 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () {
                     _complainController.getUserSemestersList();
                     Get.toNamed(Routes.complainList);
+                  },
+                ),
+                InkWell(
+                  child: const SettingItem(
+                      title: "Nghỉ phép/ Đi trễ",
+                      icon: Icons.insert_drive_file),
+                  onTap: () {
+                    _lateController.getUserSemestersList();
+                    Get.toNamed(Routes.lateApplicationFormList);
                   },
                 ),
                 InkWell(
