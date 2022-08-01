@@ -8,6 +8,10 @@ import 'package:smartschool_mobile/modules/complain/views/add_complain_screen.da
 import 'package:smartschool_mobile/modules/complain/views/complain_list_screen.dart';
 import 'package:smartschool_mobile/modules/complain/views/detail_complain_form_screen.dart';
 import 'package:smartschool_mobile/modules/dashboard/views/dashboard_screen.dart';
+import 'package:smartschool_mobile/modules/late/views/add_late_screen.dart';
+import 'package:smartschool_mobile/modules/late/views/choose_date_screen.dart';
+import 'package:smartschool_mobile/modules/late/views/detail_late_form_screen.dart';
+import 'package:smartschool_mobile/modules/late/views/late_application_form_list_screen.dart';
 import 'package:smartschool_mobile/modules/resetPassword/views/reset_password_screen.dart';
 import 'package:smartschool_mobile/modules/notification/bindings/notifications_binding.dart';
 import 'package:smartschool_mobile/modules/notification/views/notification_screen.dart';
@@ -73,6 +77,21 @@ class AppPages {
           GetPage(
               name: Routes.detailComplainForm,
               page: () => const DetailComplainFormScreen()),
+        ]),
+    GetPage(
+        name: Routes.lateApplicationFormList,
+        page: () => const LateApplicationFormListScreen(),
+        children: [
+          GetPage(
+              name: Routes.detailLateForm,
+              page: () => const DetailLateFormScreen()),
+          GetPage(
+              name: Routes.chooseDateForLate,
+              page: () => const ChooseDateForLateScreen(),
+              children: [
+                GetPage(
+                    name: Routes.addLate, page: () => const AddLateScreen()),
+              ]),
         ]),
     GetPage(
         name: Routes.changePasswordFirstTime,

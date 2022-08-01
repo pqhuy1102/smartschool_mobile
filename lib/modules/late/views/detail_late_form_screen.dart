@@ -3,18 +3,17 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smartschool_mobile/modules/complain/controllers/complain_controller.dart';
+import 'package:smartschool_mobile/modules/late/controllers/late_controller.dart';
 
-class DetailComplainFormScreen extends StatefulWidget {
-  const DetailComplainFormScreen({Key? key}) : super(key: key);
+class DetailLateFormScreen extends StatefulWidget {
+  const DetailLateFormScreen({Key? key}) : super(key: key);
 
   @override
-  State<DetailComplainFormScreen> createState() =>
-      _DetailComplainFormScreenState();
+  State<DetailLateFormScreen> createState() => _DetailLateFormScreenState();
 }
 
-class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
-  final ComplainController _complainController = Get.put(ComplainController());
+class _DetailLateFormScreenState extends State<DetailLateFormScreen> {
+  final LateController _lateController = Get.put(LateController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
             },
           ),
           title: Text(
-            'Chi tiết phản ánh',
+            'Chi tiết xin phép',
             style: TextStyle(
                 fontSize: textScale > 1.4 ? 17.0.sp / textScale * 1.4 : 17.0.sp,
                 color: Colors.blue.shade900,
@@ -44,7 +43,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
           elevation: 0,
         ),
         body: Obx((() {
-          if (_complainController.hasInternet.isFalse) {
+          if (_lateController.hasInternet.isFalse) {
             return Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,7 +91,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
               ),
             );
           } else {
-            if (_complainController.isDetailLoading.isTrue) {
+            if (_lateController.isDetailLoading.isTrue) {
               return Center(
                 child: SpinKitFadingFour(
                   color: Colors.blue.shade900,
@@ -110,8 +109,8 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _complainController
-                              .detailComplainFormData!.formDetail.courseName,
+                          _lateController
+                              .detailLateFormData!.formDetail.courseName,
                           style: TextStyle(
                               fontSize: textScale >= 1.3
                                   ? 15.0.sp / textScale * 1.3
@@ -134,10 +133,8 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                   width: 6,
                                 ),
                                 Text(
-                                  formatDate(_complainController
-                                      .detailComplainFormData!
-                                      .formDetail
-                                      .startTime
+                                  formatDate(_lateController
+                                      .detailLateFormData!.formDetail.startTime
                                       .toString()
                                       .substring(0, 10)),
                                   style: TextStyle(
@@ -162,8 +159,8 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                   width: 6,
                                 ),
                                 Text(
-                                  _complainController
-                                      .detailComplainFormData!.formDetail.room,
+                                  _lateController
+                                      .detailLateFormData!.formDetail.room,
                                   style: TextStyle(
                                       fontSize: textScale >= 1.3
                                           ? 12.0.sp / textScale * 1.3
@@ -188,7 +185,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                               width: 6,
                             ),
                             Text(
-                              "${formatDateTime(_complainController.detailComplainFormData!.formDetail.startTime).substring(0, 8)} - ${formatDateTime(_complainController.detailComplainFormData!.formDetail.endTime).substring(0, 8)}",
+                              "${formatDateTime(_lateController.detailLateFormData!.formDetail.startTime).substring(0, 8)} - ${formatDateTime(_lateController.detailLateFormData!.formDetail.endTime).substring(0, 8)}",
                               style: TextStyle(
                                   fontSize: textScale >= 1.3
                                       ? 12.0.sp / textScale * 1.3
@@ -202,62 +199,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                         ),
                         Row(
                           children: [
-                            Text('Thời gian điểm danh: ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: textScale >= 1.3
-                                        ? 12.0.sp / textScale * 1.3
-                                        : 13.0.sp,
-                                    color: Colors.black)),
-                            Flexible(
-                                child: Text(
-                                    _complainController.detailComplainFormData!
-                                                .formDetail.checkinTime ==
-                                            null
-                                        ? ""
-                                        : formatDateTime(_complainController
-                                                .detailComplainFormData!
-                                                .formDetail
-                                                .checkinTime)
-                                            .substring(0, 8),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: textScale >= 1.3
-                                          ? 11.0.sp / textScale * 1.3
-                                          : 13.0.sp,
-                                      color: Colors.black,
-                                    )))
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Text('Trạng thái hiện tại: ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: textScale >= 1.3
-                                        ? 13.0.sp / textScale * 1.3
-                                        : 13.0.sp,
-                                    color: Colors.black)),
-                            Text(
-                                _complainController.detailComplainFormData!
-                                    .formDetail.currentStatus,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: textScale >= 1.3
-                                        ? 13.0.sp / textScale * 1.3
-                                        : 13.0.sp,
-                                    color: Colors.black))
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Text('Thay đổi thành: ',
+                            Text('Đăng ký: ',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: textScale >= 1.3
@@ -265,8 +207,8 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                       : 13.0.sp,
                                 )),
                             Text(
-                                _complainController.detailComplainFormData!
-                                    .formDetail.requestStatus
+                                _lateController.detailLateFormData!.formDetail
+                                    .requestStatus
                                     .toString(),
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
@@ -288,16 +230,17 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                       ? 12.0.sp / textScale * 1.3
                                       : 13.0.sp,
                                 )),
-                            Text(
-                              _complainController.detailComplainFormData!
-                                  .formDetail.teacherName,
+                            Flexible(
+                                child: Text(
+                              _lateController
+                                  .detailLateFormData!.formDetail.teacherName,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: textScale >= 1.3
                                       ? 12.0.sp / textScale * 1.3
                                       : 13.0.sp,
                                   fontWeight: FontWeight.w600),
-                            )
+                            ))
                           ],
                         ),
                         const SizedBox(
@@ -305,7 +248,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                         ),
                         Row(
                           children: [
-                            Text('Nội dung phản ánh:',
+                            Text('Lý do:',
                                 style: TextStyle(
                                     fontSize: textScale >= 1.3
                                         ? 12.0.sp / textScale * 1.3
@@ -318,7 +261,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                           height: 10,
                         ),
                         Text(
-                            '- ${_complainController.detailComplainFormData!.formDetail.reason}',
+                            '- ${_lateController.detailLateFormData!.formDetail.reason}',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: textScale >= 1.3
@@ -328,7 +271,7 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        _complainController.detailComplainFormData!.formDetail
+                        _lateController.detailLateFormData!.formDetail
                                     .rejectReason ==
                                 ""
                             ? const Text("")
@@ -339,19 +282,19 @@ class _DetailComplainFormScreenState extends State<DetailComplainFormScreen> {
                                         : 13.0.sp,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
-                        _complainController.detailComplainFormData!.formDetail
+                        _lateController.detailLateFormData!.formDetail
                                     .rejectReason ==
                                 ""
                             ? const Text("")
                             : const SizedBox(
                                 height: 10,
                               ),
-                        _complainController.detailComplainFormData!.formDetail
+                        _lateController.detailLateFormData!.formDetail
                                     .rejectReason ==
                                 ""
                             ? const Text("")
                             : Text(
-                                '- ${_complainController.detailComplainFormData!.formDetail.rejectReason}',
+                                '- ${_lateController.detailLateFormData!.formDetail.rejectReason}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: textScale >= 1.3

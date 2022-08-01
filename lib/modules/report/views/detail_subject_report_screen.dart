@@ -124,7 +124,7 @@ class SubjectDetailReportScreen extends StatelessWidget {
                         ),
                         Obx(() {
                           return SizedBox(
-                              width: textScale > 1.2 ? 36.0.w : 35.0.w,
+                              width: textScale > 1.2 ? 36.0.w : 30.0.w,
                               child: Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -148,9 +148,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                     color: Colors.black45,
                                   ),
                                   iconSize: 28,
-                                  buttonHeight: shortestSide > 600 ? 52 : 30,
+                                  buttonHeight: shortestSide > 600 ? 50 : 28,
                                   buttonPadding: const EdgeInsets.only(
-                                      left: 20, right: 10),
+                                      left: 10, right: 10),
                                   dropdownDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
@@ -161,8 +161,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                           'Tất cả',
                                           style: TextStyle(
                                               fontSize: textScale > 1.4
-                                                  ? 13.0.sp / textScale * 1.4
-                                                  : 13.0.sp,
+                                                  ? 12.0.sp / textScale * 1.4
+                                                  : 12.0.sp,
                                               color: Colors.black,
                                               fontWeight: FontWeight.w600),
                                         ),
@@ -175,8 +175,8 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                           'Hợp lệ',
                                           style: TextStyle(
                                               fontSize: textScale > 1.4
-                                                  ? 13.0.sp / textScale * 1.4
-                                                  : 13.0.sp,
+                                                  ? 12.0.sp / textScale * 1.4
+                                                  : 12.0.sp,
                                               color: Colors.black,
                                               fontWeight: FontWeight.w600),
                                         ),
@@ -189,10 +189,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                           'Đi trễ',
                                           style: TextStyle(
                                               fontSize: textScale > 1.4
-                                                  ? 13.0.sp / textScale * 1.4
-                                                  : 13.0.sp,
-                                                                                            color: Colors.black,
-
+                                                  ? 12.0.sp / textScale * 1.4
+                                                  : 12.0.sp,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ),
@@ -204,10 +203,9 @@ class SubjectDetailReportScreen extends StatelessWidget {
                                           'Vắng',
                                           style: TextStyle(
                                               fontSize: textScale > 1.4
-                                                  ? 13.0.sp / textScale * 1.4
-                                                  : 13.0.sp,
-                                                                                            color: Colors.black,
-
+                                                  ? 12.0.sp / textScale * 1.4
+                                                  : 12.0.sp,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smartschool_mobile/modules/complain/controllers/complain_controller.dart';
+import 'package:smartschool_mobile/modules/late/controllers/late_controller.dart';
 
-class ComplainItem extends StatelessWidget {
-  ComplainItem(
+class LateApplicationItem extends StatelessWidget {
+  LateApplicationItem(
       {Key? key,
       required this.courseName,
       required this.formId,
@@ -22,7 +22,7 @@ class ComplainItem extends StatelessWidget {
   final String formStatus;
   final int formId;
 
-  final ComplainController _complainController = Get.put(ComplainController());
+  final LateController _lateController = Get.put(LateController());
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +61,15 @@ class ComplainItem extends StatelessWidget {
                         ),
                         onPressed: () {
                           Get.defaultDialog(
-                              title: 'Bạn chắc chắn muốn hủy phản ánh đã tạo?',
+                              title:
+                                  'Bạn chắc chắn muốn hủy đơn xin phép đã tạo?',
                               titleStyle: TextStyle(
                                   fontSize: textScale > 1.4
                                       ? 14.0.sp / textScale * 1.4
                                       : 14.0.sp,
                                   fontWeight: FontWeight.w700),
                               middleText:
-                                  'Đơn phản ánh sẽ bị hủy sau khi bạn chọn “Hủy” phản ánh này.',
+                                  'Đơn xin phép sẽ bị hủy sau khi bạn chọn “Hủy” phản ánh này.',
                               middleTextStyle: TextStyle(
                                   fontSize: textScale > 1.4
                                       ? 13.0.sp / textScale * 1.4
@@ -78,8 +79,7 @@ class ComplainItem extends StatelessWidget {
                               radius: 10.0,
                               confirm: ElevatedButton(
                                   onPressed: () {
-                                    _complainController
-                                        .deleteComplainForm(formId);
+                                    _lateController.deleteLateForm(formId);
                                   },
                                   child: Text(
                                     'Hủy',
@@ -190,38 +190,12 @@ class ComplainItem extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                      height: 36,
-                      width: 101,
+                      height: 40,
+                      width:
+                          requestStatus == "Vắng có phép (Hợp lệ)" ? 240 : 100,
                       decoration: BoxDecoration(
-                          color: currentStatus == "Vắng"
-                              ? Colors.red.shade100
-                              : Colors.orange.shade100,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Center(
-                        child: Text(currentStatus,
-                            style: TextStyle(
-                                fontSize: textScale >= 1.3
-                                    ? 12.0.sp / textScale * 1.3
-                                    : 12.0.sp,
-                                color: currentStatus == "Vắng"
-                                    ? Colors.red
-                                    : Colors.orange.shade800,
-                                fontWeight: FontWeight.w700)),
-                      )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Icon(Icons.arrow_forward_outlined),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                      height: 36,
-                      width: 101,
-                      decoration: BoxDecoration(
-                          color: requestStatus == "Hợp lệ"
-                              ? Colors.green.shade100
-                              : Colors.orange.shade100,
+                          border: Border.all(
+                              color: Colors.grey.shade700, width: 1.5),
                           borderRadius: BorderRadius.circular(20)),
                       child: Center(
                         child: Text(requestStatus,
@@ -229,16 +203,13 @@ class ComplainItem extends StatelessWidget {
                                 fontSize: textScale >= 1.3
                                     ? 12.0.sp / textScale * 1.3
                                     : 12.0.sp,
-                                color: requestStatus == "Hợp lệ"
-                                    ? Colors.green.shade800
-                                    : Colors.orange.shade800,
-                                fontWeight: FontWeight.w700)),
+                                color: Colors.grey.shade700,
+                                fontWeight: FontWeight.w600)),
                       )),
                 ],
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   margin: const EdgeInsets.only(top: 0),

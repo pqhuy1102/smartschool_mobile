@@ -7,10 +7,10 @@ import 'package:smartschool_mobile/modules/complain/models/complain_form_respons
 import 'package:smartschool_mobile/modules/complain/models/detail_complain_form_response.dart';
 import 'package:smartschool_mobile/modules/complain/models/request_complain_request_model.dart';
 import 'package:smartschool_mobile/modules/complain/providers/complain_provider.dart';
+import 'package:smartschool_mobile/modules/late/providers/late_provider.dart';
 import 'package:smartschool_mobile/modules/report/providers/report_provider.dart';
-import 'package:smartschool_mobile/routes/app_pages.dart';
 
-class ComplainController extends GetxController {
+class LateController extends GetxController {
   var hasInternet = false.obs;
 
   var isLoading = false.obs;
@@ -22,23 +22,25 @@ class ComplainController extends GetxController {
   final scheduleId = 0.obs;
 
   // ignore: prefer_typing_uninitialized_variables
-  var _complainRequestData;
+  var _lateRequestData;
   // ignore: prefer_typing_uninitialized_variables
-  var _detailComplainFormData;
+  var _detailLateFormData;
 
   final defaultTeacherId = "".obs;
 
   final defaultRequestStatus = "".obs;
 
-  final complainList = [].obs;
+  final lateFormList = [].obs;
 
-  final filterComplainList = [].obs;
+  final filterLateFormList = [].obs;
 
   final filterValue = 0.obs;
 
   var userSemestersList = [].obs;
 
   var currentSemesterValue = "".obs;
+
+  var indayAttendanceList = [].obs;
 
   filterValueGetter() => filterValue.value;
 
@@ -76,18 +78,18 @@ class ComplainController extends GetxController {
     if (res != null) {
       userSemestersList.value = res.body["semester_list"];
       currentSemesterValue.value = userSemestersList.last['id'].toString();
-      getComplainList(int.parse(currentSemesterValue.value));
+      getLateFormList(int.parse(currentSemesterValue.value));
       isLoading(false);
     } else {
       isLoading(false);
     }
   }
 
-  ComplainFormResponeModel? get complainRequestData => _complainRequestData;
-  DetailComplainFormResponseModel? get detailComplainFormData =>
-      _detailComplainFormData;
+  ComplainFormResponeModel? get complainRequestData => _lateRequestData;
+  DetailComplainFormResponseModel? get detailLateFormData =>
+      _detailLateFormData;
 
-  Future<void> getComplainForm(int scheduleId) async {
+  Future<void> getLateForm(int scheduleId) async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
     Map<String, String> headers = {
@@ -97,17 +99,17 @@ class ComplainController extends GetxController {
     var res = await ComplainProvider().getComplainForm(headers, scheduleId);
 
     if (res != null) {
-      _complainRequestData = res;
+      _lateRequestData = res;
       defaultTeacherId.value = res.teacherList.first.id.toString();
       defaultRequestStatus.value = res.requestStatus.first.toString();
       isLoading(false);
     } else {
-      _complainRequestData = null;
+      _lateRequestData = null;
       isLoading(false);
     }
   }
 
-  Future<void> getDetailComplainForm(int selectedForm) async {
+  Future<void> getDetailLateForm(int selectedForm) async {
     isDetailLoading(true);
     String? token = _authenticationManager.getToken();
     Map<String, String> headers = {
@@ -116,17 +118,16 @@ class ComplainController extends GetxController {
     };
     var res =
         await ComplainProvider().getDetailComplainForm(headers, selectedForm);
-
     if (res != null) {
-      _detailComplainFormData = res;
+      _detailLateFormData = res;
       isDetailLoading(false);
     } else {
-      _detailComplainFormData = null;
+      _detailLateFormData = null;
       isDetailLoading(false);
     }
   }
 
-  Future<void> deleteComplainForm(int selectedForm) async {
+  Future<void> deleteLateForm(int selectedForm) async {
     isLoading(true);
 
     String? token = _authenticationManager.getToken();
@@ -145,9 +146,9 @@ class ComplainController extends GetxController {
       isLoading(false);
     } else {
       if (res != null) {
-        filterComplainList
+        filterLateFormList
             .removeWhere((item) => item["form_id"] == selectedForm);
-        complainList.removeWhere((item) => item["form_id"] == selectedForm);
+        lateFormList.removeWhere((item) => item["form_id"] == selectedForm);
         isLoading(false);
         Get.back();
         Get.snackbar('Thành công', 'Hủy phản ánh thành công!',
@@ -166,7 +167,7 @@ class ComplainController extends GetxController {
     }
   }
 
-  Future<void> getComplainList(int selectedSemester) async {
+  Future<void> getLateFormList(int selectedSemester) async {
     isLoading(true);
     filterValue.value = 0;
     String? token = _authenticationManager.getToken();
@@ -174,30 +175,29 @@ class ComplainController extends GetxController {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
     };
-    var res =
-        await ComplainProvider().getComplainList(headers, selectedSemester);
+    var res = await LateProvider().getLateFormList(headers, selectedSemester);
 
     if (res != null) {
-      complainList.value = res;
-      filterComplainList.value = complainList.reversed.toList();
+      lateFormList.value = res;
+      filterLateFormList.value = lateFormList.reversed.toList();
       isLoading(false);
     } else {
-      complainList.value = [];
+      lateFormList.value = [];
       isLoading(false);
     }
   }
 
-  void filterComplainListFun(int filterValue) {
+  void filterLateFormListFun(int filterValue) {
     if (filterValue == 0) {
-      filterComplainList.value = complainList.reversed.toList();
+      filterLateFormList.value = lateFormList.reversed.toList();
     } else if (filterValue == 1) {
-      filterComplainList.value = complainList.reversed
+      filterLateFormList.value = lateFormList.reversed
           .toList()
           .where(
               (complainItem) => complainItem["form_status"] == "Đang chờ duyệt")
           .toList();
     } else {
-      filterComplainList.value = complainList.reversed
+      filterLateFormList.value = lateFormList.reversed
           .toList()
           .where((complainItem) =>
               complainItem["form_status"] == "Chấp nhận" ||
@@ -206,7 +206,7 @@ class ComplainController extends GetxController {
     }
   }
 
-  Future<void> requestComplain() async {
+  Future<void> requestLate() async {
     isRequestLoading(true);
     String? token = _authenticationManager.getToken();
     Map<String, String> headers = {
@@ -215,7 +215,7 @@ class ComplainController extends GetxController {
     };
     var res = await ComplainProvider().requestComplain(
         RequestComplainRequestModel(
-          scheduleId: _complainRequestData.scheduleId,
+          scheduleId: _lateRequestData.scheduleId,
           requestCheckinStatus: defaultRequestStatus.value,
           reason: complainReasonEditingController!.text.trim(),
           toUserId: int.parse(defaultTeacherId.value),
@@ -239,7 +239,7 @@ class ComplainController extends GetxController {
                     fontSize: 14.0.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.green.shade800)),
-            content: Text('Phản ánh của bạn đang được xét duyệt!',
+            content: Text('Đơn xin phép của bạn đang được xét duyệt!',
                 style:
                     TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w500)),
             actions: [
@@ -250,8 +250,8 @@ class ComplainController extends GetxController {
                 onPressed: () {
                   Get.back();
                   Get.back();
+                  Get.back();
                   getUserSemestersList();
-                  Get.toNamed(Routes.complainList);
                 },
               ),
             ],
@@ -267,7 +267,7 @@ class ComplainController extends GetxController {
                     fontSize: 14.0.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.red)),
-            content: Text('Gửi phản ánh thất bại',
+            content: Text('Gửi xin phép thất bại!',
                 style:
                     TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600)),
             actions: [
@@ -281,6 +281,24 @@ class ComplainController extends GetxController {
           ),
         );
       }
+    }
+  }
+
+  Future<void> getIndayAttendance(date) async {
+    String? token = _authenticationManager.getToken();
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    };
+    isRequestLoading(true);
+
+    var res = await LateProvider().getIndaySchedule(headers, date);
+    if (res != null) {
+      isRequestLoading(false);
+      indayAttendanceList.value = res;
+    } else {
+      indayAttendanceList.value = [];
+      isRequestLoading(false);
     }
   }
 
