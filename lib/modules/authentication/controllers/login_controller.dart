@@ -77,6 +77,7 @@ class LoginController extends GetxController {
               backgroundColor: Colors.red,
               colorText: Colors.white);
         }
+        isLoading(false);
       }
     }
   }
