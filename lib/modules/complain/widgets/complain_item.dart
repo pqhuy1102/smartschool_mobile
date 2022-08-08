@@ -54,8 +54,9 @@ class ComplainItem extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 20),
-                          primary: Colors.red,
+                          primary: Colors.white,
                           shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Colors.red, width: 2),
                             borderRadius: BorderRadius.circular(16.0.sp),
                           ),
                         ),
@@ -129,7 +130,7 @@ class ComplainItem extends StatelessWidget {
                                 fontSize: textScale >= 1.3
                                     ? 13.0.sp / textScale * 1.3
                                     : 13.0.sp,
-                                color: Colors.white,
+                                color: Colors.red,
                                 fontWeight: FontWeight.w600)))
                     : const Text("")
               ],

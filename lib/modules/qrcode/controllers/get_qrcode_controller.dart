@@ -74,6 +74,7 @@ class GetQrCodeController extends GetxController {
       qrCodeString.value = res.qrString;
       isLoading(false);
     } else {
+      qrCodeString.value = '';
       isLoading(false);
     }
   }

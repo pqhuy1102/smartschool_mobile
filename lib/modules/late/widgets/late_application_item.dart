@@ -54,8 +54,9 @@ class LateApplicationItem extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 20),
-                          primary: Colors.red,
+                          primary: Colors.white,
                           shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Colors.red, width: 2),
                             borderRadius: BorderRadius.circular(16.0.sp),
                           ),
                         ),
@@ -69,7 +70,7 @@ class LateApplicationItem extends StatelessWidget {
                                       : 14.0.sp,
                                   fontWeight: FontWeight.w700),
                               middleText:
-                                  'Đơn xin phép sẽ bị hủy sau khi bạn chọn “Hủy” phản ánh này.',
+                                  'Đơn xin phép sẽ bị hủy sau khi bạn chọn “Hủy” đơn xin phép này.',
                               middleTextStyle: TextStyle(
                                   fontSize: textScale > 1.4
                                       ? 13.0.sp / textScale * 1.4
@@ -90,7 +91,7 @@ class LateApplicationItem extends StatelessWidget {
                                         color: Colors.white),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.red.shade600,
+                                    primary: Colors.red,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 25),
                                     shape: RoundedRectangleBorder(
@@ -129,7 +130,7 @@ class LateApplicationItem extends StatelessWidget {
                                 fontSize: textScale >= 1.3
                                     ? 13.0.sp / textScale * 1.3
                                     : 13.0.sp,
-                                color: Colors.white,
+                                color: Colors.red,
                                 fontWeight: FontWeight.w600)))
                     : const Text("")
               ],
@@ -191,8 +192,7 @@ class LateApplicationItem extends StatelessWidget {
                 children: [
                   Container(
                       height: 40,
-                      width:
-                          requestStatus == "Vắng có phép (Hợp lệ)" ? 240 : 100,
+                      width: 150,
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: Colors.grey.shade700, width: 1.5),

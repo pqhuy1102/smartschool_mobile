@@ -12,8 +12,10 @@ class ReportProvider extends GetConnect {
 
   Future<dynamic> getUserSemestersList(headers) async {
     final response = await get(userSemesterListUrl, headers: headers);
-    if (response.statusCode == HttpStatus.ok) {
+    if (response.status.isOk) {
       return response;
+    } else if (response.status.isUnauthorized) {
+      return 'unauthorized';
     } else {
       return null;
     }

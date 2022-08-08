@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
 import 'package:smartschool_mobile/modules/authentication/model/login_request_model.dart';
@@ -11,12 +12,23 @@ class LoginController extends GetxController {
   late final AuthenticationManager _authenticationManager;
 
   var isLoading = false.obs;
+  var isLoginGoogleLoading = false.obs;
 
   var username = "".obs;
 
   var isActivated = false.obs;
 
   var hasInternet = false.obs;
+
+  final _googleSignIn = GoogleSignIn(
+    clientId:
+        "82945894712-rp99rrdgq5ab7ja7cup95g37dfia6isf.apps.googleusercontent.com",
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+  var googleAccount = Rx<GoogleSignInAccount?>(null);
 
   TextEditingController? emailEditingController;
   TextEditingController? passwordEditingController;
@@ -39,6 +51,46 @@ class LoginController extends GetxController {
       final hasInternetYet = status == InternetConnectionStatus.connected;
       hasInternet.value = hasInternetYet;
     });
+  }
+
+  Future<void> googleLogin() async {
+    isLoginGoogleLoading(true);
+    try {
+      googleAccount.value = await _googleSignIn.signIn();
+      final googleAuth = await googleAccount.value!.authentication;
+
+      final res = await _loginProvider.loginWithGoogle(googleAuth.accessToken);
+      print(googleAuth.accessToken);
+      if (res != null) {
+        username.value = res.body['username'];
+        isActivated(true);
+        _authenticationManager.changePasswordFirstTimeStatus(true);
+        _authenticationManager.login(googleAuth.accessToken, username.value);
+
+        Get.snackbar('Thành công', 'Đăng nhập thành công!',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.green,
+            colorText: Colors.white);
+        isLoginGoogleLoading(false);
+      } else {
+        Get.snackbar('Thất bại', 'Đăng nhập thất bạiii!',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        isLoginGoogleLoading(false);
+      }
+    } catch (e) {
+      Get.snackbar(
+          'Thất bại',
+          e.toString() ==
+                  'PlatformException(network_error, com.google.android.gms.common.api.ApiException: 7: , null, null)'
+              ? "Bạn chưa kết nối internet!"
+              : "Đăng nhập thất bại!",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      isLoginGoogleLoading(false);
+    }
   }
 
   //login
@@ -83,8 +135,10 @@ class LoginController extends GetxController {
   }
 
   //logout
-  void logout() {
+  void logout() async {
     _authenticationManager.logOut();
+    await _googleSignIn.signOut();
+
     Get.offAll(() => const OnBoard());
 
     Get.snackbar('Thành công', 'Đăng xuất thành công!',
