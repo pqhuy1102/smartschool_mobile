@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/cache_manager.dart';
+import 'package:smartschool_mobile/modules/authentication/providers/login_provider.dart';
 
 class AuthenticationManager extends GetxController with CacheManager {
   final isLogged = false.obs;
@@ -38,6 +39,10 @@ class AuthenticationManager extends GetxController with CacheManager {
     if (name != null) {
       username.value = name;
     }
+    // final res = await LoginProvider().loginWithGoogle(token);
+    // if(res != null){
+
+    // }
     if (token != null) {
       isLogged.value = true;
     }

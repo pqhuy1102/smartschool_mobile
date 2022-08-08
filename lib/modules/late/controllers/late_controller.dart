@@ -13,6 +13,8 @@ import 'package:smartschool_mobile/modules/report/providers/report_provider.dart
 class LateController extends GetxController {
   var hasInternet = false.obs;
 
+  var selectedFormId = 0.obs;
+
   var isLoading = false.obs;
 
   var isRequestLoading = false.obs;
@@ -116,8 +118,10 @@ class LateController extends GetxController {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
     };
+
     var res =
         await ComplainProvider().getDetailComplainForm(headers, selectedForm);
+    selectedFormId.value = selectedForm;
     if (res != null) {
       _detailLateFormData = res;
       isDetailLoading(false);

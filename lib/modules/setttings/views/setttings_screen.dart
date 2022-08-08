@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/login_controller.dart';
 import 'package:smartschool_mobile/modules/complain/controllers/complain_controller.dart';
 import 'package:smartschool_mobile/modules/late/controllers/late_controller.dart';
+import 'package:smartschool_mobile/modules/profile/controllers/profile_controller.dart';
 import 'package:smartschool_mobile/modules/setttings/widgets/setting_item.dart';
 import 'package:smartschool_mobile/routes/app_pages.dart';
 
@@ -68,6 +69,7 @@ class SettingsScreen extends StatelessWidget {
     final ComplainController _complainController =
         Get.put(ComplainController());
     final LateController _lateController = Get.put(LateController());
+    final ProfileController _profileController = Get.put(ProfileController());
     final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Scaffold(
@@ -104,6 +106,7 @@ class SettingsScreen extends StatelessWidget {
                   child: SettingItem(
                       title: "personal information".tr, icon: Icons.person),
                   onTap: () {
+                    _profileController.getProfileUser();
                     Get.toNamed(Routes.dashboard + Routes.profile);
                   },
                 ),

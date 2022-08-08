@@ -274,7 +274,7 @@ class _DetailLateFormScreenState extends State<DetailLateFormScreen> {
                         _lateController.detailLateFormData!.formDetail
                                     .rejectReason ==
                                 ""
-                            ? const Text("")
+                            ? const SizedBox.shrink()
                             : Text('Lí do từ chối',
                                 style: TextStyle(
                                     fontSize: textScale >= 1.3
@@ -285,14 +285,14 @@ class _DetailLateFormScreenState extends State<DetailLateFormScreen> {
                         _lateController.detailLateFormData!.formDetail
                                     .rejectReason ==
                                 ""
-                            ? const Text("")
+                            ? const SizedBox.shrink()
                             : const SizedBox(
                                 height: 10,
                               ),
                         _lateController.detailLateFormData!.formDetail
                                     .rejectReason ==
                                 ""
-                            ? const Text("")
+                            ? const SizedBox.shrink()
                             : Text(
                                 '- ${_lateController.detailLateFormData!.formDetail.rejectReason}',
                                 style: TextStyle(
@@ -304,6 +304,91 @@ class _DetailLateFormScreenState extends State<DetailLateFormScreen> {
                         const SizedBox(
                           height: 20,
                         ),
+                        ElevatedButton(
+                            onPressed: () {
+                              Get.defaultDialog(
+                                  title:
+                                      'Bạn chắc chắn muốn hủy đơn xin phép đã tạo?',
+                                  titleStyle: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                      fontWeight: FontWeight.w700),
+                                  middleText:
+                                      'Đơn xin phép sẽ bị hủy sau khi bạn chọn “Hủy” đơn xin phép này.',
+                                  middleTextStyle: TextStyle(
+                                      fontSize: textScale > 1.4
+                                          ? 13.0.sp / textScale * 1.4
+                                          : 13.0.sp,
+                                      fontWeight: FontWeight.w500),
+                                  backgroundColor: Colors.white,
+                                  radius: 10.0,
+                                  confirm: ElevatedButton(
+                                      onPressed: () {
+                                        _lateController.deleteLateForm(
+                                            _lateController
+                                                .selectedFormId.value);
+                                        Get.back();
+                                      },
+                                      child: Text(
+                                        'Hủy',
+                                        style: TextStyle(
+                                            fontSize: textScale > 1.4
+                                                ? 14.0.sp / textScale * 1.4
+                                                : 14.0.sp,
+                                            color: Colors.white),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 25),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4.0.sp),
+                                        ),
+                                      )),
+                                  cancel: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.white,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4.0.sp),
+                                            side: BorderSide(
+                                                color: Colors.blue.shade900)),
+                                      ),
+                                      onPressed: (() {
+                                        Get.back();
+                                      }),
+                                      child: Text(
+                                        'Đóng',
+                                        style: TextStyle(
+                                            fontSize: textScale > 1.4
+                                                ? 14.0.sp / textScale * 1.4
+                                                : 14.0.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.blue.shade900),
+                                      )),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 14, vertical: 18));
+                            },
+                            child: Text(
+                              'Hủy'.toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: textScale >= 1.3
+                                      ? 13.0.sp / textScale * 1.3
+                                      : 13.0.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              minimumSize: const Size.fromHeight(40),
+                              primary: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0.sp),
+                              ),
+                            ))
                       ],
                     ),
                   )));

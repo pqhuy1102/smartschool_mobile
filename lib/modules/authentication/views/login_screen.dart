@@ -176,6 +176,80 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ))
                           ],
+                        ))),
+                Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Hoặc',
+                      style: TextStyle(
+                          fontSize: textScale > 1.4
+                              ? 13.0.sp / textScale * 1.4
+                              : 13.0.sp,
+                          color: Colors.black),
+                    )),
+
+                Container(
+                    margin: const EdgeInsets.all(16),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          _loginController.googleLogin();
+                        },
+                        child: Obx((() {
+                          if (_loginController.isLoginGoogleLoading.value) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const CircularProgressIndicator(
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                Text(
+                                  'Đang đăng nhập...',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                      fontWeight: FontWeight.w600),
+                                )
+                              ],
+                            );
+                          } else {
+                            return Row(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(16, 0, 50, 0),
+                                  child: Image.asset(
+                                    'assets/images/google.png',
+                                    width: 35,
+                                    height: 35,
+                                  ),
+                                ),
+                                Text(
+                                  'Đăng nhập với Google',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale > 1.4
+                                          ? 14.0.sp / textScale * 1.4
+                                          : 14.0.sp,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            );
+                          }
+                        })),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          minimumSize: const Size.fromHeight(40),
+                          primary: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: Colors.grey.shade600, width: 1.0),
+                            borderRadius: BorderRadius.circular(6.0.sp),
+                          ),
                         )))
               ],
             ),

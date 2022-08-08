@@ -40,6 +40,8 @@ class ComplainController extends GetxController {
 
   var currentSemesterValue = "".obs;
 
+  var selectedFormId = 0.obs;
+
   filterValueGetter() => filterValue.value;
 
   late final AuthenticationManager _authenticationManager;
@@ -116,7 +118,7 @@ class ComplainController extends GetxController {
     };
     var res =
         await ComplainProvider().getDetailComplainForm(headers, selectedForm);
-
+    selectedFormId.value = selectedForm;
     if (res != null) {
       _detailComplainFormData = res;
       isDetailLoading(false);
