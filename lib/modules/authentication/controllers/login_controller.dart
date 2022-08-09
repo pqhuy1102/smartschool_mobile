@@ -79,7 +79,6 @@ class LoginController extends GetxController {
         isLoginGoogleLoading(false);
       }
     } catch (e) {
-      print(e);
       Get.snackbar(
           'Thất bại',
           e.toString() ==
