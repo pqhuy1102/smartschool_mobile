@@ -6,10 +6,12 @@ import 'package:smartschool_mobile/modules/qrcode/models/get_qrcode_response_mod
 class GetQrCodeProvider extends GetConnect {
   final String getQrCodeUrl = '${Constant.apiDomain}/user/get-qr';
 
-  Future<GetQrCodeResponseModel?> getQrCode(headers) async {
+  Future<dynamic> getQrCode(headers) async {
     final response = await get(getQrCodeUrl, headers: headers);
     if (response.statusCode == HttpStatus.ok) {
       return getQrCodeResponseModelFromJson(response.bodyString!);
+    } else if (response.status.isUnauthorized) {
+      return 'unauthorized';
     } else {
       return null;
     }

@@ -1,9 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
+import 'package:smartschool_mobile/modules/authentication/widgets/onboard.dart';
 
 import 'package:smartschool_mobile/modules/qrcode/providers/get_qrcode_provider.dart';
 
@@ -70,8 +73,34 @@ class GetQrCodeController extends GetxController {
       'Authorization': 'Bearer $token',
     };
     var res = await GetQrCodeProvider().getQrCode(headers);
-    if (res != null) {
+    if (res != null && res != 'unathorized') {
       qrCodeString.value = res.qrString;
+      isLoading(false);
+    } else if (res == 'unauthorized') {
+      Get.dialog(
+        AlertDialog(
+          title: Text('Cảnh báo!',
+              style: TextStyle(
+                  fontSize: 14.0.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red)),
+          content: Text(
+              'Phiên đăng nhập của bạn đã hết hạn, vui lòng đăng nhập lại!',
+              style: TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600)),
+          actions: [
+            TextButton(
+                child: Text("Đăng nhập lại",
+                    style: TextStyle(
+                        fontSize: 13.0.sp, color: Colors.blue.shade900)),
+                onPressed: () {
+                  _authenticationManager.logOut();
+                  Get.offAll(() => const OnBoard());
+                }),
+          ],
+        ),
+        barrierDismissible: false,
+      );
+      qrCodeString.value = '';
       isLoading(false);
     } else {
       qrCodeString.value = '';
