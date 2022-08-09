@@ -86,6 +86,7 @@ class DashBoardController extends GetxController {
                 }),
           ],
         ),
+        barrierDismissible: false,
       );
 
       isLoading(false);

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
+import 'package:smartschool_mobile/modules/authentication/widgets/onboard.dart';
 import 'package:smartschool_mobile/modules/complain/models/complain_form_response_model.dart';
 import 'package:smartschool_mobile/modules/complain/models/detail_complain_form_response.dart';
 import 'package:smartschool_mobile/modules/complain/models/request_complain_request_model.dart';
@@ -81,6 +82,32 @@ class LateController extends GetxController {
       userSemestersList.value = res.body["semester_list"];
       currentSemesterValue.value = userSemestersList.last['id'].toString();
       getLateFormList(int.parse(currentSemesterValue.value));
+      isLoading(false);
+    } else if (res == 'unauthorized') {
+      Get.dialog(
+        AlertDialog(
+          title: Text('Cảnh báo!',
+              style: TextStyle(
+                  fontSize: 14.0.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red)),
+          content: Text(
+              'Phiên đăng nhập của bạn đã hết hạn, vui lòng đăng nhập lại!',
+              style: TextStyle(fontSize: 13.0.sp, fontWeight: FontWeight.w600)),
+          actions: [
+            TextButton(
+                child: Text("Đăng nhập lại",
+                    style: TextStyle(
+                        fontSize: 13.0.sp, color: Colors.blue.shade900)),
+                onPressed: () {
+                  _authenticationManager.logOut();
+                  Get.offAll(() => const OnBoard());
+                }),
+          ],
+        ),
+        barrierDismissible: false,
+      );
+
       isLoading(false);
     } else {
       isLoading(false);

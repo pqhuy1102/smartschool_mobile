@@ -60,7 +60,6 @@ class LoginController extends GetxController {
       final googleAuth = await googleAccount.value!.authentication;
 
       final res = await _loginProvider.loginWithGoogle(googleAuth.accessToken);
-      print(googleAuth.accessToken);
       if (res != null) {
         username.value = res.body['username'];
         isActivated(true);

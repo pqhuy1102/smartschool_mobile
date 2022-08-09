@@ -90,6 +90,7 @@ class ReportController extends GetxController {
                 }),
           ],
         ),
+        barrierDismissible: false,
       );
 
       isLoading(false);
