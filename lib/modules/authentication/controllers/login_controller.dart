@@ -72,13 +72,14 @@ class LoginController extends GetxController {
             colorText: Colors.white);
         isLoginGoogleLoading(false);
       } else {
-        Get.snackbar('Thất bại', 'Đăng nhập thất bạiii!',
+        Get.snackbar('Thất bại', 'Đăng nhập thất bại!',
             snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.red,
             colorText: Colors.white);
         isLoginGoogleLoading(false);
       }
     } catch (e) {
+      print(e);
       Get.snackbar(
           'Thất bại',
           e.toString() ==
