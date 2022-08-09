@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/cache_manager.dart';
-import 'package:smartschool_mobile/modules/authentication/providers/login_provider.dart';
 
 class AuthenticationManager extends GetxController with CacheManager {
   final isLogged = false.obs;
