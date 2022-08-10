@@ -68,9 +68,11 @@ class GetQrCodeController extends GetxController {
     countDown.value = 15;
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await GetQrCodeProvider().getQrCode(headers);
     if (res != null && res != 'unathorized') {

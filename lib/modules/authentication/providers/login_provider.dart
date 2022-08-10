@@ -5,7 +5,6 @@ import 'package:smartschool_mobile/modules/authentication/model/login_request_mo
 
 class LoginProvider extends GetConnect {
   final String loginUrl = '${Constant.apiDomain}/login';
-  final String loginGoogleUrl = '${Constant.apiDomain}/login-google';
 
   Future<dynamic> login(LoginRequestModel model) async {
     final response = await post(loginUrl, model.toJson(), headers: {
@@ -16,11 +15,11 @@ class LoginProvider extends GetConnect {
   }
 
   Future<dynamic> loginWithGoogle(token) async {
-    final response = await post(loginGoogleUrl, 'model', headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+    final response = await post(loginUrl, 'model', headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Bearer $token',
+      'Login-Type': 'google-type'
     });
-
     if (response.statusCode == HttpStatus.ok) {
       return response;
     } else {

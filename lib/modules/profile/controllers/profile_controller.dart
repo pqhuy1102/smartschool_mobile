@@ -40,9 +40,11 @@ class ProfileController extends GetxController {
   Future<void> getProfileUser() async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ProfileProvider().getProfileUser(headers);
     if (res != null) {

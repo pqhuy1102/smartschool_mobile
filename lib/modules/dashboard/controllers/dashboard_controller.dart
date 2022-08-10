@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
@@ -23,14 +24,26 @@ class DashBoardController extends GetxController {
     _authenticationManager = Get.find();
     _notificationProvider = Get.put(NotificationProvider());
     getIndayAttendance();
+
+    getInternetStatus();
+
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final hasInternetYet = status == InternetConnectionStatus.connected;
+      hasInternet.value = hasInternetYet;
+      if (hasInternet.isTrue) {
+        getIndayAttendance();
+      }
+    });
   }
 
   Future<void> updateNotificationToken(String fcmToken) async {
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
 
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     // ignore: unused_local_variable
     await _notificationProvider.updateNotificationToken(
@@ -51,9 +64,11 @@ class DashBoardController extends GetxController {
 
   Future<void> getIndayAttendance() async {
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     isLoading(true);
     var now = DateTime.now();
@@ -61,6 +76,7 @@ class DashBoardController extends GetxController {
     String today = formatter.format(now);
     var res =
         await GetIndayAttendanceProvider().getIndayAttendance(headers, today);
+
     if (res != null && res != 'unauthorized') {
       isLoading(false);
       indayAttendanceList.value = res;
@@ -88,10 +104,16 @@ class DashBoardController extends GetxController {
         ),
         barrierDismissible: false,
       );
-
+      indayAttendanceList.value = [];
       isLoading(false);
     } else {
+      indayAttendanceList.value = [];
+
       isLoading(false);
     }
+  }
+
+  void getInternetStatus() async {
+    hasInternet.value = await InternetConnectionChecker().hasConnection;
   }
 }

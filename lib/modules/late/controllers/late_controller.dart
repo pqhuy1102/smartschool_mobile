@@ -72,9 +72,11 @@ class LateController extends GetxController {
   Future<void> getUserSemestersList() async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ReportProvider().getUserSemestersList(headers);
 
@@ -121,9 +123,11 @@ class LateController extends GetxController {
   Future<void> getLateForm(int scheduleId) async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ComplainProvider().getComplainForm(headers, scheduleId);
 
@@ -141,9 +145,11 @@ class LateController extends GetxController {
   Future<void> getDetailLateForm(int selectedForm) async {
     isDetailLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
 
     var res =
@@ -162,9 +168,11 @@ class LateController extends GetxController {
     isLoading(true);
 
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res =
         await ComplainProvider().deleteComplainForm(headers, selectedForm);
@@ -202,9 +210,11 @@ class LateController extends GetxController {
     isLoading(true);
     filterValue.value = 0;
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await LateProvider().getLateFormList(headers, selectedSemester);
 
@@ -240,9 +250,11 @@ class LateController extends GetxController {
   Future<void> requestLate() async {
     isRequestLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ComplainProvider().requestComplain(
         RequestComplainRequestModel(
@@ -317,9 +329,11 @@ class LateController extends GetxController {
 
   Future<void> getIndayAttendance(date) async {
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     isRequestLoading(true);
 

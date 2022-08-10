@@ -11,13 +11,15 @@ class AuthenticationManager extends GetxController with CacheManager {
     removeToken();
     removeChangePassStatus();
     removeUsername();
+    removeLoginType();
   }
 
-  void login(String? token, String? name) async {
+  void login(String? token, String? name, bool isGoogleLogin) async {
     isLogged.value = true;
 
     //Token is cached
     await saveToken(token);
+    await saveLoginType(isGoogleLogin);
     await saveUsername(name);
   }
 

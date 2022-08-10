@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:555616356133:android:7a934a83e581e0fe5d7ccc",
         "android_client_info": {
-          "package_name": "com.example.smartschool_mobile"
+          "package_name": "com.phenikaamaas.studentconnect"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "555616356133-uitp441ih51rfdc4hmmrgras3mkc8jcb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.smartschool_mobile",
+            "package_name": "com.phenikaamaas.studentconnect",
             "certificate_hash": "85adabc2194381dea31b08090b6b56a162ecbe1e"
           }
         },

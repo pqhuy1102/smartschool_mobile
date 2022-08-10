@@ -64,7 +64,8 @@ class LoginController extends GetxController {
         username.value = res.body['username'];
         isActivated(true);
         _authenticationManager.changePasswordFirstTimeStatus(true);
-        _authenticationManager.login(googleAuth.accessToken, username.value);
+        _authenticationManager.login(
+            googleAuth.accessToken, username.value, true);
 
         Get.snackbar('Thành công', 'Đăng nhập thành công!',
             snackPosition: SnackPosition.TOP,
@@ -105,7 +106,8 @@ class LoginController extends GetxController {
       isLoading(false);
     } else {
       if (!res.hasError) {
-        _authenticationManager.login(res.body['token'], res.body['username']);
+        _authenticationManager.login(
+            res.body['token'], res.body['username'], false);
         username.value = res.body['username'];
 
         isActivated.value = res.body['is_activate'];

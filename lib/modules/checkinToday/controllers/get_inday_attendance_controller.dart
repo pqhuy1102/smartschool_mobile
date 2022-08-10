@@ -24,14 +24,10 @@ class GetIndayAttendanceController extends GetxController {
 
     getInternetStatus();
 
-    getIndayAttendance();
-
     InternetConnectionChecker().onStatusChange.listen((status) {
       final hasInternetYet = status == InternetConnectionStatus.connected;
       hasInternet.value = hasInternetYet;
-      if (hasInternet.isTrue) {
-        getIndayAttendance();
-      }
+      if (hasInternet.isTrue) {}
     });
   }
 

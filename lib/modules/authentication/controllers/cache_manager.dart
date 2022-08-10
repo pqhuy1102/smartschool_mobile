@@ -33,6 +33,22 @@ mixin CacheManager {
     await box.remove(CacheManagerKey.ISACTIVATE.toString());
   }
 
+  Future<bool> saveLoginType(bool isGoogleLogin) async {
+    final box = GetStorage();
+    await box.write(CacheManagerKey.LOGINTYPE.toString(), isGoogleLogin);
+    return true;
+  }
+
+  bool getLoginType() {
+    final box = GetStorage();
+    return box.read(CacheManagerKey.LOGINTYPE.toString());
+  }
+
+  Future<void> removeLoginType() async {
+    final box = GetStorage();
+    await box.remove(CacheManagerKey.LOGINTYPE.toString());
+  }
+
   Future<bool> saveUsername(String? name) async {
     final box = GetStorage();
     await box.write(CacheManagerKey.USERNAME.toString(), name);
@@ -51,4 +67,4 @@ mixin CacheManager {
 }
 
 // ignore: constant_identifier_names
-enum CacheManagerKey { TOKEN, ISACTIVATE, USERNAME }
+enum CacheManagerKey { TOKEN, ISACTIVATE, USERNAME, LOGINTYPE }

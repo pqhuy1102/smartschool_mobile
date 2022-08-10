@@ -55,12 +55,13 @@ class ReportController extends GetxController {
   Future<void> getUserSemestersList() async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ReportProvider().getUserSemestersList(headers);
-
     if (res != null && res != 'unauthorized') {
       userSemestersList.value = res.body["semester_list"];
       currentSemesterValue.value = userSemestersList.last['id'].toString();
@@ -101,9 +102,11 @@ class ReportController extends GetxController {
 
   Future<void> getCoursesInSemester() async {
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ReportProvider()
         .getUserCoursesInSemester(headers, currentSemesterValue.value);
@@ -113,9 +116,11 @@ class ReportController extends GetxController {
   Future<void> getCourseAttendance(selectedCourseId) async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ReportProvider()
         .getUserCourseAttendance(headers, selectedCourseId);

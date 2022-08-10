@@ -6,7 +6,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smartschool_mobile/modules/authentication/controllers/authentication_manager.dart';
-import 'package:smartschool_mobile/modules/checkinToday/controllers/get_inday_attendance_controller.dart';
 import 'package:smartschool_mobile/modules/checkinToday/widgets/checkin_today_item.dart';
 import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/dashboard/widgets/bottom_nav_tab.dart';
@@ -33,8 +32,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   final ReportController _reportController = Get.put(ReportController());
   final ProfileController _profileController = Get.put(ProfileController());
   final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
-  late final GetIndayAttendanceController _getIndayAttendanceController =
-      Get.put(GetIndayAttendanceController());
 
   void requestAndRegisterNotification() async {
     messaging = FirebaseMessaging.instance;
@@ -176,7 +173,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 onPressed: () {
                   Get.back();
                   Get.offNamed(Routes.dashboard);
-                  _getIndayAttendanceController.getIndayAttendance();
+                  _dashBoardController.getIndayAttendance();
                 },
               ),
             ],
@@ -356,7 +353,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           ),
         ),
         Obx(() {
-          if (_getIndayAttendanceController.hasInternet.isFalse) {
+          if (_dashBoardController.hasInternet.isFalse) {
             return SingleChildScrollView(
               child: Center(
                 child: Column(
@@ -400,7 +397,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         ),
                       ),
                       onPressed: () {
-                        _getIndayAttendanceController.getIndayAttendance();
+                        _dashBoardController.getIndayAttendance();
                       },
                     ),
                   ],
@@ -408,15 +405,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               ),
             );
           } else {
-            if (_getIndayAttendanceController.isLoading.isTrue) {
+            if (_dashBoardController.isLoading.isTrue) {
               return Center(
                 child: SpinKitFadingFour(
                   color: Colors.blue.shade900,
                   size: 40.0.sp,
                 ),
               );
-            } else if (_getIndayAttendanceController
-                .indayAttendanceList.isEmpty) {
+            } else if (_dashBoardController.indayAttendanceList.isEmpty) {
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -445,32 +441,31 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   child: SizedBox(
                 height: 100.0,
                 child: ListView.builder(
-                    itemCount: _getIndayAttendanceController
-                        .indayAttendanceList.length,
+                    itemCount: _dashBoardController.indayAttendanceList.length,
                     itemBuilder: ((context, index) {
                       return Container(
                         margin: const EdgeInsets.fromLTRB(12, 15, 12, 0),
                         child: CheckinTodayItem(
-                            startTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['start_time'])
+                            startTime: formatDate(_dashBoardController.indayAttendanceList[index]['start_time'])
                                 .substring(10),
-                            endTime: formatDate(_getIndayAttendanceController.indayAttendanceList[index]['end_time'])
+                            endTime: formatDate(_dashBoardController.indayAttendanceList[index]['end_time'])
                                 .substring(10),
-                            date: _getIndayAttendanceController.indayAttendanceList[index]
+                            date: _dashBoardController.indayAttendanceList[index]
                                         ['check_in_time'] ==
                                     null
                                 ? ""
-                                : formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                : formatDate(_dashBoardController.indayAttendanceList[index]['check_in_time'])
                                     .substring(0, 10),
-                            time: _getIndayAttendanceController.indayAttendanceList[index]
+                            time: _dashBoardController.indayAttendanceList[index]
                                         ['check_in_time'] ==
                                     null
                                 ? "--/--"
                                 : "Điểm danh lúc: " +
-                                    formatDate(_getIndayAttendanceController.indayAttendanceList[index]['check_in_time'])
+                                    formatDate(_dashBoardController.indayAttendanceList[index]['check_in_time'])
                                         .substring(10),
-                            course: _getIndayAttendanceController.indayAttendanceList[index]['course'],
-                            room: _getIndayAttendanceController.indayAttendanceList[index]['room'],
-                            status: _getIndayAttendanceController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_getIndayAttendanceController.indayAttendanceList[index]['end_time']) : convertCheckinTodayStatus(_getIndayAttendanceController.indayAttendanceList[index]['check_in_status'])),
+                            course: _dashBoardController.indayAttendanceList[index]['course'],
+                            room: _dashBoardController.indayAttendanceList[index]['room'],
+                            status: _dashBoardController.indayAttendanceList[index]['check_in_status'] == "" ? checkStatusCheckin(_dashBoardController.indayAttendanceList[index]['end_time']) : convertCheckinTodayStatus(_dashBoardController.indayAttendanceList[index]['check_in_status'])),
                       );
                     })),
               ));
@@ -497,7 +492,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               icon: Icons.home,
               isSelected: selectedPosition == 0,
               onTap: () {
-                _getIndayAttendanceController.getIndayAttendance();
+                _dashBoardController.getIndayAttendance();
                 setState(() {
                   selectedPosition = 0;
                 });
