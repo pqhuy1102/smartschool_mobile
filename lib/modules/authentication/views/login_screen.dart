@@ -221,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 Container(
                                   margin:
-                                      const EdgeInsets.fromLTRB(16, 0, 50, 0),
+                                      const EdgeInsets.fromLTRB(16, 0, 48, 0),
                                   child: Image.asset(
                                     'assets/images/google.png',
                                     width: 35,

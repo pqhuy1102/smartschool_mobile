@@ -43,10 +43,11 @@ class ChangePasswordFirstTimeController extends GetxController {
       String newPassword, String reNewPassword) async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
-
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
 
     final res = await _changePasswordProvider.changePasswordFirstTime(

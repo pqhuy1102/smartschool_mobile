@@ -70,9 +70,11 @@ class ComplainController extends GetxController {
   Future<void> getUserSemestersList() async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ReportProvider().getUserSemestersList(headers);
 
@@ -119,9 +121,11 @@ class ComplainController extends GetxController {
   Future<void> getComplainForm(int scheduleId) async {
     isLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ComplainProvider().getComplainForm(headers, scheduleId);
 
@@ -139,9 +143,11 @@ class ComplainController extends GetxController {
   Future<void> getDetailComplainForm(int selectedForm) async {
     isDetailLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res =
         await ComplainProvider().getDetailComplainForm(headers, selectedForm);
@@ -159,9 +165,11 @@ class ComplainController extends GetxController {
     isLoading(true);
 
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res =
         await ComplainProvider().deleteComplainForm(headers, selectedForm);
@@ -199,9 +207,11 @@ class ComplainController extends GetxController {
     isLoading(true);
     filterValue.value = 0;
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res =
         await ComplainProvider().getComplainList(headers, selectedSemester);
@@ -238,9 +248,11 @@ class ComplainController extends GetxController {
   Future<void> requestComplain() async {
     isRequestLoading(true);
     String? token = _authenticationManager.getToken();
+    bool isGoogleLogin = _authenticationManager.getLoginType();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
+      "Login-Type": isGoogleLogin ? 'google-type' : '',
     };
     var res = await ComplainProvider().requestComplain(
         RequestComplainRequestModel(
