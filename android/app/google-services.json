@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "555616356133-rqhrnar7vnfqa585vpjc6nas62bjds2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phenikaamaas.studentconnect",
+            "certificate_hash": "676fe00d9c4f6096f306c3de8fe47ce4cd92e873"
+          }
+        },
+        {
           "client_id": "555616356133-uitp441ih51rfdc4hmmrgras3mkc8jcb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
