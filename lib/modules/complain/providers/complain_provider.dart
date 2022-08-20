@@ -11,7 +11,7 @@ class ComplainProvider extends GetConnect {
   final String requestComplainUrl =
       '${Constant.apiDomain}/user/request-change-attendance-status';
   final String getComplainListUrl =
-      '${Constant.apiDomain}/user/get-complain-form-request?semester_id=';
+      '${Constant.apiDomain}/user/get-complain-form-request2?semester_id=';
   final String deleteComplainFormUrl =
       '${Constant.apiDomain}/user/delete-complain-form?form_id=';
   final String getDetailComplainFormUrl =

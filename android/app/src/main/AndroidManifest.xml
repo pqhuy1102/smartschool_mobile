@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.phenikaamaas.studentconnect">
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+
    <application
         android:label="Student Connect"
         android:name="${applicationName}"
@@ -32,3 +35,5 @@
             android:value="2" />
     </application>
 </manifest>
+
+
