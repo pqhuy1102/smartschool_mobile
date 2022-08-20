@@ -64,7 +64,7 @@ class ComplainController extends GetxController {
       if (hasInternet.isTrue) {}
     });
 
-    getUserSemestersList();
+    // getUserSemestersList();
   }
 
   Future<void> getUserSemestersList() async {
@@ -110,6 +110,10 @@ class ComplainController extends GetxController {
 
       isLoading(false);
     } else {
+      Get.snackbar('Lỗi ', "Khong the lay hoc ki!",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
       isLoading(false);
     }
   }
@@ -222,6 +226,10 @@ class ComplainController extends GetxController {
       isLoading(false);
     } else {
       complainList.value = [];
+      Get.snackbar('Lỗi ', "Khong the lay danh sach phan anh!",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
       isLoading(false);
     }
   }
