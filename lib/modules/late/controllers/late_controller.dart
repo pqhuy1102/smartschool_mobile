@@ -66,7 +66,7 @@ class LateController extends GetxController {
       if (hasInternet.isTrue) {}
     });
 
-    getUserSemestersList();
+    // getUserSemestersList();
   }
 
   Future<void> getUserSemestersList() async {
@@ -224,6 +224,10 @@ class LateController extends GetxController {
       isLoading(false);
     } else {
       lateFormList.value = [];
+      Get.snackbar('Lỗi ', "Lấy danh sách nghỉ phép/ đi trễ thất bại!",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
       isLoading(false);
     }
   }

@@ -51,17 +51,6 @@ class DashBoardController extends GetxController {
         headers);
   }
 
-  Future<void> testNotification() async {
-    String? token = _authenticationManager.getToken();
-
-    Map<String, String> headers = {
-      "Content-Type": "application/json",
-      'Authorization': 'Bearer $token',
-    };
-
-    await _notificationProvider.testNotification(headers);
-  }
-
   Future<void> getIndayAttendance() async {
     String? token = _authenticationManager.getToken();
     bool isGoogleLogin = _authenticationManager.getLoginType();
