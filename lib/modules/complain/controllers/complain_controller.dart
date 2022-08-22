@@ -226,7 +226,7 @@ class ComplainController extends GetxController {
       isLoading(false);
     } else {
       complainList.value = [];
-      Get.snackbar('Lỗi ', "Khong the lay danh sach phan anh!",
+      Get.snackbar('Lỗi ', "Lấy danh sách phản ánh thất bại!",
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);

@@ -77,7 +77,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 );
               } else {
                 return Container(
-                  decoration: const BoxDecoration(color: Colors.white),
+                  // decoration: const BoxDecoration(color: Colors.white),
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: SafeArea(

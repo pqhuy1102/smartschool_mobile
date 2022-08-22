@@ -21,14 +21,4 @@ class NotificationProvider extends GetConnect {
       return null;
     }
   }
-
-  //test notification
-  Future<String?> testNotification(headers) async {
-    final response = await get(testNotificationUrl, headers: headers);
-    if (response.statusCode == HttpStatus.ok) {
-      return response.bodyString;
-    } else {
-      return null;
-    }
-  }
 }

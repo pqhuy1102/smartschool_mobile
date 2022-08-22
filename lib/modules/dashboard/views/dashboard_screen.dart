@@ -204,10 +204,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     });
   }
 
-  void testNoti() {
-    _dashBoardController.testNotification();
-  }
-
   @override
   Widget build(BuildContext context) {
     final textScale = MediaQuery.of(context).textScaleFactor;
@@ -284,16 +280,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                   )),
-            body: Container(
-                decoration: const BoxDecoration(color: Colors.white),
-                child: SafeArea(
-                    child: IndexedStack(
-                  index: selectedPosition,
-                  children: [
-                    _dashboardScreen(context),
-                    const ReportScreen(),
-                  ],
-                )))),
+            body: SafeArea(
+                child: IndexedStack(
+              index: selectedPosition,
+              children: [
+                _dashboardScreen(context),
+                const ReportScreen(),
+              ],
+            ))),
         onWillPop: () async {
           if (selectedPosition == 1) {
             setState(() {

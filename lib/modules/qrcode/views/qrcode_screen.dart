@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smartschool_mobile/modules/checkinToday/controllers/get_inday_attendance_controller.dart';
+import 'package:smartschool_mobile/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:smartschool_mobile/modules/qrcode/controllers/get_qrcode_controller.dart';
 
 // ignore: must_be_immutable
@@ -17,8 +17,8 @@ class QRCodeScreen extends StatefulWidget {
 
 class _QRCodeScreenState extends State<QRCodeScreen> {
   final GetQrCodeController _qrCodeController = Get.put(GetQrCodeController());
-  final GetIndayAttendanceController _getIndayAttendanceController =
-      Get.put(GetIndayAttendanceController());
+  final DashBoardController _dashBoardController =
+      Get.put(DashBoardController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                 ),
                 onPressed: () {
                   Get.back();
-                  _getIndayAttendanceController.getIndayAttendance();
+                  _dashBoardController.getIndayAttendance();
                 },
               ),
               title: Text(
@@ -323,7 +323,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
               }
             })),
         onWillPop: () async {
-          _getIndayAttendanceController.getIndayAttendance();
+          _dashBoardController.getIndayAttendance();
           return true;
         });
   }
