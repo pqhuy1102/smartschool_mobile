@@ -248,7 +248,7 @@ class ComplainController extends GetxController {
           .toList()
           .where((complainItem) =>
               complainItem["form_status"] == "Chấp nhận" ||
-              complainItem["form_status"] == "Từ chối")
+              complainItem["form_status"] == "Từ chối")
           .toList();
     }
   }

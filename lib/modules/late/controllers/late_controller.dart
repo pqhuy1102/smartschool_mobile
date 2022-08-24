@@ -220,7 +220,7 @@ class LateController extends GetxController {
 
     if (res != null) {
       lateFormList.value = res;
-      filterLateFormList.value = lateFormList.reversed.toList();
+      filterLateFormList.value = lateFormList.toList();
       isLoading(false);
     } else {
       lateFormList.value = [];
@@ -246,7 +246,7 @@ class LateController extends GetxController {
           .toList()
           .where((complainItem) =>
               complainItem["form_status"] == "Chấp nhận" ||
-              complainItem["form_status"] == "Từ chối")
+              complainItem["form_status"] == "Từ chối")
           .toList();
     }
   }
